@@ -1,0 +1,278 @@
+@import 'tailwindcss';
+
+/* Dark mode follows <html data-theme> (set before paint in app/layout.tsx). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * Design tokens. A bright, light site with deep-ink bands for contrast and a
+ * palette of five tones (lib/tones.ts) — one per workflow step and feature
+ * group. Use the token classes (`bg-bg`, `text-muted`, `border-line`…) and
+ * tones from lib/tones.ts, never raw hex in components.
+ */
+:root {
+	--bg: #fbfbfd;
+	--bg-subtle: #f4f5f9;
+	--bg-muted: #eceef4;
+	--fg: #0b0d14;
+	--fg-muted: #555b6e;
+	--fg-faint: #9298a8;
+	--line: #e6e8ef;
+	--line-strong: #d5d8e2;
+	--panel: #ffffff;
+	--ink: #0d0d0d;
+	--ink-2: #1b1b1b;
+	--accent: #10b981;
+	--accent-soft: #e3f8ef;
+	--accent-fg: #ffffff;
+	--shadow: 0 1px 2px rgb(16 24 40 / 0.04), 0 12px 40px -12px rgb(16 24 40 / 0.16);
+	--shadow-lg: 0 2px 4px rgb(16 24 40 / 0.04), 0 30px 80px -20px rgb(40 30 90 / 0.28);
+	color-scheme: light;
+}
+
+/* Dark: thinkcrypt.dev's neutral black — no blue tint in any surface. */
+[data-theme='dark'] {
+	--bg: #0d0d0d;
+	--bg-subtle: #121212;
+	--bg-muted: #1f1f1f;
+	--fg: #faf8f1;
+	--fg-muted: #b3b0a7;
+	--fg-faint: #75736d;
+	--line: #232323;
+	--line-strong: #333333;
+	--panel: #1b1b1b;
+	--ink: #060508;
+	--ink-2: #1b1b1b;
+	--accent: #34d399;
+	--accent-soft: #0f2a1f;
+	--shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 40px -12px rgb(0 0 0 / 0.7);
+	--shadow-lg: 0 2px 4px rgb(0 0 0 / 0.5), 0 30px 80px -20px rgb(0 0 0 / 0.85);
+	color-scheme: dark;
+}
+
+@theme inline {
+	--color-bg: var(--bg);
+	--color-subtle: var(--bg-subtle);
+	--color-soft: var(--bg-muted);
+	--color-fg: var(--fg);
+	--color-muted: var(--fg-muted);
+	--color-faint: var(--fg-faint);
+	--color-line: var(--line);
+	--color-line-strong: var(--line-strong);
+	--color-panel: var(--panel);
+	--color-ink: var(--ink);
+	--color-ink-2: var(--ink-2);
+	--color-accent: var(--accent);
+	--color-accent-soft: var(--accent-soft);
+	--color-accent-fg: var(--accent-fg);
+	--shadow-panel: var(--shadow);
+	--shadow-float: var(--shadow-lg);
+	--font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+	--font-display: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+	--font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--bg);
+	color: var(--fg);
+	font-family: var(--font-sans);
+	font-weight: 250;
+	letter-spacing: 0;
+	/* Long URLs and query strings wrap instead of widening the page. */
+	overflow-wrap: break-word;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+	font-family: var(--font-display);
+}
+
+/* Modernist headlines: uppercase, extra-light, large. Unlayered, so these
+   beat the tracking utilities on individual headings. */
+h1,
+h2,
+h3 {
+	text-transform: uppercase;
+}
+h1,
+h2 {
+	font-weight: 200;
+	letter-spacing: -0.012em;
+	line-height: 1.04;
+}
+h3 {
+	letter-spacing: 0.02em;
+}
+h1 strong,
+h2 strong {
+	font-weight: 500;
+}
+/* Bold body copy stays readable next to the light weight. */
+strong,
+b {
+	font-weight: 500;
+}
+
+::selection {
+	background: #c7f5e0;
+	color: #0b0d14;
+}
+
+:focus-visible {
+	outline: 2px solid #8b5cf6;
+	outline-offset: 2px;
+	border-radius: 8px;
+}
+/* The search box sits in its own framed dialog; the frame is enough. */
+.search-input:focus-visible {
+	outline: none;
+}
+
+/* Grid items may shrink below their content (code blocks, drawings), so a
+   wide child scrolls inside its own box instead of widening the page. In the
+   base layer, so a min-w-* utility still wins. */
+@layer base {
+	.grid > * {
+		min-width: 0;
+	}
+}
+
+/* Section anchors land below the sticky header. */
+[id] {
+	scroll-margin-top: 96px;
+}
+
+/* Header and footer items: small spaced capitals. */
+.caps {
+	text-transform: uppercase;
+	letter-spacing: 0.16em;
+	font-size: 11.5px;
+	font-weight: 300;
+}
+
+/* Icon and number tiles: a quiet neutral tile with a hairline border and a
+   soft top highlight; the glyph inside is one thin colour (ui IconTile). */
+.glyph {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	border: 1px solid var(--line);
+	background: linear-gradient(180deg, #ffffff 0%, #f5f6f8 100%);
+	box-shadow:
+		inset 0 1px 0 rgb(255 255 255 / 0.9),
+		0 1px 2px rgb(16 24 40 / 0.05);
+}
+[data-theme='dark'] .glyph {
+	border-color: #2a2a2a;
+	background: linear-gradient(180deg, #202020 0%, #161616 100%);
+	box-shadow:
+		inset 0 1px 0 rgb(255 255 255 / 0.06),
+		0 1px 2px rgb(0 0 0 / 0.4);
+}
+/* On the dark ink bands, in either theme. */
+.glyph-ink,
+[data-theme='dark'] .glyph-ink {
+	border-color: rgb(255 255 255 / 0.1);
+	background: linear-gradient(180deg, rgb(255 255 255 / 0.07) 0%, rgb(255 255 255 / 0.02) 100%);
+	box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+
+/* The brand gradient — the home page's accent words. */
+.text-gradient {
+	background: linear-gradient(100deg, #10b981 0%, #06b6d4 35%, #6366f1 70%, #a855f7 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+/* Soft colour fields behind the home page's top: layered radial gradients, no filters. */
+.mesh {
+	background:
+		radial-gradient(40% 60% at 8% 10%, rgb(16 185 129 / 0.14), transparent 70%),
+		radial-gradient(35% 55% at 92% 0%, rgb(168 85 247 / 0.12), transparent 70%),
+		radial-gradient(40% 60% at 60% 100%, rgb(6 182 212 / 0.1), transparent 70%);
+}
+[data-theme='dark'] .mesh {
+	background:
+		radial-gradient(40% 60% at 8% 10%, rgb(16 185 129 / 0.12), transparent 70%),
+		radial-gradient(35% 55% at 92% 0%, rgb(168 85 247 / 0.14), transparent 70%),
+		radial-gradient(40% 60% at 60% 100%, rgb(6 182 212 / 0.08), transparent 70%);
+}
+
+/* ------------------------------------------------------------ guides */
+
+/*
+ * A guide's text (components/docs/prose.tsx). Long reading, so the body is a
+ * touch heavier than the marketing site's 250. Sections' h2 and h3 keep the
+ * site's light capitals.
+ */
+.prose-guide {
+	font-size: 15px;
+	line-height: 1.75;
+	font-weight: 300;
+}
+.prose-guide strong,
+.prose-guide b {
+	font-weight: 500;
+}
+.prose-guide em {
+	font-style: italic;
+}
+.prose-guide code {
+	font-family: var(--font-mono);
+	font-size: 0.84em;
+	font-weight: 400;
+	padding: 0.1em 0.38em;
+	border-radius: 6px;
+	background: var(--bg-muted);
+	overflow-wrap: anywhere;
+}
+.prose-guide pre code {
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	overflow-wrap: normal;
+}
+.prose-guide a:not(.plain) {
+	color: var(--fg);
+	text-decoration: underline;
+	text-decoration-color: var(--line-strong);
+	text-underline-offset: 4px;
+	transition: text-decoration-color 0.15s;
+}
+.prose-guide a:not(.plain):hover {
+	text-decoration-color: var(--accent);
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+.fade-in {
+	animation: fade-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	.fade-in {
+		animation: none;
+	}
+}
