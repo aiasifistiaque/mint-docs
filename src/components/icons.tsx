@@ -14,6 +14,7 @@ import {
 	ChartLine as PhChartLine,
 	Check as PhCheck,
 	Copy as PhCopy,
+	CreditCard as PhCreditCard,
 	Cube as PhCube,
 	Envelope as PhEnvelope,
 	FolderSimple as PhFolderSimple,
@@ -66,6 +67,7 @@ export const X = make(PhX, 'regular');
 export const Book = make(PhBookOpenText, 'light');
 export const Building = make(PhBuildings, 'light');
 export const Chart = make(PhChartLine, 'light');
+export const CreditCard = make(PhCreditCard, 'light');
 export const Cube = make(PhCube, 'light');
 export const Envelope = make(PhEnvelope, 'light');
 export const Folder = make(PhFolderSimple, 'light');

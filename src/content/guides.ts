@@ -2,6 +2,7 @@ import type { IconType } from '@/components/icons';
 import {
 	Building,
 	Chart,
+	CreditCard,
 	Cube,
 	Envelope,
 	Folder,
@@ -264,7 +265,7 @@ export const GUIDES: Guide[] = [
 		href: '/widgets',
 		title: 'Widgets',
 		name: 'Site widgets',
-		description: 'Ready-made pieces for your own site — sign-in and a cart today, checkout next — added with one script and styled to match.',
+		description: 'Ready-made pieces for your own site — sign-in, a cart, checkout and order history — added with one script and styled to match.',
 		icon: Puzzle,
 		group: 'Go live',
 		topics: [
@@ -273,7 +274,25 @@ export const GUIDES: Guide[] = [
 			{ id: 'login', title: 'Login & account' },
 			{ id: 'shop', title: 'Shop' },
 			{ id: 'cart', title: 'Cart' },
+			{ id: 'checkout', title: 'Checkout' },
+			{ id: 'thanks', title: 'Thank-you page' },
+			{ id: 'orders', title: 'My orders' },
 			{ id: 'mint-js', title: 'Mint in your own code' },
+		],
+	},
+	{
+		href: '/payments',
+		title: 'Payments',
+		name: 'Payments',
+		description: 'Take payments on your own site with your own Stripe account: checkout priced by the server, orders paid only when the provider confirms.',
+		icon: CreditCard,
+		group: 'Go live',
+		topics: [
+			{ id: 'payments', title: 'How payments work' },
+			{ id: 'stripe', title: 'Connecting Stripe' },
+			{ id: 'return-pages', title: 'After paying' },
+			{ id: 'test-payment', title: 'A test payment' },
+			{ id: 'payments-list', title: 'The payments list' },
 		],
 	},
 	{

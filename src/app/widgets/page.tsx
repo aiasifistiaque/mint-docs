@@ -7,7 +7,8 @@ export const metadata = guideMeta('/widgets');
 
 /**
  * Site widgets (backend docs/widgets): the mint.js script, the shared look,
- * the login widget, the shop and the cart (W-05), window.Mint and what's coming. The panel's Widgets page
+ * the login widget, the shop, cart, checkout, thank-you page and My orders
+ * (W-05/W-07), window.Mint and what's coming. The panel's Widgets page
  * (src/app/widgets) links each panel here — the section ids are GuideLink
  * targets (GuideLink.tsx GUIDE_OF).
  */
@@ -18,6 +19,10 @@ const SECTIONS = [
 	{ id: 'login', title: 'Login & account' },
 	{ id: 'shop', title: 'Shop' },
 	{ id: 'cart', title: 'Cart' },
+	{ id: 'shop-orders', title: 'The Shop’s orders' },
+	{ id: 'checkout', title: 'Checkout' },
+	{ id: 'thanks', title: 'Thank-you page' },
+	{ id: 'orders', title: 'My orders' },
 	{ id: 'mint-js', title: 'Mint in your own code' },
 	{ id: 'coming-next', title: 'Coming next' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -35,8 +40,8 @@ const Widgets = () => (
 			title='Add MINT to your site'
 			lead='One script tag per page, then put each widget where it should appear.'>
 			<P>
-				Widgets are ready-made pieces for a website or app you host yourself: sign-in today, with cart, checkout, forms and
-				more on the way. They talk to your project’s <A href='/public-api'>public API</A>, so any project with
+				Widgets are ready-made pieces for a website or app you host yourself: sign-in, a cart, checkout and order history today,
+				with forms and more on the way. They talk to your project’s <A href='/public-api'>public API</A>, so any project with
 				one can use them, websites and APIs alike. Find them in the panel under <em>Site → Widgets</em> (websites) or next to
 				the Public API (other projects).
 			</P>
@@ -181,6 +186,76 @@ const Widgets = () => (
 		</Section>
 
 		<Section
+			id='shop-orders'
+			title='The Shop’s orders'
+			lead='For checkout: which model orders are written to, and what its fields mean.'>
+			<Terms
+				head={['Part', 'What it is']}
+				rows={[
+					['Orders model, items list', 'A model with a list of items (a repeating group) — each item a product name, quantity and unit price, and optionally variant, SKU and a link to the product.'],
+					['Status', 'Which value means waiting for payment (new orders), which means paid (set only when the provider confirms) and, optionally, cancelled.'],
+					['The buyer and the money', 'Email, name, phone, delivery address (a group of fields or one text box), note, total, delivery cost, payment reference — whichever your model has.'],
+				]}
+			/>
+			<Note>
+				Saving makes the order’s status and payment reference read-only on your public API, so a page can’t mark an order
+				paid. The E-commerce and Products & orders templates are filled in for you.
+			</Note>
+		</Section>
+
+		<Section
+			id='checkout'
+			title='Checkout'
+			lead='The buyer’s details, the order summary at your prices, and Pay.'>
+			<P>
+				Put it on your checkout page and set the Cart’s <em>Checkout page</em> to that address. It needs the Shop’s orders
+				and a way to pay switched on in <A href='/payments'>Payments</A>.
+			</P>
+			<CodeBlock
+				label='checkout page'
+				code={'<div data-mint="checkout"></div>'}
+			/>
+			<Terms
+				head={['Option', 'Choices']}
+				rows={[
+					['Ask for a phone number', 'On by default — couriers often need one.'],
+					['Ask for a delivery address', 'Off for things that aren’t delivered.'],
+					['Let buyers add a note', 'Delivery instructions, a gift message.'],
+					['Buyers must have an account', 'Off: guests pay with just an email.'],
+				]}
+			/>
+			<P>
+				Pay writes the order as waiting for payment and sends the buyer to the provider’s page. If something in the cart
+				changed meanwhile (a price, sold out), the widget says so and shows the cart as it is now.
+			</P>
+		</Section>
+
+		<Section
+			id='thanks'
+			title='Thank-you page'
+			lead='Where buyers come back to after paying.'>
+			<CodeBlock
+				label='thank-you page'
+				code={'<div data-mint="thanks"></div>'}
+			/>
+			<P>
+				It reads the payment’s reference from the page’s address (<C>?ref=…</C>), waits for the provider’s confirmation —
+				usually a second or two — and shows the order number and what was bought. A guest’s cart is emptied then.
+			</P>
+		</Section>
+
+		<Section
+			id='orders'
+			title='My orders'
+			lead='A signed-in customer’s own orders, for an account page.'>
+			<CodeBlock
+				label='account page'
+				code={'<div data-mint="login"></div>\n<div data-mint="orders"></div>'}
+			/>
+			<P>Each order shows its number, date, status (as your team sets it — Paid, Packed, Shipped…), total and items.</P>
+		</Section>
+
+		<Section
 			id='mint-js'
 			title='Mint in your own code'
 			lead='mint.js gives your page’s scripts window.Mint.'>
@@ -228,13 +303,10 @@ const Widgets = () => (
 			<List
 				items={[
 					<>
-						<strong>Checkout & payments</strong>: address, delivery and payment, with prices worked out on the server. Payments go
-						to your own merchant account. Which providers you can use depends on your organization’s country: Stripe everywhere,
-						plus SSLCommerz and bKash in Bangladesh. Your country is set in{' '}
-						<A href='/organization'>organization settings</A>.
-					</>,
-					<>
-						<strong>My orders</strong>: order history and tracking in the account widget.
+						<strong>More ways to pay</strong>: SSLCommerz and bKash for organizations in Bangladesh, cash on delivery and bank
+						transfer everywhere, and refunds. Which providers you can use depends on your organization’s country, set in{' '}
+						<A href='/organization'>organization settings</A>. Card payments with Stripe work now — see{' '}
+						<A href='/payments'>Payments</A>.
 					</>,
 					<>
 						<strong>Forms</strong>: contact and newsletter forms built from your models, with spam protection.
