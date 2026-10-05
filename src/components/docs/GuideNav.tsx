@@ -13,6 +13,14 @@ type Item = { id: string; title: string };
 const GuideNav = ({ sections }: { sections: Item[] }) => {
 	const [active, setActive] = useState(sections[0]?.id || '');
 
+	// Arriving with a #section (a link from the app, or the app's old
+	// /user-docs address redirecting here): the browser's own jump can happen
+	// before the page has settled, or be undone while it hydrates — jump again.
+	useEffect(() => {
+		const id = decodeURIComponent(window.location.hash.slice(1));
+		if (id) document.getElementById(id)?.scrollIntoView();
+	}, []);
+
 	// The section being read: the last one whose heading has passed a line a
 	// little below the header. At the very bottom, the last section.
 	useEffect(() => {
