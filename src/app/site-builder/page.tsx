@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import Guide from '@/components/docs/Guide';
 import { A, List, Note, P, Section, Terms } from '@/components/docs/prose';
 import { guideMeta } from '@/lib/seo';
@@ -28,8 +29,10 @@ const SECTIONS = [
 	{ id: 'style', title: 'Styling a block' },
 	{ id: 'breakpoints', title: 'Phone, tablet and desktop' },
 	{ id: 'design', title: 'Theme, colours and fonts' },
+	{ id: 'themes', title: 'The themes' },
 	{ id: 'layouts', title: 'Header and footer' },
 	{ id: 'sections', title: 'Saved sections' },
+	{ id: 'blocks', title: 'Every block' },
 	{ id: 'publish', title: 'Publishing' },
 ];
 
@@ -49,6 +52,173 @@ const Shot = ({ src, alt, caption }: { src: string; alt: string; caption: string
 	</figure>
 );
 
+/** The preset catalogue (mint-sites src/presets), grouped as on the Add tab. Thumbnails are real renders. */
+const PRESET_GROUPS: { title: string; note: string; items: [string, string][] }[] = [
+	{
+		title: 'Headers',
+		note: 'Your logo or name and a menu of your pages; on phones the menu folds into a ☰ button.',
+		items: [
+			['header-bar.png', 'Logo, menu from your pages, button'],
+			['header-centered.png', 'Menu in the middle, two buttons'],
+			['header-simple.png', 'Name, links and a button'],
+			['header-stacked.png', 'Logo above a centred menu'],
+		],
+	},
+	{
+		title: 'Heroes',
+		note: 'The big first section of a page.',
+		items: [
+			['hero-centered.png', 'Centred title, text and two buttons'],
+			['hero-split.png', 'Text beside a picture'],
+			['hero-image.jpg', 'Big photo behind the title (add your photo under Style → Background)'],
+			['hero-minimal.png', 'Big type, nothing else'],
+			['hero-stats.png', 'Title, buttons and three numbers'],
+			['hero-signup.png', 'Title with an email sign-up'],
+		],
+	},
+	{
+		title: 'Features and services',
+		note: 'What you offer and why people choose you.',
+		items: [
+			['features-grid.png', 'Six points with icons'],
+			['features-cards.png', 'Three cards with pictures'],
+			['features-split.png', 'Picture beside a checklist'],
+			['steps.png', 'How it works in three steps'],
+			['services-tabs.png', 'Services in tabs'],
+		],
+	},
+	{
+		title: 'Proof',
+		note: 'Logos, numbers and what customers say.',
+		items: [
+			['logos.png', 'A moving strip of customers'],
+			['stats.png', 'Four figures in a row'],
+			['testimonials-grid.png', 'Three reviews'],
+			['testimonial-single.png', 'One big quote'],
+			['testimonials-carousel.png', 'A carousel of reviews'],
+		],
+	},
+	{
+		title: 'Calls to action and events',
+		note: 'Ask for the next step.',
+		items: [
+			['cta-banner.png', 'Coloured band'],
+			['cta-card.png', 'Card with two buttons'],
+			['countdown-banner.png', 'Countdown to a date'],
+		],
+	},
+	{
+		title: 'Prices and questions',
+		note: 'Plans side by side, and answers that open on a click.',
+		items: [
+			['pricing-three.png', 'Three plans'],
+			['pricing-two.png', 'Two options side by side'],
+			['faq.png', 'Questions — an accordion of answers'],
+		],
+	},
+	{
+		title: 'People, pictures and contact',
+		note: 'Your team, a gallery, how to reach you.',
+		items: [
+			['team.png', 'People with photos'],
+			['gallery.png', 'A grid of photos that open big'],
+			['contact.png', 'Details, map and a form'],
+			['newsletter.png', 'Email sign-up band'],
+		],
+	},
+	{
+		title: 'Blog and products',
+		note: 'Sample posts and products for now — they’ll show your own soon.',
+		items: [
+			['blog-list.png', 'Three latest posts'],
+			['product-grid.png', 'Four items in a grid'],
+		],
+	},
+	{
+		title: 'Footers and whole pages',
+		note: 'The bottom of every page, a page title, and a “page not found” page.',
+		items: [
+			['footer-columns.png', 'Logo, link columns and socials'],
+			['footer-centered.png', 'Centred menu and socials'],
+			['footer-simple.png', 'Name, links and copyright'],
+			['page-title.png', 'Breadcrumbs, title and intro'],
+			['not-found.png', 'Page not found (404) — put it on a page at /404'],
+		],
+	},
+];
+
+/** The themes (mint-sites src/themes): primary, accent and background swatches. */
+const THEMES = [
+	{ name: 'Studio', colors: ['#4f46e5', '#e0e7ff', '#ffffff'], look: 'Clean and modern — neutral greys and an indigo accent. Fits most business sites.', fonts: 'Inter' },
+	{ name: 'Editorial', colors: ['#b4532a', '#f1eadf', '#faf6ef'], look: 'Warm and literary — paper tones and a terracotta accent. Writers, studios, restaurants.', fonts: 'Fraunces, Source Serif 4' },
+	{ name: 'Bright', colors: ['#7c3aed', '#ff7a59', '#fdfcff'], look: 'Friendly and colourful — violet and coral, round corners, pill buttons. Apps, shops, classes.', fonts: 'Outfit, DM Sans' },
+	{ name: 'Market', colors: ['#166534', '#fde68a', '#fbfaf7'], look: 'Fresh and trustworthy — deep green and warm amber. Made for shops and products.', fonts: 'Manrope' },
+	{ name: 'Calm', colors: ['#4d6b5a', '#ead9c6', '#f7f5f0'], look: 'Soft and unhurried — sage and sand, generous space, round corners. Bookings, wellness, care.', fonts: 'Lora, Nunito' },
+	{ name: 'Mono', colors: ['#0a0a0a', '#ff4d00', '#ffffff'], look: 'Stark and precise — black and white, square corners, capital buttons. Portfolios.', fonts: 'Space Grotesk, IBM Plex Sans' },
+	{ name: 'Bistro', colors: ['#8c1c2c', '#b8893a', '#fbf6ee'], look: 'Warm and inviting — wine red, brass and cream. Restaurants and bars.', fonts: 'Playfair Display, Lato' },
+];
+
+/** Every block (mint-sites src/blocks), as grouped on the Add tab. */
+const BLOCK_GROUPS: { title: string; rows: [ReactNode, ReactNode][] }[] = [
+	{
+		title: 'Layout',
+		rows: [
+			['Section', 'A full-width band of the page with its content kept to a readable width. Pages are made of these.'],
+			['Container', 'Keeps what’s inside to a maximum width, centred.'],
+			['Stack', 'Lines blocks up in a row or a column with even gaps. Rows turn into columns on phones.'],
+			['Grid', 'Equal columns — fewer on tablets and phones.'],
+			['Card', 'A box for a picture, text and buttons. The whole card can be a link (then leave buttons out).'],
+			['Tabs', 'Content in tabs: visitors pick a title to see its part. Each tab is a block inside it.'],
+			['Accordion', 'Questions that open to show their answers. Can keep just one open at a time.'],
+			['Spacer, Divider', 'Empty space of a set height; a thin line.'],
+			['Saved section', <>A section you saved to use on several pages — see <A href='#sections'>Saved sections</A>.</>],
+		],
+	},
+	{
+		title: 'Text and buttons',
+		rows: [
+			['Heading', 'A title. One main title (level 1) per page, then levels 2–4 in order.'],
+			['Text', 'Paragraphs with bold, italics, links and lists.'],
+			['Button', 'Goes to a page or a link, scrolls to a block, or opens a pop-up, drawer or widget.'],
+			['Link', 'A text link to a page, another site, an email address or a phone number.'],
+			['Icon', 'One of about 200 icons, in the text colour.'],
+			['Number', 'A big figure with a label — “12 years”, “4.9 ★”, “2,000 customers”.'],
+			['Badge', 'A small label — “New”, “Popular”, “Sold out”.'],
+			['Quote', 'What a customer said, with their name, role, photo and stars.'],
+			['Countdown', 'Days, hours, minutes and seconds to a date; shows your own message once it has passed.'],
+		],
+	},
+	{
+		title: 'Pictures and video',
+		rows: [
+			['Image', 'A picture from your media library, cropped to a shape if you like.'],
+			['Gallery', 'A grid of pictures; a click opens them big, with next and previous.'],
+			['Carousel', 'Slides people swipe or step through with arrows — pictures, cards, quotes.'],
+			['Moving strip', 'Logos or words that slowly scroll sideways; it stands still for people who prefer less motion.'],
+			['Video', 'A YouTube or Vimeo video, or a video file — can play silently on a loop.'],
+			['Map', 'A Google map of your address from Site setup, or one you type in.'],
+			['Embed', 'A map or player from an allowed site by its embed link.'],
+		],
+	},
+	{
+		title: 'Navigation',
+		rows: [
+			['Header', 'Logo, menu and buttons at the top of every page; on phones the menu opens from a ☰ button.'],
+			['Logo', 'Your logo and/or site name, linking to the home page.'],
+			['Menu', 'A row or column of links: your menu pages, or links you choose.'],
+			['Social links', 'Icons for your social profiles from Site setup, plus your email.'],
+			['Breadcrumbs', 'Home › Section › This page — from the page’s address.'],
+		],
+	},
+	{
+		title: 'Pop-ups, drawers and forms',
+		rows: [
+			['Pop-up, Drawer, Popover', <>Panels that open from a button — see <A href='#overlays'>Pop-ups, drawers and popovers</A>.</>],
+			['Contact form', 'Name, email and message. Until built-in forms arrive, sending opens the visitor’s email app, addressed to the email in Site setup.'],
+		],
+	},
+];
+
 const SiteBuilder = () => (
 	<Guide
 		href='/site-builder'
@@ -63,9 +233,9 @@ const SiteBuilder = () => (
 				the site’s theme decides the colours, fonts and corners for all of them at once. We host the finished site for you.
 			</P>
 			<Note>
-				The site builder is being rolled out in steps. Opening a page, changing, adding and moving its blocks and publishing
-				come first; styling blocks and choosing themes follow. This guide grows with it. Until it reaches your
-				workspace, the way to build a site is your own code reading the <A href='/websites'>site API</A>.
+				The site builder grows in steps. Building pages from blocks and ready-made sections, styling them, themes and
+				publishing are here now; showing your own data (products, posts), the AI and your own domain come next, and this
+				guide grows with them. You can still build a site in your own code from the <A href='/websites'>site API</A>.
 			</Note>
 			<P>
 				<strong>Drafts and the live site.</strong> Your site always exists twice:
@@ -243,10 +413,12 @@ const SiteBuilder = () => (
 			<Terms
 				head={['Group', 'Blocks']}
 				rows={[
-					['Layout', 'Section (a full-width band), Container, Stack (a row or a column), Grid, Spacer, Divider'],
-					['Text and buttons', 'Heading, Text, Button, Link, Icon'],
-					['Pictures and video', 'Image, Video, Embed (a map or video from an allowed site)'],
+					['Layout', 'Section (a full-width band), Container, Stack (a row or a column), Grid, Card, Tabs, Accordion, Spacer, Divider'],
+					['Text and buttons', 'Heading, Text, Button, Link, Icon, Number, Badge, Quote, Countdown'],
+					['Pictures and video', 'Image, Gallery, Carousel, Moving strip, Video, Map, Embed (a map or video from an allowed site)'],
+					['Navigation', 'Header, Logo, Menu, Social links, Breadcrumbs'],
 					['Pop-ups and drawers', <>Pop-up, Drawer, Popover — see <A href='#overlays'>below</A></>],
+					['Forms', 'Contact form'],
 				]}
 			/>
 			<P>
@@ -257,7 +429,8 @@ const SiteBuilder = () => (
 			<P>
 				<strong>Drag</strong> a block onto the page to put it exactly where you want: a blue line shows where it will land, and
 				an empty box turns blue when it will go inside. If a block can’t go somewhere, a red note says why and nothing is added.
-				The search box at the top finds blocks and sections by name.
+				The search box at the top finds blocks and sections by name. What each block does is in{' '}
+				<A href='#blocks'>Every block</A>.
 			</P>
 			<Note>
 				The new block is selected straight away, with its settings on the right. Every add is one step of undo.
@@ -269,18 +442,42 @@ const SiteBuilder = () => (
 			title='Ready-made sections'
 			lead='Sections at the top of the Add tab are whole parts of a page, built from ordinary blocks.'>
 			<P>
-				A ready-made section — a header, a hero with a title and two buttons, a footer — is a set of blocks arranged for you.
-				Add it like a block (click, or drag it onto the page). Once it’s on the page it’s just blocks: change any text, picture
-				or button, add or remove parts, move them around.
+				A ready-made section — a header, a hero, prices, questions, a footer — is a set of blocks arranged for you. Add it like a
+				block (click, or drag it onto the page): it goes between the page’s sections. Once it’s on the page it’s just blocks:
+				change any text, picture or button, add or remove parts, move them around. Each one takes your theme’s colours, fonts
+				and corners, so it fits the rest of the site straight away.
 			</P>
-			<List
-				items={[
-					<><strong>Headers</strong> — your name, menu links and a button.</>,
-					<><strong>Heroes</strong> — a centred title, a line of text and two buttons.</>,
-					<><strong>Footers</strong> — your name, links and the copyright line.</>,
-				]}
-			/>
-			<Note>More sections and themes are on the way — features, prices, testimonials, questions, team, contact and more.</Note>
+			<P>
+				The Add tab shows a small picture of each. They are grouped like this (the pictures below are the sections as they
+				come, in the Studio theme):
+			</P>
+			{PRESET_GROUPS.map(g => (
+				<div
+					key={g.title}
+					className='mt-6'>
+					<h3 className='text-[15px] font-medium'>{g.title}</h3>
+					<p className='mt-1 text-[14px] text-muted'>{g.note}</p>
+					<div className='mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2'>
+						{g.items.map(([file, label]) => (
+							<figure key={file}>
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src={`/guides/site-builder/presets/${file}`}
+									alt={`The ${label} section`}
+									loading='lazy'
+									className='h-auto w-full rounded-lg border border-line bg-white'
+								/>
+								<figcaption className='mt-1.5 text-[13px] text-muted'>{label}</figcaption>
+							</figure>
+						))}
+					</div>
+				</div>
+			))}
+			<Note>
+				Pictures in a new section are grey placeholders with a label (“Your best photo”) until you choose your own — click
+				one and pick a picture from your media library. Blog and product sections show sample posts and products for now;
+				filling them from your own data is the next step of the builder.
+			</Note>
 		</Section>
 
 		<Section
@@ -435,6 +632,46 @@ const SiteBuilder = () => (
 		</Section>
 
 		<Section
+			id='themes'
+			title='The themes'
+			lead='Seven themes, each a different mood. Every one works in light and dark, and you can change any colour or font.'>
+			<Terms
+				head={['Theme', 'Look and fonts']}
+				rows={THEMES.map(t => [
+					<span
+						key={t.name}
+						className='inline-flex items-center gap-2'>
+						<span
+							aria-hidden
+							className='inline-flex overflow-hidden rounded-full border border-line'>
+							{t.colors.map(c => (
+								<span
+									key={c}
+									className='size-3.5'
+									style={{ background: c }}
+								/>
+							))}
+						</span>
+						{t.name}
+					</span>,
+					<>
+						{t.look} <span className='text-muted'>Fonts: {t.fonts}.</span>
+					</>,
+				])}
+			/>
+			<P>
+				Pick one in <em>Design → Theme</em>. Switching restyles every page at once; your words, pictures and layout stay as
+				they are. Colours and fonts you changed stay on top of whichever theme you pick (see{' '}
+				<A href='#design'>Theme, colours and fonts</A>).
+			</P>
+			<Note>
+				Every theme is checked for contrast: text on its backgrounds, on buttons and on cards reaches at least 4.5 to 1 in
+				both light and dark, the level that keeps text readable for most people. If you change colours yourself, keep text
+				and its background clearly apart.
+			</Note>
+		</Section>
+
+		<Section
 			id='layouts'
 			title='Header and footer'
 			lead='The header and footer are shared: change them once and every page shows the change.'>
@@ -471,6 +708,39 @@ const SiteBuilder = () => (
 				Under <strong>Pages → Saved sections</strong> you can rename one, or delete one no page uses. A saved section can’t hold
 				another saved section, or a pop-up or drawer.
 			</P>
+		</Section>
+
+		<Section
+			id='blocks'
+			title='Every block'
+			lead='What each block on the Add tab is for, in one line.'>
+			{BLOCK_GROUPS.map(g => (
+				<div
+					key={g.title}
+					className='mt-5'>
+					<h3 className='text-[15px] font-medium'>{g.title}</h3>
+					<Terms
+						head={['Block', 'What it’s for']}
+						rows={g.rows}
+					/>
+				</div>
+			))}
+			<P>
+				<strong>Blocks that use your Website settings.</strong> The header, logo, social links, map and contact form show
+				your site name, logo, social profiles, address and email from <em>Site setup</em> — change them there and every
+				page follows. The header’s and menu’s links are the pages you marked <em>Show in the menu</em> (or links you type in,
+				if you choose “These links”).
+			</P>
+			<P>
+				<strong>Hints, not errors.</strong> Some things are flagged with a hint but never stop you publishing: a picture
+				without alt text (a short description for people who can’t see it), a second main title on a page, or a heading that
+				skips a level. Fixing them helps visitors who use screen readers, and search engines.
+			</P>
+			<Note>
+				Every block is made to be quick: pages carry no extra code for blocks they don’t use. Tabs, carousels, galleries and
+				countdowns add a few lines only on pages that have them, and the moving strip stands still for visitors who ask their
+				device for less motion.
+			</Note>
 		</Section>
 
 		<Section
