@@ -25,6 +25,11 @@ const SECTIONS = [
 	{ id: 'inline-text', title: 'Typing on the page' },
 	{ id: 'shortcuts', title: 'Keyboard shortcuts' },
 	{ id: 'overlays', title: 'Pop-ups, drawers and popovers' },
+	{ id: 'style', title: 'Styling a block' },
+	{ id: 'breakpoints', title: 'Phone, tablet and desktop' },
+	{ id: 'design', title: 'Theme, colours and fonts' },
+	{ id: 'layouts', title: 'Header and footer' },
+	{ id: 'sections', title: 'Saved sections' },
 	{ id: 'publish', title: 'Publishing' },
 ];
 
@@ -196,7 +201,7 @@ const SiteBuilder = () => (
 					'Click a row to select that block; the arrow folds and unfolds what’s inside it.',
 					'Double-click a row to give the block a name of your own (“Hero”, “Prices”) — just for you, visitors never see it.',
 					<>The eye hides a block on the site without deleting it; the lock stops it from being moved or deleted by accident.</>,
-					<><strong>Header</strong> and <strong>Footer</strong> are shared by every page and listed above and below the page’s own blocks. You see them here; you’ll change them from the site’s design, which comes next.</>,
+					<><strong>Header</strong> and <strong>Footer</strong> are shared by every page and listed above and below the page’s own blocks. You see them here, and change them in the header or footer itself — see <A href='#layouts'>Header and footer</A>.</>,
 					<>Pop-ups, drawers and popovers are listed under <strong>Overlays</strong> — see <A href='#overlays'>below</A>.</>,
 					<>Drag a row to move its block: drop it on the top or bottom edge of another row to put it before or after, or on the middle of a block that holds others to put it inside. A red line means it can’t go there, with the reason underneath.</>,
 				]}
@@ -206,7 +211,7 @@ const SiteBuilder = () => (
 		<Section
 			id='props'
 			title='A block’s settings'
-			lead='The right column shows what the selected block can do, and changes show on the page as you type.'>
+			lead='The right column shows what the selected block can do, and changes show on the page as you type. Its Style tab is how it looks — see Styling a block.'>
 			<Terms
 				head={['Setting', 'How it works']}
 				rows={[
@@ -367,6 +372,108 @@ const SiteBuilder = () => (
 		</Section>
 
 		<Section
+			id='style'
+			title='Styling a block'
+			lead='Select a block and open Style in the right column: spacing, size, background, border, text and more — all from your theme.'>
+			<Terms
+				head={['Group', 'What it changes']}
+				rows={[
+					['Layout', 'For blocks that hold others: side by side or stacked, wrapping, how items line up and spread out, the gap between them, grid columns.'],
+					['Spacing', 'Padding (space inside the block) and margin (space around it), side by side, in the steps of your theme’s spacing scale.'],
+					['Size', 'Width, maximum width (reading width, page width …), minimum height, height and shape (square, 16:9 …).'],
+					['Background', 'A theme colour, a gradient between two theme colours, or an image — with a colour laid over it to keep text readable.'],
+					['Border', 'Line width and colour, rounded corners and shadow, from your theme.'],
+					['Text', 'Size, weight, alignment, colour, line height, letter spacing and capitals.'],
+					['Effects', 'Opacity, sticking to the top while scrolling, which block sits on top, and which screen sizes the block shows on.'],
+				]}
+			/>
+			<P>
+				Only what applies is shown: line-up and gap settings appear for blocks that hold others, image settings once there’s an
+				image. Groups with something set have a dot. Colours are always your theme’s colours, never a fixed one — so when you
+				change the theme or a colour in it, every block follows.
+			</P>
+		</Section>
+
+		<Section
+			id='breakpoints'
+			title='Phone, tablet and desktop'
+			lead='A style can be different on a phone, a tablet and a computer. Phone comes first; bigger screens only change what you set for them.'>
+			<List
+				items={[
+					<>The <strong>Phone</strong>, <strong>Tablet</strong> and <strong>Desktop</strong> buttons at the top of the Style tab are the same as the ones above the page: picking one shows the page at that size and edits the styles for it.</>,
+					<><strong>Phone</strong> styles apply on every screen. <strong>Tablet</strong> styles apply from 768 px wide and up, <strong>Desktop</strong> from 1024 px — each only for what you set there. A setting you leave alone shows what it gets from the smaller size, like “As on phone (large)”.</>,
+					<>A <strong>blue dot</strong> next to a setting means it’s set for the size you’re editing; click it to clear it there. An <strong>orange ring</strong> means a bigger size changes it; click it to drop those changes.</>,
+					<>The circling arrow beside the sizes clears every style set for the size you’re on. The number on each size button says how many it has.</>,
+					<>To hide a block on some screens only, use <strong>Effects → Shown on</strong> and click the sizes it should be hidden on.</>,
+				]}
+			/>
+			<Note>
+				A common pattern: a smaller heading and less padding on phones, larger from tablet up. Set the phone size first, then switch
+				to Tablet and set only what changes.
+			</Note>
+		</Section>
+
+		<Section
+			id='design'
+			title='Theme, colours and fonts'
+			lead='The Design tab sets the look of the whole site at once. Your pages and their words never change.'>
+			<List
+				items={[
+					<><strong>Theme.</strong> Pick one of the themes — each has its own colours, fonts, corners and buttons. Every page restyles straight away; nothing on them is lost or moved.</>,
+					<><strong>Light and dark.</strong> Show visitors the light colours, the dark ones, or follow their device. The moon button above the page only changes your preview.</>,
+					<><strong>Colours.</strong> Change any of the theme’s colours, for light and for dark — the primary colour, text, backgrounds, lines. The arrow next to a changed colour puts the theme’s back.</>,
+					<><strong>Fonts.</strong> Pick the font for headings, for text and for code from about 50 Google Fonts, each shown in its own face, or use the device’s own font.</>,
+					<><strong>Shape.</strong> Corners (sharp to round), shadows (flat to deep) and how wide the page’s content gets.</>,
+					<><strong>Buttons.</strong> Their corners, how bold their text is, and whether it’s in capitals.</>,
+				]}
+			/>
+			<P>
+				Your changes are kept on top of the theme: pick another theme and they stay. <em>Reset to the theme</em> drops them all.
+				The design saves by itself like a page, and goes live with the next <A href='#publish'>publish</A>. While you’re in the
+				Design tab, undo (⌘Z) steps back through design changes; on a page, through that page’s.
+			</P>
+		</Section>
+
+		<Section
+			id='layouts'
+			title='Header and footer'
+			lead='The header and footer are shared: change them once and every page shows the change.'>
+			<List
+				ordered
+				items={[
+					<>Open <strong>Pages</strong> and click <strong>Header</strong> or <strong>Footer</strong> under the list of pages — or pick it in the page menu at the top left, or select a block of the header on a page and press <em>Edit the header</em>.</>,
+					'The header (or footer) shows on its own on the canvas. Add, move, style and type in it exactly like on a page. The bar above the page says how many pages show it.',
+					<>Go back to a page with the arrow in that bar, or by picking the page.</>,
+				]}
+			/>
+			<P>
+				<strong>Another layout.</strong> A page uses the site’s header and footer, or none (in the page’s settings, under{' '}
+				<em>Header and footer</em>). For a page that needs a different header — a landing page, say — press{' '}
+				<em>Another layout</em> under the header and footer, name it, change its header and footer, and pick it in that page’s
+				settings. A layout pages still use can’t be deleted.
+			</P>
+		</Section>
+
+		<Section
+			id='sections'
+			title='Saved sections'
+			lead='Save a part of a page as a section and use it on as many pages as you like. Change it once and every page follows.'>
+			<List
+				ordered
+				items={[
+					<>Select the block to save — usually a whole section, like a sign-up band or opening hours — and press the puzzle piece in the row of buttons under its name: <strong>Save as section</strong>. Give it a name. It takes that block’s place on the page.</>,
+					<>To use it on another page, open <strong>Add</strong>: your saved sections are at the top. Click one or drag it onto the page.</>,
+					<>To change it, select it on any page and press <strong>Edit the section</strong> (or click it under <strong>Pages → Saved sections</strong>). The bar above the page says how many places use it — the change shows in all of them when you publish.</>,
+					<>To change it on one page only, press <strong>Detach a copy</strong>: that page gets its own copy of the blocks, no longer linked.</>,
+				]}
+			/>
+			<P>
+				Under <strong>Pages → Saved sections</strong> you can rename one, or delete one no page uses. A saved section can’t hold
+				another saved section, or a pop-up or drawer.
+			</P>
+		</Section>
+
+		<Section
 			id='publish'
 			title='Publishing'
 			lead='One button puts every change live at once, and each publish is kept as a version you can go back to.'>
@@ -384,7 +491,7 @@ const SiteBuilder = () => (
 			<List
 				items={[
 					'Every page you added or changed since the last publish.',
-					'The look: theme, colours and fonts, the header and the footer.',
+					'The look: theme, colours and fonts, the header and the footer, and your saved sections.',
 					'Pages you deleted disappear from the live site.',
 				]}
 			/>
