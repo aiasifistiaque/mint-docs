@@ -54,6 +54,7 @@ const ConnectAi = () => (
 				rows={[
 					['Can build', 'On: it can create and change models and pages. Off: it can only look at your models and check plans.'],
 					['Can read records', 'It can read records to answer questions — only pages you can view, never changing anything.'],
+					['May publish (website projects)', <>It may put the site live when you ask. Off by default: it builds drafts and you publish. Make this key from the site builder’s <A href='/site-builder#ai'>AI menu</A>.</>],
 					['Expires', 'Never, or in 7, 30, 90 days or a year.'],
 				]}
 			/>
@@ -152,6 +153,19 @@ const ConnectAi = () => (
 					['create_records', 'Add records — or update them, matched by a field — checked like the form, all or nothing.'],
 					['set_public_api', 'Turn a model’s public API on or off.'],
 					['upload_media', 'Put an image into your Media library and get its address.'],
+					[
+						'site_builder_guide · get_site_builder · start_from_theme · set_site_design · set_site_contents · save_site_page · check_site · publish_site',
+						<>
+							Website projects: build the site in the site builder — a theme’s demo to start from, the words in Contents, lists as
+							models with their public API on, pages with SEO — see{' '}
+							<A
+								key='b'
+								href='/site-builder#ai'>
+								Build with your own AI
+							</A>
+							. Also prompts: “Build my site” and “Add a list to my site”.
+						</>,
+					],
 					[
 						'describe_website · get_site · update_site_settings · upsert_page · site_snippets',
 						<>

@@ -33,6 +33,8 @@ const SECTIONS = [
 	{ id: 'layouts', title: 'Header and footer' },
 	{ id: 'sections', title: 'Saved sections' },
 	{ id: 'blocks', title: 'Every block' },
+	{ id: 'data', title: 'Your data on the page' },
+	{ id: 'ai', title: 'Build with your own AI' },
 	{ id: 'publish', title: 'Publishing' },
 ];
 
@@ -430,8 +432,9 @@ const SiteBuilder = () => (
 			/>
 			<P>
 				<strong>Click</strong> a block to add it next to what’s selected: into it, if it’s a block that holds others (a section,
-				a stack, a grid), otherwise just after it. With nothing selected it goes at the end of the page. Whole sections always go
-				between the page’s sections, never inside one.
+				a stack, a grid), otherwise just after it. With nothing selected it goes at the end of the page. A whole section — a
+				ready-made one, a saved one or an empty section — asks first: you see it and choose where it goes (after the selected
+				section, at the top or at the end of the page), and the page scrolls to it once it’s added.
 			</P>
 			<P>
 				<strong>Drag</strong> a block onto the page to put it exactly where you want: a blue line shows where it will land, and
@@ -667,9 +670,28 @@ const SiteBuilder = () => (
 				])}
 			/>
 			<P>
-				Pick one in <em>Design → Theme</em>. Switching restyles every page at once; your words, pictures and layout stay as
-				they are. Colours and fonts you changed stay on top of whichever theme you pick (see{' '}
-				<A href='#design'>Theme, colours and fonts</A>).
+				Pick one in <em>Design → Theme</em> and the builder asks what you want:
+			</P>
+			<Terms
+				head={['Choice', 'What happens']}
+				rows={[
+					[
+						'Load the demo site',
+						<>
+							A whole site in that theme to start from: a home page and three or four more, a list that suits the theme (a menu for
+							Bistro, services for Studio, products for Market, classes for Calm, posts for Editorial, work for Mono, features for
+							Bright) with sample records, and every text saved in your <em>Contents</em> so you can rewrite it here or in the panel.
+							See <A href='#data'>Your data on the page</A>.
+						</>,
+					],
+					['Replace with the demo', 'The same, on a site that already has pages: they’re replaced (the home page keeps its place). Nothing changes on the live site until you publish.'],
+					['Only change the look', 'Every page is restyled at once; your words, pictures and layout stay as they are.'],
+				]}
+			/>
+			<P>
+				Colours and fonts you changed stay on top of whichever theme you pick (see <A href='#design'>Theme, colours and fonts</A>).
+				The theme and its colours are also kept in your project’s <em>Site design</em> record, so they can be changed from the panel
+				too — the builder picks the change up the next time it opens.
 			</P>
 			<Note>
 				Every theme is checked for contrast: text on its backgrounds, on buttons and on cards reaches at least 4.5 to 1 in
@@ -685,7 +707,7 @@ const SiteBuilder = () => (
 			<List
 				ordered
 				items={[
-					<>Open <strong>Pages</strong> and click <strong>Header</strong> or <strong>Footer</strong> under the list of pages — or select a block of the header on a page and press <em>Edit the header</em>.</>,
+					<>Open <strong>Pages</strong> and click <strong>Header</strong> or <strong>Footer</strong> under the list of pages — or select a block of the header on a page and press <em>Edit the header</em>. <em>Delete it</em> there removes that block from the header on every page (it asks first, then opens the header so undo brings it back).</>,
 					'The header (or footer) shows on its own on the canvas. Add, move, style and type in it exactly like on a page. The bar above the page says how many pages show it.',
 					<>Go back to a page with the arrow in that bar, or by picking the page.</>,
 				]}
@@ -748,6 +770,72 @@ const SiteBuilder = () => (
 				countdowns add a few lines only on pages that have them, and the moving strip stands still for visitors who ask their
 				device for less motion.
 			</Note>
+		</Section>
+
+		<Section
+			id='data'
+			title='Your data on the page'
+			lead='Your site’s words, lists and details live in your project, where the team can change them without opening the builder.'>
+			<Terms
+				head={['What', 'Where it lives']}
+				rows={[
+					['Texts, headings, buttons, pictures', <><strong>Contents</strong> — one record per piece, with a short name (its slug) such as <code>home-hero</code>. Edit them in the panel’s Contents table; the site changes straight away, no publish needed.</>],
+					['Each page’s title and description for search engines', <><strong>SEO</strong> — one record per page. Changing it in the panel shows on the page in the builder and goes live with the next publish.</>],
+					['The theme, colours and fonts', <><strong>Site design</strong> — one record. See <A href='#themes'>The themes</A>.</>],
+					['Lists — services, team, products, posts…', <>A <strong>model of its own</strong> with a <em>public API</em> (list and get) switched on, so visitors’ pages can read it.</>],
+				]}
+			/>
+			<P>
+				<strong>Use data.</strong> Text, pictures and buttons that can come from data show a small <em>Use data</em> button
+				beside their setting. Choose <em>Save it in Contents</em> to turn what’s there into a Contents record, or pick a Contents
+				record, the site’s name, email, phone or address, or — inside a list — a field of each record. The setting then shows
+				where its value comes from, with a link to change it; <em>stop using data</em> to type it here again.
+			</P>
+			<P>
+				<strong>Lists of records.</strong> Add <em>List of records</em> (Add → Your data). Under <em>Records</em> pick the model,
+				the order, how many, and — if you want only some — a filter (featured is yes, price at most 100…). The blocks inside the
+				list are drawn once per record: bind them with Use data, or type <code>{'{{item.title}}'}</code> in a text. Turn on{' '}
+				<em>Show pages</em> for Previous / Next links when there are more records.
+			</P>
+			<P>
+				<strong>A page for each record.</strong> A page whose address has a part in brackets, like <code>/services/[slug]</code>,
+				shows one record: <code>/services/web-design</code> shows the service whose slug is web-design, and its title and
+				description can use the record too (<code>{'{{record.title}} — Acme'}</code>). An address with no such record is a
+				“page not found”.
+			</P>
+			<P>
+				Text can format what it shows: <code>{'{{item.price | money}}'}</code>, <code>{'{{record.createdAt | date}}'}</code>,{' '}
+				<code>{'{{item.summary | truncate:120}}'}</code>, <code>{'{{item.subtitle | default:\'Coming soon\'}}'}</code>; also
+				number, upper and lower.
+			</P>
+			<Note>
+				A list can only show a model whose public API is on with list and get — otherwise visitors would see nothing. The
+				builder says so in the list itself, and Publish won’t go ahead until it’s fixed. Turn it on in the panel (Models → the
+				model → Public API). Contents never need it.
+			</Note>
+		</Section>
+
+		<Section
+			id='ai'
+			title='Build with your own AI'
+			lead='Connect Claude, ChatGPT, Cursor or any MCP client, and let it build the site here — with the same pages, themes and checks as the builder.'>
+			<P>
+				Open <em>AI</em> in the builder’s top bar (or <em>Settings → Connect your AI</em>):
+			</P>
+			<List
+				items={[
+					<><strong>Connect</strong> — make a key (it acts as you, never beyond your role; tick <em>It may publish</em> only if you want your AI to put changes live), then follow the steps for your AI with the key already filled in.</>,
+					<><strong>Build with AI</strong> — a ready request with your theme in it. Copy it into your AI; in Claude and Claude Code it’s also in the prompt menu as “Build my site”.</>,
+					<><strong>Keys</strong> — every key, when it was last used, and Revoke.</>,
+				]}
+			/>
+			<P>
+				Your AI starts from the theme’s demo site when the site is blank, writes your words into Contents, makes a model for each
+				list (with its public API on) and fills it, and saves every page with its SEO. Everything it makes is a draft you see and
+				change in the builder; nothing goes live until you publish (or it does, if its key may publish and you ask it to).
+				More about keys and clients in <A href='/connect-ai'>Connect your AI</A>.
+			</P>
+			<Note>Your role needs the “Manage API keys” permission to make a key. Without it you still see the steps.</Note>
 		</Section>
 
 		<Section
