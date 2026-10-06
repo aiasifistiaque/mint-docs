@@ -10,6 +10,7 @@ import {
 	Images,
 	Layout,
 	Lifebuoy,
+	PaintBrush,
 	Plug,
 	Puzzle,
 	Rocket,
@@ -307,6 +308,18 @@ export const GUIDES: Guide[] = [
 			{ id: 'build-a-page', title: 'Building a page' },
 			{ id: 'site-api', title: 'The site API' },
 			{ id: 'render', title: 'Rendering your site' },
+		],
+	},
+	{
+		href: '/site-builder',
+		title: 'Site builder',
+		name: 'The site builder',
+		description: 'Build your website visually from ready-made blocks, then publish every change in one go — and go back to any earlier version.',
+		icon: PaintBrush,
+		group: 'Go live',
+		topics: [
+			{ id: 'start', title: 'What the site builder is' },
+			{ id: 'publish', title: 'Publishing' },
 		],
 	},
 	{

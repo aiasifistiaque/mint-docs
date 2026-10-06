@@ -25,6 +25,7 @@ import {
 	List as PhList,
 	MagnifyingGlass as PhMagnifyingGlass,
 	Moon as PhMoon,
+	PaintBrushBroad as PhPaintBrushBroad,
 	Plug as PhPlug,
 	PuzzlePiece as PhPuzzlePiece,
 	RocketLaunch as PhRocketLaunch,
@@ -75,6 +76,7 @@ export const Globe = make(PhGlobe, 'light');
 export const Images = make(PhImages, 'light');
 export const Layout = make(PhLayout, 'light');
 export const Lifebuoy = make(PhLifebuoy, 'light');
+export const PaintBrush = make(PhPaintBrushBroad, 'light');
 export const Plug = make(PhPlug, 'light');
 export const Puzzle = make(PhPuzzlePiece, 'light');
 export const Rocket = make(PhRocketLaunch, 'light');
