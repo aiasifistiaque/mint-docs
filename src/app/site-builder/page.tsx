@@ -19,6 +19,12 @@ const SECTIONS = [
 	{ id: 'canvas', title: 'The canvas' },
 	{ id: 'outline', title: 'The outline' },
 	{ id: 'props', title: 'A block’s settings' },
+	{ id: 'add', title: 'Adding blocks' },
+	{ id: 'presets', title: 'Ready-made sections' },
+	{ id: 'move', title: 'Moving, copying and wrapping' },
+	{ id: 'inline-text', title: 'Typing on the page' },
+	{ id: 'shortcuts', title: 'Keyboard shortcuts' },
+	{ id: 'overlays', title: 'Pop-ups, drawers and popovers' },
 	{ id: 'publish', title: 'Publishing' },
 ];
 
@@ -52,8 +58,8 @@ const SiteBuilder = () => (
 				the site’s theme decides the colours, fonts and corners for all of them at once. We host the finished site for you.
 			</P>
 			<Note>
-				The site builder is being rolled out in steps. Opening a page, changing its blocks and publishing come first;
-				adding new blocks, styling them and choosing themes follow. This guide grows with it. Until it reaches your
+				The site builder is being rolled out in steps. Opening a page, changing, adding and moving its blocks and publishing
+				come first; styling blocks and choosing themes follow. This guide grows with it. Until it reaches your
 				workspace, the way to build a site is your own code reading the <A href='/websites'>site API</A>.
 			</Note>
 			<P>
@@ -191,6 +197,8 @@ const SiteBuilder = () => (
 					'Double-click a row to give the block a name of your own (“Hero”, “Prices”) — just for you, visitors never see it.',
 					<>The eye hides a block on the site without deleting it; the lock stops it from being moved or deleted by accident.</>,
 					<><strong>Header</strong> and <strong>Footer</strong> are shared by every page and listed above and below the page’s own blocks. You see them here; you’ll change them from the site’s design, which comes next.</>,
+					<>Pop-ups, drawers and popovers are listed under <strong>Overlays</strong> — see <A href='#overlays'>below</A>.</>,
+					<>Drag a row to move its block: drop it on the top or bottom edge of another row to put it before or after, or on the middle of a block that holds others to put it inside. A red line means it can’t go there, with the reason underneath.</>,
 				]}
 			/>
 		</Section>
@@ -207,12 +215,154 @@ const SiteBuilder = () => (
 					['Colours', 'Your theme’s colours, so a change of theme still looks right.'],
 					['Images and videos', <>Pick from your <A href='/media'>media library</A>, upload one, or paste an address. Videos also take YouTube and Vimeo links.</>],
 					['Icons', 'Search the built-in set and click one.'],
-					['When clicked', 'For buttons, links, icons and images: go to one of your pages, open a link (optionally in a new tab), scroll to a block on the page, or open a widget like the cart.'],
+					['When clicked', <>For buttons, links, icons and images: go to one of your pages, open a link (optionally in a new tab), scroll to a block on the page, open or close a <A href='#overlays'>pop-up or drawer</A>, or open a widget like the cart.</>],
 				]}
 			/>
 			<P>
-				<em>Remove block</em> at the bottom deletes the selected block (undo brings it back). Locked blocks can’t be
-				removed until you unlock them in the outline.
+				The row of small buttons under the block’s name duplicates, copies, cuts, pastes, moves and wraps it (see{' '}
+				<A href='#move'>Moving, copying and wrapping</A>). <em>Remove block</em> at the bottom — or the bin in that row —
+				deletes it (undo brings it back). Locked blocks can’t be moved or removed until you unlock them in the outline.
+			</P>
+		</Section>
+
+		<Section
+			id='add'
+			title='Adding blocks'
+			lead='The Add tab lists every block and ready-made section. Click one to add it, or drag it onto the page.'>
+			<Shot
+				src='/guides/site-builder/add.jpg'
+				alt='The Add tab listing blocks by group; a drawer just added is open on the page and its settings are on the right'
+				caption='The Add tab. A drawer was just added: it opens on the canvas so you can fill it in.'
+			/>
+			<P>Open <strong>Add</strong> at the top of the left column. Blocks come in groups:</P>
+			<Terms
+				head={['Group', 'Blocks']}
+				rows={[
+					['Layout', 'Section (a full-width band), Container, Stack (a row or a column), Grid, Spacer, Divider'],
+					['Text and buttons', 'Heading, Text, Button, Link, Icon'],
+					['Pictures and video', 'Image, Video, Embed (a map or video from an allowed site)'],
+					['Pop-ups and drawers', <>Pop-up, Drawer, Popover — see <A href='#overlays'>below</A></>],
+				]}
+			/>
+			<P>
+				<strong>Click</strong> a block to add it next to what’s selected: into it, if it’s a block that holds others (a section,
+				a stack, a grid), otherwise just after it. With nothing selected it goes at the end of the page. Whole sections always go
+				between the page’s sections, never inside one.
+			</P>
+			<P>
+				<strong>Drag</strong> a block onto the page to put it exactly where you want: a blue line shows where it will land, and
+				an empty box turns blue when it will go inside. If a block can’t go somewhere, a red note says why and nothing is added.
+				The search box at the top finds blocks and sections by name.
+			</P>
+			<Note>
+				The new block is selected straight away, with its settings on the right. Every add is one step of undo.
+			</Note>
+		</Section>
+
+		<Section
+			id='presets'
+			title='Ready-made sections'
+			lead='Sections at the top of the Add tab are whole parts of a page, built from ordinary blocks.'>
+			<P>
+				A ready-made section — a header, a hero with a title and two buttons, a footer — is a set of blocks arranged for you.
+				Add it like a block (click, or drag it onto the page). Once it’s on the page it’s just blocks: change any text, picture
+				or button, add or remove parts, move them around.
+			</P>
+			<List
+				items={[
+					<><strong>Headers</strong> — your name, menu links and a button.</>,
+					<><strong>Heroes</strong> — a centred title, a line of text and two buttons.</>,
+					<><strong>Footers</strong> — your name, links and the copyright line.</>,
+				]}
+			/>
+			<Note>More sections and themes are on the way — features, prices, testimonials, questions, team, contact and more.</Note>
+		</Section>
+
+		<Section
+			id='move'
+			title='Moving, copying and wrapping'
+			lead='Move blocks by dragging them, or with the buttons and shortcuts; copy them to any page.'>
+			<List
+				items={[
+					<><strong>Drag on the page</strong>: select a block, then drag its blue name tag. The blue line shows where it will go; let go to drop it. Press Esc to cancel.</>,
+					<><strong>Drag in the outline</strong>: see <A href='#outline'>The outline</A>.</>,
+					<><strong>Move up / down</strong> (⌥↑ / ⌥↓) swaps it with the block before or after it.</>,
+					<><strong>Duplicate</strong> (⌘D) puts a copy just after it.</>,
+					<><strong>Copy</strong> (⌘C) and <strong>Cut</strong> (⌘X) keep it to paste; <strong>Paste</strong> (⌘V) adds it next to the selection — on this page or any other page of any of your sites, in this browser.</>,
+					<><strong>Wrap</strong> puts the block inside a new stack or section, so you can lay it out with others or give it a background.</>,
+					<><strong>Select the block it’s in</strong> (Esc) walks up from a block to the one holding it.</>,
+				]}
+			/>
+			<P>
+				Copies get new ids, so they never clash with what’s already on the page. If a copied button opens a pop-up that you
+				didn’t copy with it, the editor warns you before publishing.
+			</P>
+		</Section>
+
+		<Section
+			id='inline-text'
+			title='Typing on the page'
+			lead='Double-click a heading, text, button or link on the page to type straight into it.'>
+			<List
+				items={[
+					'Double-click the words. They become editable right where they are.',
+					<>For a heading, button or link, press <strong>Enter</strong> to finish. For text with several paragraphs, Enter starts a new line — finish with <strong>⌘Enter</strong> or by clicking somewhere else.</>,
+					<><strong>Esc</strong> stops without keeping the change.</>,
+					<>In text blocks, ⌘B and ⌘I make words bold or italic. Anything else pasted in is tidied to the formatting the site allows.</>,
+				]}
+			/>
+			<P>The same text is in the block’s settings on the right — change it in either place.</P>
+		</Section>
+
+		<Section
+			id='shortcuts'
+			title='Keyboard shortcuts'
+			lead='They work whether the page or the outline has the focus — not while you’re typing in a box.'>
+			<Terms
+				head={['Keys (Ctrl on Windows)', 'What it does']}
+				rows={[
+					['⌘Z / ⇧⌘Z', 'Undo / redo'],
+					['⌘C · ⌘X · ⌘V', 'Copy · cut · paste'],
+					['⌘D', 'Duplicate'],
+					['Delete or ⌫', 'Delete the selected block'],
+					['↑ / ↓', 'Select the block before / after'],
+					['⌥↑ / ⌥↓', 'Move the selected block up / down'],
+					['Esc', 'Select the block it’s in'],
+					['Double-click', 'Type on the page'],
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='overlays'
+			title='Pop-ups, drawers and popovers'
+			lead='Things that open over the page when a button is clicked: a sign-up pop-up, a side menu, a small note.'>
+			<Shot
+				src='/guides/site-builder/overlays.jpg'
+				alt='The outline lists a Drawer under Overlays; the selected button’s “When clicked” is set to open that drawer'
+				caption='A drawer under Overlays, and a button set to open it.'
+			/>
+			<Terms
+				head={['Block', 'What it is']}
+				rows={[
+					['Pop-up', 'A window in the middle of the screen. Good for a sign-up form, a video, more details.'],
+					['Drawer', 'A panel that slides in from the left or right. Good for menus, filters, a cart.'],
+					['Popover', 'A small panel that opens just under the button that opens it. Good for short notes and mini menus.'],
+				]}
+			/>
+			<List
+				ordered
+				items={[
+					<>Add one from <strong>Add → Pop-ups and drawers</strong>. It goes at the top level of the page and is listed in the outline under <strong>Overlays</strong>.</>,
+					'Put anything inside it — text, pictures, buttons — like any other part of the page. While it (or something in it) is selected, it shows open on the canvas.',
+					<>Select the button or link that should open it, and set <strong>When clicked</strong> to <em>Open a pop-up or drawer</em> and pick it under <em>Which one</em>. <em>Toggle</em> opens it or, if it’s open, closes it; <em>Close</em> is for a button inside it.</>,
+					'Publish.',
+				]}
+			/>
+			<P>
+				On your site they stay hidden until opened. A pop-up or drawer dims the page behind it and closes with its × button,
+				with Esc, or with a click on the dimmed page; the keyboard stays inside it while it’s open, and screen readers announce
+				it by the name you give it in its settings. A popover closes with Esc or a click anywhere else.
 			</P>
 		</Section>
 
