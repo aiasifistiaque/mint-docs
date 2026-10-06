@@ -319,6 +319,7 @@ export const GUIDES: Guide[] = [
 		group: 'Go live',
 		topics: [
 			{ id: 'start', title: 'What the site builder is' },
+			{ id: 'live-site', title: 'Your live site' },
 			{ id: 'publish', title: 'Publishing' },
 		],
 	},

@@ -14,6 +14,7 @@ export const metadata = guideMeta('/site-builder');
 
 const SECTIONS = [
 	{ id: 'start', title: 'What the site builder is' },
+	{ id: 'live-site', title: 'Your live site' },
 	{ id: 'publish', title: 'Publishing' },
 ];
 
@@ -51,6 +52,44 @@ const SiteBuilder = () => (
 			<P>
 				A new website project starts with a home page (a large title, a line of text and two buttons), a header with your
 				site’s name and a few links, and a footer — ready to change. Nothing is live until the first time you publish.
+			</P>
+		</Section>
+
+		<Section
+			id='live-site'
+			title='Your live site'
+			lead='We host it: fast pages, search-engine basics and your Site setup, with nothing to deploy.'>
+			<P>
+				Your published site is served by MINT on its own web address, separate from the panel, so visitors never see
+				anything of your workspace. Connecting your own domain is on the way.
+			</P>
+			<P>
+				<strong>How changes reach it.</strong> Pages are kept ready to send, so they open quickly. When you publish, your
+				site is refreshed at once: the next visitor gets the new version.
+			</P>
+			<Terms
+				head={['', 'Where it comes from']}
+				rows={[
+					['Page title and description', 'Each page’s SEO settings. A page without its own description uses the site’s default from Site setup → SEO, and every page but the home page follows the title template there (for example “%s · Acme”).'],
+					['Share picture', 'The page’s share image, or the site’s default — shown when someone posts a link to the page.'],
+					['Hide from search engines', 'Per page, or for the whole site in Site setup → SEO.'],
+					['Sitemap and robots.txt', <>Made for you at <em>/sitemap.xml</em> and <em>/robots.txt</em>, listing the published pages that aren’t hidden from search.</>],
+					['Favicon, tracking, pixels, your code tags', 'From Site setup — the same settings a code-built site uses. Search-console verification is in the page itself, so Google and Bing can check it.'],
+					['Widgets', <>The <A href='/widgets'>widgets</A> you switch on load on every page.</>],
+				]}
+			/>
+			<P>
+				<strong>Redirects.</strong> Redirects you set in Site setup work here too: someone opening the old address is sent
+				to the new one (permanently, unless you untick it).
+			</P>
+			<P>
+				<strong>Page not found.</strong> An address with no page shows a short “Page not found” message in your site’s
+				look, with your header and footer and a button back to the home page. To design your own, add a page at the
+				address <em>/404</em> and publish it.
+			</P>
+			<P>
+				<strong>Light and dark.</strong> Your site shows in light colours, dark colours, or follows each visitor’s
+				device setting — your choice in the site’s design.
 			</P>
 		</Section>
 
