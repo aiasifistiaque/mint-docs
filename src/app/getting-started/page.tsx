@@ -100,22 +100,31 @@ const GettingStarted = () => (
 		<Section
 			id='first-project'
 			title='Your first project'
-			lead='A project is an app or a website. Start one from the projects page.'>
+			lead='A project is an app, a website or an API. Your home page walks you through the first one.'>
+			<P>
+				Right after you sign up, your home page is a welcome: what MINT is, the three kinds of project, and every step to a working
+				project, each with its guide. We also email you the same steps.
+			</P>
 			<List
 				ordered
 				items={[
 					<>
-						On <A href={`${APP_URL}/projects`}>Projects</A>, press <strong>New project</strong>.
+						Under <strong>Step 1 · Choose what to build</strong>, press <strong>Start an app</strong>, <strong>Start a website</strong> or{' '}
+						<strong>Start an API</strong>. Or, any time, on <A href={`${APP_URL}/projects`}>Projects</A>, press <strong>New project</strong>.
 					</>,
 					<>
-						Name it and pick its kind: <strong>App</strong> for an empty workspace (a CRM, a booking system, an API for your
-						mobile app) or <strong>Website</strong> to start with pages, SEO and content blocks ready.
+						Name it. Then start from a ready-made template (with its models and sample data), or set it up yourself.
 					</>,
 					<>
-						Press <strong>Create project</strong>. It opens, with an empty dashboard and sidebar waiting for you.
+						Press <strong>Create project</strong>. It opens on its <strong>Get started</strong> page.
 					</>,
 				]}
 			/>
+			<Note>
+				Once you have a project, the steps become a <strong>Getting started</strong> checklist on your home and each project&apos;s
+				dashboard. Creating a project, adding a model and inviting someone tick themselves. Tick the others with{' '}
+				<strong>Mark as done</strong>, or press <strong>Hide</strong> when you don&apos;t need it.
+			</Note>
 			<P>
 				More in <A href='/projects'>Projects</A>.
 			</P>
