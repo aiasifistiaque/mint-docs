@@ -255,6 +255,13 @@ const SiteBuilder = () => (
 				A new website project starts with a home page (a large title, a line of text and two buttons), a header with your
 				site’s name and a few links, and a footer — ready to change. Nothing is live until the first time you publish.
 			</P>
+			<P>
+				<strong>Where it opens.</strong> Open <em>Site → Site builder</em> in your website project and press{' '}
+				<em>Open the site builder</em> — or <em>Edit site</em> on the website’s home. The builder opens full screen in its own
+				tab, already signed in as you, so there’s nothing to log in to. <em>Exit</em> (top right) saves and takes you back to
+				the panel. If your browser blocks the new tab, allow pop-ups for the panel and press the button again. If you stay
+				away long enough for the builder’s session to end, it says so — open it again from the panel.
+			</P>
 		</Section>
 
 		<Section
@@ -300,13 +307,13 @@ const SiteBuilder = () => (
 			title='Pages'
 			lead='Every page of your site, where it stands, and everything you can do to it.'>
 			<P>
-				Open <em>Site → Site builder</em> in your website project (or <em>Edit site</em> on the website’s home). The
-				left column has two tabs: <em>Pages</em> and <em>Outline</em>. Pick a page in Pages, or in the list at the top
-				left, to open it.
+				Open the builder (<em>Site → Site builder</em> in your website project, or <em>Edit site</em> on the website’s
+				home). The left column has four tabs: <em>Pages</em>, <em>Outline</em>, <em>Add</em> and <em>Design</em>. Pick a
+				page in Pages to open it.
 			</P>
 			<Shot
 				src='/guides/site-builder/pages.jpg'
-				alt='The Pages tab: Home, About and Contact, each with its address and a status'
+				alt='The Pages tab: Home, About, About copy and Contact, each with its address and a status; the header, footer and saved sections below'
 				caption='Pages, with their address and where each one stands.'
 			/>
 			<Terms
@@ -541,8 +548,8 @@ const SiteBuilder = () => (
 			lead='Things that open over the page when a button is clicked: a sign-up pop-up, a side menu, a small note.'>
 			<Shot
 				src='/guides/site-builder/overlays.jpg'
-				alt='The outline lists a Drawer under Overlays; the selected button’s “When clicked” is set to open that drawer'
-				caption='A drawer under Overlays, and a button set to open it.'
+				alt='A button is selected; in its settings, “When clicked” is set to open the page’s drawer'
+				caption='A button set to open the page’s drawer.'
 			/>
 			<Terms
 				head={['Block', 'What it is']}
@@ -678,7 +685,7 @@ const SiteBuilder = () => (
 			<List
 				ordered
 				items={[
-					<>Open <strong>Pages</strong> and click <strong>Header</strong> or <strong>Footer</strong> under the list of pages — or pick it in the page menu at the top left, or select a block of the header on a page and press <em>Edit the header</em>.</>,
+					<>Open <strong>Pages</strong> and click <strong>Header</strong> or <strong>Footer</strong> under the list of pages — or select a block of the header on a page and press <em>Edit the header</em>.</>,
 					'The header (or footer) shows on its own on the canvas. Add, move, style and type in it exactly like on a page. The bar above the page says how many pages show it.',
 					<>Go back to a page with the arrow in that bar, or by picking the page.</>,
 				]}
@@ -754,7 +761,7 @@ const SiteBuilder = () => (
 			</P>
 			<Shot
 				src='/guides/site-builder/publish.jpg'
-				alt='The Publish dialog listing a new page and a changed page, with a note field'
+				alt='The Publish dialog listing a changed page and the design, with a note field'
 				caption='Publish lists what goes live; a note says what this version is.'
 			/>
 			<P>When everything is in order, it puts live together:</P>
