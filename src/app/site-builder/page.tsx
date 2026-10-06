@@ -146,7 +146,7 @@ const SiteBuilder = () => (
 					<><strong>Name, address & SEO</strong> — the page’s name, its address, whether it’s in the menu (and its label and order), whether it has the site’s header and footer, and what search engines and link previews show.</>,
 					<><strong>Make it the home page</strong> — it moves to /, and the old home page gets an address from its name.</>,
 					<><strong>Duplicate</strong> — a copy as a new draft, at the same address with “-copy”.</>,
-					<><strong>Take off the site</strong> — gone from the live site at once; <strong>Put back on the site</strong> returns it with the next publish.</>,
+					<><strong>Take off the site</strong> — after you confirm, gone from the live site at once; <strong>Put back on the site</strong> returns it with the next publish.</>,
 					<><strong>Delete</strong> — a published page stays live until you publish, then it’s gone. The home page can’t be deleted.</>,
 				]}
 			/>
