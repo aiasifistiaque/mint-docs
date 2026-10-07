@@ -50,42 +50,29 @@ const Models = () => (
 		<Section
 			id='models-wizard'
 			title='Creating a model'
-			lead='New model opens a step-by-step wizard. Nothing is created until the last step.'>
+			lead='New model opens three short steps. Nothing is created until you press Create on the last one.'>
 			<List
 				ordered
 				items={[
 					<>
-						<strong>Model</strong> — its title, record code and fields.
+						<strong>What it stores</strong> — a title (like “Customers”) and the fields every record holds. The form
+						people will fill in is drawn beside them as you type. <em>More options</em> holds the rest, which most
+						models never need: the model name and address, record numbers, and who sees each record.
 					</>,
 					<>
-						<strong>Settings</strong> — which fields are required, editable, searchable and sortable.
+						<strong>Check the pages</strong> — the table page, form, record page, filters and fields &amp; rules made
+						from your fields, as coloured cards. <strong>Preview</strong> shows them as they’ll look. They’re ready as
+						they are; <em>Change it</em> on a card opens that part in the same tabs as <A href='/pages'>Pages</A>.
 					</>,
 					<>
-						<strong>Config</strong> — the page: its heading, add and export buttons, the ⋯ menu on each row, bulk actions.
-					</>,
-					<>
-						<strong>Form</strong> — the add/edit form’s sections and rows.
-					</>,
-					<>
-						<strong>Table</strong> — the columns and their order.
-					</>,
-					<>
-						<strong>View</strong> — the record’s own page: its sections and the records linked to it.
-					</>,
-					<>
-						<strong>Filters</strong> — the filter chips above the table.
-					</>,
-					<>
-						<strong>Sidebar & create</strong> — the sidebar section for its page, a summary, and <strong>Create model</strong>
-						.
+						<strong>Finish</strong> — where it goes in the sidebar, a summary in plain words, and{' '}
+						<strong>Create</strong>. Then add the first record straight away, or open the table.
 					</>,
 				]}
 			/>
 			<P>
-				Every step after the first starts from sensible suggestions made from your fields, so you can press{' '}
-				<strong>Next</strong> through them and change things later in <A href='/pages'>Pages</A>. Going back and
-				adding a field adds it everywhere; your other changes stay. Progress is kept in your browser, so a reload carries on
-				where you were — <em>Start over</em> clears it.
+				Going back and adding a field adds it to the pages too; your other changes stay. Progress is kept in your
+				browser, so a reload carries on where you were — <em>Start over</em> clears it.
 			</P>
 			<Note>
 				Rather describe it? <A href='/connect-ai'>Connect your own AI</A> — Claude, ChatGPT and others can plan and

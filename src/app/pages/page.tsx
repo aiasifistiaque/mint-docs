@@ -158,7 +158,7 @@ const Pages = () => (
 				head={['Setting', 'What it does']}
 				rows={[
 					['Title / Subtitle', 'The page heading and the line under it.'],
-					['Add button', 'Its label, and whether it opens the form in a dialog or on a page of its own.'],
+					['Add button', 'Its label, and whether it opens the form in a pop-up over the table or on a page of its own (/your-page/create — the same form, with more room).'],
 					['Export button', 'Download the table as Excel, CSV or PDF.'],
 					['Search / Filter row', 'The search box (matching Searchable fields) and the filter chips.'],
 					['Clickable rows', 'Clicking a row opens the record.'],
