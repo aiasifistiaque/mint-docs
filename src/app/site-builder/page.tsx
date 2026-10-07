@@ -779,23 +779,37 @@ const SiteBuilder = () => (
 			<Terms
 				head={['What', 'Where it lives']}
 				rows={[
-					['Texts, headings, buttons, pictures', <><strong>Contents</strong> — one record per piece, with a short name (its slug) such as <code>home-hero</code>. Edit them in the panel’s Contents table; the site changes straight away, no publish needed.</>],
+					['Texts, headings, buttons, pictures', <><strong>Contents</strong> — one record per piece, with a short name (its slug) such as <code>home-hero-1</code>, made for you. Edit them on the page or in the panel’s Contents table; a change made in the panel shows on the live site straight away, no publish needed.</>],
+					['Cards — features, team, reviews, numbers', <><strong>Contents</strong> — one record per section, its cards in a list.</>],
 					['Each page’s title and description for search engines', <><strong>SEO</strong> — one record per page. Changing it in the panel shows on the page in the builder and goes live with the next publish.</>],
 					['The theme, colours and fonts', <><strong>Site design</strong> — one record. See <A href='#themes'>The themes</A>.</>],
 					['Lists — services, team, products, posts…', <>A <strong>model of its own</strong> with a <em>public API</em> (list and get) switched on, so visitors’ pages can read it.</>],
 				]}
 			/>
 			<P>
-				<strong>Use data.</strong> Text, pictures and buttons that can come from data show a small <em>Use data</em> button
-				beside their setting. Choose <em>Save it in Contents</em> to turn what’s there into a Contents record, or pick a Contents
-				record, the site’s name, email, phone or address, or — inside a list — a field of each record. The setting then shows
-				where its value comes from, with a link to change it; <em>stop using data</em> to type it here again.
+				<strong>Every word is in Contents, from the start.</strong> A new site opens as its theme’s demo — every page, its SEO
+				record and a list such as Services — named after your site. Each heading, text, button and picture on it is already a
+				Contents record, and so is everything you add later: a section or block from the Add tab arrives with demo words (rich
+				text as lorem ipsum) saved in its own record, and a pasted or duplicated copy gets records of its own. Change the words
+				right on the page or in the panel; a setting kept in Contents shows <em>In Contents · Open</em> beside it.
 			</P>
 			<P>
-				<strong>Lists of records.</strong> Add <em>List of records</em> (Add → Your data). Under <em>Records</em> pick the model,
-				the order, how many, and — if you want only some — a filter (featured is yes, price at most 100…). The blocks inside the
-				list are drawn once per record: bind them with Use data, or type <code>{'{{item.title}}'}</code> in a text. Turn on{' '}
-				<em>Show pages</em> for Previous / Next links when there are more records.
+				<strong>Lists of cards.</strong> Sections made of look-alike cards — features, team, reviews, numbers, steps — are
+				lists: their cards are kept in one Contents record. Select the list (click a card, then <em>List of records</em> in the
+				path at the top) and change, add, remove or reorder the cards under <em>Records</em>, or in the panel’s Contents.
+			</P>
+			<P>
+				<strong>Use data.</strong> Text, pictures and buttons that can come from data show a small <em>Use data</em> button
+				beside their setting. Pick a Contents record, the site’s name, email, phone or address, or — inside a list — a field of
+				each record. The setting then shows where its value comes from; <em>stop using data</em> to type it here again.
+			</P>
+			<P>
+				<strong>Lists of records.</strong> Any list can show one of your models instead of its own cards: under{' '}
+				<em>Records</em> pick the model (Services, Team, Products…), the order, how many, and — if you want only some — a filter
+				(featured is yes, price at most 100…). The card follows: its title shows the record’s name or title, its text the
+				description, its picture the image. Pick <em>Cards kept in Contents</em> to go back to cards of its own. The blocks
+				inside the list are drawn once per record: bind them with Use data, or type <code>{'{{item.title}}'}</code> in a text.
+				Turn on <em>Show pages</em> for Previous / Next links when there are more records.
 			</P>
 			<P>
 				<strong>A page for each record.</strong> A page whose address has a part in brackets, like <code>/services/[slug]</code>,
