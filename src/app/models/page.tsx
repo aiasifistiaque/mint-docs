@@ -117,7 +117,7 @@ const Models = () => (
 			lead='Each field has a name, a type, and whether it’s required.'>
 			<P>
 				<strong>Add a field</strong> first asks what it will hold — text, a number, a date, a choice from a list, an upload,
-				a link to another record — each with a line on what it’s for; then you name it. The type can be changed later in
+				a link to another record — each with a line on what it’s for. Type in the search box at the top to narrow the list (Enter picks the best match); then you name it. The type can be changed later in
 				the field’s row, and its picture at the start of the row shows the type at a glance.
 			</P>
 			<P>
