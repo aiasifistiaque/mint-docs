@@ -289,6 +289,12 @@ const Pages = () => (
 				because a new document needs a project picked — add documents from the project’s page instead.
 			</P>
 			<P>
+				<em>Show only</em> narrows a tab to the records that meet your conditions, so a client page can have{' '}
+				<em>All bills</em> and, beside it, <em>Due bills</em> (status is due). Each condition is a field, a test (is, is
+				not, is one of, more or less than, before or after, contains, is empty) and a value; a record must meet every
+				one. Adding from a tab fills in its “is” conditions — <em>Add bill</em> on Due bills starts as due.
+			</P>
+			<P>
 				Every detail page also has a <strong>History</strong> tab: who changed what, and when.
 			</P>
 		</Section>
