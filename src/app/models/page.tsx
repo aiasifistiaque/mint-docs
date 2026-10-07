@@ -60,9 +60,11 @@ const Models = () => (
 						models never need: the model name and address, record numbers, and who sees each record.
 					</>,
 					<>
-						<strong>Check the pages</strong> — the table page, form, record page, filters and fields &amp; rules made
-						from your fields, as coloured cards. <strong>Preview</strong> shows them as they’ll look. They’re ready as
-						they are; <em>Change it</em> on a card opens that part in the same tabs as <A href='/pages'>Pages</A>.
+						<strong>Check the pages</strong> — the pages made from your fields, one part at a time: an overview, then
+						the table page, form, record page, filters and fields &amp; rules. <strong>Next</strong> takes you
+						through each in turn (the bar shows “part 2 of 6”), and <strong>Preview</strong> shows how they’ll look.
+						They’re ready as they are; change anything on the way, with the same tools as{' '}
+						<A href='/pages'>Pages</A>. <strong>Finish</strong> opens once you’ve seen every part.
 					</>,
 					<>
 						<strong>Finish</strong> — where it goes in the sidebar, a summary in plain words, and{' '}
