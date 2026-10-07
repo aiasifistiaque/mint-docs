@@ -14,7 +14,7 @@ const SECTIONS = [
 	{ id: 'models', title: 'What a model is' },
 	{ id: 'models-wizard', title: 'Creating a model' },
 	{ id: 'models-names', title: 'Names and addresses' },
-	{ id: 'models-code', title: 'Record codes' },
+	{ id: 'models-code', title: 'Record numbers' },
 	{ id: 'models-fields', title: 'Fields' },
 	{ id: 'models-password', title: 'Password fields' },
 	{ id: 'models-sections', title: 'Sections and lists' },
@@ -109,25 +109,39 @@ const Models = () => (
 
 		<Section
 			id='models-code'
-			title='Record codes'>
+			title='Record numbers'>
 			<P>
-				<strong>Give every record a code</strong> numbers records as they’re created: a prefix, a dash and a padded number,
-				like <C>INV-0001</C>. Two records created at the same moment never share one. Turning codes on for a model that has
-				records gives them codes, oldest first; a new prefix applies from then on.
+				<strong>Give every record a number (code)</strong>, under the model’s <strong>Settings → Record numbers</strong>,
+				numbers records as they’re created: a prefix, a dash and a padded number, like <C>INV-0001</C>. Two records created
+				at the same moment never share one. Turning numbers on for a model that has records gives them numbers, oldest
+				first; a new prefix applies from then on.
 			</P>
 			<P>
-				Switching codes on fills in a prefix from the title (Invoices → <C>INV</C>); change it, or clear it for plain
-				numbers (<C>0001</C>). <strong>First code</strong> beside it shows exactly what the next record gets.
+				Switching it on fills in a prefix from the title (Invoices → <C>INV</C>); change it, or clear it for plain numbers (
+				<C>0001</C>). <strong>Next record gets</strong> beside it shows exactly what the next record gets.
 			</P>
 		</Section>
 
 		<Section
 			id='models-fields'
 			title='Fields'
-			lead='Each field has a label, a key, a kind, and whether it’s required.'>
+			lead='Each field has a name, a type, and whether it’s required.'>
 			<P>
-				The key is the field’s name in the API — filled in from the label until you change it. The chevron opens more:
-				unique, searchable, shown in the table, min/max, allowed values, a default and help text for the form.
+				<strong>Add a field</strong> first asks what it will hold — text, a number, a date, a choice from a list, an upload,
+				a link to another record — each with a line on what it’s for; then you name it. The type can be changed later in
+				the field’s row, and its picture at the start of the row shows the type at a glance.
+			</P>
+			<P>
+				Under each name, in small grey letters, is its <strong>API name</strong> (the key): how your API, imports and
+				formulas refer to the field. It’s made from the name until you change it. <strong>More</strong> opens the rest of a
+				field’s settings, in groups: <em>In the form</em> (what it starts with — the default — and help text),{' '}
+				<em>Limits</em> or <em>Length</em> (lowest/highest, fewest/most characters), the options or allowed values,{' '}
+				<em>Table and search</em> (a column in the table, found by the search box, no duplicates, faster sorting and
+				filtering) and the API name.
+			</P>
+			<P>
+				Beside the list, <strong>Form preview</strong> draws the add form from your fields as you edit them — before you
+				save.
 			</P>
 			<Terms
 				head={['Kind', 'Holds · shows as']}
@@ -158,8 +172,8 @@ const Models = () => (
 						refused.
 					</>,
 					<>
-						<strong>Default</strong>: what a new record starts with — prefilled in the form, and used when your API call
-						leaves it out.
+						<strong>Starts with (default)</strong>: what a new record starts with — prefilled in the form, and used when your
+						API call leaves it out.
 					</>,
 					<>
 						Some keys are reserved: <C>_id</C>, <C>code</C>, <C>createdAt</C>, <C>updatedAt</C>, <C>customer</C>, and
@@ -247,7 +261,8 @@ const Models = () => (
 			</P>
 			<P>
 				For confidential records — salaries, contracts, personal notes — switch on{' '}
-				<strong>Access → Restrict access to each record</strong> in the model. Every record then has an owner (whoever
+				<strong>Let each record choose who can see it</strong>, under the model’s{' '}
+				<strong>Settings → Who sees each record</strong>. Every record then has an owner (whoever
 				created it) and a privacy, chosen in the form’s <em>Manage access</em> section:
 			</P>
 			<Terms
@@ -274,6 +289,21 @@ const Models = () => (
 			id='changing'
 			title='Changing a model'
 			lead='Open it from Build → Models. Changes apply as soon as you save.'>
+			<P>A model’s page has four tabs:</P>
+			<Terms
+				head={['Tab', 'What’s there']}
+				rows={[
+					['Fields', 'The fields, in order, and the form preview beside them. Page layout opens the table, form and record page designer.'],
+					['Settings', 'Basics (title, record name, sidebar, description), Record numbers and Who sees each record.'],
+					['Connections', 'What this model links to, and which models link to it.'],
+					['Advanced', 'The fixed names (model name, address, collection, version), and Turn off or delete.'],
+				]}
+			/>
+			<P>
+				Edits are kept until you click <strong>Save changes</strong> — in the header, in the bar that appears at the bottom
+				while something is unsaved, or with ⌘S / Ctrl+S. <strong>Undo all</strong> goes back to the saved model. A tab
+				with a red number has fields that need attention.
+			</P>
 			<List
 				items={[
 					'Adding a field is always safe; it appears in the table, form, detail page and filters straight away.',
@@ -283,9 +313,10 @@ const Models = () => (
 					'Every change is kept as a version before it’s applied.',
 				]}
 			/>
-			<H3>Disabling and deleting</H3>
+			<H3>Turning off and deleting</H3>
 			<P>
-				<strong>Disable</strong> takes the page away but keeps the model and its records. <strong>Delete</strong> removes the
+				Both are on the <strong>Advanced</strong> tab. <strong>Turn off</strong> takes the page away but keeps the model
+				and its records. <strong>Delete</strong> removes the
 				model, its page and its sidebar entry; its records stay unless you tick “Also delete its records” and type the model’s
 				name.
 			</P>
