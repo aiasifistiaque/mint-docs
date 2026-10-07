@@ -121,9 +121,12 @@ const GettingStarted = () => (
 				]}
 			/>
 			<Note>
-				Once you have a project, the steps become a <strong>Getting started</strong> checklist on your home and each project&apos;s
-				dashboard. Creating a project, adding a model and inviting someone tick themselves. Tick the others with{' '}
-				<strong>Mark as done</strong>, or press <strong>Hide</strong> when you don&apos;t need it.
+				Once you have a project, the steps become a <strong>Getting started</strong> checklist on your home page. Inside a
+				project, its dashboard shows <strong>Suggested next steps</strong> as cards made for that kind of project — build
+				your first model, add records, arrange the sidebar, build the dashboard, invite your team, connect your AI, open
+				the public API, and the guides. The highlighted card is the one to do next. Cards tick themselves when MINT can tell
+				(a model, a record, a saved dashboard, an invitation); tick the others with <strong>Mark done</strong>, or press{' '}
+				<strong>Hide</strong> — <strong>Show suggestions</strong> brings them back.
 			</Note>
 			<P>
 				More in <A href='/projects'>Projects</A>.
