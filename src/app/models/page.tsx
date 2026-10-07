@@ -147,7 +147,7 @@ const Models = () => (
 					['Options', 'One of the values you list (a dropdown) — or several, with “Allow several”'],
 					['Tags', 'A list of words, free or from allowed values'],
 					['Image / Images', 'One uploaded picture / a gallery · from your Media'],
-					['File / Files', 'Uploaded documents · download links'],
+					['File / Files', 'Uploaded documents · shown on the record page in a section of their own, as icon tiles that open in a new tab'],
 					['Video', 'An uploaded video'],
 					['Link to a record / records', 'One or more records of another model — a booking’s guest, a post’s tags'],
 					['Section / Section list', 'A group of fields, or rows of them (see below)'],
