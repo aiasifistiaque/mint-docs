@@ -282,6 +282,13 @@ const Pages = () => (
 				<em>Add</em> button that opens the other model’s form with this record already filled in.
 			</P>
 			<P>
+				A tab can also reach one step further, through a model in between: a client’s documents, when each document
+				belongs to a project and each project to a client. Under <em>Linked by</em>, pick the option under{' '}
+				<em>Through another route</em> (“Documents of this record’s Projects”); the line beneath it spells out the path.
+				The tab then lists every document of every project of that client. Its <em>Add</em> button is shown muted,
+				because a new document needs a project picked — add documents from the project’s page instead.
+			</P>
+			<P>
 				Every detail page also has a <strong>History</strong> tab: who changed what, and when.
 			</P>
 		</Section>
