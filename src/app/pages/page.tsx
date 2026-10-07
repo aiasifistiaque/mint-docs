@@ -133,6 +133,14 @@ const Pages = () => (
 				<em>Advanced</em>: how it’s stored, which details of a linked record are loaded, and the raw settings. Fields marked{' '}
 				<em>automatic</em>, like <C>createdAt</C>, are filled in by the system and can’t be changed.
 			</P>
+			<P>
+				<em>Locked when</em> makes a field changeable only until the record reaches a state. A bill’s status can move
+				between draft and due, but once it is void or paid it stays: add the condition <em>status · is one of · void,
+				paid</em>. Conditions are a field, a test and a value, and all of them must hold. They’re checked against the
+				record as it’s saved, so the change that marks a bill paid goes through and every change after it is refused —
+				in the edit form (the field shows locked, with the reason), in bulk edits, and through the public API. Other
+				fields can be locked the same way: lock <em>amount</em> when status is paid.
+			</P>
 		</Section>
 
 		<Section
