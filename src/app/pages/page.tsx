@@ -14,15 +14,16 @@ export const metadata = guideMeta('/pages');
 const SECTIONS = [
 	{ id: 'what', title: 'What it is' },
 	{ id: 'workflow', title: 'Drafts and publishing' },
-	{ id: 'settings', title: 'Settings' },
+	{ id: 'preview', title: 'Preview' },
+	{ id: 'settings', title: 'Fields & rules' },
 	{ id: 'settings-linked', title: 'Linked-record pickers' },
-	{ id: 'table', title: 'Table' },
+	{ id: 'table', title: 'Table page' },
 	{ id: 'table-status', title: 'Status moves' },
 	{ id: 'table-totals', title: 'Totals' },
 	{ id: 'table-upload', title: 'Bulk upload' },
 	{ id: 'filters', title: 'Filters' },
 	{ id: 'form', title: 'Form' },
-	{ id: 'view', title: 'Detail page and tabs' },
+	{ id: 'view', title: 'Record page and tabs' },
 	{ id: 'source', title: 'Versions' },
 	{ id: 'faq', title: 'Troubleshooting' },
 ];
@@ -38,9 +39,23 @@ const Pages = () => (
 			lead='Build → Pages: every model’s page, and how it looks and behaves.'>
 			<P>
 				Creating a <A href='/models'>model</A> gives it a page. Pages lets you refine that page without touching the
-				model: which columns the table shows, the filter chips, the form’s layout and rules, the record’s detail page and its
-				tabs, the ⋯ menu on each row, bulk actions. Click a page in the list to open its editor; its tabs are below.
+				model: which columns the table shows, the filter buttons, the form’s layout and rules, the record’s own page and its
+				tabs, the ⋯ menu on each row, actions on ticked rows. Click a page in the list to open its editor.
 			</P>
+			<P>
+				The editor’s tabs each have a colour, used on the tab, its card on the Overview and the banner at its top:
+			</P>
+			<Terms
+				head={['Tab', 'What it changes']}
+				rows={[
+					['Table page (teal)', 'The list of records: title, buttons, columns, the ⋯ row menu, actions on ticked rows.'],
+					['Form (orange)', 'The add and edit form: sections, fields side by side, fields that show only when needed.'],
+					['Record page (pink)', 'A record’s own page: sections, linked records, tabs of related lists.'],
+					['Filters (purple)', 'The filter buttons above the table.'],
+					['Fields & rules (blue)', 'Required, editable, sortable, searchable — and the input each field uses.'],
+					['Versions (cyan)', 'Every published version, to bring an older one back.'],
+				]}
+			/>
 			<Note>
 				A model’s <em>fields</em> are changed in Models. Pages changes how those fields are shown and used.
 			</Note>
@@ -54,7 +69,8 @@ const Pages = () => (
 				ordered
 				items={[
 					<>
-						<strong>Edit</strong> in any tab. <em>Undo changes</em> drops them.
+						<strong>Edit</strong> in any tab. While something is unsaved a bar stays at the bottom of the page with{' '}
+						<em>Undo all</em>, <em>Preview</em>, <em>Save draft</em> and <em>Publish</em>.
 					</>,
 					<>
 						<strong>Save draft</strong> keeps them on the server — they survive a reload and a teammate can carry on. Saving is
@@ -70,15 +86,28 @@ const Pages = () => (
 				]}
 			/>
 			<P>
-				The <strong>Overview</strong> tab sums the page up — its fields, columns, filters and sections, and whether a draft is
-				waiting — with each card opening its tab.
+				The <strong>Overview</strong> tab sums the page up — its columns, form, record page, filters and fields, and whether a
+				draft is waiting — with each card opening its tab (<em>Change it</em>) or its preview. The header shows whether the
+				page is <em>Live</em> or has a <em>Draft not published yet</em>.
+			</P>
+		</Section>
+
+		<Section
+			id='preview'
+			title='Preview'
+			lead='See the page before anyone else does.'>
+			<P>
+				<strong>Preview</strong> — in the header, the bottom bar, each tab’s banner and the Overview cards — opens a window
+				with three pictures: the <strong>Table page</strong>, the <strong>Form</strong> and a <strong>Record page</strong>.
+				They’re drawn from your changes as they are, saved or not, and filled in with your five latest records (placeholders
+				when there are none). Nothing in the preview can be clicked; <em>Back to editing</em> closes it.
 			</P>
 		</Section>
 
 		<Section
 			id='settings'
-			title='Settings'
-			lead='How the server treats each field.'>
+			title='Fields & rules'
+			lead='How each field is stored, checked and typed in.'>
 			<Terms
 				head={['Switch', 'Once published']}
 				rows={[
@@ -115,8 +144,8 @@ const Pages = () => (
 
 		<Section
 			id='table'
-			title='Table'
-			lead='The page’s list: its header, columns, row menu and bulk actions.'>
+			title='Table page'
+			lead='The page’s list: its header and buttons, columns, row menu and actions on selected rows.'>
 			<Terms
 				head={['Setting', 'What it does']}
 				rows={[
@@ -134,7 +163,7 @@ const Pages = () => (
 				The ⋯ on every row: quick view, the detail page, edit in a dialog or on a page, duplicate, delete, a link, quick-edit
 				of one field, and more. Drag to reorder.
 			</P>
-			<H3>Bulk actions</H3>
+			<H3>Actions on selected rows</H3>
 			<P>
 				<strong>Select rows</strong> adds checkboxes and a menu for what’s ticked: export, delete (with undo), duplicate,
 				archive, change status, compare, merge duplicates, print, set a field, and totals. Each needs the matching permission —
@@ -217,7 +246,7 @@ const Pages = () => (
 				A section has a title, an optional description and rows; a row holds one field or several side by side. Drag sections
 				and rows to reorder. Fields not placed anywhere are listed, so none are forgotten.
 			</P>
-			<H3>Conditional fields</H3>
+			<H3>Fields that show only when needed</H3>
 			<P>
 				<em>Make a field conditional…</em> shows it only when others hold certain values — “Company name when Type is Business”.
 				Tests include is, is not, is one of, more/less than, is filled in, is empty, is on and is off; several conditions can
@@ -231,7 +260,7 @@ const Pages = () => (
 
 		<Section
 			id='view'
-			title='Detail page and tabs'
+			title='Record page and tabs'
 			lead='The record’s own page and its quick-view dialog.'>
 			<P>
 				A list of sections, each with a title and 1–3 columns. Start from the form’s layout or from all fields. A section can
