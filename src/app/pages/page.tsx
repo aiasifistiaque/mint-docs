@@ -141,6 +141,19 @@ const Pages = () => (
 				in the edit form (the field shows locked, with the reason), in bulk edits, and through the public API. Other
 				fields can be locked the same way: lock <em>amount</em> when status is paid.
 			</P>
+			<P>
+				Two or more conditions show a <em>Match</em> switch: <em>All of these</em> (each must hold) or <em>Any of
+				these</em> (one is enough) — “status is void” or “status is paid”. For a choice field, <em>is one of</em> lets you
+				tick several values in one condition. The same switch is on tab conditions and on fields from linked records.
+			</P>
+			<P>
+				<strong>Add a field from linked records</strong> makes a field worked out from the records linking to this one — a
+				client’s <em>Due payment</em>: from <em>bills whose client is this record</em>, <em>Add up a field</em> of{' '}
+				<em>amount</em>, only where <em>status is due</em>. It can also count them, or take their average, smallest or
+				largest value. Give it a name, then add it to the table, the record page or the form in the page builder like any
+				other field. It’s worked out whenever records are read, so it’s always current; it can’t be typed, sorted or
+				searched, and it only counts linked records the person looking may see.
+			</P>
 		</Section>
 
 		<Section
