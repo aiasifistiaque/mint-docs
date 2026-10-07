@@ -108,22 +108,30 @@ const Pages = () => (
 			id='settings'
 			title='Fields & rules'
 			lead='How each field is stored, checked and typed in.'>
+			<P>
+				Each row is one field: its picture and name (with the API name in small grey letters), <strong>Asked as</strong> —
+				the input people fill in (text, long text, a date, a dropdown, tags, an image, a record picker…) — and its rules.{' '}
+				<strong>Required</strong> and <strong>Can be changed later</strong> are switches right in the row; any other rule
+				that’s on shows as a coloured chip. <em>Find a field</em> narrows a long list.
+			</P>
 			<Terms
-				head={['Switch', 'Once published']}
+				head={['Rule', 'Once published']}
 				rows={[
 					['Required', 'Must be filled in when a record is added.'],
-					['Unique', 'A second record with the same value is refused.'],
-					['Editable', 'Can be changed after the record is created.'],
-					['Sortable', 'The table can sort by it.'],
-					['Searchable', 'The search box matches it.'],
-					['Hidden', 'Never shown or returned — not even to you.'],
-					['Trim', 'Spaces around the value are removed.'],
+					['Can be changed later', 'People can edit it after the record is created.'],
+					['No duplicates', 'A second record with the same value is refused.'],
+					['Searchable', 'The table’s search box finds records by it.'],
+					['Sortable', 'The table can be sorted by it.'],
+					['Trim spaces', 'Spaces before and after the value are removed.'],
+					['Hidden everywhere', 'Never shown or sent anywhere — not even to you.'],
 				]}
 			/>
 			<P>
-				Each field’s expanded options set its label, the input the form uses (text, rich text, dropdown, tags, image picker,
-				record picker…), how the table draws it, whether the column shows by default, and min/max. <C>createdAt</C> is always
-				there and read-only.
+				<strong>More</strong> opens a field’s settings in groups: <em>Rules</em> (each with what it does), <em>How it
+				looks</em> (its label, how the table shows it, whether its column shows from the start), <em>Limits</em> or{' '}
+				<em>Length</em> for numbers and text, <em>Picking a linked record</em> for record pickers, and — folded away —{' '}
+				<em>Advanced</em>: how it’s stored, which details of a linked record are loaded, and the raw settings. Fields marked{' '}
+				<em>automatic</em>, like <C>createdAt</C>, are filled in by the system and can’t be changed.
 			</P>
 		</Section>
 
