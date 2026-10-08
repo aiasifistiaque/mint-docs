@@ -329,6 +329,16 @@ const Pages = () => (
 				For a field that links to records — a payment method, a client — you don’t need its id: type part of its name and
 				pick it from the list. The same search is used in <em>Locked when</em> and in record-page tab conditions.
 			</P>
+			<H3 id='form-pickers'>Pickers that depend on other fields</H3>
+			<P>
+				On a bill with a Client and a Project, Project should offer only that client’s projects. Under{' '}
+				<em>Pickers that depend on other fields</em>, each record picker in the form is listed with what it offers. When
+				the linked model points at what another picker picks — a project has a client — a suggestion appears:{' '}
+				<em>Only where Client is this form’s Client</em>. One press adds it; <em>Add condition</em> builds others (a
+				field of the linked model, is / is not / is one of, and a fixed value or another field of the form). Choose{' '}
+				<em>While empty: offer none</em> to show no projects until a client is picked. Picking another client clears a
+				project that no longer fits. It’s the same setting as the field’s <em>Which records are offered</em>.
+			</P>
 			<H3 id='form-sections'>Sections that show only when needed</H3>
 			<P>
 				<em>Make a section conditional…</em> hides a whole section until it applies — <em>Bank details</em> only when{' '}
