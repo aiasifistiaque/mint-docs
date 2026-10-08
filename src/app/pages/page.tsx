@@ -149,6 +149,12 @@ const Pages = () => (
 				tick several values in one condition. The same switch is on tab conditions and on fields from linked records.
 			</P>
 			<P>
+				<strong>Colours</strong>, under <em>How it looks</em> for a field with choices — a status, active / inactive, a
+				yes / no — turns on <em>Show as coloured tags</em>: the table and the record page show the value as a coloured
+				tag. Each option starts with a colour from what it means (paid and active green, void and cancelled red, due and
+				pending orange, draft gray); click another swatch to change it, <em>Default</em> to go back.
+			</P>
+			<P>
 				<strong>Add a field from linked records</strong> makes a field worked out from the records linking to this one — a
 				client’s <em>Due payment</em>: from <em>bills whose client is this record</em>, <em>Add up a field</em> of{' '}
 				<em>amount</em>, only where <em>status is due</em>. It can also count them, or take their average, smallest or
