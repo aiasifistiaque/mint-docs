@@ -149,6 +149,14 @@ const Pages = () => (
 				tick several values in one condition. The same switch is on tab conditions and on fields from linked records.
 			</P>
 			<P>
+				<strong>Filled in from a linked record</strong>, under <em>More</em> for a field, fills it in when a record is
+				picked on the same form — a payment’s amount from the bill it pays. Choose the picker (<em>Bill</em>), then{' '}
+				<em>Its Total</em>, or <em>A formula over its fields…</em> such as <C>total - paid</C> (the bill’s number fields,
+				with + − × ÷, round, min and max). The value stays editable; opening a saved payment never changes it, picking
+				another bill fills it again, and a payment added without the form (through the API) gets it too when it was left
+				empty.
+			</P>
+			<P>
 				<strong>Colours</strong>, under <em>How it looks</em> for a field with choices — a status, active / inactive, a
 				yes / no — turns on <em>Show as coloured tags</em>: the table and the record page show the value as a coloured
 				tag. Each option starts with a colour from what it means (paid and active green, void and cancelled red, due and
