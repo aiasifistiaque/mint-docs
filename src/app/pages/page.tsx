@@ -346,6 +346,20 @@ const Pages = () => (
 				hold the record’s own fields, chosen fields of a linked record (“Guest · Email”), or a list of related records (a
 				guest’s bookings, newest first).
 			</P>
+			<P>
+				A section’s <em>Copy button</em> switch adds <strong>Copy details</strong> at its top right: one press copies its
+				fields as text, one per line — <em>Bank Name: City Bank</em>, <em>Routing Number: 225261187</em> — ready to paste
+				into a message. Fields with no value are left out.
+			</P>
+			<H3 id='view-visibility'>Shown only when needed</H3>
+			<P>
+				Under the sections, <em>Sections shown only when needed</em> lets each section appear only when the record holds
+				certain values — <em>Bank details</em> only when Method is Bank transfer — and <em>Hide fields with no value</em>{' '}
+				leaves out the section’s empty fields (and linked lists with no records). <em>Fields shown only when needed</em>{' '}
+				does the same for single fields: <em>IBAN</em> only when Bank name is filled in. A section with nothing left to
+				show is left out. This applies to the record page and the quick view; it only hides things from view — nothing
+				is changed or removed from the record.
+			</P>
 			<H3>Tabs</H3>
 			<P>
 				After <em>Overview</em>, add tabs that list records of another model linked to this one — a client’s invoices, an
