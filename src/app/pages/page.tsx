@@ -325,6 +325,16 @@ const Pages = () => (
 				The server applies the same rules: a hidden field’s value isn’t saved, and a required field is only required while
 				it’s shown.
 			</P>
+			<P>
+				For a field that links to records — a payment method, a client — you don’t need its id: type part of its name and
+				pick it from the list. The same search is used in <em>Locked when</em> and in record-page tab conditions.
+			</P>
+			<H3 id='form-sections'>Sections that show only when needed</H3>
+			<P>
+				<em>Make a section conditional…</em> hides a whole section until it applies — <em>Bank details</em> only when{' '}
+				<em>Method</em> is <em>Bank transfer</em>. Its conditions test fields in other sections. While it’s hidden its
+				fields count as empty: their values aren’t saved and they aren’t required, and the section’s heading goes too.
+			</P>
 		</Section>
 
 		<Section
