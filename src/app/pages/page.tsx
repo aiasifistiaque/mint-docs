@@ -6,7 +6,7 @@ export const metadata = guideMeta('/pages');
 
 /**
  * The page builder (Build → Pages, /builder) for projects. Section ids mirror
- * the platform's builder guide (workflow, settings, settings-linked, guidelines, table,
+ * the platform's builder guide (workflow, settings, settings-linked, guidelines, value-display, table,
  * table-status, table-totals, table-upload, filters, form, view) — the
  * builder's "How it works" links land here through panel.ts docsPath.
  */
@@ -18,6 +18,7 @@ const SECTIONS = [
 	{ id: 'settings', title: 'Fields & rules' },
 	{ id: 'settings-linked', title: 'Linked-record pickers' },
 	{ id: 'guidelines', title: 'User guidelines' },
+	{ id: 'value-display', title: 'Around a value' },
 	{ id: 'table', title: 'Table page' },
 	{ id: 'table-status', title: 'Status moves' },
 	{ id: 'table-totals', title: 'Totals' },
@@ -188,6 +189,25 @@ const Pages = () => (
 				upload move in there too), and as a link above the add and edit forms. They open as a window, or a sheet from the
 				bottom on a phone. Guidelines are words only — what the server actually refuses is set by the field rules
 				(<em>Can be changed later</em>, <em>Locked when</em>), so write the guideline beside the rule that enforces it.
+			</P>
+		</Section>
+
+		<Section
+			id='value-display'
+			title='Around a value'
+			lead='Words before or after a value, and a second field under it.'>
+			<P>
+				<strong>Advanced: around a value</strong> sits at the bottom of the <em>Fields &amp; rules</em> and{' '}
+				<em>Table</em> tabs (both show the same settings). Pick a field and press <em>Add</em>, then choose what goes{' '}
+				<strong>before</strong> and <strong>after</strong> its value: <em>Words I type</em> — an amount shown as{' '}
+				<em>BDT 1,200</em> — or <em>Another field’s value</em>, so a bill’s amount reads with its own currency field
+				(<em>USD 40</em> on one row, <em>BDT 1,200</em> on the next).
+			</P>
+			<P>
+				<strong>Under it, in the table</strong> puts a second field in small type below the value — a customer’s email
+				under their name — so the table needs one column for both. The words show on every row of the table and on the
+				record page, in grey beside the value; an empty value shows on its own. The stored value doesn’t change: search,
+				sorting, filters and exports still use the number or text itself.
 			</P>
 		</Section>
 
