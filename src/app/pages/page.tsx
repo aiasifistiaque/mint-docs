@@ -6,7 +6,7 @@ export const metadata = guideMeta('/pages');
 
 /**
  * The page builder (Build → Pages, /builder) for projects. Section ids mirror
- * the platform's builder guide (workflow, settings, settings-linked, table,
+ * the platform's builder guide (workflow, settings, settings-linked, guidelines, table,
  * table-status, table-totals, table-upload, filters, form, view) — the
  * builder's "How it works" links land here through panel.ts docsPath.
  */
@@ -17,6 +17,7 @@ const SECTIONS = [
 	{ id: 'preview', title: 'Preview' },
 	{ id: 'settings', title: 'Fields & rules' },
 	{ id: 'settings-linked', title: 'Linked-record pickers' },
+	{ id: 'guidelines', title: 'User guidelines' },
 	{ id: 'table', title: 'Table page' },
 	{ id: 'table-status', title: 'Status moves' },
 	{ id: 'table-totals', title: 'Totals' },
@@ -138,7 +139,7 @@ const Pages = () => (
 				between draft and due, but once it is void or paid it stays: add the condition <em>status · is one of · void,
 				paid</em>. Conditions are a field, a test and a value, and all of them must hold. They’re checked against the
 				record as it’s saved, so the change that marks a bill paid goes through and every change after it is refused —
-				in the edit form (the field shows locked, with the reason), in bulk edits, and through the public API. Other
+				in the edit form (the field shows muted, with the reason; a section list loses its add, edit and delete buttons), in bulk edits, and through the public API. Other
 				fields can be locked the same way: lock <em>amount</em> when status is paid.
 			</P>
 			<P>
@@ -168,6 +169,25 @@ const Pages = () => (
 				<strong>Which records are offered</strong> narrows the list with conditions — <em>is</em>, <em>is not</em>,{' '}
 				<em>is one of</em> — against a fixed value or another field of the same form. On an invoice: offer only the projects
 				whose <C>client</C> is this form’s <C>client</C>; pick another client and a project that no longer fits is cleared.
+			</P>
+		</Section>
+
+		<Section
+			id='guidelines'
+			title='User guidelines'
+			lead='Rules in plain words for the people using the page.'>
+			<P>
+				Not everyone knows that a void invoice can’t be reversed, or that a paid bill locks. <strong>User guidelines</strong>,
+				under the fields on the <em>Fields &amp; rules</em> tab, is where you tell them: <em>Add a guideline</em>, give it a
+				title — <em>A void invoice can’t be reversed</em> — and, if it helps, a few words under it on why and what to do
+				instead. The arrows reorder them. <em>Title</em> names the list (<em>User guidelines</em> unless you change it), and
+				the menu reads after it: <em>Billing rules</em> becomes <em>View billing rules</em>.
+			</P>
+			<P>
+				Once published, people find them in the table’s <strong>⋯</strong> menu beside the add button (Export and Bulk
+				upload move in there too), and as a link above the add and edit forms. They open as a window, or a sheet from the
+				bottom on a phone. Guidelines are words only — what the server actually refuses is set by the field rules
+				(<em>Can be changed later</em>, <em>Locked when</em>), so write the guideline beside the rule that enforces it.
 			</P>
 		</Section>
 
