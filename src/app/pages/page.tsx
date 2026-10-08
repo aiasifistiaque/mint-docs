@@ -150,7 +150,8 @@ const Pages = () => (
 			</P>
 			<P>
 				<strong>Filled in from a linked record</strong>, under <em>More</em> for a field, fills it in when a record is
-				picked on the same form — a payment’s amount from the bill it pays. Choose the picker (<em>Bill</em>), then{' '}
+				picked on the same form — a payment’s amount from the bill it pays. Turn on <em>Fill this from a linked record</em>,
+				choose the picker (<em>Bill</em>), then{' '}
 				<em>Its Total</em>, or <em>A formula over its fields…</em> such as <C>total - paid</C> (the bill’s number fields,
 				with + − × ÷, round, min and max). The value stays editable; opening a saved payment never changes it, picking
 				another bill fills it again, and a payment added without the form (through the API) gets it too when it was left
