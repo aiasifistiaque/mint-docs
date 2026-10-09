@@ -178,6 +178,10 @@ const Pages = () => (
 			title='Linked-record pickers'
 			lead='For a field that picks records of another model.'>
 			<P>
+				<strong>Shown under the name in the list</strong> adds up to four of the linked record’s fields in small type
+				under each name in the picker — an invoice’s total and due date — so two alike can be told apart before picking.
+			</P>
+			<P>
 				<strong>Add new from the form</strong> puts a <strong>+</strong> beside the picker: adding a booking for a guest who
 				isn’t in the list yet, press +, fill in the guest, and they’re picked.
 			</P>
