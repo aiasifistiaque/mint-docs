@@ -178,8 +178,14 @@ const Pages = () => (
 			title='Linked-record pickers'
 			lead='For a field that picks records of another model.'>
 			<P>
+				<strong>Name shown in the picker</strong> is the field each record is listed by, and what the input shows once one
+				is picked. It’s <em>Name</em> unless you pick another — an invoice’s number, a person’s email.
+			</P>
+			<P>
 				<strong>Shown under the name in the list</strong> adds up to four of the linked record’s fields in small type
 				under each name in the picker — an invoice’s total and due date — so two alike can be told apart before picking.
+				Only the values show, not the field names. With two or more, <strong>Show them</strong> puts them side by side on
+				one line, separated by dots (<em>1,200 · 12 Oct 2026</em>), or each on its own line.
 			</P>
 			<P>
 				<strong>Add new from the form</strong> puts a <strong>+</strong> beside the picker: adding a booking for a guest who
