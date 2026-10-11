@@ -8,7 +8,7 @@ export const metadata = guideMeta('/pages');
  * The page builder (Build → Pages, /builder) for projects. Section ids mirror
  * the platform's builder guide (workflow, settings, settings-linked, guidelines, value-display, table,
  * table-status, table-totals, table-upload, filters, form, view, linked-relationships,
- * linked-tab, linked-rule, linked-form, linked-where) — the
+ * linked-tab, linked-rule, linked-transfer, linked-form, linked-where) — the
  * builder's "How it works" links land here through panel.ts docsPath.
  */
 
@@ -436,7 +436,8 @@ const Pages = () => (
 				ordered
 				items={[
 					<>
-						Open the page (Build → Pages) and its green <strong>Linked Relationships</strong> tab.{' '}
+						Open the page (Build → Pages) and its green <strong>Linked Relationships</strong> tab — or, for a new model,
+						the last part of the wizard’s <em>Check the pages</em> step.{' '}
 						<strong>This page changes…</strong> lists its rules; <strong>Changed by…</strong> lists rules on other pages
 						that change this page’s records.
 					</>,
@@ -447,8 +448,9 @@ const Pages = () => (
 					</>,
 					<>
 						Each change is a field of the linked page (only fields that can be edited there are offered) and how:{' '}
-						<em>Set to</em> a value, <em>Copy from this record</em>, <em>Add</em> a number, <em>Work out</em> a formula,
-						or <em>Empty it</em>.
+						<em>Set to</em> a value, <em>Copy from this record</em>, <em>Add</em> a number, <em>Take off</em> a number,{' '}
+						<em>Work out</em> a formula, or <em>Empty it</em>. Add and Take off can have a <em>Never below</em> number and
+						the message people see when a save would go under it.
 					</>,
 					<>
 						Choose what happens when the rule stops holding, then <strong>Save rule</strong> and publish the page.
@@ -463,7 +465,12 @@ const Pages = () => (
 					['If', 'Conditions on this record — Mark as paid is Yes. All must hold, or any one.'],
 					['Update the record picked in', 'The field that picks the record to change — Invoice. A field that picks several changes each.'],
 					['Only if', 'Conditions on the picked record — Status is not Cancelled.'],
-					['Then: change', 'Set a value, copy one of this record’s fields, add a number, work out a formula, or empty a field.'],
+					[
+						'Compare with this record',
+						'A condition can compare with a value, or with one of this record’s fields — Balance is less than this Transfer’s Amount; To account is this Transfer’s From account.',
+					],
+					['Then: change', 'Set a value, copy one of this record’s fields, add or take off a number, work out a formula, or empty a field.'],
+					['Never below', 'With Add or Take off: the field never goes under this number — the save is refused with your message instead.'],
 					['Then: refuse the save', 'Nothing is saved while the conditions hold; your message says why.'],
 					[
 						'When it stops holding',
@@ -473,6 +480,30 @@ const Pages = () => (
 					['Also for website and API saves', 'Off by default: records your website or app saves through the public API don’t run the rule.'],
 				]}
 			/>
+			<H3 id='linked-transfer'>Example: a transfer between two accounts</H3>
+			<P>
+				A Transfers page picks a <em>From account</em> and a <em>To account</em> and has an <em>Amount</em>. Two rules move
+				the money:
+			</P>
+			<List
+				items={[
+					<>
+						<strong>Take from the sending account</strong> — update the record picked in From account: Balance,{' '}
+						<em>Take off</em> this record’s Amount, <em>Never below</em> 0, message <em>Not enough money in the sending
+						account.</em>
+					</>,
+					<>
+						<strong>Give to the receiving account</strong> — update the record picked in To account: Balance,{' '}
+						<em>Add</em> this record’s Amount.
+					</>,
+				]}
+			/>
+			<P>
+				A transfer bigger than the balance is refused with your message under Amount, and nothing moves. Editing a transfer
+				from 30 to 60 only needs the 30 more; deleting it gives the money back. Two transfers at the same moment can’t both
+				spend the same balance. To stop a transfer to the same account, add a rule that refuses the save when the To
+				account is this Transfer’s From account.
+			</P>
 			<H3 id='linked-form'>What people see in the form</H3>
 			<P>
 				The form follows the rules while it’s filled in: tick Mark as paid and Payment date gets its asterisk. Under the

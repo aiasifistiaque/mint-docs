@@ -61,8 +61,10 @@ const Models = () => (
 					</>,
 					<>
 						<strong>Check the pages</strong> — the pages made from your fields, one part at a time: an overview, then
-						the table page, form, record page, filters and fields &amp; rules. <strong>Next</strong> takes you
-						through each in turn (the bar shows “part 2 of 6”), and <strong>Preview</strong> shows how they’ll look.
+						the table page, form, record page, filters, fields &amp; rules and — optional —{' '}
+						<A href='/pages#linked-relationships'>Linked Relationships</A> (rules that change the records this one picks,
+						like a transfer taking money from one account and giving it to another). <strong>Next</strong> takes you
+						through each in turn (the bar shows “part 2 of 7”), and <strong>Preview</strong> shows how they’ll look.
 						They’re ready as they are; change anything on the way, with the same tools as{' '}
 						<A href='/pages'>Pages</A>. <strong>Finish</strong> opens once you’ve seen every part.
 					</>,
