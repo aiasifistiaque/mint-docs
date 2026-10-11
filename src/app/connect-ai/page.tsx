@@ -147,7 +147,7 @@ const ConnectAi = () => (
 					['list_sidebar_categories', 'See where new pages can go.'],
 					['plan_feature', 'Check a plan exactly as the build would. Changes nothing.'],
 					['build_feature', 'Build an agreed plan — models, fields, links, tabs, sidebar — all or nothing.'],
-					['update_page', 'Change a page’s columns, form, detail page or add button.'],
+					['update_page', 'Change a page’s columns, form, detail page, add button or Linked Relationships — rules that update the records a page picks when it’s saved.'],
 					['query_records', 'Read records to answer a question (keys with Can read records).'],
 					['get_dashboard · update_dashboard', 'Read and change the dashboard’s widgets.'],
 					['create_records', 'Add records — or update them, matched by a field — checked like the form, all or nothing.'],
