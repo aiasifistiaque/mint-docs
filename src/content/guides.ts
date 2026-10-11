@@ -164,6 +164,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'table', title: 'Table' },
 			{ id: 'form', title: 'Form' },
 			{ id: 'view', title: 'Detail page and tabs' },
+			{ id: 'linked-relationships', title: 'Linked Relationships' },
 		],
 	},
 	{

@@ -7,7 +7,8 @@ export const metadata = guideMeta('/pages');
 /**
  * The page builder (Build → Pages, /builder) for projects. Section ids mirror
  * the platform's builder guide (workflow, settings, settings-linked, guidelines, value-display, table,
- * table-status, table-totals, table-upload, filters, form, view) — the
+ * table-status, table-totals, table-upload, filters, form, view, linked-relationships,
+ * linked-tab, linked-rule, linked-form, linked-where) — the
  * builder's "How it works" links land here through panel.ts docsPath.
  */
 
@@ -26,6 +27,7 @@ const SECTIONS = [
 	{ id: 'filters', title: 'Filters' },
 	{ id: 'form', title: 'Form' },
 	{ id: 'view', title: 'Record page and tabs' },
+	{ id: 'linked-relationships', title: 'Linked Relationships' },
 	{ id: 'source', title: 'Versions' },
 	{ id: 'faq', title: 'Troubleshooting' },
 ];
@@ -54,6 +56,7 @@ const Pages = () => (
 					['Form (orange)', 'The add and edit form: sections, fields side by side, fields that show only when needed.'],
 					['Record page (pink)', 'A record’s own page: sections, linked records, tabs of related lists.'],
 					['Filters (purple)', 'The filter buttons above the table.'],
+					['Linked Relationships (green)', 'What saving a record does to the records it picks — a payment marking its invoice paid.'],
 					['Fields & rules (blue)', 'Required, editable, sortable, searchable — and the input each field uses.'],
 					['Versions (cyan)', 'Every published version, to bring an older one back.'],
 				]}
@@ -417,6 +420,77 @@ const Pages = () => (
 			<P>
 				Every detail page also has a <strong>History</strong> tab: who changed what, and when.
 			</P>
+		</Section>
+
+		<Section
+			id='linked-relationships'
+			title='Linked Relationships'
+			lead='Saving one record changes the records it picks — record a payment, and its invoice turns Paid.'>
+			<P>
+				A rule on a page, read as a sentence: <em>When a payment is added, if Mark as paid is ticked, update the invoice
+				picked in Invoice: set Status to Paid, and set Payment date to this payment’s Payment date.</em> Rules are part of the
+				page, so they’re saved as a draft and go live when you publish.
+			</P>
+			<H3 id='linked-tab'>Making a rule</H3>
+			<List
+				ordered
+				items={[
+					<>
+						Open the page (Build → Pages) and its green <strong>Linked Relationships</strong> tab.{' '}
+						<strong>This page changes…</strong> lists its rules; <strong>Changed by…</strong> lists rules on other pages
+						that change this page’s records.
+					</>,
+					<>
+						<strong>Add a rule</strong>, name it, and fill in the sentence from the top: when the record is added, edited
+						or deleted; if (conditions on it); the field that picks the record to change; only if (conditions on that
+						record); then change it — or refuse the save with your message.
+					</>,
+					<>
+						Each change is a field of the linked page (only fields that can be edited there are offered) and how:{' '}
+						<em>Set to</em> a value, <em>Copy from this record</em>, <em>Add</em> a number, <em>Work out</em> a formula,
+						or <em>Empty it</em>.
+					</>,
+					<>
+						Choose what happens when the rule stops holding, then <strong>Save rule</strong> and publish the page.
+					</>,
+				]}
+			/>
+			<H3 id='linked-rule'>The parts of a rule</H3>
+			<Terms
+				head={['Part', 'What it does']}
+				rows={[
+					['When', 'Added, edited, deleted. Most rules run on added and edited.'],
+					['If', 'Conditions on this record — Mark as paid is Yes. All must hold, or any one.'],
+					['Update the record picked in', 'The field that picks the record to change — Invoice. A field that picks several changes each.'],
+					['Only if', 'Conditions on the picked record — Status is not Cancelled.'],
+					['Then: change', 'Set a value, copy one of this record’s fields, add a number, work out a formula, or empty a field.'],
+					['Then: refuse the save', 'Nothing is saved while the conditions hold; your message says why.'],
+					[
+						'When it stops holding',
+						'The record is deleted, the box is unticked, or another invoice is picked: put the fields back (unless someone changed them since), leave them, or don’t allow it.',
+					],
+					['Allow even if they can’t edit', 'Without it, only people who may edit the linked page can save a record this rule changes.'],
+					['Also for website and API saves', 'Off by default: records your website or app saves through the public API don’t run the rule.'],
+				]}
+			/>
+			<H3 id='linked-form'>What people see in the form</H3>
+			<P>
+				The form follows the rules while it’s filled in: tick Mark as paid and Payment date gets its asterisk. Under the
+				fields a line says what saving will also change — <em>Will also update Invoice A: Status → paid, Payment date → 20 Oct
+				2026</em> — or why it would be refused. After saving, the message lists what else changed, and the invoice’s history
+				says which rule and which payment changed it.
+			</P>
+			<H3 id='linked-where'>Where rules run</H3>
+			<P>
+				Everywhere records are saved: the form, Copy and Duplicate, bulk edit and status changes, bulk delete (and its undo,
+				which runs the rules again), and bulk upload — checked for every row first, so nothing is saved unless all pass. A
+				rule only ever reaches records in the same project.
+			</P>
+			<Note>
+				Totals that must always be right — amount paid, balance — are better as a rollup or formula in{' '}
+				<A href='/models'>Models</A>: worked out when read, they can’t drift. Use a rule for a change that happens once: a
+				status, a date, stock taken off.
+			</Note>
 		</Section>
 
 		<Section
