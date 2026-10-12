@@ -258,7 +258,7 @@ const Pages = () => (
 			<H3>Row menu</H3>
 			<P>
 				The ⋯ on every row: quick view, the detail page, edit in a dialog or on a page, duplicate, delete, a link, quick-edit
-				of one field, and more. Drag to reorder.
+				of one field, add a linked record, and more. Drag to reorder — see <A href='#row-menu'>Row menu</A>.
 			</P>
 			<H3>Actions on selected rows</H3>
 			<P>
@@ -266,6 +266,46 @@ const Pages = () => (
 				archive, change status, compare, merge duplicates, print, set a field, and totals. Each needs the matching permission —
 				see <A href='/records#bulk'>Working on many rows</A>.
 			</P>
+		</Section>
+
+		<Section
+			id='row-menu'
+			title='Row menu'
+			lead='What the ⋯ on every row offers — and on which rows.'>
+			<P>
+				Add items with <strong>Add menu item</strong>, name them, pick what each does, and drag them into order. Open an
+				item (›) for its settings.
+			</P>
+			<P>
+				<strong>Show only when</strong> — on every item. The item shows only on rows that match: <em>Status is not Paid</em>.
+				Other rows simply don’t offer it. It doesn’t stop a save made some other way; for that, add a{' '}
+				<em>Refuse the save</em> rule on the other page (<A href='#linked-relationships'>Linked Relationships</A>).
+			</P>
+			<P>
+				<strong>Add a linked record</strong> opens another page’s add form with fields already filled in from the row —{' '}
+				<em>Add payment</em> on a bill:
+			</P>
+			<List
+				items={[
+					<>
+						<strong>Page</strong> — where the new record goes (Payments). Its field that picks this page is filled in for
+						you: <em>Bill ← This bill</em>, locked.
+					</>,
+					<>
+						<strong>Filled in</strong> — more fields, each from the row (<em>Amount ← Bill’s Due amount</em>) or a fixed
+						value (<em>Method ← Cash</em>).
+					</>,
+					<>
+						<strong>The lock</strong> shows the field read-only, with where its value came from. Unlocked ones can be
+						changed before saving.
+					</>,
+				]}
+			/>
+			<Note>
+				The form is the other page’s own add form — its required fields, its rules and its “Will also update…” line all
+				apply — and saving refreshes the list you’re on, so a bill that a payment marks paid shows Paid straight away.
+				People need permission to add records on that page.
+			</Note>
 		</Section>
 
 		<Section
