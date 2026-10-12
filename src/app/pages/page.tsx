@@ -282,6 +282,12 @@ const Pages = () => (
 				<em>Refuse the save</em> rule on the other page (<A href='#linked-relationships'>Linked Relationships</A>).
 			</P>
 			<P>
+				<strong>Set a field</strong> changes one field to a value you pick — <em>Mark as void</em>: Status → Void. It asks
+				first (“Mark as void? Status becomes Void.”, or your own words), isn’t offered on rows that already have that value,
+				and is checked like any edit: locked fields and permissions still apply. Pair it with <em>Show only when</em>{' '}
+				<em>Status is one of Unpaid, Due</em> so paid bills can’t be voided from the menu.
+			</P>
+			<P>
 				<strong>Add a linked record</strong> opens another page’s add form with fields already filled in from the row —{' '}
 				<em>Add payment</em> on a bill:
 			</P>
