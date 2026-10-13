@@ -24,6 +24,7 @@ const SECTIONS = [
 	{ id: 'page', title: 'Paper and look' },
 	{ id: 'download', title: 'Downloading' },
 	{ id: 'ai', title: 'Build with your AI' },
+	{ id: 'preview', title: 'Preview' },
 	{ id: 'gallery', title: 'The gallery' },
 	{ id: 'access', title: 'Who can do what' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -222,6 +223,18 @@ const PdfTemplates = () => (
 			<P>
 				In the designer, <strong>Change with your AI</strong> does the same for the open template. Save your own edits first —
 				your AI changes the saved copy — then press <strong>Load its changes</strong>.
+			</P>
+		</Section>
+
+		<Section
+			id='preview'
+			title='Preview'>
+			<P>
+				The eye on a template’s card (yours or the gallery’s), or <strong>Preview</strong> in the designer, opens the PDF itself in a new
+				tab with every field filled with sample data: a customer, three line items whose amounts add up to the total, paid and
+				due, dates. Your business details and saved texts print where you have them; the empty ones get a stand-in (a “YOUR
+				LOGO” badge), so you see the whole layout. From the designer it shows your unsaved changes. <strong>Download</strong> keeps
+				the file. To see one of your own records instead, pick it above the designer’s page and press <strong>Real PDF</strong>.
 			</P>
 		</Section>
 
