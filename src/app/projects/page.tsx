@@ -16,6 +16,7 @@ const SECTIONS = [
 	{ id: 'history', title: 'History' },
 	{ id: 'switching', title: 'Switching projects' },
 	{ id: 'edit', title: 'Editing a project' },
+	{ id: 'project-settings', title: 'Project settings and business details' },
 	{ id: 'media-library', title: 'Media library' },
 	{ id: 'address', title: 'Its public address' },
 	{ id: 'archive', title: 'Archiving and deleting' },
@@ -198,6 +199,22 @@ const Projects = () => (
 			lead='The ⋯ menu on its card. Needs Manage projects.'>
 			<P>
 				<strong>Edit…</strong> changes the name, description, media library and, for a website, its domains.
+			</P>
+		</Section>
+
+		<Section
+			id='project-settings'
+			title='Project settings and business details'
+			lead='Project → Settings in the sidebar, inside the project. Needs Manage projects.'>
+			<P>
+				The project’s name and description, and its <strong>business details</strong>: logo, business name, address, phone,
+				email, website and tax / VAT / BIN number. Its invoices, bills and receipts print these (see{' '}
+				<A href='/pdf-templates'>PDF templates</A>). <strong>Upload logo</strong> picks one from the media library, uploads a
+				new one or takes a link.
+			</P>
+			<P>
+				A new project starts with the organization’s business details; from then on they’re the project’s own, so two
+				projects can print different addresses. The PDF designer’s Business details change the same ones.
 			</P>
 		</Section>
 

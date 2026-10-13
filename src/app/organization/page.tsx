@@ -45,6 +45,12 @@ const Organization = () => (
 				building. Changing them needs the <em>Edit the organization</em> permission.
 			</P>
 			<P>
+				<strong>Business details</strong> on the same page — your logo, business name, address, phone, email, website and tax
+				number — are what each new project starts with. A project then keeps its own copy, changed in its{' '}
+				<A href='/projects#project-settings'>Project settings</A>; the organization’s are changed only here, outside a
+				project.
+			</P>
+			<P>
 				The country decides which payment providers the organization’s sites can take payments with — in Bangladesh,
 				SSLCommerz and bKash as well as Stripe; elsewhere, Stripe. The settings show the ones on offer under the country.
 			</P>
