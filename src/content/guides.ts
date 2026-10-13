@@ -5,6 +5,7 @@ import {
 	CreditCard,
 	Cube,
 	Envelope,
+	FilePdf,
 	Folder,
 	Globe,
 	Images,
@@ -191,6 +192,19 @@ export const GUIDES: Guide[] = [
 			{ id: 'widgets', title: 'Widgets' },
 			{ id: 'charts', title: 'Charts' },
 			{ id: 'access', title: 'Who sees what' },
+		],
+	},
+	{
+		href: '/pdf-templates',
+		title: 'PDF templates',
+		name: 'PDF templates',
+		description: 'Design the invoices, bills and receipts your records download as PDFs — from a starter, from nothing, or with AI.',
+		icon: FilePdf,
+		group: 'Build',
+		topics: [
+			{ id: 'match', title: 'Matching your fields' },
+			{ id: 'designer', title: 'The designer' },
+			{ id: 'download', title: 'Downloading' },
 		],
 	},
 	{

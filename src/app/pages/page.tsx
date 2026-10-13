@@ -288,6 +288,11 @@ const Pages = () => (
 				<em>Status is one of Unpaid, Due</em> so paid bills can’t be voided from the menu.
 			</P>
 			<P>
+				<strong>Download PDF</strong> downloads the row printed with one of the page’s{' '}
+				<A href='/pdf-templates'>PDF templates</A> — pick one, or leave it on the page’s default. Pair it with{' '}
+				<em>Show only when</em> to offer “Receipt” only on paid rows.
+			</P>
+			<P>
 				<strong>Add a linked record</strong> opens another page’s add form with fields already filled in from the row —{' '}
 				<em>Add payment</em> on a bill:
 			</P>
