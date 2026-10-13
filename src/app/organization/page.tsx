@@ -135,6 +135,42 @@ const Organization = () => (
 		</Section>
 
 		<Section
+			id='project-people'
+			title='Inviting people into one project'
+			lead='Bring someone into a single project — a freelancer, a client, a developer — without opening the rest of your organization to them.'>
+			<List
+				ordered
+				items={[
+					<>
+						Open the project and go to <strong>Project → People</strong> in the sidebar, then press <strong>Invite</strong>.
+					</>,
+					<>
+						Enter their email and choose <strong>Member</strong> (works with the records) or <strong>Developer</strong> (works with
+						the records and builds the project: models, pages, AI keys). They get an email with a link that works for 7 days.
+					</>,
+					<>
+						Once they accept, the project shows on their dashboard and in their project menu under <em>your</em> organization’s
+						name, next to their own projects.
+					</>,
+				]}
+			/>
+			<Terms
+				head={['Who', 'What happens']}
+				rows={[
+					['Someone new to your organization', 'Joins as a project guest: they open only the projects they were invited to, can’t start projects, and don’t see your members.'],
+					['Someone already in your organization', 'Gets the project straight away — no email — with the role you chose for it.'],
+					['The owner, admins, members with all projects', 'Already open it. Change them on Members instead.'],
+				]}
+			/>
+			<P>
+				The owner and admins can invite to any project. Give anyone else the <strong>Invite to projects</strong> permission on a
+				role (<A href={`${APP_URL}/org/roles`}>Roles</A>) and they can invite to the projects they open. On People you can change
+				someone’s role in that project or remove them; a guest removed from their last project leaves the organization. Giving a
+				guest a role or every project on <A href={`${APP_URL}/org/members`}>Members</A> makes them a full member.
+			</P>
+		</Section>
+
+		<Section
 			id='invited'
 			title='When you’re invited'
 			lead='Invited to someone else’s organization? It joins the ones you already have.'>
