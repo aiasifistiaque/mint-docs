@@ -23,7 +23,7 @@ const SECTIONS = [
 	{ id: 'conditions', title: 'Show only when' },
 	{ id: 'page', title: 'Paper and look' },
 	{ id: 'download', title: 'Downloading' },
-	{ id: 'ai', title: 'Build with AI' },
+	{ id: 'ai', title: 'Build with your AI' },
 	{ id: 'gallery', title: 'The gallery' },
 	{ id: 'access', title: 'Who can do what' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -56,7 +56,7 @@ const PdfTemplates = () => (
 			<List
 				ordered
 				items={[
-					'Pick a starting point: a design from the gallery, Blank, or Build with AI.',
+					'Pick a starting point: a design from the gallery, Blank, or Build with your AI.',
 					'Pick the page it prints (Bills, Invoices, Payments…) and name it.',
 					'For a gallery design, match what it shows to your fields — next section.',
 					'It opens in the designer. The first template of a page becomes its default.',
@@ -106,7 +106,7 @@ const PdfTemplates = () => (
 					'The page shows one of your records (pick it above the page), or sample data. Show fields switches to which field goes where.',
 					'Real PDF shows the actual file, with your unsaved changes — page breaks and page numbers are exact only there.',
 					'Undo and redo (⌘Z, ⇧⌘Z), Delete removes the selected block, ⌘S saves. Nothing changes for anyone until you save.',
-					'Change with AI rewrites the template from a sentence (“make the totals bigger”) — check it, then save.',
+					'Change with your AI has your own AI change the template from a sentence (“make the totals bigger”) — then load its changes.',
 				]}
 			/>
 		</Section>
@@ -212,12 +212,16 @@ const PdfTemplates = () => (
 
 		<Section
 			id='ai'
-			title='Build with AI'>
+			title='Build with your AI'>
 			<P>
-				Describe the document and pick its page; AI lays it out with that page’s fields and opens it in the designer. In the
-				designer, <strong>Change with AI</strong> edits the open template from a sentence. Fields it used that the page doesn’t
-				have are listed when it finishes — they print blank. You can also use your own AI through{' '}
-				<A href='/connect-ai'>Connect AI</A>: it has PDF template tools.
+				Your own AI — Claude, ChatGPT, Cursor or any MCP client — builds templates for you once it’s connected (see{' '}
+				<A href='/connect-ai'>Connect AI</A>). <strong>Build with your AI</strong> writes the prompt to paste into it: pick the
+				page, say what it should look like, copy. It reads the page’s fields, shows you its plan and saves the template; press{' '}
+				<strong>Show what it made</strong> to see it in the list.
+			</P>
+			<P>
+				In the designer, <strong>Change with your AI</strong> does the same for the open template. Save your own edits first —
+				your AI changes the saved copy — then press <strong>Load its changes</strong>.
 			</P>
 		</Section>
 
