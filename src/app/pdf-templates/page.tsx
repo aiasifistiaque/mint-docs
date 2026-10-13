@@ -15,6 +15,7 @@ const SECTIONS = [
 	{ id: 'start', title: 'Making a template' },
 	{ id: 'match', title: 'Matching your fields' },
 	{ id: 'business', title: 'Business details' },
+	{ id: 'texts', title: 'Saved texts' },
 	{ id: 'designer', title: 'The designer' },
 	{ id: 'blocks', title: 'Blocks' },
 	{ id: 'tokens', title: 'Fields in text' },
@@ -83,7 +84,7 @@ const PdfTemplates = () => (
 		<Section
 			id='business'
 			title='Business details'
-			lead='Typed once for the project, used by every template.'>
+			lead='The project’s logo, address and contacts, a bank note, money and dates — set once, used by every template.'>
 			<Terms
 				head={['Setting', 'What it does']}
 				rows={[
@@ -94,7 +95,26 @@ const PdfTemplates = () => (
 					['Time zone', 'Empty: each reader’s own. Set one so every copy shows the same day.'],
 				]}
 			/>
-			<P>The logo is an image address (PNG, JPG, WebP or SVG) — copy it from the Media library.</P>
+			<P>
+				<strong>Business details</strong> on the PDF Templates page, or <strong>Upload logo</strong> / <strong>Add address</strong> on the designer’s page, opens it. <strong>Upload logo</strong> picks from the media library, uploads a new one or takes a link. They’re the project’s own business details — <A href='/projects#project-settings'>Project settings</A> shows the same ones; the bank note, money and dates belong to PDF templates.
+			</P>
+		</Section>
+
+		<Section
+			id='texts'
+			title='Saved texts'
+			lead='Terms and conditions, a return policy — written once, printed by any template.'>
+			<P>
+				Business details → <strong>Saved texts</strong>. Name a text (Terms &amp; conditions), write it, and every template prints it
+				with its field — <C>{'{{texts.terms_conditions}}'}</C>; the copy button next to each gives it. Change the words
+				once and every template printing them changes. <strong>**bold**</strong> and new lines work, and fields too: “Pay within 7 days
+				of <C>{'{{bill.issueDate | date}}'}</C>” prints each record’s date. One click adds a ready one — Terms &amp;
+				conditions, Computer generated (“no signature is required”), Payment instructions, Return policy, Thank you.
+			</P>
+			<P>
+				Words that belong to one template only — a heading, “This invoice is computer generated” on just this design — are
+				plain text blocks instead (see the designer).
+			</P>
 		</Section>
 
 		<Section
