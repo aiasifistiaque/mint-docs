@@ -20,6 +20,7 @@ const SECTIONS = [
 	{ id: 'models-uid', title: 'Address (slug) fields' },
 	{ id: 'models-password', title: 'Password fields' },
 	{ id: 'models-sections', title: 'Sections and lists' },
+	{ id: 'models-components', title: 'Components' },
 	{ id: 'formulas', title: 'Calculated fields' },
 	{ id: 'models-links', title: 'Linking models' },
 	{ id: 'models-access', title: 'Who sees the records' },
@@ -245,6 +246,30 @@ const Models = () => (
 				row’s “5 fields: …” button opens it again. Inside, fields can be text, long text, email, link, colour, number,
 				formula, yes/no, date, options, image or file.
 			</P>
+		</Section>
+
+		<Section
+			id='models-components'
+			title='Components'
+			lead='A group of fields made once and used by any model — a button, an SEO block, a card.'>
+			<P>
+				<strong>Build → Components → New component</strong>: give it a title and its fields. Its address —{' '}
+				<C>shared.button</C>, <C>seo.meta</C> — is made from a category and a name and stays fixed. A component’s fields can be
+				text, rich text, pictures, files, choices, numbers, dates and the rest; not links to records or other components.
+			</P>
+			<P>
+				To use one, add a field of the kind <strong>Component</strong> to a model and pick it — <strong>One</strong> (a
+				page’s main button) or <strong>A list</strong> (its row of buttons, with at least / at most under More). The form
+				shows its fields together under the field’s name; the API sends it as an object, or a list of them.
+			</P>
+			<Terms
+				head={['', '']}
+				rows={[
+					['Change it once', 'Every model using it follows: its form, its record page and its API.'],
+					['Left blank', 'A component nobody filled in is simply empty — its own required fields only count once something is typed in it.'],
+					['Deleting', 'Not while a model uses it — the message names where. Take it off those fields first.'],
+				]}
+			/>
 		</Section>
 
 		<Section
