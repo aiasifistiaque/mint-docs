@@ -11,6 +11,7 @@ import {
 	Images,
 	Layout,
 	Lifebuoy,
+	Lightning,
 	PaintBrush,
 	Plug,
 	Puzzle,
@@ -218,6 +219,19 @@ export const GUIDES: Guide[] = [
 			{ id: 'folders', title: 'Folders' },
 			{ id: 'upload', title: 'Uploading' },
 			{ id: 'trash', title: 'Trash' },
+		],
+	},
+	{
+		href: '/automations',
+		title: 'Automations',
+		name: 'Automations',
+		description: 'When a record is created, changed or deleted: notify people, send an email, call a webhook, update or create a record.',
+		icon: Lightning,
+		group: 'Build',
+		topics: [
+			{ id: 'automation-trigger', title: 'When it runs' },
+			{ id: 'automation-actions', title: 'What it does' },
+			{ id: 'automation-runs', title: 'Runs' },
 		],
 	},
 	{

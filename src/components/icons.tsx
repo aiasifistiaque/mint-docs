@@ -37,6 +37,7 @@ import {
 	Table as PhTable,
 	UserCircle as PhUserCircle,
 	WebhooksLogo as PhWebhooksLogo,
+	Lightning as PhLightning,
 	FilePdf as PhFilePdf,
 	X as PhX,
 } from '@phosphor-icons/react/dist/ssr';
@@ -88,4 +89,5 @@ export const Stack = make(PhStack, 'light');
 export const Table = make(PhTable, 'light');
 export const User = make(PhUserCircle, 'light');
 export const Webhooks = make(PhWebhooksLogo, 'light');
+export const Lightning = make(PhLightning, 'light');
 export const FilePdf = make(PhFilePdf, 'light');
