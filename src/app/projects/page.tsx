@@ -245,6 +245,17 @@ const Projects = () => (
 				]}
 			/>
 			<P>
+				<span id='comment-replies' />
+				To answer a comment, click <strong>Reply</strong> under it. Replies sit indented under the comment they answer, the
+				latest two showing and the rest behind <strong>View earlier replies</strong>. Replying to a reply adds to the same
+				thread and starts with <C>@</C> and their name, so they’re told. Whoever wrote the first comment, and everyone who replied
+				since, gets a notification for each new reply, as long as they can still see the record. The notification opens the
+				thread at that reply. Deleting a comment deletes its replies too.
+			</P>
+			<P>
+				Web addresses in a comment (<C>https://…</C> or <C>www.…</C>) become links that open in a new tab.
+			</P>
+			<P>
 				Each page has its own switches: <strong>Build → Pages</strong>, open the page, <strong>Fields &amp; rules</strong> →{' '}
 				<strong>Comments and mentions</strong>, then Publish. Deals can take comments while Products don’t. With comments off,
 				the comments already written stay readable; with mentions off, comments still work without the @ list.
