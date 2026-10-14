@@ -17,6 +17,7 @@ const SECTIONS = [
 	{ id: 'switching', title: 'Switching projects' },
 	{ id: 'edit', title: 'Editing a project' },
 	{ id: 'project-settings', title: 'Project settings and business details' },
+	{ id: 'project-comments', title: 'Comments and @mentions' },
 	{ id: 'media-library', title: 'Media library' },
 	{ id: 'address', title: 'Its public address' },
 	{ id: 'archive', title: 'Archiving and deleting' },
@@ -220,6 +221,33 @@ const Projects = () => (
 			<P>
 				A new project starts with the organization’s business details; from then on they’re the project’s own, so two
 				projects can print different addresses. The PDF designer’s Business details change the same ones.
+			</P>
+		</Section>
+
+		<Section
+			id='project-comments'
+			title='Comments and @mentions'
+			lead='Talk about a record on its own page — the Comments tab, next to History.'>
+			<P>
+				Open any record and go to <strong>Comments</strong>. Everyone who can see the record reads the thread and can add to it.
+				You edit or delete your own comments; people with Manage projects can delete anyone’s.
+			</P>
+			<P>
+				Type <C>@</C> to mention someone: pick them from the list and they get a notification that opens the record’s Comments
+				tab. Who you can mention follows who can see the record:
+			</P>
+			<Terms
+				head={['The record is', 'You can mention']}
+				rows={[
+					['Public, or on a page without per-record access', 'Anyone in the project whose role can view this page.'],
+					['Private', 'Only its owner and the people it’s shared with. Everyone else shows greyed out, and picking them says why.'],
+					['Only me', 'No one — nobody else can see it.'],
+				]}
+			/>
+			<P>
+				Project → Settings → <strong>Comments and mentions</strong> turns each one off for the whole project (needs Manage
+				projects). With comments off, the comments already written stay readable; with mentions off, comments still work
+				without the @ list.
 			</P>
 		</Section>
 
