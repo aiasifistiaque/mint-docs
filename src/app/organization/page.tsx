@@ -18,6 +18,7 @@ const SECTIONS = [
 	{ id: 'members', title: 'Members' },
 	{ id: 'project-access', title: 'Which projects people open' },
 	{ id: 'invitations', title: 'Inviting people' },
+	{ id: 'project-roles', title: 'A project’s own roles' },
 	{ id: 'invited', title: 'When you’re invited' },
 	{ id: 'roles', title: 'Roles and permissions' },
 	{ id: 'ownership', title: 'The owner' },
@@ -145,8 +146,10 @@ const Organization = () => (
 						Open the project and go to <strong>Project → Members</strong> in the sidebar, then press <strong>Invite</strong>.
 					</>,
 					<>
-						Enter their email and choose <strong>Member</strong> (works with the records) or <strong>Developer</strong> (works with
-						the records and builds the project: models, pages, AI keys). They get an email with a link that works for 7 days.
+						Enter their email and choose a role: <strong>Full access</strong> (everything in the project, its settings and
+						members too), <strong>Member</strong> (works with the records), <strong>Developer</strong> (works with the records and
+						builds the project: models, pages, AI keys) — or one of the <A href='#project-roles'>project’s own roles</A>. They get
+						an email with a link that works for 7 days.
 					</>,
 					<>
 						Once they accept, the project shows on their dashboard and in their project menu under <em>your</em> organization’s
@@ -169,8 +172,25 @@ const Organization = () => (
 				guest a role or every project on <A href={`${APP_URL}/org/members`}>Members</A> makes them a full member.
 			</P>
 			<P>
-				Everyone in a project sees its <strong>Project → Members</strong> list — who opens it and with what role — so they know
-				who they work with. Only the people who can invite see pending invitations and the Invite, role and remove buttons.
+				<strong>Project → Members</strong> shows only to the people who can invite to the project — the owner, admins, Full
+				access and roles with Invite to projects; <strong>Project → Settings</strong> only to those who can manage it.
+			</P>
+		</Section>
+
+		<Section
+			id='project-roles'
+			title='A project’s own roles'
+			lead='Project → Members → Roles: say, model by model, what someone may do.'>
+			<P>
+				Full access, Member and Developer are the standard roles. For anything in between, press <strong>New role</strong>,
+				name it — <em>Sales rep</em> — and tick what it may do with each model’s records: <strong>View</strong>,{' '}
+				<strong>Add</strong>, <strong>Edit</strong>, <strong>Delete</strong>. The media library and History are on the list
+				too. Adding, editing or deleting includes viewing, so View ticks itself; a column’s heading ticks the whole column.
+			</P>
+			<P>
+				Give the role when you invite someone, or change someone’s role on the list above. A role belongs to its project — the
+				same name can mean different things in two projects — and doesn’t show on the organization’s Roles. Change it and
+				everyone who has it changes with it. A role someone still has can’t be deleted: give them another one first.
 			</P>
 		</Section>
 
@@ -181,7 +201,9 @@ const Organization = () => (
 			<P>
 				Open the link in the email — signed in to the invited account, <strong>Join</strong> is all it takes. Or find it in the
 				app: <strong>Invitations for you</strong> on <A href={`${APP_URL}/projects`}>Projects</A> lists every invitation sent to your
-				email, with who sent it, your role and your projects — <strong>Join</strong> or <strong>Decline</strong>.
+				email, with who sent it, your role and your projects — <strong>Join</strong> or <strong>Decline</strong>. If you already
+				have an account, the invitation also arrives as a notification: it opens the <strong>Invitations</strong> page with that
+				invitation marked, to <strong>Accept</strong> or <strong>Decline</strong>.
 			</P>
 			<P>
 				Invitations show in the app once your email is verified, so nobody can sign up with your address and see them. Press{' '}
@@ -193,13 +215,15 @@ const Organization = () => (
 		<Section
 			id='roles'
 			title='Roles and permissions'
-			lead='A role is a set of permissions. Every organization starts with three.'>
+			lead='A role is a set of permissions. Every organization starts with these.'>
 			<Terms
 				head={['Role', 'Can']}
 				rows={[
 					['Owner', 'Everything. There is exactly one owner — you, if you signed up.'],
 					['Admin', 'Everything except handing the organization over or deleting a project that holds data.'],
 					['Member', 'View, add, edit and delete records in their projects, and start new projects. You can change what Member allows.'],
+					['Developer', 'Works with the records and builds the projects they open: models, pages, AI keys.'],
+					['Full access', 'Everything inside the projects they’re given — records, building, the project’s settings and members.'],
 				]}
 			/>
 			<P>

@@ -206,7 +206,7 @@ const Projects = () => (
 		<Section
 			id='project-settings'
 			title='Project settings and business details'
-			lead='Project → Settings in the sidebar, inside the project. Everyone in the project sees it; Manage projects changes it.'>
+			lead='Project → Settings in the sidebar, inside the project — for the people who can manage it (Manage projects, or Full access in the project).'>
 			<P>
 				<strong>About this project</strong> sums it up: its kind, its address and public API address (each with a copy
 				button), how many people open it (a link to <A href='/organization#project-people'>Project → Members</A>), its models,
@@ -245,9 +245,9 @@ const Projects = () => (
 				]}
 			/>
 			<P>
-				Project → Settings → <strong>Comments and mentions</strong> turns each one off for the whole project (needs Manage
-				projects). With comments off, the comments already written stay readable; with mentions off, comments still work
-				without the @ list.
+				Each page has its own switches: <strong>Build → Pages</strong>, open the page, <strong>Fields &amp; rules</strong> →{' '}
+				<strong>Comments and mentions</strong>, then Publish. Deals can take comments while Products don’t. With comments off,
+				the comments already written stay readable; with mentions off, comments still work without the @ list.
 			</P>
 		</Section>
 
