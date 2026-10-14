@@ -151,7 +151,7 @@ const { token, customer, message } = await res.json();
 		<Section
 			id='manage'
 			title='Managing customers'
-			lead='Audience → Customers lists everyone who signed up.'>
+			lead='API → Customers lists everyone who signed up.'>
 			<P>
 				See each customer’s name, email, phone, when they joined and last signed in. Edit their name or phone, switch them off
 				(they’re signed out and can’t sign in), or delete them. You never see or set their password, and customers can’t be

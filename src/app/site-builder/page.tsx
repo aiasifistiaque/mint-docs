@@ -823,9 +823,10 @@ const SiteBuilder = () => (
 				number, upper and lower.
 			</P>
 			<Note>
-				A list can only show a model whose public API is on with list and get — otherwise visitors would see nothing. The
-				builder says so in the list itself, and Publish won’t go ahead until it’s fixed. Turn it on in the panel (Models → the
-				model → Public API). Contents never need it.
+				A list can only show a model with list and read-one endpoints open to anyone — otherwise visitors would see nothing. The
+				builder says so in the list itself, and Publish won’t go ahead until it’s fixed. Make them in the panel: API → Endpoints →{' '}
+				<strong>Generate from a model</strong>. The list then shows what those endpoints show — their rules and fields too.
+				Contents never need it.
 			</Note>
 		</Section>
 

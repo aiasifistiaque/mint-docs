@@ -8,15 +8,23 @@ export const metadata = guideMeta('/public-api');
 
 /**
  * The public API (backend routes-public/public.router.ts), for tenants and the
- * developers of their sites. `public-api` is a GuideLink target (the Public
- * API page); `who` is linked from the Models guide.
+ * developers of their sites. `public-api` and the `api-*` sections are
+ * GuideLink targets (the panel's API pages, docs/api-builder); `turn-on`, `who`
+ * and `read-only` were the old page's sections and stay as anchors inside the
+ * new ones (the Models guide links `who`).
  */
 
 const SECTIONS = [
 	{ id: 'public-api', title: 'What it is' },
-	{ id: 'turn-on', title: 'Making a model public' },
-	{ id: 'who', title: 'Who may call it' },
-	{ id: 'read-only', title: 'Read-only fields' },
+	{ id: 'api-pages', title: 'The API pages' },
+	{ id: 'api-endpoints', title: 'Endpoints' },
+	{ id: 'api-generate', title: 'Generate from a model' },
+	{ id: 'api-new-endpoint', title: 'Making an endpoint' },
+	{ id: 'api-access', title: 'Who can call it' },
+	{ id: 'api-conditions', title: 'Rules: which records' },
+	{ id: 'api-fields', title: 'Fields in and out' },
+	{ id: 'api-filters', title: 'A list’s filters and pages' },
+	{ id: 'api-keys', title: 'Server keys' },
 	{ id: 'address', title: 'The address' },
 	{ id: 'requests', title: 'Requests' },
 	{ id: 'list', title: 'Listing and paging' },
@@ -43,97 +51,265 @@ const PublicApi = () => (
 	<Guide
 		href='/public-api'
 		sections={SECTIONS}
-		open={{ href: '/public-api', label: 'Open Public API' }}>
+		open={{ href: '/public-api', label: 'Open API' }}>
 		<Section
 			id='public-api'
 			title='What it is'
-			lead='Your own website or app reading and writing your models — with no server of your own.'>
+			lead='Your own website, app or server reading and writing your models — at addresses you choose, with rules you set.'>
 			<P>
 				A product catalogue on your shop’s site, a booking form that saves straight into Bookings, an app where customers see
-				their own orders. Every model can have a public API; it’s off until you turn it on, and then answers only the actions
-				you tick. It needs no key — what’s public is public, and what needs a customer asks for one.
+				their own orders, your till sending in the day’s sales. Each of those is an <strong>endpoint</strong>: an address that
+				does one thing with one model’s records — list them, read one, create, update or delete — for whoever you allow. Nothing
+				is public until you make an endpoint for it.
 			</P>
 		</Section>
 
 		<Section
-			id='turn-on'
-			title='Making a model public'
-			lead='Audience → Public API (in an API project: API → Public API). Needs the Build permission.'>
+			id='api-pages'
+			title='The API pages'
+			lead='Sidebar → API (needs the Build permission). Four tabs run along the top of each.'>
+			<Terms
+				head={['Page', 'What it’s for']}
+				rows={[
+					['Overview', 'The API’s address, how many endpoints are on, calls, keys and customers; each model and what it has on the API; what was called lately; code to start from.'],
+					['Endpoints', 'Every endpoint, by model — method, address, who can call it, how many rules, calls, an on/off switch. Generate and make endpoints here; open one to change it.'],
+					['Keys', 'Secret keys for your own server, scripts or partners.'],
+					['Reference', 'Every endpoint written up for whoever builds your site or app — what to send, what comes back — with a tester.'],
+				]}
+			/>
+			<P>
+				Customers (who signed up on your site) and Webhooks (your server told when records change) sit in the same sidebar
+				section.
+			</P>
+		</Section>
+
+		<Section
+			id='api-endpoints'
+			title='Endpoints'>
+			<P>
+				An endpoint is a method and an address under your project’s API — <C>GET /products/featured</C> — plus its rules: who
+				can call it, which records it reaches, which fields go in and out, and for a list, how it’s filtered and paged.
+			</P>
+			<Terms
+				head={['Kind', 'Address']}
+				rows={[
+					[
+						'Standard',
+						<>
+							A model’s own address: <C>/products</C> (list, create) and <C>/products/:id</C> (read one, update, delete). Made by{' '}
+							<A href='#api-generate'>Generate from a model</A>. Their address can’t change.
+						</>,
+					],
+					[
+						'Custom',
+						<>
+							Any address you choose — <C>/products/featured</C>, <C>/my/orders</C>, <C>/contact</C>. Several endpoints can work on
+							the same model, each with its own rules: a public list of published products, and a key-only one with everything.
+						</>,
+					],
+				]}
+			/>
+			<P>
+				Switch an endpoint off and it answers <C>404</C> until it’s on again; its settings are kept. Changes on its page are
+				a draft until you press <strong>Save changes</strong>.
+			</P>
+		</Section>
+
+		<Section
+			id='api-generate'
+			title='Generate from a model'
+			lead='Endpoints → Generate from a model (or Generate beside a model).'>
+			<span id='turn-on' />
+			<List
+				ordered
+				items={[
+					'Pick the model.',
+					<>
+						Tick its endpoints — <strong>List</strong> and <strong>Read one</strong> start ticked; add <strong>Create</strong>,{' '}
+						<strong>Update</strong>, <strong>Delete</strong> if your site or app changes records.
+					</>,
+					<>
+						Pick <A href='#api-access'>who can call them</A>, and press Generate.
+					</>,
+				]}
+			/>
+			<P>
+				They answer at once. Endpoints the model already has are left as they are (one that was off is turned back on). Then
+				open each to set its <A href='#api-conditions'>rules</A> and <A href='#api-fields'>fields</A>. A website project’s Pages,
+				SEO and Contents have their list and read-one endpoints from the start — that’s how your site reads them.
+			</P>
+		</Section>
+
+		<Section
+			id='api-new-endpoint'
+			title='Making an endpoint'
+			lead='Endpoints → New endpoint: four short steps, then its page opens.'>
 			<List
 				ordered
 				items={[
 					<>
-						Switch the model to <strong>Public</strong>. It starts with List and Read one.
+						<strong>Model</strong> — whose records it works on.
 					</>,
 					<>
-						Tick the actions it answers: <strong>List</strong>, <strong>Read one</strong>, <strong>Create</strong>,{' '}
-						<strong>Update</strong>, <strong>Delete</strong>.
+						<strong>What it does</strong> — List, Read one, Create, Update or Delete.
 					</>,
-					<>Choose who may call it (next section). Changes apply at once.</>,
 					<>
-						With Create or Update ticked, tick the <A href='#read-only'>read-only fields</A> — what only your team sets, like an
-						order’s status.
+						<strong>Address</strong> — lowercase words and dashes, up to four parts: <C>/products/featured</C>. Read one,
+						Update and Delete end with <C>/:id</C>, where the record’s id goes: <C>/my/orders/:id</C>. A few first words are kept
+						for MINT’s own addresses (<C>auth</C>, <C>site</C>, <C>pages</C>, <C>shop</C>, <C>cart</C>, <C>checkout</C>…), and two
+						endpoints can’t share a method and address.
+					</>,
+					<>
+						<strong>Who</strong> can call it, and a name for you and your team.
 					</>,
 				]}
 			/>
 			<P>
-				The <A href={`${APP_URL}/public-api`}>Public API</A> page shows each model’s address and ready-to-copy examples for the open
-				project. A website project’s Pages, SEO and Contents start public, read-only — that’s how your site
-				reads them.
+				When a custom address and a model’s <C>/:id</C> could both match — <C>/products/featured</C> and{' '}
+				<C>/products/:id</C> — the one with more fixed words wins, so <C>featured</C> is never taken for an id.
 			</P>
 		</Section>
 
 		<Section
-			id='who'
-			title='Who may call it'>
+			id='api-access'
+			title='Who can call it'
+			lead='An endpoint’s Access tab.'>
+			<span id='who' />
 			<Terms
 				head={['Choice', 'Means']}
 				rows={[
-					['Anyone', 'No sign-in. Anyone who knows the address can use the ticked actions — a product list, blog posts, opening hours.'],
+					['Anyone', 'No sign-in, no key. Anyone who knows the address can call it — a product list, opening hours, a contact form.'],
 					[
 						'Signed-in customers',
 						<>
-							Only your <A href='/customers'>customers</A>, signed in. Every customer sees every record — a members-only
-							price list.
+							Your <A href='/customers'>customers</A>, signed in with the sign-in widget or your own form. Rules can use who
+							they are: <strong>Only their own records</strong> makes each customer reach only the records they created
+							through the API — orders, bookings, support requests.
 						</>,
 					],
 					[
-						'Customers — own records only',
-						'Each customer only lists, reads, updates and deletes the records they created — orders, bookings, support requests. Records added in the panel belong to no customer, so customers don’t see them.',
+						'A server key',
+						<>
+							Your own server, scripts or partners, with a <A href='#api-keys'>server key</A>. For what must never be called
+							from a browser — importing the till’s sales, a partner’s stock feed.
+						</>,
 					],
 				]}
 			/>
 			<Note tone='warn'>
-				With <strong>Anyone</strong>, Create, Update and Delete are open to the whole internet. Tick them only when that’s
-				what you want — a contact form’s Create, say — and never Update or Delete.
+				With <strong>Anyone</strong>, a Create, Update or Delete endpoint is open to the whole internet. That’s right for a
+				contact form’s Create — never for Update or Delete. Records added in the panel belong to no customer, so “only their
+				own records” never shows them to anyone.
 			</Note>
 		</Section>
 
 		<Section
-			id='read-only'
-			title='Read-only fields'
-			lead='What only your team sets — never a request. Public API → the model → Read-only fields (shown when Create or Update is ticked).'>
+			id='api-conditions'
+			title='Rules: which records'
+			lead='Access tab → Which records it reaches. Add a rule: a field, a test, a value.'>
 			<P>
-				A customer who can create an order shouldn’t be able to send <C>{'"status": "paid"'}</C> with it. Tick the fields your
-				business controls — an order’s status, payment reference, tracking link; a booking’s confirmation — and the API never
-				writes them:
+				<em>Status is Published</em>, <em>Stock is more than 0</em>, <em>Email is their email</em>. The tests fit the field:
+				is, is not, is one of, contains, more / less than (before / after for dates), is empty, is not empty. Records must meet
+				all the rules — or switch to <strong>any one of these</strong>.
 			</P>
 			<Terms
-				head={['Request', 'What happens to a read-only field']}
+				head={['Endpoint', 'What the rules do']}
 				rows={[
-					['Create (POST)', 'Whatever is sent for it is ignored; the new record gets the field’s default (or stays empty).'],
-					['Update (PUT)', 'Whatever is sent for it is ignored; it keeps the value it has. The other fields are still saved.'],
-					['List, Read one', 'It comes back as usual — your site can show the status, it just can’t change it.'],
+					['List', 'Only records that meet them are listed and counted.'],
+					['Read one, Update, Delete', 'A record that doesn’t meet them doesn’t exist for this endpoint — the call answers 404.'],
+					[
+						'Create',
+						<>
+							The new record (with its defaults) must meet them, or the call is refused with <C>403</C> and{' '}
+							<C>code: "rule_failed"</C>. “Only their own records” makes the signed-in customer its owner.
+						</>,
+					],
 				]}
 			/>
 			<P>
-				Requests aren’t refused for sending one, so a site can send back a record it read. Your team still changes these fields
-				in the panel as usual — a webhook on the model tells your server when a new order comes in. <C>GET {PUBLIC_API}/</C> and the{' '}
-				<A href='#reference'>API reference</A> mark them <C>readOnly</C>; calculated (formula) fields are always read-only.
+				On an endpoint for signed-in customers a rule can compare with the customer: <strong>Owner is the signed-in customer</strong>{' '}
+				(what “only their own records” is), or a text field with <strong>their email</strong>, <strong>their name</strong> or{' '}
+				<strong>their phone</strong> — orders placed with a customer’s email before they had an account, say. A value is checked
+				against the field when you save (“Price” takes a number), so a rule can’t fail later for being mistyped. Archived records
+				and, on models with record access, private ones never reach the API whatever the rules say.
+			</P>
+		</Section>
+
+		<Section
+			id='api-fields'
+			title='Fields in and out'
+			lead='An endpoint’s Fields tab.'>
+			<span id='read-only' />
+			<Terms
+				head={['Column', 'Means']}
+				rows={[
+					[
+						'Sent back',
+						<>
+							The fields in each record it answers with — leave out what the site doesn’t need or mustn’t see (a cost price,
+							an internal note). <C>_id</C> always comes back. A caller can ask for fewer with <A href='#fields'>fields=</A>, never more.
+						</>,
+					],
+					[
+						'Written',
+						<>
+							Create and Update only: the fields a call may set. Untick what only your team sets — an order’s status, a payment
+							reference. Sent anyway, they’re ignored: a new record gets the field’s default, an update keeps the value it has.
+						</>,
+					],
+				]}
+			/>
+			<P>
+				Calculated (formula) fields are always worked out by the server. Requests aren’t refused for sending a field that isn’t
+				written, so a site can send back a record it read.
 			</P>
 			<Note tone='warn'>
-				A required field with no default can’t be read-only while Create is on — every new record would be missing it. Give the
-				field a default in Models (an order’s status: <C>pending</C>), or let the API write it.
+				A required field with no default must be written by a Create endpoint — otherwise every new record would be missing it.
+				Give it a default in Models (an order’s status: <C>pending</C>), or tick Written.
+			</Note>
+		</Section>
+
+		<Section
+			id='api-filters'
+			title='A list’s filters and pages'
+			lead='A list endpoint’s Filters tab.'>
+			<Terms
+				head={['Setting', 'Means']}
+				rows={[
+					['Always filtered by', 'Rules that are part of the list — Featured is Yes. Callers can’t take them off.'],
+					[
+						'Let callers filter, search and sort',
+						<>
+							On: callers add their own <A href='#filters'>filters</A>, <A href='#search'>search</A> and <A href='#sorting'>sort</A>{' '}
+							on top. Off: the list is exactly as set here — only <C>page</C>, <C>limit</C> and <C>fields</C> are read.
+						</>,
+					],
+					['Order', 'The field it’s sorted by when the caller doesn’t say (newest first unless set).'],
+					['Page size · Largest page', <>How many records a page holds by default, and the most a caller’s <C>limit</C> can ask for (up to 100).</>],
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='api-keys'
+			title='Server keys'
+			lead='API → Keys → New key. For endpoints whose “who” is a server key.'>
+			<P>
+				Name the key after what will use it — “The shop’s till”, “Nightly import” — so you can revoke one without stopping the
+				others. The key (<C>mint_sk_…</C>) is shown <strong>once</strong>: copy it into your server’s environment variables. After
+				that only its last four characters show, with who made it and when it was last used.
+			</P>
+			<CodeBlock
+				label='Calling with a key'
+				code={`curl ${PUBLIC_API}/till/orders \\\n  -H "Authorization: Bearer $MINT_SERVER_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '{"quantity": 3, "note": "From the till"}'`}
+			/>
+			<P>
+				<C>X-Api-Key: mint_sk_…</C> works too. Any key in use opens every endpoint that needs a key. A wrong or revoked key, or
+				none, answers <C>401</C> with <C>code: "key_required"</C>. <strong>Revoke</strong> stops a key at once.
+			</P>
+			<Note tone='warn'>
+				Never put a key in a website, an app or a message — anyone who sees the page’s code has it. Browsers call endpoints for
+				anyone or for signed-in customers; keys are for servers.
 			</Note>
 		</Section>
 
@@ -150,8 +326,9 @@ const PublicApi = () => (
 				code={`${PUBLIC_API}/<model>`}
 			/>
 			<P>
-				<C>GET {PUBLIC_API}/</C> describes the project: its name and kind, and every public model with its actions, who may
-				call it, and its fields (key, label, kind, required, allowed values, and <C>readOnly</C> on those a request can’t write)
+				A custom endpoint has its own address under the same root — <C>{PUBLIC_API}/products/featured</C>.{' '}
+				<C>GET {PUBLIC_API}/</C> describes the project: its name and kind, every endpoint (method, address, who may call it,
+				how many rules, its fields in and out), and every public model with its actions, who may call it, and its fields (key, label, kind, required, allowed values, and <C>readOnly</C> on those a request can’t write)
 				— handy for checking what’s on.
 			</P>
 		</Section>
@@ -559,13 +736,21 @@ async function loadMore() {
 					[
 						'401',
 						<>
-							Sign in first (<C>code: "customer_required"</C>) — the model needs a signed-in customer and the token is missing,
-							expired or for another project.
+							Sign in first (<C>code: "customer_required"</C>) — the endpoint is for signed-in customers and the token is
+							missing, expired or for another project. Or <C>code: "key_required"</C> — it needs a server key and none, a wrong
+							or a revoked one was sent.
+						</>,
+					],
+					[
+						'403',
+						<>
+							A rule refused it (<C>code: "rule_failed"</C>) — a create whose record doesn’t meet the endpoint’s rules;{' '}
+							<C>message</C> says which.
 						</>,
 					],
 					[
 						'404',
-						'The model isn’t public, the action isn’t ticked, the record doesn’t exist (or isn’t this customer’s), or the project is archived.',
+						'No endpoint answers that method and address (or it’s off), the record doesn’t exist or is outside the endpoint’s rules, or the project is archived.',
 					],
 					[
 						'429',
@@ -586,10 +771,11 @@ async function loadMore() {
 		<Section
 			id='reference'
 			title='The API reference'
-			lead='On the Public API page, below the models: every endpoint your site or app can call.'>
+			lead='API → Reference: every endpoint your site or app can call.'>
+			<span id='api-reference' />
 			<P>
-				It’s made from what the live API says it offers, so it always matches the switches above it — turn a model or an
-				action on and its endpoint appears. Above the models, <strong>Lists: paging, sorting and filters</strong> sums up the
+				It’s made from what the live API says it offers, so it always matches the Endpoints page — make or switch on an
+				endpoint and it appears, grouped by model; <strong>Open</strong> goes to its page. Above the models, <strong>Lists: paging, sorting and filters</strong> sums up the
 				query parameters and operators every list takes. Click an endpoint for the rest: a list shows its sortable and
 				searchable fields, every filter its fields take (with their operators and allowed values) and example requests made
 				from its own fields, each with <strong>Try</strong>; a create or update shows the body fields; every endpoint shows an
@@ -629,7 +815,8 @@ if (!res.ok) throw new Error(data.message);`}
 		<Section
 			id='tester'
 			title='Trying requests'
-			lead='“Try it” sends a request to your live API from your browser and shows the answer.'>
+			lead='“Try it” sends a request to your live API from your browser and shows the answer — on an endpoint’s Try it tab, or under the reference.'>
+			<span id='api-try' />
 			<List
 				ordered
 				items={[

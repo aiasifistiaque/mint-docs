@@ -85,7 +85,7 @@ const GettingStarted = () => (
 					['Home', 'The project’s dashboard. With no project open, your organization’s projects.'],
 					['Your project’s sections', 'At the top of the sidebar: the pages of the models you build, arranged how you like.'],
 					['Files', 'The media library: the project’s images, videos and documents, in folders.'],
-					['Audience', 'Analytics (websites), the Public API, and the customers who sign in to your site or app.'],
+					['API', 'Your models for your own site, app or server: the overview, endpoints, server keys, the reference, the customers who sign in, and webhooks.'],
 					['Build', 'Models, Pages, Sidebar, Dashboard and Connect AI — the tools for shaping the project.'],
 					['Organization', 'Projects, Members, Roles and the organization’s Settings.'],
 					['Your avatar', 'Your settings — profile, password, two-step sign-in, signed-in devices, theme — and signing out.'],

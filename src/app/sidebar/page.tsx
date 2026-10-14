@@ -37,7 +37,7 @@ const Sidebar = () => (
 				creating them; here you rename, reorder, hide and restrict them. Each project has its own sidebar.
 			</P>
 			<P>
-				The <em>Audience</em>, <em>Build</em> and <em>Organization</em> sections below yours are fixed — they follow each
+				The <em>API</em>, <em>Build</em> and <em>Organization</em> sections below yours are fixed — they follow each
 				person’s role.
 			</P>
 		</Section>

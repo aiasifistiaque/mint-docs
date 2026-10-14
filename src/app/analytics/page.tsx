@@ -34,7 +34,7 @@ const Analytics = () => (
 			lead='Visits to your website, counted without cookies.'>
 			<P>
 				Page views, visitors and visits, where they came from, what they use, which links they click, and events you send
-				yourself — for website projects, in <strong>Audience → Analytics</strong>. One line of HTML on your site starts it.
+				yourself — for website projects, in <strong>Site → Analytics</strong>. One line of HTML on your site starts it.
 			</P>
 		</Section>
 
