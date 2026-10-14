@@ -71,7 +71,7 @@ export const GUIDES: Guide[] = [
 		href: '/account',
 		title: 'Account',
 		name: 'Your account & security',
-		description: 'Your profile and password, two-step sign-in with passkeys and codes, your signed-in devices, and how the panel looks.',
+		description: 'Your profile and password, two-step sign-in with passkeys and codes, your signed-in devices, how the panel looks, and the MINT app for your phone.',
 		icon: Shield,
 		group: 'Start here',
 		topics: [
@@ -79,6 +79,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'password', title: 'Password' },
 			{ id: 'overview', title: 'Two-factor sign-in' },
 			{ id: 'devices', title: 'Signed-in devices' },
+			{ id: 'install-app', title: 'The MINT app' },
 		],
 	},
 	{

@@ -6,9 +6,11 @@ import { guideMeta } from '@/lib/seo';
 export const metadata = guideMeta('/account');
 
 /**
- * Your account: profile, password, two-factor sign-in, devices, appearance.
+ * Your account: profile, password, two-factor sign-in, devices, appearance,
+ * installing the app.
  * Section ids are link targets from the settings screens (two-factor,
- * devices, appearance) via panel.ts docsPath — keep them.
+ * devices, appearance) via panel.ts docsPath, and from Install app
+ * (tenant/GuideLink.tsx, #install-app) — keep them.
  */
 
 const SECTIONS = [
@@ -26,6 +28,7 @@ const SECTIONS = [
 	{ id: 'devices', title: 'Signed-in devices' },
 	{ id: 'locked-out', title: 'Locked out' },
 	{ id: 'appearance', title: 'Appearance' },
+	{ id: 'install-app', title: 'The MINT app' },
 ];
 
 const Account = () => (
@@ -278,6 +281,45 @@ const Account = () => (
 				Your theme is saved to your account, so it follows you to other browsers and devices. Light, dark or system is
 				remembered by each browser, so a laptop and a phone can differ.
 			</P>
+		</Section>
+
+		<Section
+			id='install-app'
+			title='The MINT app'
+			lead='Your avatar → Install app.'>
+			<P>
+				Install MINT on your phone or computer and it opens from its own icon, full screen without the browser’s address bar
+				and tabs — like any other app. It’s the same panel with everything in it, always up to date: there’s nothing to
+				download from an app store and nothing to update.
+			</P>
+			<Terms
+				head={['On', 'How']}
+				rows={[
+					['Android (Chrome, Edge, Samsung Internet)', 'Install app → Install. Or the browser’s ⋮ menu → Install app'],
+					['iPhone and iPad', 'Safari’s Share button → Add to Home Screen → Add (Chrome on iPhone: Share in the address bar)'],
+					['Chrome or Edge on a computer', 'Install app → Install MINT. Or the install icon at the right end of the address bar'],
+					['Safari on a Mac', 'File → Add to Dock'],
+				]}
+			/>
+			<P>
+				On a computer, <strong>Install app</strong> also shows a QR code: scan it with your phone’s camera to open MINT there,
+				then install it from the account menu on the phone. Firefox on a computer can’t install apps — use your phone, or
+				Chrome, Edge or Safari.
+			</P>
+			<H3>Signing in</H3>
+			<P>
+				Sign in once inside the app. On Android it usually shares the browser’s sign-in; on iPhone the app keeps its own, so
+				you sign in again the first time you open it. Signing out of the app signs out that device only.
+			</P>
+			<H3>Without a connection</H3>
+			<P>
+				MINT works with your live data, so it needs the internet. Open it offline and you see a “You’re offline” page that
+				reloads itself as soon as you’re back online.
+			</P>
+			<Note>
+				Once MINT is installed, <strong>Install app</strong> no longer shows in the menu inside the app. To remove it, delete it
+				like any other app — your account and data stay as they are.
+			</Note>
 		</Section>
 	</Guide>
 );
