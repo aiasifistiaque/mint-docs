@@ -205,9 +205,14 @@ const Projects = () => (
 		<Section
 			id='project-settings'
 			title='Project settings and business details'
-			lead='Project → Settings in the sidebar, inside the project. Needs Manage projects.'>
+			lead='Project → Settings in the sidebar, inside the project. Everyone in the project sees it; Manage projects changes it.'>
 			<P>
-				The project’s name and description, and its <strong>business details</strong>: logo, business name, address, phone,
+				<strong>About this project</strong> sums it up: its kind, its address and public API address (each with a copy
+				button), how many people open it (a link to <A href='/organization#project-people'>Project → Members</A>), its models,
+				which media library it uses, the template it was built from, and who made it and when.
+			</P>
+			<P>
+				Below that, the project’s name and description, and its <strong>business details</strong>: logo, business name, address, phone,
 				email, website and tax / VAT / BIN number. Its invoices, bills and receipts print these (see{' '}
 				<A href='/pdf-templates'>PDF templates</A>). <strong>Upload logo</strong> picks one from the media library, uploads a
 				new one or takes a link.

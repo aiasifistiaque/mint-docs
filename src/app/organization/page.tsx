@@ -142,7 +142,7 @@ const Organization = () => (
 				ordered
 				items={[
 					<>
-						Open the project and go to <strong>Project → People</strong> in the sidebar, then press <strong>Invite</strong>.
+						Open the project and go to <strong>Project → Members</strong> in the sidebar, then press <strong>Invite</strong>.
 					</>,
 					<>
 						Enter their email and choose <strong>Member</strong> (works with the records) or <strong>Developer</strong> (works with
@@ -159,14 +159,18 @@ const Organization = () => (
 				rows={[
 					['Someone new to your organization', 'Joins as a project guest: they open only the projects they were invited to, can’t start projects, and don’t see your members.'],
 					['Someone already in your organization', 'Gets the project straight away — no email — with the role you chose for it.'],
-					['The owner, admins, members with all projects', 'Already open it. Change them on Members instead.'],
+					['The owner, admins, members with all projects', 'Already open it. Change them on Organization → Members instead.'],
 				]}
 			/>
 			<P>
 				The owner and admins can invite to any project. Give anyone else the <strong>Invite to projects</strong> permission on a
-				role (<A href={`${APP_URL}/org/roles`}>Roles</A>) and they can invite to the projects they open. On People you can change
+				role (<A href={`${APP_URL}/org/roles`}>Roles</A>) and they can invite to the projects they open. On Project → Members you can change
 				someone’s role in that project or remove them; a guest removed from their last project leaves the organization. Giving a
 				guest a role or every project on <A href={`${APP_URL}/org/members`}>Members</A> makes them a full member.
+			</P>
+			<P>
+				Everyone in a project sees its <strong>Project → Members</strong> list — who opens it and with what role — so they know
+				who they work with. Only the people who can invite see pending invitations and the Invite, role and remove buttons.
 			</P>
 		</Section>
 
