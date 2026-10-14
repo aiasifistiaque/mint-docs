@@ -202,8 +202,10 @@ const Organization = () => (
 				Open the link in the email — signed in to the invited account, <strong>Join</strong> is all it takes. Or find it in the
 				app: <strong>Invitations for you</strong> on <A href={`${APP_URL}/projects`}>Projects</A> lists every invitation sent to your
 				email, with who sent it, your role and your projects — <strong>Join</strong> or <strong>Decline</strong>. If you already
-				have an account, the invitation also arrives as a notification: it opens the <strong>Invitations</strong> page with that
-				invitation marked, to <strong>Accept</strong> or <strong>Decline</strong>.
+				have an account, the invitation also arrives as a notification. It opens the invitation’s own page — who invited you,
+				to which project or organization, your role and what it allows — with <strong>Accept invitation</strong> and{' '}
+				<strong>Decline</strong>. Whoever sent it hears if you decline. An invitation that was already answered, withdrawn or has
+				expired says so on that page.
 			</P>
 			<P>
 				Invitations show in the app once your email is verified, so nobody can sign up with your address and see them. Press{' '}
