@@ -152,6 +152,8 @@ const ConnectAi = () => (
 					['get_dashboard · update_dashboard', 'Read and change the dashboard’s widgets.'],
 					['create_records', 'Add records — or update them, matched by a field — checked like the form, all or nothing.'],
 					['set_public_api', 'Turn a model’s public API on or off.'],
+					['list_endpoints · generate_endpoints · save_endpoint', 'See, generate and change your API’s endpoints — who can call each, its rules and fields.'],
+					['get_api_logs', 'Read the calls made to your API (last 7 days) — find why one fails.'],
 					['upload_media', 'Put an image into your Media library and get its address.'],
 					[
 						'site_builder_guide · get_site_builder · start_from_theme · set_site_design · set_site_contents · save_site_page · check_site · publish_site',

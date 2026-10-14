@@ -25,6 +25,7 @@ const SECTIONS = [
 	{ id: 'api-fields', title: 'Fields in and out' },
 	{ id: 'api-filters', title: 'A list’s filters and pages' },
 	{ id: 'api-keys', title: 'Server keys' },
+	{ id: 'api-logs', title: 'Logs' },
 	{ id: 'address', title: 'The address' },
 	{ id: 'requests', title: 'Requests' },
 	{ id: 'list', title: 'Listing and paging' },
@@ -67,13 +68,14 @@ const PublicApi = () => (
 		<Section
 			id='api-pages'
 			title='The API pages'
-			lead='Sidebar → API (needs the Build permission). Four tabs run along the top of each.'>
+			lead='Sidebar → API (needs the Build permission). Five tabs run along the top of each.'>
 			<Terms
 				head={['Page', 'What it’s for']}
 				rows={[
 					['Overview', 'The API’s address, how many endpoints are on, calls, keys and customers; each model and what it has on the API; what was called lately; code to start from.'],
 					['Endpoints', 'Every endpoint, by model — method, address, who can call it, how many rules, calls, an on/off switch. Generate and make endpoints here; open one to change it.'],
 					['Keys', 'Secret keys for your own server, scripts or partners.'],
+					['Logs', 'Every call to the API in the last 7 days — who called, which endpoint answered, what they got, and why it failed.'],
 					['Reference', 'Every endpoint written up for whoever builds your site or app — what to send, what comes back — with a tester.'],
 				]}
 			/>
@@ -311,6 +313,40 @@ const PublicApi = () => (
 				Never put a key in a website, an app or a message — anyone who sees the page’s code has it. Browsers call endpoints for
 				anyone or for signed-in customers; keys are for servers.
 			</Note>
+		</Section>
+
+		<Section
+			id='api-logs'
+			title='Logs'
+			lead='API → Logs, or the Logs tab on an endpoint’s page. Every call to your API, kept 7 days.'>
+			<P>
+				Pick a period — the last hour, 24 hours or 7 days — to see how many calls came in, how many failed, how long they
+				typically took and how slow the slowest 5% were, with a chart of calls that worked (green) and failed (red) over
+				time. <strong>Commonest errors</strong> lists what callers were told most often. Click one to see just those calls.
+			</P>
+			<P>
+				Below are the calls themselves, newest first. Narrow them by answer (worked, failed, refused 4xx, server errors 5xx),
+				endpoint, who called, or text in the address, query, error or a customer’s email. Turn on <strong>Live</strong> to
+				check for new calls every 5 seconds while you test your site.
+			</P>
+			<Terms
+				head={['Open a call to see', '']}
+				rows={[
+					['Answer', 'The status, and the error the caller got with its code — “Sign in first.” (customer_required).'],
+					['Endpoint', 'The endpoint that answered, or none: customer sign-in, the cart and shop, or an address with no endpoint (404).'],
+					['Who called', 'Anyone, the signed-in customer (their email), or the server key (its name).'],
+					['From', 'The website that made the call, and the browser or client (“Chrome on macOS”, “curl/8.4.0”).'],
+					['As curl', 'The same call as a curl command, to repeat it from a terminal.'],
+				]}
+			/>
+			<Note>
+				The log never keeps what was sent, tokens, keys or IP addresses, and values of query parameters named like a token,
+				key, secret or password show as <C>•••</C>. Your site’s own page loads and analytics aren’t logged.
+			</Note>
+			<P>
+				The Overview shows the last 24 hours as a chart, with <strong>See what failed</strong> when something did. Your own AI
+				can read the logs too, through <A href='/connect-ai'>Connect AI</A> — ask it why a call fails.
+			</P>
 		</Section>
 
 		<Section
