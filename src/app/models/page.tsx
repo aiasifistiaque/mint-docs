@@ -14,8 +14,10 @@ const SECTIONS = [
 	{ id: 'models', title: 'What a model is' },
 	{ id: 'models-wizard', title: 'Creating a model' },
 	{ id: 'models-names', title: 'Names and addresses' },
+	{ id: 'models-single', title: 'Single types' },
 	{ id: 'models-code', title: 'Record numbers' },
 	{ id: 'models-fields', title: 'Fields' },
+	{ id: 'models-uid', title: 'Address (slug) fields' },
 	{ id: 'models-password', title: 'Password fields' },
 	{ id: 'models-sections', title: 'Sections and lists' },
 	{ id: 'formulas', title: 'Calculated fields' },
@@ -99,6 +101,21 @@ const Models = () => (
 		</Section>
 
 		<Section
+			id='models-single'
+			title='Single types'
+			lead='For something there is exactly one of — the site’s settings, an About page, a footer.'>
+			<P>
+				Under a model’s <strong>Settings → How many records</strong>, pick <strong>Just one</strong>. Its page then opens
+				that one record instead of a table — or, before it’s filled in, a <strong>Fill it in</strong> button. A second
+				record can’t be added, from the form, a bulk upload or the API.
+			</P>
+			<P>
+				Its API answers with the record itself — <C>GET /site-settings</C> returns <C>{'{ "siteName": … }'}</C>, not a list.
+				A model with records can become a single type only while it has one at most.
+			</P>
+		</Section>
+
+		<Section
 			id='models-code'
 			title='Record numbers'>
 			<P>
@@ -171,6 +188,25 @@ const Models = () => (
 						secret-looking names like <C>password</C> or <C>token</C>. Every model gets <C>createdAt</C> and <C>updatedAt</C>{' '}
 						on its own.
 					</>,
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='models-uid'
+			title='Address (slug) fields'
+			lead='A record’s address on your site, made from its title: “My first post” → my-first-post.'>
+			<P>
+				Add a field of the kind <strong>Address (slug)</strong> and pick what it’s <strong>made from</strong> — usually the
+				title. While you add a record, the address follows the title as you type; type your own to change it. Saved
+				addresses don’t move when the title changes later, so links to them keep working.
+			</P>
+			<Terms
+				head={['', '']}
+				rows={[
+					['Always unique', 'Two records can’t share an address. One made from a title that’s taken gets -2, -3…; one you type that’s taken is refused.'],
+					['Tidied', 'Lower case, words joined by dashes, accents dropped (Café → cafe). Bangla and other scripts are kept.'],
+					['On the API', <>Filter by it to find a record by its address: <C>?slug=my-first-post</C>.</>],
 				]}
 			/>
 		</Section>
