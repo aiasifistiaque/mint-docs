@@ -26,6 +26,7 @@ const SECTIONS = [
 	{ id: 'lists', title: 'Lists from other pages' },
 	{ id: 'conditions', title: 'Show only when' },
 	{ id: 'page', title: 'Paper and look' },
+	{ id: 'themes', title: 'Themes: colours and fonts' },
 	{ id: 'download', title: 'Downloading' },
 	{ id: 'ai', title: 'Build with your AI' },
 	{ id: 'preview', title: 'Preview' },
@@ -62,6 +63,7 @@ const PdfTemplates = () => (
 				ordered
 				items={[
 					'Pick a starting point: a design from the gallery, Blank, or Build with your AI.',
+					'Pick a look: the design drawn in each ready look (colours and fonts), or “As designed”. Change it any time in the designer — Themes, below.',
 					'Pick the page it prints (Bills, Invoices, Payments…) and name it.',
 					'For a gallery design, match what it shows to your fields — next section.',
 					'It opens in the designer. The first template of a page becomes its default.',
@@ -127,7 +129,7 @@ const PdfTemplates = () => (
 			<List
 				items={[
 					'It fills the window: the sidebar folds away behind the menu button. One toolbar on top — undo / redo, what the page shows (a record or Sample data), Fields, zoom, Business details, Your AI, Preview, Real PDF and Save.',
-					'Left, three tabs: “Blocks” — text, rows, table, columns, box, row, image, line, space, page break; “Ready-made” — pieces (Logo & business, Signature, Push to bottom, Computer note “…no signature is required”, Terms, Bank details, PAID stamp, Thank you) and your saved texts; a click puts it after the selected block. “Layers” — the blocks as a tree, like Figma’s: drag a row up or down (a line shows where it lands), onto the middle of a box, row or columns to put it inside (the row lights up), or onto a “Column 2” / “Inside” line or a part’s title; near the panel’s edge the list scrolls along. Tiles can also be dragged straight onto the page.',
+					'Left: the Theme bar on top (Themes, below), then three tabs: “Blocks” — text, rows, table, columns, box, row, image, line, space, page break; “Ready-made” — pieces (Logo & business, Signature, Push to bottom, Computer note “…no signature is required”, Terms, Bank details, PAID stamp, Thank you) and your saved texts; a click puts it after the selected block. “Layers” — the blocks as a tree, like Figma’s: drag a row up or down (a line shows where it lands), onto the middle of a box, row or columns to put it inside (the row lights up), or onto a “Column 2” / “Inside” line or a part’s title; near the panel’s edge the list scrolls along. Tiles can also be dragged straight onto the page.',
 					'Middle: the page. Click a block to select it; its bar on the page moves it up or down (left or right in a row), duplicates, copies or deletes it, and ↖ selects the block around it (the whole signature, not just its words). Drag blocks on the page to move them. A selected image or logo has a handle on each corner: drag one to make it bigger or smaller — it keeps its shape; hold ⇧ to change the shape too. Empty business details show as “+ Add phone”, “+ Upload logo” — click one to fill it in.',
 					'Right: the selected block’s settings — or, with nothing selected, the document: its name, page, paper, look and lists.',
 					'Sample data fills every field, like Preview; your business details and saved texts show as they are. Fields switches to which field goes where.',
@@ -285,9 +287,37 @@ const PdfTemplates = () => (
 			id='page'
 			title='Paper and look'>
 			<P>
-				Page → Paper: A4, Letter, Legal or A5, portrait or landscape, and the margins (72 points = 1 inch). Look: the font
-				(Geist, Geist Mono, Helvetica, Times, Courier), text size and line height, and the colours blocks start from. Bangla
-				text and the ৳ sign always print — characters a font doesn’t have use Noto Sans Bengali.
+				Page → Paper: A4, Letter, Legal or A5, portrait or landscape, and the margins (72 points = 1 inch). Look: text size and
+				line height, and the theme in use — fonts and colours are changed in the Theme view (next). Bangla text and the ৳ sign
+				always print — characters a font doesn’t have use Noto Sans Bengali.
+			</P>
+		</Section>
+
+		<Section
+			id='themes'
+			title='Themes: colours and fonts'
+			lead='One click changes the colours and fonts of the whole page — the Theme bar at the top of the designer’s left panel.'>
+			<List
+				items={[
+					'Looks: twelve ready pairs of colours and fonts — Studio, Editorial, Heritage, Fresh, Tech, Mono, Warm, Bold, Forest, Royal, Calm, Ledger. A tick marks the one in use.',
+					'Mix and match: Colours (twelve palettes) and Fonts (twelve pairings of a heading font and a text font) change on their own.',
+					'Your own: the heading and text fonts, and each theme colour — Text, Muted, Accent, On accent (words on the accent), Soft (light panels), Dark (deep bands), Lines.',
+					'In a block’s colour picker the theme’s colours are dots: pick one and the block follows the theme; a typed colour stays fixed. A text block’s Font can be “Heading font”.',
+					'An older template, the first time it gets a look: the colours that play a part (accent, its tints, dark bands, white words on the accent) start following the theme, and big titles take the heading font.',
+				]}
+			/>
+			<Terms
+				head={['Fonts', 'Embedded in every PDF']}
+				rows={[
+					['Sans', 'Geist, Inter, DM Sans, Manrope, Montserrat, Poppins, IBM Plex Sans, Space Grotesk'],
+					['Serif', 'Playfair Display, EB Garamond, Merriweather, Source Serif, Crimson Pro, IBM Plex Serif'],
+					['Mono', 'Geist Mono'],
+					['Built into PDFs', 'Helvetica, Times, Courier — not embedded, Latin-1 only'],
+				]}
+			/>
+			<P>
+				Only the letters a PDF uses are embedded, so files stay small. Every font prints accented letters (Ł, Š, Ő…) and ₹ € £ ¥
+				in every weight, and its text copies out of the PDF.
 			</P>
 		</Section>
 
