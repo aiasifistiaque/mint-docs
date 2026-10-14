@@ -21,6 +21,7 @@ const SECTIONS = [
 	{ id: 'models-password', title: 'Password fields' },
 	{ id: 'models-sections', title: 'Sections and lists' },
 	{ id: 'models-components', title: 'Components' },
+	{ id: 'models-blocks', title: 'Content blocks' },
 	{ id: 'formulas', title: 'Calculated fields' },
 	{ id: 'models-links', title: 'Linking models' },
 	{ id: 'models-access', title: 'Who sees the records' },
@@ -270,6 +271,23 @@ const Models = () => (
 					['Deleting', 'Not while a model uses it — the message names where. Take it off those fields first.'],
 				]}
 			/>
+		</Section>
+
+		<Section
+			id='models-blocks'
+			title='Content blocks'
+			lead='A field of components in any order — a page’s hero, text, questions, a button.'>
+			<P>
+				Add a field of the kind <strong>Content blocks</strong> and pick the components it takes (they’re made under{' '}
+				<A href='#models-components'>Components</A>). Whoever fills in a record then builds it from those: <strong>Add</strong>{' '}
+				offers each one, every block opens to its own fields, and the arrows move it up or down; copy and remove are beside
+				them. Under More, <strong>How many</strong> sets at least / at most.
+			</P>
+			<P>
+				Each block is checked as its component — its required fields, its options — and keeps a <C>_key</C> however it moves.
+				The API sends them in order: <C>{'[{ "__component": "content.hero", "_key": "4uh57zhf", "heading": "…" }, …]'}</C>.
+				Changing a component changes its blocks in every model that takes it.
+			</P>
 		</Section>
 
 		<Section
