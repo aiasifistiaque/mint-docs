@@ -24,6 +24,7 @@ const SECTIONS = [
 	{ id: 'api-conditions', title: 'Rules: which records' },
 	{ id: 'api-fields', title: 'Fields in and out' },
 	{ id: 'api-filters', title: 'A list’s filters and pages' },
+	{ id: 'api-populate', title: 'Linked records' },
 	{ id: 'api-keys', title: 'Server keys' },
 	{ id: 'api-logs', title: 'Logs' },
 	{ id: 'address', title: 'The address' },
@@ -35,6 +36,8 @@ const SECTIONS = [
 	{ id: 'dates', title: 'Filtering by date' },
 	{ id: 'search', title: 'Search' },
 	{ id: 'fields', title: 'Choosing fields' },
+	{ id: 'populate', title: 'Filling in links' },
+	{ id: 'api-drafts', title: 'Drafts and publishedAt' },
 	{ id: 'recipes', title: 'Recipes' },
 	{ id: 'shape', title: 'What comes back' },
 	{ id: 'writing', title: 'Creating and updating' },
@@ -290,6 +293,38 @@ const PublicApi = () => (
 					['Page size · Largest page', <>How many records a page holds by default, and the most a caller’s <C>limit</C> can ask for (up to 100).</>],
 				]}
 			/>
+		</Section>
+
+		<Section
+			id='api-populate'
+			title='Linked records'
+			lead='A List or Read one endpoint’s Fields tab: the links a caller may have filled in.'>
+			<P>
+				A link — a post’s author, a hero’s button page — comes back as the linked record’s id (a top-level link with its name).
+				A caller can ask for the whole record instead with <A href='#populate'>populate=</A>. This panel decides which links it
+				may ask for:
+			</P>
+			<Terms
+				head={['Setting', 'Means']}
+				rows={[
+					[
+						'Every link one step away',
+						'On (the default): every link of the model — including links inside its sections, components and content blocks.',
+					],
+					[
+						'Only the ones ticked',
+						<>
+							Off: exactly the links ticked. Here you can also offer a link of a linked record — <C>author.company</C> — two
+							links deep at most.
+						</>,
+					],
+				]}
+			/>
+			<P>
+				A linked record comes out as <strong>its own model’s API</strong> shows it: who may call that model’s Read one endpoint,
+				its rules and its fields — never more. A model without a public API comes out by its name only (marked{' '}
+				<em>name only</em>), and nothing past it can be filled.
+			</P>
 		</Section>
 
 		<Section
@@ -661,6 +696,62 @@ const { doc } = await fetch(\`${PUBLIC_API}/products?\${params}\`).then(r => r.j
 		</Section>
 
 		<Section
+			id='populate'
+			title='Filling in links'
+			lead='populate=<links> answers with the linked records themselves instead of their ids.'>
+			<CodeBlock
+				label='A post with its author and the button inside its hero'
+				code={`GET ${PUBLIC_API}/posts/66f0…?populate=author,hero.button_page
+
+{
+  "_id": "66f0…",
+  "title": "Spring menu",
+  "author": { "_id": "66a1…", "name": "Ana", "bio": "…" },
+  "hero": { "heading": "Fresh bread", "button_page": { "_id": "66b2…", "title": "Order online", "slug": "order" } },
+  "publishedAt": "2026-10-16T09:30:00.000Z"
+}`}
+			/>
+			<Terms
+				head={['Write', 'Fills']}
+				rows={[
+					[<C key='a'>populate=author</C>, 'A link field.'],
+					[<C key='b'>populate=hero.button_page</C>, 'A link inside a section, a component or a list of rows.'],
+					[<C key='c'>populate=content.page</C>, 'A link inside content blocks — in every block type that has it.'],
+					[<C key='d'>populate=author.company</C>, 'A link of the linked record — when the endpoint offers it (two links deep at most).'],
+					[<C key='e'>populate=*</C>, 'Everything the endpoint offers.'],
+				]}
+			/>
+			<P>
+				Several are comma-separated. A link the endpoint doesn’t offer answers 400 with the ones it does (see{' '}
+				<A href='#api-populate'>Linked records</A>). A linked record the caller isn’t allowed to see is <C>null</C>, or left out
+				of a list of links. A linked record’s own links stay ids unless you fill them too.
+			</P>
+		</Section>
+
+		<Section
+			id='api-drafts'
+			title='Drafts and publishedAt'
+			lead='A model with Drafts and publishing answers with what’s published — edits wait until someone presses Publish.'>
+			<P>
+				Each record of such a model carries <C>publishedAt</C>, when it last went live. A record that’s never been published, or
+				was taken off, isn’t in the answers at all; filters, search and sort run on the published values.
+			</P>
+			<P>
+				A server — a preview build, an import — can read the drafts as they are, never-published ones too, with{' '}
+				<C>status=draft</C> and a <A href='#api-keys'>server key</A>. If the model has a field of its own called{' '}
+				<C>status</C>, write <C>_status=draft</C> instead (it always works).
+			</P>
+			<CodeBlock
+				label='Drafts, from your server'
+				code={`curl "${PUBLIC_API}/posts?status=draft" \\
+  -H "x-api-key: $MINT_SERVER_KEY"`}
+			/>
+			<Note tone='warn'>
+				Never put a server key in a page’s code — anyone can read it there. Without a key, <C>status=draft</C> answers 401.
+			</Note>
+		</Section>
+
+		<Section
 			id='recipes'
 			title='Recipes'>
 			<Terms
@@ -891,7 +982,11 @@ if (!res.ok) throw new Error(data.message);`}
 					<>
 						On <A href={`${APP_URL}/webhooks`}>Webhooks</A>, press <strong>Add a webhook</strong>.
 					</>,
-					<>Pick the model and when it’s sent: a record created, changed, deleted — any of them.</>,
+					<>
+						Pick the model and when it’s sent: a record created, changed, deleted — any of them. A model with drafts can also
+						send when a record is <strong>published</strong> (the record as it went live) or <strong>taken off</strong> (its
+						draft), with <C>event: "publish"</C> or <C>"unpublish"</C>. Publishing also refreshes your site’s pages.
+					</>,
 					<>
 						Give the address your server listens on, starting with <C>https://</C>, and a note on what it does with it. Without an
 						address the webhook stays off.
