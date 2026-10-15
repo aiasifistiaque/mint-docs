@@ -184,7 +184,8 @@ const Organization = () => (
 			<P>
 				Full access, Member and Developer are the standard roles. For anything in between, press <strong>New role</strong>,
 				name it — <em>Sales rep</em> — and tick what it may do with each model’s records: <strong>View</strong>,{' '}
-				<strong>Add</strong>, <strong>Edit</strong>, <strong>Delete</strong>. The media library and History are on the list
+				<strong>Add</strong>, <strong>Edit</strong>, <strong>Delete</strong> — and <strong>Publish</strong> on models whose
+				records are <A href='/models#models-drafts'>drafts until published</A>. The media library and History are on the list
 				too. Adding, editing or deleting includes viewing, so View ticks itself; a column’s heading ticks the whole column.
 			</P>
 			<P>
@@ -239,6 +240,7 @@ const Organization = () => (
 					['Records: Add', 'Adding records, importing them from a file, uploading files'],
 					['Records: Edit', 'Changing records, archiving them, moving their status'],
 					['Records: Delete', 'Deleting and merging records, deleting files'],
+					['Records: Publish', 'Putting drafts live, taking records off the site, throwing changes away — on models whose records are drafts until published'],
 					['Build', 'Models, pages, the sidebar, the dashboard, media and the public API'],
 					['AI keys', 'Making and revoking the keys AI assistants connect with'],
 					['Create projects', 'Starting new apps and websites'],

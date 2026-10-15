@@ -25,6 +25,7 @@ const SECTIONS = [
 	{ id: 'formulas', title: 'Calculated fields' },
 	{ id: 'models-links', title: 'Linking models' },
 	{ id: 'models-access', title: 'Who sees the records' },
+	{ id: 'models-drafts', title: 'Drafts and publishing' },
 	{ id: 'changing', title: 'Changing a model' },
 	{ id: 'features', title: 'Features built by AI' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -352,6 +353,40 @@ const Models = () => (
 			<P>
 				For the people using your site or app it’s different: a public model can be set to{' '}
 				<A href='/public-api#who'>customers’ own records only</A>, so each customer sees just what they created.
+			</P>
+		</Section>
+
+		<Section
+			id='models-drafts'
+			title='Drafts and publishing'
+			lead='Edit as much as you like; your site and API change when you press Publish.'>
+			<P>
+				Turn on <strong>Records are drafts until published</strong> in a model’s Settings (Drafts and publishing). Its records
+				are then drafts: saving changes what you see in the panel, but your site, the <A href='/public-api'>public API</A> and
+				its filters, sorting and search keep using what was last published. Turning it on publishes the records already
+				there, so nothing leaves your site.
+			</P>
+			<P>Each record’s page says where it stands, beside its title, with the buttons that move it:</P>
+			<Terms
+				head={['It says', 'What it means']}
+				rows={[
+					['Draft', 'Never published — not on the site or API. Publish puts it there.'],
+					['Published', 'Live, and the same as what you see.'],
+					[
+						'Changes not published',
+						'Live, but edited since. Publish puts the changes live; Discard changes brings the record back to what’s published.',
+					],
+				]}
+			/>
+			<P>
+				<strong>Take off</strong> removes a record from the site and API and keeps it as a draft. Links to other records,
+				numbers and History stay as they are whatever you do.
+			</P>
+			<P>
+				Publishing is a right of its own: <strong>Publish</strong> on a role (the standard roles have it), or ticked per model on
+				a <A href='/organization#project-roles'>project’s own role</A>. Someone who can edit but not publish writes drafts, and
+				the record page tells them someone who can publish puts it live. Turning drafts on for a model gives Publish to the
+				project roles that could edit it, so nobody loses what they could do.
 			</P>
 		</Section>
 
