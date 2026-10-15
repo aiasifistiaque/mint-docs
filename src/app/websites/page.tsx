@@ -223,6 +223,10 @@ const Websites = () => (
 			id='contents'
 			title='Older content blocks'
 			lead='Websites made before content types kept one word per record. Category says what kind.'>
+			<Note>
+				The first time the site builder opens such a site, each section’s words move into one piece of its type — the page
+				looks the same. The old records stay until the next Publish, then go to the table’s Archived view.
+			</Note>
 			<Terms
 				head={['Category', 'Uses the fields']}
 				rows={[
