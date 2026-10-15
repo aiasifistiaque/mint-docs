@@ -285,6 +285,13 @@ const Models = () => (
 				own), and a component that sits inside another stays that way. Changing the inner one reaches every model using
 				the outer one.
 			</P>
+			<H3 id='models-components-reusable'>Make a section reusable</H3>
+			<P>
+				Made a <strong>Section</strong> or <strong>Section list</strong> in one model and want it in another? On the
+				model’s Fields tab, <strong>Make reusable</strong> under it turns it into a component — give it a title and an
+				address. The field then uses that component (once, or as a list, as before), its records stay exactly as they
+				were, and any other model can pick it. Save other changes to the model first — it’s made from the model as saved.
+			</P>
 		</Section>
 
 		<Section
