@@ -383,6 +383,13 @@ const Models = () => (
 				numbers and History stay as they are whatever you do.
 			</P>
 			<P>
+				<strong>All content</strong>, straight after the Dashboard in the sidebar, gathers it: the website’s Contents, your
+				single types, and every model with drafts — how many records each has, how many aren’t live, what changed last. In a
+				model’s table, the <strong>Status</strong> column says where each record stands and its filter shows just the drafts or
+				the changed ones; tick rows and <strong>Menu → Publish</strong> puts them live together. A record’s page says when it was
+				last published and by whom. In any form, <strong>⌘S</strong> (Ctrl+S) saves.
+			</P>
+			<P>
 				Publishing is a right of its own: <strong>Publish</strong> on a role (the standard roles have it), or ticked per model on
 				a <A href='/organization#project-roles'>project’s own role</A>. Someone who can edit but not publish writes drafts, and
 				the record page tells them someone who can publish puts it live. Turning drafts on for a model gives Publish to the
