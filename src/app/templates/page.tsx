@@ -38,7 +38,9 @@ const Templates = () => (
 				items={[
 					<>
 						<strong>Models</strong> with their fields, links between them, filters and forms (see{' '}
-						<A href='/models'>Models</A>).
+						<A href='/models'>Models</A>), and the <strong>components</strong> they use (see{' '}
+						<A href='/models#models-components'>Components</A>) — a component your project already has with the same
+						address is kept as it is.
 					</>,
 					<>
 						<strong>Pages</strong> with their content blocks and search titles, and the site’s settings (websites — see{' '}
