@@ -179,9 +179,15 @@ const Websites = () => (
 			<P>
 				The types are components, under <A href='/models#models-components'>Build → Components</A> (category <C>content</C>):
 				add a field to one and every piece of that type gets it; make your own component in the <C>content</C> category and it’s
-				offered as a type too. Each piece is checked as its type — a Hero needs its heading. <strong>Table</strong> opens the same
-				records as a table; pieces from before types (one word each, as the site builder made them) are listed under the page and
-				open there.
+				offered as a type too. Each piece is checked as its type. <strong>Table</strong> opens the same records as a table;
+				pieces from before types (one word each, as the site builder made them) are listed under the page and open there.
+			</P>
+			<P>
+				<strong>Drafts until you publish.</strong> A change — made here, in the table or in the site builder — is a draft: each
+				piece says <em>Draft</em>, <em>Published</em> or <em>Changes not published</em>. <strong>Publish</strong> on a piece, or{' '}
+				<strong>Publish the page</strong>, puts it on your site and API; the site builder’s Publish puts the words it shows live
+				with the layout. Publishing needs the <A href='/organization#roles'>Publish permission</A>. The site builder writes each
+				section’s words into one piece of the section’s type, so what you add there shows here, in the page’s order.
 			</P>
 		</Section>
 

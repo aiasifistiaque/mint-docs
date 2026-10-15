@@ -779,8 +779,8 @@ const SiteBuilder = () => (
 			<Terms
 				head={['What', 'Where it lives']}
 				rows={[
-					['Texts, headings, buttons, pictures', <><strong>Contents</strong> — one record per piece, with a short name (its slug) such as <code>home-hero-1</code>, made for you. Edit them on the page or in the panel’s Contents table; a change made in the panel shows on the live site straight away, no publish needed.</>],
-					['Cards — features, team, reviews, numbers', <><strong>Contents</strong> — one record per section, its cards in a list.</>],
+					['Texts, headings, buttons, pictures', <><strong>Contents</strong> — one record per section, of the section’s type (a Hero, Cards, Questions…), with a short name (its slug) such as <code>home-hero-1</code>, made for you. Edit them on the page or in the panel’s <A href='/websites#site-contents'>Contents</A>; a change is a draft until you publish — the site’s Publish, or Publish in Contents.</>],
+					['Cards — features, team, reviews, numbers', <><strong>Contents</strong> — the section’s record, its cards as its rows.</>],
 					['Each page’s title and description for search engines', <><strong>SEO</strong> — one record per page. Changing it in the panel shows on the page in the builder and goes live with the next publish.</>],
 					['The theme, colours and fonts', <><strong>Site design</strong> — one record. See <A href='#themes'>The themes</A>.</>],
 					['Lists — services, team, products, posts…', <>A <strong>model of its own</strong> with a <em>public API</em> (list and get) switched on, so visitors’ pages can read it.</>],
@@ -790,8 +790,11 @@ const SiteBuilder = () => (
 				<strong>Every word is in Contents, from the start.</strong> A new site opens as its theme’s demo — every page, its SEO
 				record and a list such as Services — named after your site. Each heading, text, button and picture on it is already a
 				Contents record, and so is everything you add later: a section or block from the Add tab arrives with demo words (rich
-				text as lorem ipsum) saved in its own record, and a pasted or duplicated copy gets records of its own. Change the words
-				right on the page or in the panel; a setting kept in Contents shows <em>In Contents · Open</em> beside it.
+				text as lorem ipsum) saved in its own record, and a pasted or duplicated copy gets records of its own. Each section’s
+				words are one record of the section’s type — the hero’s heading, text and buttons together — so the panel’s Contents
+				shows a page piece by piece, in its order. Change the words right on the page or in the panel; a setting kept in
+				Contents shows <em>In Contents · Open</em> beside it. Changes are drafts: <strong>Publish</strong> puts the layout and
+				its words live together.
 			</P>
 			<P>
 				<strong>Lists of cards.</strong> Sections made of look-alike cards — features, team, reviews, numbers, steps — are
