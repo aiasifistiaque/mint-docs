@@ -257,7 +257,8 @@ const Models = () => (
 			<P>
 				<strong>Build → Components → New component</strong>: give it a title and its fields. Its address —{' '}
 				<C>shared.button</C>, <C>seo.meta</C> — is made from a category and a name and stays fixed. A component’s fields can be
-				text, rich text, pictures, files, choices, numbers, dates and the rest; not links to records or other components.
+				text, rich text, pictures, files, choices, numbers, dates and the rest, a group or list of rows, links to records, and
+				other components (see below).
 			</P>
 			<P>
 				To use one, add a field of the kind <strong>Component</strong> to a model and pick it — <strong>One</strong> (a
@@ -269,9 +270,21 @@ const Models = () => (
 				rows={[
 					['Change it once', 'Every model using it follows: its form, its record page and its API.'],
 					['Left blank', 'A component nobody filled in is simply empty — its own required fields only count once something is typed in it.'],
-					['Deleting', 'Not while a model uses it — the message names where. Take it off those fields first.'],
+					['Deleting', 'Not while a model or another component uses it — the message names where. Take it off those fields first.'],
 				]}
 			/>
+			<H3 id='models-components-nesting'>Links and components inside a component</H3>
+			<P>
+				A component can link to records — a <strong>Featured product</strong> with a <strong>Product</strong> field
+				(Link to a record) and <strong>Also try</strong> (Link to records). The form gets the same record picker as
+				anywhere else; the record page and the API give the linked records’ names.
+			</P>
+			<P>
+				A component can also hold another one — a <strong>Call to action</strong> inside the Featured product, once or as
+				a list. Only one level deep: the inner component’s fields must all be plain (no groups or components of their
+				own), and a component that sits inside another stays that way. Changing the inner one reaches every model using
+				the outer one.
+			</P>
 		</Section>
 
 		<Section
