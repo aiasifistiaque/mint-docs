@@ -28,7 +28,9 @@ const SECTIONS = [
 	{ id: 'ai-site', title: 'Build your site with AI' },
 	{ id: 'kit', title: 'The website kit' },
 	{ id: 'build-a-page', title: 'Building a page' },
-	{ id: 'contents', title: 'Content blocks' },
+	{ id: 'site-contents', title: 'Contents, page by page' },
+	{ id: 'site-contents-list', title: 'Lists of your records' },
+	{ id: 'contents', title: 'Older content blocks' },
 	{ id: 'seo', title: 'SEO' },
 	{ id: 'menu', title: 'The menu' },
 	{ id: 'site-api', title: 'The site API' },
@@ -105,7 +107,7 @@ const Websites = () => (
 				rows={[
 					[<>Pages (<C>pages</C>)</>, 'Every page: its name, path, status, template, parent and place in the menu.'],
 					[<>SEO (<C>seo</C>)</>, 'Per page: title, description, share image, keywords, canonical URL, hide from search engines.'],
-					[<>Contents (<C>web-contents</C>)</>, 'The content blocks on each page: text, lists, cards, rich text, images, galleries, video.'],
+					[<>Contents (<C>web-contents</C>)</>, <>What each page says, one typed piece at a time — a hero, cards, questions, a list (<A href='#site-contents'>Contents, page by page</A>).</>],
 				]}
 			/>
 			<P>
@@ -147,9 +149,74 @@ const Websites = () => (
 		</Section>
 
 		<Section
+			id='site-contents'
+			title='Contents, page by page'
+			lead='Pick a page, then add what’s on it. Each piece has a type, and asks only for its own words.'>
+			<P>
+				<strong>Contents</strong> opens with a <strong>Page</strong> dropdown: choose Home, About… to see that page’s contents in
+				the order they show, or <strong>Whole site</strong> for what’s on every page — the header and the footer. The arrows move a
+				piece up or down; the pencil opens it.
+			</P>
+			<P>
+				<strong>New content</strong> asks first what it is, then shows only that type’s fields:
+			</P>
+			<Terms
+				head={['Type', 'What it holds']}
+				rows={[
+					['Hero', 'A small line above, a heading, text, a picture, two buttons and a few numbers under it'],
+					['Text / Rich text', 'A heading and a few paragraphs — or a longer piece with headings, lists and pictures'],
+					['Cards', 'A heading and a row of cards, each with a title, small text, description, picture and link — features, services, team, plans'],
+					['Questions', 'Questions and their answers'],
+					['Numbers', 'A few figures with a label each'],
+					['Reviews', 'Quotes with a name, role and photo'],
+					['Gallery / Logos / Picture / Video', 'Photos, logos, one picture with a caption, or a video'],
+					['Call to action', 'A heading, a line and the buttons'],
+					['List', <>Records of one of your models — see <A href='#site-contents-list'>Lists of your records</A></>],
+					['Section', 'Anything else: headings, text, a picture, buttons and rows'],
+					['Header / Footer', 'The words and links at the top and bottom of every page'],
+				]}
+			/>
+			<P>
+				The types are components, under <A href='/models#models-components'>Build → Components</A> (category <C>content</C>):
+				add a field to one and every piece of that type gets it; make your own component in the <C>content</C> category and it’s
+				offered as a type too. Each piece is checked as its type — a Hero needs its heading. <strong>Table</strong> opens the same
+				records as a table; pieces from before types (one word each, as the site builder made them) are listed under the page and
+				open there.
+			</P>
+		</Section>
+
+		<Section
+			id='site-contents-list'
+			title='Lists of your records'
+			lead='Show your projects, posts or products on a page: which ones, how many, in what order.'>
+			<List
+				items={[
+					<>
+						<strong>Model</strong> — whose records it shows. The site reads them as any visitor would, so the model needs its{' '}
+						<A href='/public-api'>public API</A> on for listing; one without is offered with the reason.
+					</>,
+					<>
+						<strong>How many</strong> and <strong>Order by</strong> — newest first, the cheapest first, by name.
+					</>,
+					<>
+						<strong>Which records</strong> — conditions on its fields (<em>Featured is Yes</em>, <em>Year is more than 2020</em>),
+						all of them or any one. With none, every record its public API shows.
+					</>,
+					<>
+						<strong>Card title, text and picture</strong> — which of its fields each card shows, and <strong>Each card links to</strong>:{' '}
+						<C>/projects/{'{slug}'}</C> fills in each record’s own values.
+					</>,
+				]}
+			/>
+			<P>
+				<em>It shows now</em> lists what it would show at this moment, or why it shows nothing.
+			</P>
+		</Section>
+
+		<Section
 			id='contents'
-			title='Content blocks'
-			lead='Each block is one piece of a page. Category says what kind.'>
+			title='Older content blocks'
+			lead='Websites made before content types kept one word per record. Category says what kind.'>
 			<Terms
 				head={['Category', 'Uses the fields']}
 				rows={[
