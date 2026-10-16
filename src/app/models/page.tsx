@@ -330,7 +330,13 @@ const Models = () => (
 				<C>ceil</C>, <C>abs</C>, <C>min</C>, <C>max</C>), or type it: <C>total - paid</C>,{' '}
 				<C>round(price * qty * 1.05, 2)</C>. Over a section list, <C>sum(items.total)</C>, <C>avg(items.total)</C> and{' '}
 				<C>count(items)</C>; a formula inside a row uses that row’s values (<C>quantity * rate</C>). <em>Try it</em> works it
-				out on sample numbers.
+				out on sample numbers. Use a field as many times as you need — <C>price * qty + price</C>.
+			</P>
+			<P>
+				Through a <A href='#models-links'>link to a record</A>, a formula reads that record’s numbers: with a <em>Tax</em> link,{' '}
+				<C>price * qty + tax.amount</C> adds the amount of the Tax picked. The field list offers them as{' '}
+				<em>Tax › Amount</em>. No Tax picked counts as 0. The value is worked out when the record is saved, so if
+				someone later changes the Tax’s amount, records that use it keep the old total until they’re saved again.
 			</P>
 			<P>
 				A formula field can’t be typed into: forms show the result as you type, and the server calculates it on every save —
