@@ -335,8 +335,8 @@ const Models = () => (
 			<P>
 				Through a <A href='#models-links'>link to a record</A>, a formula reads that record’s numbers: with a <em>Tax</em> link,{' '}
 				<C>price * qty + tax.amount</C> adds the amount of the Tax picked. The field list offers them as{' '}
-				<em>Tax › Amount</em>. No Tax picked counts as 0. The value is worked out when the record is saved, so if
-				someone later changes the Tax’s amount, records that use it keep the old total until they’re saved again.
+				<em>Tax › Amount</em>. No Tax picked counts as 0. When someone changes the Tax’s amount, every record that picks
+				it is recalculated straight away; if the Tax is deleted, it counts as 0 for them.
 			</P>
 			<P>
 				A formula field can’t be typed into: forms show the result as you type, and the server calculates it on every save —
