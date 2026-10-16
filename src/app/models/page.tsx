@@ -164,7 +164,7 @@ const Models = () => (
 					['Link', 'A web address, checked · opens in a new tab'],
 					['Number', 'A number, with optional min/max'],
 					['Formula', 'A number worked out from other fields (see below)'],
-					['Yes / No', 'A switch · a Yes/No filter'],
+					['Yes / No', 'A switch · a Yes/No filter. Left unticked it saves as No — a real answer, so Required never stops the save'],
 					['Date', 'A date; the default can be “when created”'],
 					['Color', 'A colour, with a picker'],
 					['Options', 'One of the values you list (a dropdown) — or several, with “Allow several”'],
