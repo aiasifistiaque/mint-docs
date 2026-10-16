@@ -5,15 +5,20 @@ import { guideMeta } from '@/lib/seo';
 export const metadata = guideMeta('/email');
 
 /**
- * Email (backend docs/messaging M-02): the organization's own email server
- * (SMTP, sent with nodemailer), testing it, the log, and what MINT itself
- * sends. Section ids are targets of the tenant panel's GuideLink (email,
- * email-server, email-test, email-log) — keep them.
+ * Email (backend docs/messaging M-02, M-14): a project's email accounts and
+ * its default, the organization's own email server as the fallback (SMTP,
+ * sent with nodemailer), testing, the log, and what MINT itself sends.
+ * Section ids are targets of the tenant panel's GuideLink (email,
+ * email-accounts, connect-email, default-account, email-server, email-test,
+ * email-log) — keep them.
  */
 
 const SECTIONS = [
 	{ id: 'email', title: 'Who sends what' },
-	{ id: 'email-server', title: 'Your email server' },
+	{ id: 'email-accounts', title: 'A project’s email accounts' },
+	{ id: 'connect-email', title: 'Connecting an account' },
+	{ id: 'default-account', title: 'The default account' },
+	{ id: 'email-server', title: 'Your organization’s email server' },
 	{ id: 'providers', title: 'Common providers' },
 	{ id: 'email-test', title: 'Testing it' },
 	{ id: 'email-log', title: 'What was sent' },
@@ -24,7 +29,7 @@ const Email = () => (
 	<Guide
 		href='/email'
 		sections={SECTIONS}
-		open={{ href: '/org/email', label: 'Open Email' }}>
+		open={{ href: '/projects', label: 'Open your projects' }}>
 		<Section
 			id='email'
 			title='Who sends what'
@@ -32,22 +37,78 @@ const Email = () => (
 			<Terms
 				head={['Email', 'Sent by']}
 				rows={[
-					['A welcome to each customer who signs up on your sites', 'You — through your email server, from your address'],
-					['Emails from a record, newsletters, automations (coming next)', 'You — the same way'],
+					['A welcome to each customer who signs up on your sites', 'You — through the project’s default email account, from your address'],
+					['Order receipts, automation emails', 'You — the same way'],
 					['Your welcome to MINT, invitations to your organization', 'MINT'],
 					['Password resets, sign-in and verification codes', 'MINT'],
 				]}
 			/>
 			<P>
-				Until you add your email server, your customers get no emails from you — signing up on your sites still works.
-				MINT doesn’t send anything to your customers in its own name.
+				Until a project has an email account (or your organization has a server), its customers get no emails from you —
+				signing up on your sites still works. MINT doesn’t send anything to your customers in its own name.
 			</P>
 		</Section>
 
 		<Section
+			id='email-accounts'
+			title='A project’s email accounts'
+			lead='Inside a project: Project → Email. Connect the accounts the project sends from — Sales, Support, as many as you like.'>
+			<P>
+				Each row shows the account’s name, the sender name and address, the server, and whether it works:{' '}
+				<em>Working</em> (green) after a check or an email that went out, <em>Not working</em> (red) with the reason
+				after one that didn’t. The <em>⋯</em> menu on a row has Make default, Edit, Send a test email and Remove.
+			</P>
+			<Note>
+				A project with no account uses your organization’s email server (Organization → Email, below), if it has one —
+				the Email page says so.
+			</Note>
+		</Section>
+
+		<Section
+			id='connect-email'
+			title='Connecting an account'
+			lead='Connect an account opens a window. Fill it in, press Test connection, then Connect.'>
+			<Terms
+				head={['Field', 'What to put']}
+				rows={[
+					['Account name', 'For your team, to tell accounts apart — e.g. Sales. Empty: the address.'],
+					['Sender name', 'The name people see the email is from — e.g. your shop’s name.'],
+					['Email provider', 'Optional: pick yours to fill in the server and port.'],
+					['SMTP server', <>Your host’s outgoing server, e.g. <code>smtp.gmail.com</code>.</>],
+					['Port', '587 (secured after connecting) or 465 (secured from the start). The security follows the port.'],
+					['Email', 'The address emails come from. It’s also the sign-in.'],
+					['Password', 'The account’s password — or an app password for Gmail and Outlook.'],
+				]}
+			/>
+			<P>
+				<strong>Test connection</strong> signs in to the server without sending anything. Green means it connected and
+				the password was accepted; red says what went wrong in plain words. Changing any field clears the answer, so test
+				again. Saving checks once more and shows the result on the row; an account that fails is still saved, so you can
+				fix it later with Edit.
+			</P>
+			<Note>
+				The password is stored encrypted and never shown again. When editing, leave it empty to keep the saved one — Test
+				connection then uses the saved one too.
+			</Note>
+		</Section>
+
+		<Section
+			id='default-account'
+			title='The default account'
+			lead='Send from, at the top of the list, picks the default. Every email the project sends goes through it.'>
+			<List
+				items={[
+					'The first account you connect becomes the default.',
+					'Removing the default makes the oldest account left the default; removing the last one sends the project’s emails back to your organization’s server, or stops them if it has none.',
+					'Send a test email (in a row’s ⋯ menu) goes through that account, whether it’s the default or not — to you, or any address.',
+				]}
+			/>
+		</Section>
+
+		<Section
 			id='email-server'
-			title='Your email server'
-			lead='Organization → Email. One server for the whole organization; every project uses it.'>
+			title='Your organization’s email server'
+			lead='Organization → Email. One server for the whole organization — used by every project that hasn’t connected its own account.'>
 			<P>Your email host gives you these details (often under “SMTP”, “outgoing mail” or “email clients”):</P>
 			<Terms
 				head={['Setting', 'What to put']}
@@ -101,8 +162,11 @@ const Email = () => (
 		<Section
 			id='email-log'
 			title='What was sent'
-			lead='The Email page lists the last 50 emails sent through your server: when, what kind, to whom, the subject, and whether it went.'>
-			<P>Only the subject is kept, never the message itself. Entries go after 180 days.</P>
+			lead='Each Email page lists the last 50 emails: when, what kind, to whom, the subject, and whether it went.'>
+			<P>
+				A project’s page shows that project’s emails and which account each went through; the organization’s page shows
+				them all. Only the subject is kept, never the message itself. Entries go after 180 days.
+			</P>
 		</Section>
 
 		<Section
