@@ -6,7 +6,7 @@ export const metadata = guideMeta('/pages');
 
 /**
  * The page builder (Build → Pages, /builder) for projects. Section ids mirror
- * the platform's builder guide (workflow, settings, settings-linked, guidelines, value-display, table,
+ * the platform's builder guide (workflow, settings, settings-linked, guidelines, navbar-search, value-display, table,
  * table-status, table-totals, table-upload, filters, form, view, linked-relationships,
  * linked-tab, linked-rule, linked-transfer, linked-form, linked-where) — the
  * builder's "How it works" links land here through panel.ts docsPath.
@@ -19,6 +19,7 @@ const SECTIONS = [
 	{ id: 'settings', title: 'Fields & rules' },
 	{ id: 'settings-linked', title: 'Linked-record pickers' },
 	{ id: 'guidelines', title: 'User guidelines' },
+	{ id: 'navbar-search', title: 'Navbar search' },
 	{ id: 'value-display', title: 'Around a value' },
 	{ id: 'table', title: 'Table page' },
 	{ id: 'table-status', title: 'Status moves' },
@@ -218,6 +219,43 @@ const Pages = () => (
 				bottom on a phone. Guidelines are words only — what the server actually refuses is set by the field rules
 				(<em>Can be changed later</em>, <em>Locked when</em>), so write the guideline beside the rule that enforces it.
 			</P>
+		</Section>
+
+		<Section
+			id='navbar-search'
+			title='Navbar search'
+			lead='Find a record from any page — by its name, email or any field you choose.'>
+			<P>
+				The magnifier at the top of every page (or <C>⌘K</C>, <C>Alt+K</C> on Windows) finds pages by name. Turn on{' '}
+				<strong>Show in search</strong> in <strong>Navbar search</strong>, on a page’s <em>Fields &amp; rules</em> tab, and
+				it finds that page’s records too. Type two letters or more: matches are listed under the project and page they
+				come from — <em>Customer portal › Clients</em> — by the record’s name (its <em>Record name</em> field, or its
+				record number when it has none). When the match was in another field, the line under the name says which:{' '}
+				<em>Email: jane@acme.com</em>. Click one, or pick it with the arrow keys and Enter, to open its page.
+			</P>
+			<P>
+				<strong>Search by</strong> lists the page’s <em>Searchable</em> fields — the ones its table’s search box uses,
+				ticked in the fields list above. All of them count until you click one to leave it out; to search by another
+				field, make it Searchable first. It’s off on every page until you turn it on, and like everything here it takes
+				effect once published.
+			</P>
+			<List
+				items={[
+					<>
+						<strong>Only what they could see anyway.</strong> Each page answers with its own table’s rules: a person whose
+						role can’t view the page never sees its records, records shared with someone else or kept <em>Only me</em> stay
+						hidden, and archived rows stay out.
+					</>,
+					<>
+						<strong>Best matches first.</strong> A name that is the search, then names starting with it, then the rest —
+						five per page, thirty in all. <em>More in Clients</em> means there were more: type a little more to narrow it
+						down, or search the table itself.
+					</>,
+				]}
+			/>
+			<Note>
+				Inside a project the search covers that project’s pages; on the organization’s own pages it finds pages only.
+			</Note>
 		</Section>
 
 		<Section
