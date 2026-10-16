@@ -285,6 +285,15 @@ const Models = () => (
 				own), and a component that sits inside another stays that way. Changing the inner one reaches every model using
 				the outer one.
 			</P>
+			<H3 id='models-image-details'>Image fields with details</H3>
+			<P>
+				An <strong>Image</strong> or <strong>Images</strong> field stores the picture’s address. Turn on{' '}
+				<strong>Send each picture with its details</strong> (in the field’s options, under On the API) and the API answers
+				with the media library’s details instead: <C>{'{ "url": "…", "alt": "…", "caption": "…", "width": 1600, "height": 900, "focal": { "x": 0.33, "y": 0.7 } }'}</C>.
+				It works inside sections, components and content blocks too. A picture that isn’t in the library comes with empty
+				details. Set the details in <A href='/media#image-details'>Media</A>.
+			</P>
+
 			<H3 id='models-components-reusable'>Make a section reusable</H3>
 			<P>
 				Made a <strong>Section</strong> or <strong>Section list</strong> in one model and want it in another? On the

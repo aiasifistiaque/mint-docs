@@ -18,6 +18,7 @@ const SECTIONS = [
 	{ id: 'move', title: 'Moving' },
 	{ id: 'rename', title: 'Renaming and copies' },
 	{ id: 'preview', title: 'Preview and links' },
+	{ id: 'image-details', title: 'Alt text and focal point' },
 	{ id: 'find', title: 'Search, filter, sort' },
 	{ id: 'trash', title: 'Trash' },
 	{ id: 'shortcuts', title: 'Keyboard shortcuts' },
@@ -130,6 +131,37 @@ const Media = () => (
 				Click a file to see it full screen with its type, size, dimensions, folder and link; ← → step through files.{' '}
 				<strong>Copy link</strong> puts the file’s public address on your clipboard, to use on your site or anywhere else.{' '}
 				<strong>Download</strong> saves the original.
+			</P>
+		</Section>
+
+		<Section
+			id='image-details'
+			title='Alt text and focal point'
+			lead='An image’s preview has a For the site part: what the picture shows, a caption, and what to keep in view.'>
+			<Terms
+				head={['Detail', 'What it does']}
+				rows={[
+					[
+						'Alt text',
+						<>
+							What the picture shows, in a sentence — <em>A sourdough loaf on a wooden board</em>. Screen readers read it out and
+							search engines use it. Your site uses it wherever the picture has no alt text of its own, so you write it once.
+						</>,
+					],
+					['Caption', 'A line to show with it, for image fields that send their details (below).'],
+					[
+						'Focal point',
+						<>
+							Click the picture on what matters — a face, the product. When a page crops the picture to fit (a wide banner, a
+							square card), that point stays in view. <strong>Reset</strong> goes back to the middle.
+						</>,
+					],
+				]}
+			/>
+			<P>
+				Press <strong>Save</strong>. A change reaches every page and record using the picture — they keep its address and
+				read its details when they show it. An image field can send them on the API too:{' '}
+				<A href='/models#models-image-details'>Image fields with details</A>.
 			</P>
 		</Section>
 
