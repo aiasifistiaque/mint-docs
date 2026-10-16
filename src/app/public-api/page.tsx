@@ -985,7 +985,8 @@ if (!res.ok) throw new Error(data.message);`}
 					<>
 						Pick the model and when it’s sent: a record created, changed, deleted — any of them. A model with drafts can also
 						send when a record is <strong>published</strong> (the record as it went live) or <strong>taken off</strong> (its
-						draft), with <C>event: "publish"</C> or <C>"unpublish"</C>. Publishing also refreshes your site’s pages.
+						draft), with <C>event: "publish"</C> or <C>"unpublish"</C>. Publishing also refreshes your site’s pages. A{' '}
+						<A href='/models#models-schedule'>scheduled</A> publish sends them too, with <C>source: "schedule"</C>.
 					</>,
 					<>
 						Give the address your server listens on, starting with <C>https://</C>, and a note on what it does with it. Without an

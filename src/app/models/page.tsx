@@ -26,6 +26,7 @@ const SECTIONS = [
 	{ id: 'models-links', title: 'Linking models' },
 	{ id: 'models-access', title: 'Who sees the records' },
 	{ id: 'models-drafts', title: 'Drafts and publishing' },
+	{ id: 'models-schedule', title: 'Scheduling' },
 	{ id: 'changing', title: 'Changing a model' },
 	{ id: 'features', title: 'Features built by AI' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -424,6 +425,37 @@ const Models = () => (
 				the record page tells them someone who can publish puts it live. Turning drafts on for a model gives Publish to the
 				project roles that could edit it, so nobody loses what they could do.
 			</P>
+		</Section>
+
+		<Section
+			id='models-schedule'
+			title='Scheduling'
+			lead='Set a record to go live at a time, to come off at a time, or both.'>
+			<P>
+				On a record’s page, <strong>Schedule</strong> (beside Publish) asks for two times, in your own time zone:
+			</P>
+			<Terms
+				head={['Time', 'What happens then']}
+				rows={[
+					['Publish at', 'The draft as it is at that time goes live — edits you make before then go with it.'],
+					['Take off at', 'It leaves your site and API. The draft stays in the panel. It has to be after Publish at, and needs the record live or a publish before it.'],
+				]}
+			/>
+			<P>
+				Either one can be left empty; the × beside a time clears it. Once set, the button says what’s next (“Publishes 20 Oct,
+				09:00”) and the record’s page says it under the title. <strong>All content</strong> lists what’s coming up across the
+				project, soonest first. Times can be up to two years ahead.
+			</P>
+			<P>
+				It happens within a minute of the time, as the person who set it: History shows “published … as scheduled”, the
+				project’s <A href='/public-api#webhooks'>publish and unpublish webhooks</A> go out (their <code>source</code> is{' '}
+				<code>schedule</code>), the site refreshes, and the person who set it gets a notification. If it can’t happen — drafts
+				were turned off on the model, say — they’re told why instead. A record deleted before its time simply isn’t published.
+			</P>
+			<Note>
+				Scheduling needs the <strong>Publish</strong> right, like Publish itself. Your <A href='/connect-ai'>connected AI</A>{' '}
+				can schedule too — “publish it on Monday at 9” — when its key can publish.
+			</Note>
 		</Section>
 
 		<Section

@@ -167,7 +167,7 @@ const ConnectAi = () => (
 						'list_content_types · get_entry · save_entry_draft',
 						'Your content (models with Drafts and publishing, single types): what isn’t live yet, one entry’s draft and what’s published, and writing drafts — never live until published.',
 					],
-					['publish_entry', 'Publish entries, or take them off — only when you ask, with a key that Can publish and your Publish right.'],
+					['publish_entry', 'Publish entries, or take them off — now, or at a time you give (“publish it on Monday at 9”) — only when you ask, with a key that Can publish and your Publish right.'],
 					[
 						'get_page_contents · fill_page · suggest_seo',
 						'Website projects: read a page’s contents, write them from your brief as drafts, and gather a page’s words to write its SEO title and description.',
