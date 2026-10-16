@@ -100,7 +100,7 @@ export const GUIDES: Guide[] = [
 		href: '/email',
 		title: 'Email',
 		name: 'Email',
-		description: 'Send your emails to customers from your own address: connect email accounts to a project, test them green or red, pick the default, and see everything that went out.',
+		description: 'Send your emails to customers from your own address: connect email accounts to a project, test them green or red, pick the default, design how your emails look, and see everything that went out.',
 		icon: Envelope,
 		group: 'Organization & projects',
 		topics: [
@@ -108,6 +108,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'email-accounts', title: 'A project’s email accounts' },
 			{ id: 'connect-email', title: 'Connecting an account' },
 			{ id: 'default-account', title: 'The default account' },
+			{ id: 'email-designs', title: 'How your emails look' },
 			{ id: 'email-server', title: 'Your organization’s email server' },
 			{ id: 'providers', title: 'Common providers' },
 			{ id: 'email-test', title: 'Testing it' },

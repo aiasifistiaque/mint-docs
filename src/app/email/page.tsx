@@ -10,7 +10,8 @@ export const metadata = guideMeta('/email');
  * sent with nodemailer), testing, the log, and what MINT itself sends.
  * Section ids are targets of the tenant panel's GuideLink (email,
  * email-accounts, connect-email, default-account, email-server, email-test,
- * email-log) — keep them.
+ * email-log, email-designs, design-look, design-header, design-colours,
+ * design-footer, automation-email-design) — keep them.
  */
 
 const SECTIONS = [
@@ -18,6 +19,12 @@ const SECTIONS = [
 	{ id: 'email-accounts', title: 'A project’s email accounts' },
 	{ id: 'connect-email', title: 'Connecting an account' },
 	{ id: 'default-account', title: 'The default account' },
+	{ id: 'email-designs', title: 'How your emails look' },
+	{ id: 'design-look', title: 'Plain or designed' },
+	{ id: 'design-header', title: 'The header' },
+	{ id: 'design-colours', title: 'Colours and shape' },
+	{ id: 'design-footer', title: 'Footer and signature' },
+	{ id: 'automation-email-design', title: 'A design for one automation' },
 	{ id: 'email-server', title: 'Your organization’s email server' },
 	{ id: 'providers', title: 'Common providers' },
 	{ id: 'email-test', title: 'Testing it' },
@@ -103,6 +110,91 @@ const Email = () => (
 					'Send a test email (in a row’s ⋯ menu) goes through that account, whether it’s the default or not — to you, or any address.',
 				]}
 			/>
+		</Section>
+
+		<Section
+			id='email-designs'
+			title='How your emails look'
+			lead='Project → Email → How your emails look. Design the frame every email from the project goes out in — receipts, welcomes, automation emails and tests.'>
+			<P>
+				<strong>New design</strong> opens a window: the settings on the left, a sample email on the right that changes as
+				you do — at desktop or phone width. What you see is exactly what your customers get. A project can have several
+				designs (Receipts, Newsletter…); the <em>Default</em> one is used unless an automation picks another. The{' '}
+				<em>⋯</em> menu on a row has Make default, Send a test email and Remove.
+			</P>
+			<Note>
+				With no design, emails use MINT’s classic look: your name on a dark band above a white card. Removing the last
+				design goes back to it.
+			</Note>
+		</Section>
+
+		<Section
+			id='design-look'
+			title='Plain or designed'
+			lead='Two looks to start from.'>
+			<Terms
+				head={['Look', 'What your customer sees']}
+				rows={[
+					['Plain', 'Just your words, a link and your signature — like an email you wrote yourself. Good for a personal tone, and it rarely lands in spam.'],
+					['Designed', 'Your logo or name in a coloured header, the message on a card, a button, and a small footer with your details.'],
+				]}
+			/>
+			<P>
+				<strong>Font</strong> offers the fonts every email app has (Helvetica, Georgia, Trebuchet…), so it looks the same in
+				Gmail, Outlook and on phones. <strong>Start from colours</strong> sets the header, buttons and background in one
+				click — change any of them after.
+			</P>
+		</Section>
+
+		<Section
+			id='design-header'
+			title='The header'
+			lead='Designed only. Turn it off for no band at the top.'>
+			<List
+				items={[
+					'Logo — upload one or pick it from the media library. Use PNG or JPG: Gmail and Outlook don’t show SVG in emails. It starts as your business logo.',
+					<>Title — text beside the logo, or on its own. <code>{'{{business.name}}'}</code> fills in your business name; leave it empty for the logo alone.</>,
+					'Logo height, line up (left or centre), background and title colour.',
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='design-colours'
+			title='Colours and shape'
+			lead='Click a swatch to pick a colour, or type it like #1f2937.'>
+			<Terms
+				head={['Setting', 'What it colours']}
+				rows={[
+					['Text', 'The message.'],
+					['Buttons (Links on a plain email)', 'The button — “View your order” — or the link on a plain email.'],
+					['Heading, Button text', 'The large line at the top of the card, and the words on the button.'],
+					['Card, Around the card', 'The white box the message is in, and the background around it.'],
+					['Corners', 'Square, soft, round or rounder — the card and its button.'],
+					['Width', '560 px is usual; 480 is narrower, 640 wider. Phones always show it full width.'],
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='design-footer'
+			title='Footer and signature'
+			lead='Lines under the email: a small footer on a designed one, your signature on a plain one.'>
+			<P>
+				<strong>Insert a detail</strong> adds your business name, address, phone, email, website, the project’s name or
+				this year — taken from Project → Settings → Business details, so they stay right when they change. A line whose
+				detail is empty is left out.
+			</P>
+		</Section>
+
+		<Section
+			id='automation-email-design'
+			title='A design for one automation'
+			lead='In an automation’s Send an email, Design picks how that email looks.'>
+			<P>
+				<em>The default</em> follows whichever design is the project’s default. Pick another — a plain one for a personal
+				follow-up, say — and only that email uses it. If that design is removed, the email goes out in the default.
+			</P>
 		</Section>
 
 		<Section
