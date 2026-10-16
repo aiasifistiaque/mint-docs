@@ -81,7 +81,7 @@ const Automations = () => (
 					['Notify people', 'A notification in the panel for the people you pick in the project, or whoever made the change. It opens the record.'],
 					[
 						'Send an email',
-						'Through your organization’s own email server (Organization → Email). To people in the project, the address in a field — the record’s own Email, or one of a record it links to (a bill’s Customer → Email) — or up to 10 addresses you type. It goes out in the project’s email design, or one you pick (Email → How your emails look).',
+						'Through your organization’s own email server (Organization → Email). To people in the project, the address in a field — the record’s own Email, or one of a record it links to (a bill’s Customer → Email) — or up to 10 addresses you type. It goes out in the project’s email design, or one you pick (Email → How your emails look). Attach PDFs adds up to 3 of the page’s published PDF templates, printed for the record — a bill’s invoice to its customer. (A template that’s removed or back to draft stops the email, and Runs says why.)',
 					],
 					[
 						'Call a webhook',

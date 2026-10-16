@@ -338,6 +338,10 @@ const PdfTemplates = () => (
 						<A href='/pages#row-menu'>row menu</A>.
 					</>,
 					'Several records at once: tick them, Print / PDF — each template is an option, one file with each record from a new page.',
+					<>
+						Emailed by itself: an automation’s <strong>Send an email</strong> can attach it, printed for the record — the
+						invoice to the customer when a bill is sent. See <A href='/automations#automation-actions'>automations</A>.
+					</>,
 				]}
 			/>
 		</Section>
