@@ -81,7 +81,7 @@ const Automations = () => (
 					['Notify people', 'A notification in the panel for the people you pick in the project, or whoever made the change. It opens the record.'],
 					[
 						'Send an email',
-						'Through your organization’s own email server (Organization → Email). To people in the project, an email field of the record (a customer’s address), or up to 10 addresses you type.',
+						'Through your organization’s own email server (Organization → Email). To people in the project, the address in a field — the record’s own Email, or one of a record it links to (a bill’s Customer → Email) — or up to 10 addresses you type.',
 					],
 					[
 						'Call a webhook',
