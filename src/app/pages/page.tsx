@@ -228,10 +228,11 @@ const Pages = () => (
 			<P>
 				The magnifier at the top of every page (or <C>⌘K</C>, <C>Alt+K</C> on Windows) finds pages by name. Turn on{' '}
 				<strong>Show in search</strong> in <strong>Navbar search</strong>, on a page’s <em>Fields &amp; rules</em> tab, and
-				it finds that page’s records too. Type two letters or more: matches are listed under the project and page they
-				come from — <em>Customer portal › Clients</em> — by the record’s name (its <em>Record name</em> field, or its
-				record number when it has none). When the match was in another field, the line under the name says which:{' '}
-				<em>Email: jane@acme.com</em>. Click one, or pick it with the arrow keys and Enter, to open its page.
+				it finds that page’s records too. Type two letters or more: matching records are listed after the pages, each by
+				its name (its <em>Record name</em> field, or its record number when it has none), with its record number and the
+				page it comes from underneath — <em>INV-0001 · Invoices</em>. When the match was in another field, a line under
+				that says which: <em>Email: jane@acme.com</em>. Click one, or pick it with the arrow keys and Enter, to open its
+				page.
 			</P>
 			<P>
 				<strong>Search by</strong> lists the page’s <em>Searchable</em> fields — the ones its table’s search box uses,
