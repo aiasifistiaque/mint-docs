@@ -54,6 +54,10 @@ const ConnectAi = () => (
 				rows={[
 					['Can build', 'On: it can create and change models and pages. Off: it can only look at your models and check plans.'],
 					['Can read records', 'It can read records to answer questions — only pages you can view, never changing anything.'],
+					[
+						'Can publish',
+						'It can put drafts and your site live — only when you ask it to, and only where your role has Publish. Off (the default): it writes drafts and you publish them yourself.',
+					],
 					['May publish (website projects)', <>It may put the site live when you ask. Off by default: it builds drafts and you publish. Make this key from the site builder’s <A href='/site-builder#ai'>AI menu</A>.</>],
 					['Expires', 'Never, or in 7, 30, 90 days or a year.'],
 				]}
@@ -127,6 +131,10 @@ const ConnectAi = () => (
 					<>
 						<em>“How many bookings did we have last month, by room?”</em> (with Can read records on)
 					</>,
+					<>
+						<em>“Write three blog posts about our spring menu as drafts.”</em> · <em>“Rewrite the home page’s hero and questions for families.”</em>{' '}
+						· <em>“Suggest a better title and description for the About page.”</em>
+					</>,
 				]}
 			/>
 			<P>
@@ -154,7 +162,16 @@ const ConnectAi = () => (
 					['set_public_api', 'Turn a model’s public API on or off.'],
 					['list_endpoints · generate_endpoints · save_endpoint', 'See, generate and change your API’s endpoints — who can call each, its rules and fields.'],
 					['get_api_logs', 'Read the calls made to your API (last 7 days) — find why one fails.'],
-					['upload_media', 'Put an image into your Media library and get its address.'],
+					['upload_media', 'Put an image into your Media library and get its address — with its alt text and caption.'],
+					[
+						'list_content_types · get_entry · save_entry_draft',
+						'Your content (models with Drafts and publishing, single types): what isn’t live yet, one entry’s draft and what’s published, and writing drafts — never live until published.',
+					],
+					['publish_entry', 'Publish entries, or take them off — only when you ask, with a key that Can publish and your Publish right.'],
+					[
+						'get_page_contents · fill_page · suggest_seo',
+						'Website projects: read a page’s contents, write them from your brief as drafts, and gather a page’s words to write its SEO title and description.',
+					],
 					[
 						'site_builder_guide · get_site_builder · start_from_theme · set_site_design · set_site_contents · save_site_page · check_site · publish_site',
 						<>
@@ -193,6 +210,7 @@ const ConnectAi = () => (
 					'A build is all or nothing: if any part fails, nothing is left half made.',
 					'It can’t delete models, records or pages (a website block it drops is archived, not deleted), and it only ever works in the key’s project.',
 					'Everything it builds is yours to change or remove in Models and Pages.',
+					'Content it writes stays a draft: the site and API don’t change until it’s published — by you, or by the AI when you ask and its key Can publish.',
 				]}
 			/>
 		</Section>
