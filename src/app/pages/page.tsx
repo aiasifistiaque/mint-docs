@@ -133,11 +133,17 @@ const Pages = () => (
 				]}
 			/>
 			<P>
-				<strong>More</strong> opens a field’s settings in groups: <em>Rules</em> (each with what it does), <em>How it
-				looks</em> (its label, how the table shows it, whether its column shows from the start), <em>Limits</em> or{' '}
-				<em>Length</em> for numbers and text, <em>Picking a linked record</em> for record pickers, and — folded away —{' '}
-				<em>Advanced</em>: how it’s stored, which details of a linked record are loaded, and the raw settings. Fields marked{' '}
-				<em>automatic</em>, like <C>createdAt</C>, are filled in by the system and can’t be changed.
+				<strong>Click a field</strong> to open its settings — the open field is raised and edged in blue so it’s easy to
+				tell apart, and <strong>Done</strong> or Esc puts it away. They come in groups: <em>Rules</em> (each with what it
+				does), <em>How it looks</em> (its label, how the table shows it, whether its column shows from the start),{' '}
+				<em>Limits</em> or <em>Length</em> for numbers and text, <em>Picking a linked record</em> for record pickers, and —
+				folded away — <em>Advanced</em>: how it’s stored, which details of a linked record are loaded, and the raw settings.
+				Fields marked <em>automatic</em>, like <C>createdAt</C>, are filled in by the system and can’t be changed.
+			</P>
+			<P>
+				The <strong>⋯</strong> at the end of a field moves it up or down, puts it back as it started (once you’ve changed
+				it), copies its API name, or removes it from the page. A field from linked records can also be duplicated there.
+				You can still drag a field by ⋮⋮.
 			</P>
 			<P>
 				<em>Locked when</em> makes a field changeable only until the record reaches a state. A bill’s status can move
@@ -153,7 +159,7 @@ const Pages = () => (
 				tick several values in one condition. The same switch is on tab conditions and on fields from linked records.
 			</P>
 			<P>
-				<strong>Filled in from a linked record</strong>, under <em>More</em> for a field, fills it in when a record is
+				<strong>Filled in from a linked record</strong>, in a field’s settings, fills it in when a record is
 				picked on the same form — a payment’s amount from the bill it pays. Turn on <em>Fill this from a linked record</em>,
 				choose the picker (<em>Bill</em>), then{' '}
 				<em>Its Total</em>, or <em>A formula over its fields…</em> such as <C>total - paid</C> (the bill’s number fields,
