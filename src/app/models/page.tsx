@@ -326,6 +326,16 @@ const Models = () => (
 			title='Calculated fields'
 			lead='A Formula field works itself out from other number fields.'>
 			<P>
+				<strong>Build with blocks</strong> is the way in if you’d rather not write it. Every empty box says what goes in it
+				— click it and pick from the list, or drag a block or a field onto it from the shelf above. Pick{' '}
+				<em>If … then … otherwise</em> and it asks for the condition (<em>Discount type is Percentage</em> — a choice
+				field’s options come up as a list), then the value, then the value otherwise; <em>Add another condition</em> adds
+				an <em>otherwise if</em>. <em>Calculation</em> joins two values with plus, minus, times or divided by, and a box
+				inside it can hold another calculation. Point at a block and its × empties it again. The formula can’t be saved
+				while a box is empty. <em>Type it</em> shows the same formula as text, to read or change; switching back turns it
+				into blocks again.
+			</P>
+			<P>
 				Build it from the field list, the operators (+ − × ÷ %, brackets) and functions (<C>round</C>, <C>floor</C>,{' '}
 				<C>ceil</C>, <C>abs</C>, <C>min</C>, <C>max</C>), or type it: <C>total - paid</C>,{' '}
 				<C>round(price * qty * 1.05, 2)</C>. Over a section list, <C>sum(items.total)</C>, <C>avg(items.total)</C> and{' '}
