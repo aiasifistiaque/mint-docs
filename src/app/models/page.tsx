@@ -326,14 +326,15 @@ const Models = () => (
 			title='Calculated fields'
 			lead='A Formula field works itself out from other number fields.'>
 			<P>
-				<strong>Build with blocks</strong> is the way in if you’d rather not write it. Every empty box says what goes in it
-				— click it and pick from the list, or drag a block or a field onto it from the shelf above. Pick{' '}
-				<em>If … then … otherwise</em> and it asks for the condition (<em>Discount type is Percentage</em> — a choice
-				field’s options come up as a list), then the value, then the value otherwise; <em>Add another condition</em> adds
-				an <em>otherwise if</em>. <em>Calculation</em> joins two values with plus, minus, times or divided by, and a box
-				inside it can hold another calculation. Point at a block and its × empties it again. The formula can’t be saved
-				while a box is empty. <em>Type it</em> shows the same formula as text, to read or change; switching back turns it
-				into blocks again.
+				The formula sits at the bottom of the dialog, locked — it’s built by clicking, not typed. The line on top says what
+				to pick next, and whatever you pick goes into the highlighted box: a field from <em>Fields</em>, a number or text
+				from <em>Values</em>, + − × ÷ or <em>Round</em> from <em>Calculate</em>, or <em>If</em> from <em>Decide</em>. Pick{' '}
+				<em>If</em> and it asks for the condition — pick <em>Discount type</em> and choose <em>Percentage</em> from its
+				values — then the value, then the value otherwise; <em>Otherwise if</em> checks another condition first. Right
+				after a field or number, + − × ÷ keep calculating with it. Click any part of the formula to change it (click the
+				sign between two parts to work on both); <em>Remove</em> or Backspace empties it, and <em>Undo</em> takes a step
+				back. It can’t be saved while a box is empty. <em>Type it yourself</em> unlocks it to type by hand — the buttons
+				then go in at the cursor — and <em>Back to buttons</em> locks it again.
 			</P>
 			<P>
 				Build it from the field list, the operators (+ − × ÷ %, brackets) and functions (<C>round</C>, <C>floor</C>,{' '}
