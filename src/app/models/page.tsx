@@ -333,6 +333,17 @@ const Models = () => (
 				out on sample numbers. Use a field as many times as you need — <C>price * qty + price</C>.
 			</P>
 			<P>
+				<strong>Conditions</strong> pick between two calculations with <C>if(condition, then, otherwise)</C>. A discount that
+				is either flat or a percentage, with a <em>Discount type</em> choice field:{' '}
+				<C>subtotal - if(discountType = &quot;percentage&quot;, subtotal * discount / 100, flatDiscount)</C>. Compare with{' '}
+				<C>=</C> <C>!=</C> <C>&lt;</C> <C>&lt;=</C> <C>&gt;</C> <C>&gt;=</C>, join conditions with <C>and</C> / <C>or</C>,
+				turn one round with <C>not(…)</C>, and put text in quotes. Text is compared ignoring capitals and spaces at the
+				ends. A choice, text or yes / no field can be compared, or used as the condition itself —{' '}
+				<C>if(isVip, 5, 0)</C> holds when it’s ticked. Put an <C>if</C> inside another for more than two cases:{' '}
+				<C>if(tier = &quot;gold&quot;, 20, if(tier = &quot;silver&quot;, 10, 0))</C>. Only the part the condition picks is
+				worked out, so <C>if(qty &gt; 0, total / qty, 0)</C> never divides by 0.
+			</P>
+			<P>
 				Through a <A href='#models-links'>link to a record</A>, a formula reads that record’s numbers: with a <em>Tax</em> link,{' '}
 				<C>price * qty + tax.amount</C> adds the amount of the Tax picked. The field list offers them as{' '}
 				<em>Tax › Amount</em>. No Tax picked counts as 0. When someone changes the Tax’s amount, every record that picks
