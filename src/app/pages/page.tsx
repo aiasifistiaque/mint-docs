@@ -168,6 +168,13 @@ const Pages = () => (
 				pending orange, draft gray); click another swatch to change it, <em>Default</em> to go back.
 			</P>
 			<P>
+				<strong>Linked record in the table</strong>, under <em>How it looks</em> for a field that picks a record (a
+				bill’s <em>Client</em>), shows it in the table as a chip, as the record page does: hovering shows a card of the
+				client, with <em>View</em> to open its page and <em>Quick view</em> to open it in the side drawer without
+				leaving the table. Quick view only shows for people whose role can view that model. Off, the column shows the
+				client’s name as plain text.
+			</P>
+			<P>
 				<strong>Add a field from linked records</strong> makes a field worked out from the records linking to this one — a
 				client’s <em>Due payment</em>: from <em>bills whose client is this record</em>, <em>Add up a field</em> of{' '}
 				<em>amount</em>, only where <em>status is due</em>. It can also count them, or take their average, smallest or
