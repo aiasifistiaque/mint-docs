@@ -144,16 +144,25 @@ const Models = () => (
 				the field’s row, and its picture at the start of the row shows the type at a glance.
 			</P>
 			<P>
-				Under each name, in small grey letters, is its <strong>API name</strong> (the key): how your API, imports and
-				formulas refer to the field. It’s made from the name until you change it. <strong>More</strong> opens the rest of a
-				field’s settings, in groups: <em>In the form</em> (what it starts with — the default — and help text),{' '}
-				<em>Limits</em> or <em>Length</em> (lowest/highest, fewest/most characters), the options or allowed values,{' '}
-				<em>Table and search</em> (a column in the table, found by the search box, no duplicates, faster sorting and
-				filtering) and the API name.
+				Each field is one line: its name, its type and whether it’s required. Under the name, in small grey letters, is
+				its <strong>API name</strong> (the key): how your API, imports and formulas refer to the field. It’s made from the
+				name until you change it. Beside it is what the type needs — the model a link points to, a formula, a section’s
+				fields — and a short summary of the rest, like <em>default: draft</em> or <em>no duplicates</em>.
+			</P>
+			<P>
+				<strong>Click a field</strong> to open the rest of its settings. The open field is raised and edged in blue so
+				it’s easy to tell apart; <strong>Done</strong> or Esc puts it away. Its settings come in groups:{' '}
+				<em>In the form</em> (what it starts with — the default — and help text), <em>Limits</em> or <em>Length</em>{' '}
+				(lowest/highest, fewest/most characters), the options with their labels, <em>Table and search</em> (a column in the
+				table, found by the search box, no duplicates, faster sorting and filtering) and the API name.
+			</P>
+			<P>
+				The <strong>⋯</strong> at the end of a field duplicates it, adds a new field right below it, moves it up or down,
+				or removes it. You can also drag it by ⋮⋮.
 			</P>
 			<P>
 				Beside the list, <strong>Form preview</strong> draws the add form from your fields as you edit them — before you
-				save.
+				save. The open field is marked there too, and clicking a field in the preview opens it in the list.
 			</P>
 			<Terms
 				head={['Kind', 'Holds · shows as']}
