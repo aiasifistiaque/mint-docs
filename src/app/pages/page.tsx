@@ -345,11 +345,18 @@ const Pages = () => (
 				<em>Show only when</em> to offer “Receipt” only on paid rows.
 			</P>
 			<P>
-				<strong>Download DOCX</strong> downloads one rich-text field of the row as a Word file — a blog post’s{' '}
-				<em>Body</em>. Pick the field; only the page’s rich-text fields are offered. The file keeps the headings, bold and
-				italics, links, bullet and numbered lists, quotes, code and pictures. Rows where that field is empty don’t offer
-				it. The same download sits on the field itself on the record page: <strong>Download DOCX</strong> at the top right of
-				its panel.
+				<strong>Download document</strong> downloads one rich-text field of the row — a blog post’s <em>Body</em> — as a
+				Word file (.docx), a PDF, Markdown (.md) or plain text (.txt). Pick the field (only the page’s rich-text fields are
+				offered) and a format, or leave the format on <em>Ask each time</em> so people choose when they download. The file
+				keeps the headings, bold and italics, links, bullet and numbered lists, quotes, code and pictures. Rows where that
+				field is empty don’t offer it.
+			</P>
+			<P>
+				<strong>Open in editor</strong> opens one rich-text field of the row on a page of its own, like a document: the full
+				toolbar over a sheet of paper, with no sidebar in the way. <strong>Save</strong> (or ⌘S / Ctrl+S) changes only that
+				field; <strong>Export</strong> downloads it as Word, PDF, Markdown or text, saving first. Leaving with unsaved words
+				asks before anything is lost. On the record page, every rich-text field’s panel has the same two at its top right:{' '}
+				<strong>Open editor</strong> and <strong>Download</strong>.
 			</P>
 			<P>
 				<strong>Add a linked record</strong> opens another page’s add form with fields already filled in from the row —{' '}
