@@ -23,7 +23,7 @@ const SECTIONS = [
 	{ id: 'models-components', title: 'Components' },
 	{ id: 'models-blocks', title: 'Content blocks' },
 	{ id: 'formulas', title: 'Calculated fields' },
-	{ id: 'date-formulas', title: 'Date formulas' },
+	{ id: 'date-formulas', title: 'Formula (date)' },
 	{ id: 'models-links', title: 'Linking models' },
 	{ id: 'models-access', title: 'Who sees the records' },
 	{ id: 'models-drafts', title: 'Drafts and publishing' },
@@ -173,8 +173,8 @@ const Models = () => (
 					['Email', 'An email address, checked and lower-cased'],
 					['Link', 'A web address, checked · opens in a new tab'],
 					['Number', 'A number, with optional min/max'],
-					['Formula', 'A number worked out from other fields (see below)'],
-					['Date formula', 'A date worked out from other fields — a due date 30 days on, a renewal’s new expiry (see below)'],
+					['Formula (number)', 'A number worked out from other fields (see below)'],
+					['Formula (date)', 'A date worked out from other fields — a due date 30 days on, a renewal’s new expiry (see below)'],
 					['Yes / No', 'A switch · a Yes/No filter. Left unticked it saves as No — a real answer, so Required never stops the save'],
 					['Date', 'A date; the default can be “when created”'],
 					['Color', 'A colour, with a picker'],
@@ -335,7 +335,7 @@ const Models = () => (
 		<Section
 			id='formulas'
 			title='Calculated fields'
-			lead='A Formula field works itself out from other number fields.'>
+			lead='A Formula (number) field works itself out from other number fields.'>
 			<P>
 				The formula sits at the bottom of the dialog, locked — it’s built by clicking, not typed. The line on top says what
 				to pick next, and whatever you pick goes into the highlighted box: a field from <em>Fields</em>, a number or text
@@ -368,7 +368,7 @@ const Models = () => (
 			<P>
 				Through a <A href='#models-links'>link to a record</A>, a formula reads that record’s numbers: with a <em>Tax</em> link,{' '}
 				<C>price * qty + tax.amount</C> adds the amount of the Tax picked. The field list offers them as{' '}
-				<em>Tax › Amount</em>. No Tax picked counts as 0. When someone changes the Tax’s amount, every record that picks
+				<em>Tax › Amount</em> — in the model builder, and in a page’s <em>Fields &amp; rules</em> tab too. No Tax picked counts as 0. When someone changes the Tax’s amount, every record that picks
 				it is recalculated straight away; if the Tax is deleted, it counts as 0 for them.
 			</P>
 			<P>
@@ -378,14 +378,14 @@ const Models = () => (
 			</P>
 			<P>
 				A number formula can count days between two dates: <C>daysBetween(today(), expiresAt)</C> gives the days left
-				on a membership. For a date itself, use a Date formula.
+				on a membership. For a date itself, use a Formula (date) — a type of its own.
 			</P>
 		</Section>
 
 		<Section
 			id='date-formulas'
-			title='Date formulas'
-			lead='A Date formula field works out a date: a due date, an expiry, a renewal.'>
+			title='Formula (date)'
+			lead='A Formula (date) field works out a date: a due date, an expiry, a renewal. It’s a type of its own, beside Formula (number).'>
 			<P>
 				It’s built the same way as a formula, with a <em>Dates</em> row of buttons: <em>Today</em>, <em>Add days</em>,{' '}
 				<em>Add weeks</em>, <em>Add months</em>, <em>Add years</em>, <em>Add…</em> (the unit from a field),{' '}
@@ -427,7 +427,7 @@ const Models = () => (
 				]}
 			/>
 			<P>
-				A date it needs that’s empty leaves the Date formula empty. Dates are worked out in UTC.
+				A date it needs that’s empty leaves the Formula (date) empty. Dates are worked out in UTC.
 			</P>
 			<H3 id='date-formulas-renewal'>A membership renewal</H3>
 			<P>
@@ -443,7 +443,7 @@ const Models = () => (
 						<strong>Members</strong>: Name, Plan (a link), Fee and Expires at (a date).
 					</>,
 					<>
-						<strong>Renewals</strong>: Member and Plan (links), and <em>Renewed until</em>, a Date formula worked out{' '}
+						<strong>Renewals</strong>: Member and Plan (links), and <em>Renewed until</em>, a Formula (date) worked out{' '}
 						<em>once</em>: <C>add(latest(member.expiresAt, today()), plan.length, plan.unit)</C>.
 					</>,
 					<>
@@ -635,8 +635,8 @@ const Models = () => (
 					['There’s no Build section', 'Your role lacks the Build permission.'],
 					['The name got a 2 on the end', 'The project already has a model by that name. Change the title, or keep it.'],
 					['“Isn’t a number field” in a formula', 'Formulas only use number (and formula) fields.'],
-					['“Works out a date” in a Formula field', 'A Formula field holds a number. Make it a Date formula, or use daysBetween(…) for a number of days.'],
-					['“Not with + − × ÷” in a Date formula', 'Dates move with Add days, Add months… — addDays(start, 30), not start + 30.'],
+					['“Works out a date” in a Formula (number)', 'A Formula (number) holds a number. Make the field a Formula (date), or use daysBetween(…) for a number of days.'],
+					['“Not with + − × ÷” in a Formula (date)', 'Dates move with Add days, Add months… — addDays(start, 30), not start + 30.'],
 					['Making a field unique failed', 'Some records share a value. Fix them, then try again.'],
 					['I can’t delete a model', 'Another model links to it. Remove that link field first.'],
 					['A teammate doesn’t see the new page', 'Their role needs Records: View, and the project must be one of theirs.'],
