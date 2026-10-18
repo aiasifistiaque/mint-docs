@@ -345,6 +345,13 @@ const Pages = () => (
 				<em>Show only when</em> to offer “Receipt” only on paid rows.
 			</P>
 			<P>
+				<strong>Download DOCX</strong> downloads one rich-text field of the row as a Word file — a blog post’s{' '}
+				<em>Body</em>. Pick the field; only the page’s rich-text fields are offered. The file keeps the headings, bold and
+				italics, links, bullet and numbered lists, quotes, code and pictures. Rows where that field is empty don’t offer
+				it. The same download sits on the field itself on the record page: <strong>Download DOCX</strong> at the top right of
+				its panel.
+			</P>
+			<P>
 				<strong>Add a linked record</strong> opens another page’s add form with fields already filled in from the row —{' '}
 				<em>Add payment</em> on a bill:
 			</P>
