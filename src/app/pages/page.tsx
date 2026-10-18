@@ -588,7 +588,10 @@ const Pages = () => (
 						Each change is a field of the linked page (only fields that can be edited there are offered) and how:{' '}
 						<em>Set to</em> a value, <em>Copy from this record</em>, <em>Add</em> a number, <em>Take off</em> a number,{' '}
 						<em>Work out</em> a formula, or <em>Empty it</em>. Add and Take off can have a <em>Never below</em> number and
-						the message people see when a save would go under it.
+						the message people see when a save would go under it. <em>Copy from this record</em> also offers the fields of
+						the records it picks — a renewal’s Fee from <em>Plan › Price</em>. <em>Work out</em> opens the formula window:
+						build it from this record’s fields, the records it picks and the linked record’s own values — a date for a date
+						field, like <C>add(latest(target.expiresAt, today()), this.plan.length, this.plan.unit)</C>.
 					</>,
 					<>
 						Choose what happens when the rule stops holding, then <strong>Save rule</strong> and publish the page.

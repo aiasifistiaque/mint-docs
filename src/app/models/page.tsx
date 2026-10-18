@@ -23,6 +23,7 @@ const SECTIONS = [
 	{ id: 'models-components', title: 'Components' },
 	{ id: 'models-blocks', title: 'Content blocks' },
 	{ id: 'formulas', title: 'Calculated fields' },
+	{ id: 'date-formulas', title: 'Date formulas' },
 	{ id: 'models-links', title: 'Linking models' },
 	{ id: 'models-access', title: 'Who sees the records' },
 	{ id: 'models-drafts', title: 'Drafts and publishing' },
@@ -173,6 +174,7 @@ const Models = () => (
 					['Link', 'A web address, checked · opens in a new tab'],
 					['Number', 'A number, with optional min/max'],
 					['Formula', 'A number worked out from other fields (see below)'],
+					['Date formula', 'A date worked out from other fields — a due date 30 days on, a renewal’s new expiry (see below)'],
 					['Yes / No', 'A switch · a Yes/No filter. Left unticked it saves as No — a real answer, so Required never stops the save'],
 					['Date', 'A date; the default can be “when created”'],
 					['Color', 'A colour, with a picker'],
@@ -374,6 +376,86 @@ const Models = () => (
 				from the panel and from your API alike. Changing a formula recalculates existing records. Empty counts as 0; dividing
 				by 0 leaves it empty.
 			</P>
+			<P>
+				A number formula can count days between two dates: <C>daysBetween(today(), expiresAt)</C> gives the days left
+				on a membership. For a date itself, use a Date formula.
+			</P>
+		</Section>
+
+		<Section
+			id='date-formulas'
+			title='Date formulas'
+			lead='A Date formula field works out a date: a due date, an expiry, a renewal.'>
+			<P>
+				It’s built the same way as a formula, with a <em>Dates</em> row of buttons: <em>Today</em>, <em>Add days</em>,{' '}
+				<em>Add weeks</em>, <em>Add months</em>, <em>Add years</em>, <em>Add…</em> (the unit from a field),{' '}
+				<em>Latest of</em> and <em>Earliest of</em>. Some examples:
+			</P>
+			<List
+				items={[
+					<>
+						<C>addDays(invoiceDate, 30)</C> — due 30 days after the invoice date. A number below 0 goes back in time.
+					</>,
+					<>
+						<C>addMonths(joinedAt, plan.months)</C> — a month count read from the plan the record links to. 31 January plus
+						one month is the end of February.
+					</>,
+					<>
+						<C>add(startDate, plan.length, plan.unit)</C> — when the plan says how long in a field (<em>30</em>) and in what
+						(<em>days</em>, <em>weeks</em>, <em>months</em> or <em>years</em>) in another.
+					</>,
+					<>
+						<C>latest(member.expiresAt, today())</C> — the later of the two; an empty date is left out.
+					</>,
+					<>
+						<C>if(status = &quot;paid&quot;, addYears(paidOn, 1), addDays(today(), 7))</C> — one date or another, by a
+						condition. Dates can be compared too: <C>expiresAt &lt; today()</C>.
+					</>,
+				]}
+			/>
+			<P>
+				<strong>Work it out</strong>, under the formula, says when:
+			</P>
+			<Terms
+				head={['Choice', 'What it does']}
+				rows={[
+					['Every time the record is saved', 'Like a formula: it follows the fields it reads, and moves when they change.'],
+					[
+						'Once, when the record is added',
+						'Worked out when the record is added, then kept. Records that were there before the field get theirs when you save the model. Use it with today() or a linked record’s date, which keep changing.',
+					],
+				]}
+			/>
+			<P>
+				A date it needs that’s empty leaves the Date formula empty. Dates are worked out in UTC.
+			</P>
+			<H3 id='date-formulas-renewal'>A membership renewal</H3>
+			<P>
+				A gym wants a renewal to add the plan’s length after the current expiry, or after today if the membership has
+				already run out:
+			</P>
+			<List
+				items={[
+					<>
+						<strong>Plans</strong>: Name, Price, Length (a number) and Unit (options: days, months).
+					</>,
+					<>
+						<strong>Members</strong>: Name, Plan (a link), Fee and Expires at (a date).
+					</>,
+					<>
+						<strong>Renewals</strong>: Member and Plan (links), and <em>Renewed until</em>, a Date formula worked out{' '}
+						<em>once</em>: <C>add(latest(member.expiresAt, today()), plan.length, plan.unit)</C>.
+					</>,
+					<>
+						On the Renewals page, a <A href='/pages#linked-relationships'>Linked Relationship</A> when a renewal is added:
+						change the Member — Expires at <em>Copy from</em> Renewed until, Fee <em>Copy from</em> Plan › Price.
+					</>,
+				]}
+			/>
+			<P>
+				A member who expires on 30 November and renews on 19 October for a month runs to 30 December; one who expired in
+				September runs to a month from today. Deleting the renewal puts the old expiry back.
+			</P>
 		</Section>
 
 		<Section
@@ -553,6 +635,8 @@ const Models = () => (
 					['There’s no Build section', 'Your role lacks the Build permission.'],
 					['The name got a 2 on the end', 'The project already has a model by that name. Change the title, or keep it.'],
 					['“Isn’t a number field” in a formula', 'Formulas only use number (and formula) fields.'],
+					['“Works out a date” in a Formula field', 'A Formula field holds a number. Make it a Date formula, or use daysBetween(…) for a number of days.'],
+					['“Not with + − × ÷” in a Date formula', 'Dates move with Add days, Add months… — addDays(start, 30), not start + 30.'],
 					['Making a field unique failed', 'Some records share a value. Fix them, then try again.'],
 					['I can’t delete a model', 'Another model links to it. Remove that link field first.'],
 					['A teammate doesn’t see the new page', 'Their role needs Records: View, and the project must be one of theirs.'],
