@@ -353,11 +353,31 @@ const Pages = () => (
 			</P>
 			<P>
 				<strong>Open in editor</strong> opens one rich-text field of the row on a page of its own, like a document: the full
-				toolbar over a sheet of paper, with no sidebar in the way. <strong>Save</strong> (or ⌘S / Ctrl+S) changes only that
-				field; <strong>Export</strong> downloads it as Word, PDF, Markdown or text, saving first. Leaving with unsaved words
-				asks before anything is lost. On the record page, every rich-text field’s panel has the same two at its top right:{' '}
-				<strong>Open editor</strong> and <strong>Download</strong>.
+				toolbar across the top, and a white page on a grey desk — white with black words in dark mode too, the way it
+				prints. <strong>Save</strong> (or ⌘S / Ctrl+S) changes only that field; <strong>Export</strong> downloads it as Word,
+				PDF, Markdown or text, saving first. Leaving with unsaved words asks before anything is lost. On the record page,
+				every rich-text field’s panel has the same two at its top right: <strong>Open editor</strong> and{' '}
+				<strong>Download</strong>.
 			</P>
+			<List
+				items={[
+					<>
+						<strong>Page size</strong> (top right of the toolbar): <em>Infinite</em>, one long page, is the default. Pick{' '}
+						<em>A4</em>, <em>Letter</em>, <em>Legal</em> or <em>A5</em> to see the words on sheets, page 1, page 2 and on; Word
+						and PDF exports use the same paper. The editor remembers your choice for that field.
+					</>,
+					<>
+						<strong>Right-click</strong> anywhere on the page for bold, italic, underline, case (UPPERCASE, lowercase, Title
+						Case, Sentence case), text style, alignment, lists, quote, link, image and clear formatting. Select some words
+						and a small bar for the most used ones appears above them.
+					</>,
+					<>
+						<strong>Tables</strong>: the table button in the toolbar opens a grid; pick the rows and columns. Tab moves to
+						the next cell. Right-click inside a table to insert or delete rows and columns, or the whole table. Tables show
+						on your website and come through in every download.
+					</>,
+				]}
+			/>
 			<P>
 				<strong>Add a linked record</strong> opens another page’s add form with fields already filled in from the row —{' '}
 				<em>Add payment</em> on a bill:
