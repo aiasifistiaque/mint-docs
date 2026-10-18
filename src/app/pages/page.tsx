@@ -355,9 +355,10 @@ const Pages = () => (
 				<strong>Open in editor</strong> opens one rich-text field of the row on a page of its own, like a document: the full
 				toolbar across the top, and a white page on a grey desk — white with black words in dark mode too, the way it
 				prints. <strong>Save</strong> (or ⌘S / Ctrl+S) changes only that field; <strong>Export</strong> downloads it as Word,
-				PDF, Markdown or text, saving first. Leaving with unsaved words asks before anything is lost. On the record page,
+				PDF, Markdown or text, saving first; <strong>Print</strong> (or ⌘P / Ctrl+P) prints just the words, on the page
+				size you picked — choose “Save as PDF” in the print window for a quick PDF. Leaving with unsaved words asks before anything is lost. On the record page,
 				every rich-text field’s panel has the same two at its top right: <strong>Open editor</strong> and{' '}
-				<strong>Download</strong>.
+				<strong>Download</strong>. A long field shows its first 20 lines or so; <strong>Show more</strong> opens the rest.
 			</P>
 			<List
 				items={[
