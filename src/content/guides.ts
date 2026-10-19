@@ -277,6 +277,7 @@ export const GUIDES: Guide[] = [
 		group: 'Go live',
 		topics: [
 			{ id: 'api-generate', title: 'Generate from a model' },
+			{ id: 'api-customer-sign-in', title: 'Customer sign-in' },
 			{ id: 'api-access', title: 'Who can call it' },
 			{ id: 'api-conditions', title: 'Rules: which records' },
 			{ id: 'api-keys', title: 'Server keys' },

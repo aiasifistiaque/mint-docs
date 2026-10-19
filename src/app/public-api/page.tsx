@@ -20,6 +20,7 @@ const SECTIONS = [
 	{ id: 'api-pages', title: 'The API pages' },
 	{ id: 'api-endpoints', title: 'Endpoints' },
 	{ id: 'api-generate', title: 'Generate from a model' },
+	{ id: 'api-customer-sign-in', title: 'Customer sign-in' },
 	{ id: 'api-new-endpoint', title: 'Making an endpoint' },
 	{ id: 'api-access', title: 'Who can call it' },
 	{ id: 'api-conditions', title: 'Rules: which records' },
@@ -173,7 +174,9 @@ curl '${PUBLIC_API}/products' -H 'X-Api-Key: ${PROJECT_KEY}'`}
 						<strong>Update</strong>, <strong>Delete</strong> if your site or app changes records.
 					</>,
 					<>
-						Pick <A href='#api-access'>who can call them</A>, and press Generate.
+						Pick <A href='#api-access'>who can call them</A>. For <strong>Signed-in customers</strong>, leave{' '}
+						<strong>Only their own records</strong> ticked so each customer reaches just theirs — see{' '}
+						<A href='#api-customer-sign-in'>Customer sign-in</A>. Press Generate.
 					</>,
 				]}
 			/>
@@ -182,6 +185,71 @@ curl '${PUBLIC_API}/products' -H 'X-Api-Key: ${PROJECT_KEY}'`}
 				open each to set its <A href='#api-conditions'>rules</A> and <A href='#api-fields'>fields</A>. A website project’s Pages,
 				SEO and Contents have their list and read-one endpoints from the start — that’s how your site reads them.
 			</P>
+		</Section>
+
+		<Section
+			id='api-customer-sign-in'
+			title='Customer sign-in'
+			lead='Built into every project — nothing to generate. Endpoints → Customer sign-in, below your models.'>
+			<P>
+				Every project’s API can sign customers up and in from the start. These endpoints are always on and can’t be switched
+				off; they’re listed on Endpoints as <em>Built in</em>, and in the <A href='#reference'>API reference</A> with an
+				example of each.
+			</P>
+			<Terms
+				head={['Endpoint', 'Does']}
+				rows={[
+					[<C key='r'>POST /auth/register</C>, <>Signs a customer up — <C>name</C>, <C>email</C>, <C>password</C> (8 or more), <C>phone</C> if you like → <C>{'{ token, customer }'}</C>.</>],
+					[<C key='l'>POST /auth/login</C>, <>Signs them in — <C>email</C>, <C>password</C> → <C>{'{ token, customer }'}</C>.</>],
+					[<C key='m'>GET /auth/me</C>, 'The signed-in customer (needs their token).'],
+					[<C key='p'>PUT /auth/me</C>, 'Changes their name or phone (needs their token).'],
+					[<C key='f'>POST /auth/forgot</C>, <>Emails a link to choose a new password — see <A href='/widgets#login-reset'>Forgot password</A>.</>],
+					[<C key='s'>POST /auth/reset</C>, <>The new password, with the token from that link → <C>{'{ token, customer }'}</C>.</>],
+					[<C key='o'>POST /auth/logout-everywhere</C>, 'Signs them out on every device (needs their token).'],
+				]}
+			/>
+			<P>
+				<strong>Set up sign-in</strong> (on that section) opens Widgets → Login & account: where customers are kept (MINT’s{' '}
+				<A href='/customers'>Customers</A>, or a model of yours), their <A href='/widgets#login-roles'>customer roles</A>, and the
+				ready-made sign-in box for your site. Your own sign-in form calling these endpoints works just as well.
+			</P>
+			<H3>Their own data, with their token</H3>
+			<List
+				ordered
+				items={[
+					<>
+						Sign in (or up). The answer has a <C>token</C> — keep it on their device.
+					</>,
+					<>
+						Send it on calls: <C>Authorization: Bearer &lt;token&gt;</C>.
+					</>,
+					<>
+						Call endpoints for <strong>Signed-in customers</strong> with <strong>Only their own records</strong> — on Endpoints,{' '}
+						<strong>Generate endpoints for customers</strong> makes them. Each customer then gets just theirs: the bookings or
+						orders they created, and their own record in the model they sign up to.
+					</>,
+				]}
+			/>
+			<CodeBlock
+				label='Sign in, then fetch their own records'
+				code={`// 1. Sign in
+const res = await fetch('${PUBLIC_API}/auth/login?apiKey=${PROJECT_KEY}', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email, password }),
+});
+const { token } = await res.json();
+localStorage.setItem('customerToken', token);
+
+// 2. Their bookings — only theirs
+const mine = await fetch('${PUBLIC_API}/bookings?apiKey=${PROJECT_KEY}', {
+  headers: { Authorization: 'Bearer ' + localStorage.getItem('customerToken') },
+}).then(r => r.json());`}
+			/>
+			<Note>
+				A token lasts 30 days. A changed password or <C>/auth/logout-everywhere</C> ends every token they had. With the Login
+				widget on the page, <C>Mint.auth.fetch('bookings')</C> sends the token for you.
+			</Note>
 		</Section>
 
 		<Section
@@ -876,8 +944,9 @@ async function loadMore() {
 			id='signed-in'
 			title='Calling as a customer'>
 			<P>
-				For models that need a signed-in customer, send their token: <C>Authorization: Bearer &lt;token&gt;</C>. With the
-				sign-in widget on the page, <C>MintAuth.fetch('orders')</C> does that for you. Records a signed-in customer creates are
+				For models that need a signed-in customer, send their token: <C>Authorization: Bearer &lt;token&gt;</C> — from{' '}
+				<A href='#api-customer-sign-in'>customer sign-in</A>. With the Login widget on the page, <C>Mint.auth.fetch('orders')</C>{' '}
+				does that for you. Records a signed-in customer creates are
 				theirs, which is what <em>own records only</em> goes by. See{' '}
 				<A href='/customers'>Customers & sign-in</A>.
 			</P>
