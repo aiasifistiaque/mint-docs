@@ -49,7 +49,7 @@ const Widgets = () => (
 				head={['Step', 'What you do']}
 				rows={[
 					['Widget', 'Pick one: Login & account, Cart, Checkout, Thank-you page or My orders. Widgets that are coming soon show greyed out.'],
-					['Customers', <>Login & account only: which of your models holds your customers, if any. See <A href='#login-customers'>Your customer model</A>.</>],
+					['Customers', <>Login & account only: MINT’s Customers (the default) or a model of your own. See <A href='#login-customers'>Your customer model</A>.</>],
 					['Shop', <>Cart, Checkout, Thank-you page and My orders: which model holds your products (and, for all but the cart, where orders go). The <A href='#shop'>Shop</A> settings are right there to fill in and save.</>],
 					['Set up', 'The widget’s options, such as a card or a button, and what it asks for.'],
 					['Texts', 'Every word it shows, in your words or your visitors’ language. Leave one as it is to keep the default.'],
@@ -154,25 +154,37 @@ const Widgets = () => (
 		<Section
 			id='login-customers'
 			title='Your customer model'
-			lead='Keep the people who sign up in one of your own models, alongside the rest of your data.'>
+			lead='Accounts are kept in MINT’s Customers by default. You can keep them with a model of your own instead.'>
 			<P>
-				Every account lives in MINT’s <A href='/customers'>Customers</A>, with its password kept safely (scrambled, never
-				shown to anyone). If you also have a model of your own for customers, for example a <em>Members</em> or{' '}
-				<em>Customers</em> model your team already works in, pick it in the setup’s <em>Customers</em> step. Then:
+				Out of the box, everyone who signs up is on your <A href='/customers'>Customers</A> page. If you have a model of your
+				own for customers, for example <em>Members</em> or <em>Customers</em>, pick it in the setup’s <em>Customers</em> step,
+				choose which fields hold the email, name and phone, then choose how:
 			</P>
-			<List
-				items={[
-					'Each new account also gets a record in your model, with the email, name and phone filled into the fields you chose.',
-					'If your model already has a record with the same email (in any capitals), the account is linked to it instead. No duplicates.',
-					'Accounts made before you picked the model get their record the next time they sign in.',
-					'When a customer changes their name or phone on your site, their record changes too.',
-					'Passwords never go into your model. Signing in, staying signed in and signing out everywhere work as before.',
+			<Terms
+				head={['How', 'What happens']}
+				rows={[
+					['Keep accounts in MINT’s Customers, with a copy here', <>
+						Accounts stay on your Customers page, and each one also gets a record in your model (or is linked to the record with
+						the same email, in any capitals). Accounts made earlier get their record the next time they sign in. Your team can
+						edit or remove those records; the accounts carry on.
+					</>],
+					['This model holds the accounts', <>
+						Every sign-up is a record in your model and isn’t on the Customers page. The record’s email is what signs in, so if
+						your team changes it, the customer signs in with the new one. Removing (or archiving) the record ends that account
+						and signs it out. Records your team adds have no password, so they can’t sign in, and nobody can take one over by
+						signing up with its email. Accounts made before you switched keep signing in as MINT customers.
+					</>],
 				]}
 			/>
+			<P>
+				Either way, passwords never go into your model: MINT keeps them safely (scrambled, never shown to anyone), along with
+				staying signed in and signing out everywhere. When a customer changes their name or phone on your site, their record
+				changes too.
+			</P>
 			<Terms
 				head={['Field', 'Needs']}
 				rows={[
-					['Email', 'Required. An Email or Text field. It’s how an account finds its record.'],
+					['Email', 'Required. An Email or Text field.'],
 					['Name', 'Optional. A Text field, filled from the sign-up form.'],
 					['Phone', <>Optional. A Text field. Turn on <em>Ask for a phone number on sign-up</em> to collect one.</>],
 				]}
@@ -184,8 +196,9 @@ const Widgets = () => (
 			</P>
 			<P>
 				Your own code sees the record’s ID as <C>Mint.auth.user.record</C>. With your model’s{' '}
-				<A href='/public-api'>public API</A> on, signed-in and owner-only, a customer can read and update their own record and
-				nobody else’s.
+				<A href='/public-api'>public API</A> on, signed-in and owner-only, a customer can read and update the record their
+				sign-up made, and nobody else’s. A record your team made earlier is linked but not handed over, because an email
+				address alone doesn’t prove who someone is.
 			</P>
 		</Section>
 
