@@ -1,7 +1,7 @@
 import Guide from '@/components/docs/Guide';
 import { A, C, CodeBlock, H3, List, Note, P, Section, Terms } from '@/components/docs/prose';
 import { PAYLOAD_EXAMPLE, VERIFY_NODE } from '@/content/verify';
-import { APP_URL, PUBLIC_API } from '@/lib/config';
+import { APP_URL, PROJECT_KEY, PUBLIC_API } from '@/lib/config';
 import { guideMeta } from '@/lib/seo';
 
 export const metadata = guideMeta('/public-api');
@@ -16,6 +16,7 @@ export const metadata = guideMeta('/public-api');
 
 const SECTIONS = [
 	{ id: 'public-api', title: 'What it is' },
+	{ id: 'api-project-key', title: 'The project key' },
 	{ id: 'api-pages', title: 'The API pages' },
 	{ id: 'api-endpoints', title: 'Endpoints' },
 	{ id: 'api-generate', title: 'Generate from a model' },
@@ -69,6 +70,44 @@ const PublicApi = () => (
 		</Section>
 
 		<Section
+			id='api-project-key'
+			title='The project key'
+			lead='Every call names your project with its key: ?apiKey=<project key>. Without it the API answers 401.'>
+			<P>
+				Each project has one project key, made with the project. Find it on <strong>API → Keys</strong> (also on the API
+				Overview and in Project settings), with a copy button. Add it to every address — or send it as the{' '}
+				<C>X-Api-Key</C> header:
+			</P>
+			<CodeBlock
+				label='every call'
+				code={`GET ${PUBLIC_API}/products?apiKey=${PROJECT_KEY}
+
+curl '${PUBLIC_API}/products' -H 'X-Api-Key: ${PROJECT_KEY}'`}
+			/>
+			<P>
+				The project key is meant for your website’s code, where anyone can read it: it only says which project a call is for.
+				What a call may do is still each endpoint’s choice — anyone, signed-in customers, or a server key. Endpoints for server
+				keys need a secret <A href='#api-keys'>server key</A> as well; never put one of those in a page.
+			</P>
+			<Terms
+				head={['Answer', 'Means']}
+				rows={[
+					['401 api_key_missing', <>The call has no project key — add <C>?apiKey=</C> to the address.</>],
+					['401 api_key_invalid', 'No project has that key — it’s mistyped, or it was regenerated. Copy it again from API → Keys.'],
+				]}
+			/>
+			<P>
+				<strong>Regenerate</strong> (API → Keys) makes a new key; the old one stops at once, so every site, widget and app
+				that calls the API needs the new one. Sites MINT hosts for the project switch by themselves. The widget and analytics
+				snippets carry it as <C>data-key</C>.
+			</P>
+			<Note>
+				Addresses used to name the project — <C>/public/api/acme-store/products</C>. Those no longer answer: use{' '}
+				<C>/public/api/products?apiKey=…</C>.
+			</Note>
+		</Section>
+
+		<Section
 			id='api-pages'
 			title='The API pages'
 			lead='Sidebar → API (needs the Build permission). Five tabs run along the top of each.'>
@@ -77,7 +116,7 @@ const PublicApi = () => (
 				rows={[
 					['Overview', 'The API’s address, how many endpoints are on, calls, keys and customers; each model and what it has on the API; what was called lately; code to start from.'],
 					['Endpoints', 'Every endpoint, by model — method, address, who can call it, how many rules, calls, an on/off switch. Generate and make endpoints here; open one to change it.'],
-					['Keys', 'Secret keys for your own server, scripts or partners.'],
+					['Keys', 'The project key every call carries, and secret keys for your own server, scripts or partners.'],
 					['Logs', 'Every call to the API in the last 7 days — who called, which endpoint answered, what they got, and why it failed.'],
 					['Reference', 'Every endpoint written up for whoever builds your site or app — what to send, what comes back — with a tester.'],
 				]}
@@ -183,7 +222,7 @@ const PublicApi = () => (
 			<Terms
 				head={['Choice', 'Means']}
 				rows={[
-					['Anyone', 'No sign-in, no key. Anyone who knows the address can call it — a product list, opening hours, a contact form.'],
+					['Anyone', 'No sign-in, no server key — just the project key every call carries. A product list, opening hours, a contact form.'],
 					[
 						'Signed-in customers',
 						<>
@@ -338,7 +377,7 @@ const PublicApi = () => (
 			</P>
 			<CodeBlock
 				label='Calling with a key'
-				code={`curl ${PUBLIC_API}/till/orders \\\n  -H "Authorization: Bearer $MINT_SERVER_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '{"quantity": 3, "note": "From the till"}'`}
+				code={`curl '${PUBLIC_API}/till/orders?apiKey=${PROJECT_KEY}' \\\n  -H "Authorization: Bearer $MINT_SERVER_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d '{"quantity": 3, "note": "From the till"}'`}
 			/>
 			<P>
 				<C>X-Api-Key: mint_sk_…</C> works too. Any key in use opens every endpoint that needs a key. A wrong or revoked key, or
@@ -394,11 +433,11 @@ const PublicApi = () => (
 			</P>
 			<CodeBlock
 				label='API address'
-				code={`${PUBLIC_API}/<model>`}
+				code={`${PUBLIC_API}/<model>?apiKey=${PROJECT_KEY}`}
 			/>
 			<P>
-				A custom endpoint has its own address under the same root — <C>{PUBLIC_API}/products/featured</C>.{' '}
-				<C>GET {PUBLIC_API}/</C> describes the project: its name and kind, every endpoint (method, address, who may call it,
+				A custom endpoint has its own address under the same root — <C>{PUBLIC_API}/products/featured</C>; every call adds the{' '}
+				<A href='#api-project-key'>project key</A>. <C>GET {PUBLIC_API}/?apiKey=…</C> describes the project: its name and kind, every endpoint (method, address, who may call it,
 				how many rules, its fields in and out), and every public model with its actions, who may call it, and its fields (key, label, kind, required, allowed values, and <C>readOnly</C> on those a request can’t write)
 				— handy for checking what’s on.
 			</P>
@@ -420,7 +459,7 @@ const PublicApi = () => (
 			<P>Bodies are JSON. Calls work from any website (CORS is open) and from servers alike.</P>
 			<CodeBlock
 				label='List products'
-				code={`const res = await fetch('${PUBLIC_API}/products?limit=12&sort=-createdAt');
+				code={`const res = await fetch('${PUBLIC_API}/products?apiKey=${PROJECT_KEY}&limit=12&sort=-createdAt');
 const { doc, total, totalPages } = await res.json();`}
 			/>
 		</Section>
@@ -443,7 +482,7 @@ const { doc, total, totalPages } = await res.json();`}
 			</P>
 			<CodeBlock
 				label='Page 2, 12 to a page'
-				code={`GET ${PUBLIC_API}/products?page=2&limit=12
+				code={`GET ${PUBLIC_API}/products?apiKey=${PROJECT_KEY}&page=2&limit=12
 
 { "doc": [ …12 records… ], "total": 37, "page": 2, "limit": 12, "totalPages": 4 }`}
 			/>
@@ -457,7 +496,7 @@ const { doc, total, totalPages } = await res.json();`}
   const records = [];
   for (let page = 1; ; page++) {
     const params = new URLSearchParams({ ...query, page, limit: 100 });
-    const res = await fetch(\`${PUBLIC_API}/\${model}?\${params}\`);
+    const res = await fetch(\`${PUBLIC_API}/\${model}?apiKey=${PROJECT_KEY}&\${params}\`);
     if (!res.ok) throw new Error((await res.json()).message);
     const { doc, totalPages } = await res.json();
     records.push(...doc);
@@ -501,7 +540,7 @@ const { doc, total, totalPages } = await res.json();`}
 			</P>
 			<CodeBlock
 				label='Live products from 10 to 50, cheapest first'
-				code={`GET ${PUBLIC_API}/products?status=live&price_gte=10&price_lte=50&sort=price`}
+				code={`GET ${PUBLIC_API}/products?apiKey=${PROJECT_KEY}&status=live&price_gte=10&price_lte=50&sort=price`}
 			/>
 			<Terms
 				head={['Operator', 'Keeps records where the field…']}
@@ -559,7 +598,7 @@ const { doc, total, totalPages } = await res.json();`}
   page: '1',
   limit: '12',
 });
-const res = await fetch(\`${PUBLIC_API}/products?\${params}\`);`}
+const res = await fetch(\`${PUBLIC_API}/products?apiKey=${PROJECT_KEY}&\${params}\`);`}
 			/>
 		</Section>
 
@@ -624,7 +663,7 @@ const res = await fetch(\`${PUBLIC_API}/products?\${params}\`);`}
 				]}
 			/>
 			<P>
-				<C>GET {PUBLIC_API}/</C> lists, for each model with List on, its <C>filters</C> (each field’s key, kind and
+				<C>GET {PUBLIC_API}/?apiKey=…</C> lists, for each model with List on, its <C>filters</C> (each field’s key, kind and
 				operators), the fields <C>search</C> looks through, and the fields it can <C>sort</C> by.
 			</P>
 		</Section>
@@ -670,7 +709,7 @@ const res = await fetch(\`${PUBLIC_API}/products?\${params}\`);`}
 			<CodeBlock
 				label='A search box'
 				code={`const params = new URLSearchParams({ search: input.value, status: 'live', limit: '10' });
-const { doc } = await fetch(\`${PUBLIC_API}/products?\${params}\`).then(r => r.json());`}
+const { doc } = await fetch(\`${PUBLIC_API}/products?apiKey=${PROJECT_KEY}&\${params}\`).then(r => r.json());`}
 			/>
 			<Note>
 				While someone types, wait about 300 ms after the last key before you send (debounce) — a request per key press soon
@@ -684,7 +723,7 @@ const { doc } = await fetch(\`${PUBLIC_API}/products?\${params}\`).then(r => r.j
 			lead='fields=<keys> answers with just those fields of each record — smaller and faster, for menus, cards and dropdowns.'>
 			<CodeBlock
 				label='Only names and prices'
-				code={`GET ${PUBLIC_API}/products?fields=name,price&limit=100
+				code={`GET ${PUBLIC_API}/products?apiKey=${PROJECT_KEY}&fields=name,price&limit=100
 
 { "doc": [ { "_id": "66f0…", "name": "Trail shoe", "price": 89 }, … ], "total": 37, … }`}
 			/>
@@ -701,7 +740,7 @@ const { doc } = await fetch(\`${PUBLIC_API}/products?\${params}\`).then(r => r.j
 			lead='populate=<links> answers with the linked records themselves instead of their ids.'>
 			<CodeBlock
 				label='A post with its author and the button inside its hero'
-				code={`GET ${PUBLIC_API}/posts/66f0…?populate=author,hero.button_page
+				code={`GET ${PUBLIC_API}/posts/66f0…?apiKey=${PROJECT_KEY}&populate=author,hero.button_page
 
 {
   "_id": "66f0…",
@@ -743,11 +782,11 @@ const { doc } = await fetch(\`${PUBLIC_API}/products?\${params}\`).then(r => r.j
 			</P>
 			<CodeBlock
 				label='Drafts, from your server'
-				code={`curl "${PUBLIC_API}/posts?status=draft" \\
+				code={`curl "${PUBLIC_API}/posts?apiKey=${PROJECT_KEY}&status=draft" \\
   -H "x-api-key: $MINT_SERVER_KEY"`}
 			/>
 			<Note tone='warn'>
-				Never put a server key in a page’s code — anyone can read it there. Without a key, <C>status=draft</C> answers 401.
+				Never put a server key in a page’s code — anyone can read it there. Without a server key, <C>status=draft</C> answers 401.
 			</Note>
 		</Section>
 
@@ -778,7 +817,7 @@ const { doc } = await fetch(\`${PUBLIC_API}/products?\${params}\`).then(r => r.j
 async function loadMore() {
   if (page >= totalPages) return;            // nothing left
   page += 1;
-  const res = await fetch(\`${PUBLIC_API}/products?status=live&sort=-createdAt&limit=12&page=\${page}\`);
+  const res = await fetch(\`${PUBLIC_API}/products?apiKey=${PROJECT_KEY}&status=live&sort=-createdAt&limit=12&page=\${page}\`);
   const data = await res.json();
   totalPages = data.totalPages;
   render(data.doc);                          // append to what's shown
@@ -822,7 +861,7 @@ async function loadMore() {
 			/>
 			<CodeBlock
 				label='Create a booking'
-				code={`await fetch('${PUBLIC_API}/bookings', {
+				code={`await fetch('${PUBLIC_API}/bookings?apiKey=${PROJECT_KEY}', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ guestName: 'Ana Lima', date: '2026-10-14', guests: 2 }),
@@ -841,7 +880,7 @@ async function loadMore() {
 			</P>
 			<CodeBlock
 				label='As a customer'
-				code={`const res = await fetch('${PUBLIC_API}/orders', {
+				code={`const res = await fetch('${PUBLIC_API}/orders?apiKey=${PROJECT_KEY}', {
   headers: { Authorization: 'Bearer ' + token },
 });`}
 			/>
@@ -863,7 +902,8 @@ async function loadMore() {
 					[
 						'401',
 						<>
-							Sign in first (<C>code: "customer_required"</C>) — the endpoint is for signed-in customers and the token is
+							No project key (<C>code: "api_key_missing"</C>) or one no project has (<C>code: "api_key_invalid"</C>) — see{' '}
+							<A href='#api-project-key'>the project key</A>. Sign in first (<C>code: "customer_required"</C>) — the endpoint is for signed-in customers and the token is
 							missing, expired or for another project. Or <C>code: "key_required"</C> — it needs a server key and none, a wrong
 							or a revoked one was sent.
 						</>,
@@ -926,18 +966,18 @@ async function loadMore() {
 			<P>
 				Open an endpoint and its <strong>Example request</strong> is at the top — switch between <strong>curl</strong> for a
 				terminal and <strong>fetch</strong> for your site or app, and copy it. The address is your project’s, the body has the
-				model’s fields filled in by example, and an endpoint for signed-in customers carries the{' '}
+				model’s fields filled in by example, the project key is on the address, and an endpoint for signed-in customers carries the{' '}
 				<C>Authorization: Bearer &lt;customer token&gt;</C> header to fill in. For instance, creating a booking:
 			</P>
 			<CodeBlock
 				label='curl'
-				code={`curl -X POST 'https://…/public/api/your-project/bookings' \\
+				code={`curl -X POST 'https://…/public/api/bookings?apiKey=${PROJECT_KEY}' \\
   -H 'Content-Type: application/json' \\
   -d '{"guest":"Ada Lovelace","nights":2}'`}
 			/>
 			<CodeBlock
 				label='fetch'
-				code={`const res = await fetch('https://…/public/api/your-project/bookings', {
+				code={`const res = await fetch('https://…/public/api/bookings?apiKey=${PROJECT_KEY}', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ guest: 'Ada Lovelace', nights: 2 }),
@@ -1066,14 +1106,15 @@ if (!res.ok) throw new Error(data.message);`}
 			<Terms
 				head={['Symptom', 'Why, and what to do']}
 				rows={[
-					['404 for everything', 'Check the project’s public name in the address, and that the project isn’t archived.'],
+					['401 for everything', 'The project key is missing or out of date — every call needs ?apiKey= with the key from API → Keys.'],
+					['404 for everything', 'Check the address has no project name in it (/public/api/products, not /public/api/acme-store/products), and that the project isn’t archived.'],
 					[
 						'A webhook says “Couldn’t reach it” or “No answer in 10 seconds”',
 						'Your server is down, the address is wrong, or it answers too slowly — answer first, then do the work. Send test shows the answer straight away.',
 					],
 					['The signature never matches', 'Use the body exactly as it arrived (not re-serialised JSON), and the secret shown last — making a new one retires the old.'],
 					['404 for one model', 'It isn’t Public, or the action you’re calling isn’t ticked.'],
-					['401', 'The model is for signed-in customers — sign in with the widget, or send the customer’s token.'],
+					['401 customer_required', 'The model is for signed-in customers — sign in with the widget, or send the customer’s token.'],
 					['A field is missing from the answer', 'Only the model’s own fields come out; check the field’s key in Models — and that fields= doesn’t leave it out.'],
 					[
 						'A filter changes nothing',

@@ -1,6 +1,6 @@
 import Guide from '@/components/docs/Guide';
 import { A, C, CodeBlock, List, Note, P, Section, Terms } from '@/components/docs/prose';
-import { API_ORIGIN, APP_URL, PUBLIC_API } from '@/lib/config';
+import { API_ORIGIN, APP_URL, PROJECT_KEY, PUBLIC_API } from '@/lib/config';
 import { guideMeta } from '@/lib/seo';
 
 export const metadata = guideMeta('/customers');
@@ -21,7 +21,7 @@ const SECTIONS = [
 	{ id: 'faq', title: 'Troubleshooting' },
 ];
 
-const WIDGET = `<script src="${API_ORIGIN}/public/widget.js" data-project="<project>" async></script>
+const WIDGET = `<script src="${API_ORIGIN}/public/widget.js" data-key="<project key>" async></script>
 <div data-mint-login></div>`;
 
 const Customers = () => (
@@ -120,13 +120,13 @@ const Customers = () => (
 			/>
 			<CodeBlock
 				label='Sign in from an app'
-				code={`const res = await fetch('${PUBLIC_API}/auth/login', {
+				code={`const res = await fetch('${PUBLIC_API}/auth/login?apiKey=${PROJECT_KEY}', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ email, password }),
 });
 const { token, customer, message } = await res.json();
-// then: fetch('${PUBLIC_API}/orders', { headers: { Authorization: 'Bearer ' + token } })`}
+// then: fetch('${PUBLIC_API}/orders?apiKey=${PROJECT_KEY}', { headers: { Authorization: 'Bearer ' + token } })`}
 			/>
 		</Section>
 
@@ -169,7 +169,7 @@ const { token, customer, message } = await res.json();
 			<Terms
 				head={['Symptom', 'Why, and what to do']}
 				rows={[
-					['The card doesn’t appear', <>Check the script’s <C>data-project</C> and that the page has a <C>data-mint-login</C> element.</>],
+					['The card doesn’t appear', <>Check the script’s <C>data-key</C> is the project key from API → Keys, and that the page has a <C>data-mint-login</C> element.</>],
 					['“An account with this email exists”', 'They signed up before — sign in instead.'],
 					['“This account has been switched off”', 'Switched off under Customers. Switch them on again.'],
 					['Signed in, but API calls get 401', <>Use <C>MintAuth.fetch</C> (or send the token) — plain fetch has no token.</>],

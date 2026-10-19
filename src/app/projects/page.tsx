@@ -19,7 +19,7 @@ const SECTIONS = [
 	{ id: 'project-settings', title: 'Project settings and business details' },
 	{ id: 'project-comments', title: 'Comments and @mentions' },
 	{ id: 'media-library', title: 'Media library' },
-	{ id: 'address', title: 'Its public address' },
+	{ id: 'address', title: 'Its public address and key' },
 	{ id: 'archive', title: 'Archiving and deleting' },
 	{ id: 'faq', title: 'Troubleshooting' },
 ];
@@ -284,19 +284,20 @@ const Projects = () => (
 
 		<Section
 			id='address'
-			title='Its public address'
-			lead='Every project has a short public name used in its API.'>
+			title='Its public address and key'
+			lead='Every project has a short public name for its pages in MINT, and a project key that names it on its API.'>
 			<P>
-				It’s made from your organization’s and the project’s names when you create it — <C>acme-store</C> for the “Store”
-				project of Acme — and doesn’t change when you rename either, so your site keeps working. Your site and the snippets use
-				it:
+				The name is made from your organization’s and the project’s names when you create it — <C>acme-store</C> for the
+				“Store” project of Acme — and doesn’t change when you rename either. Your site and the snippets name the project by its{' '}
+				<A href='/public-api#api-project-key'>project key</A> instead (API → Keys):
 			</P>
 			<Terms
 				head={['Where', 'Looks like']}
 				rows={[
-					['The public API', <C key='a'>/public/api/acme-store/products</C>],
-					['The sign-in widget', <C key='w'>data-project="acme-store"</C>],
-					['The analytics tracker', <C key='t'>data-project="acme-store"</C>],
+					['The project’s pages in MINT', <C key='p'>/acme-store/products</C>],
+					['The public API', <C key='a'>/public/api/products?apiKey=mint_pk_…</C>],
+					['The sign-in widget', <C key='w'>data-key="mint_pk_…"</C>],
+					['The analytics tracker', <C key='t'>data-key="mint_pk_…"</C>],
 				]}
 			/>
 			<P>

@@ -21,7 +21,7 @@ const SECTIONS = [
 	{ id: 'faq', title: 'Troubleshooting' },
 ];
 
-const SNIPPET = `<script src="${API_ORIGIN}/public/track.js" data-project="<project>" defer></script>`;
+const SNIPPET = `<script src="${API_ORIGIN}/public/track.js" data-key="<project key>" defer></script>`;
 
 const Analytics = () => (
 	<Guide
@@ -146,7 +146,7 @@ MintAnalytics.pageview();`}
 			<Terms
 				head={['Symptom', 'Why, and what to do']}
 				rows={[
-					['“No visits recorded yet”', 'Check the snippet is on the pages and its data-project is right.'],
+					['“No visits recorded yet”', 'Check the snippet is on the pages and its data-key is the project key from API → Keys.'],
 					['My own visits don’t show', 'Your domain isn’t in the project’s list, or your browser sends Do Not Track.'],
 					['There’s no Analytics in the sidebar', 'The project is an app (analytics is for websites), or your role can’t read records.'],
 					['Testing on localhost doesn’t count', 'localhost isn’t one of your domains. Test on the live site, or clear the domains while you test.'],

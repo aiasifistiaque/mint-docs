@@ -1,6 +1,6 @@
 import Guide from '@/components/docs/Guide';
 import { A, C, CodeBlock, H3, List, Note, P, Section, Terms } from '@/components/docs/prose';
-import { PUBLIC_API } from '@/lib/config';
+import { PROJECT_KEY, PUBLIC_API } from '@/lib/config';
 import { guideMeta } from '@/lib/seo';
 
 export const metadata = guideMeta('/websites');
@@ -42,10 +42,11 @@ const SECTIONS = [
 
 const NEXT_EXAMPLE = `// app/[[...slug]]/page.tsx — Next.js, one route for every page
 const API = '${PUBLIC_API}';
+const KEY = '${PROJECT_KEY}'; // the project key — API → Keys
 
 const load = async (slug: string[] = []) => {
   const path = '/' + slug.join('/');
-  const res = await fetch(\`\${API}/pages/by-path?path=\${encodeURIComponent(path)}\`, { next: { revalidate: 60 } });
+  const res = await fetch(\`\${API}/pages/by-path?apiKey=\${KEY}&path=\${encodeURIComponent(path)}\`, { next: { revalidate: 60 } });
   return res.ok ? res.json() : null;
 };
 
@@ -279,7 +280,7 @@ const Websites = () => (
 		<Section
 			id='site-api'
 			title='The site API'
-			lead='Two read-only calls, no key.'>
+			lead='Two read-only calls, with the project key (API → Keys).'>
 			<Terms
 				head={['Call', 'Answers']}
 				rows={[
@@ -300,8 +301,8 @@ const Websites = () => (
 			/>
 			<CodeBlock
 				label='Site API'
-				code={`const site = await fetch('${PUBLIC_API}/site').then(r => r.json());
-const about = await fetch('${PUBLIC_API}/pages/by-path?path=/about').then(r => r.json());`}
+				code={`const site = await fetch('${PUBLIC_API}/site?apiKey=${PROJECT_KEY}').then(r => r.json());
+const about = await fetch('${PUBLIC_API}/pages/by-path?apiKey=${PROJECT_KEY}&path=/about').then(r => r.json());`}
 			/>
 			<P>
 				Need something else — every block with section “faq”, say? The models’ own public API is there too:{' '}

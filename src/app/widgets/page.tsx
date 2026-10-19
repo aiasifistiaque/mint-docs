@@ -31,7 +31,7 @@ const SECTIONS = [
 	{ id: 'faq', title: 'Troubleshooting' },
 ];
 
-const SCRIPT = `<script src="${API_ORIGIN}/public/mint.js" data-project="<project>" async></script>`;
+const SCRIPT = `<script src="${API_ORIGIN}/public/mint.js" data-key="<project key>" async></script>`;
 
 const Widgets = () => (
 	<Guide
@@ -411,7 +411,7 @@ const Widgets = () => (
 			<Terms
 				head={['Symptom', 'Why, and what to do']}
 				rows={[
-					['Nothing shows', <>Is the widget added and switched on? Is the script’s <C>data-project</C> right? The browser console says which.</>],
+					['Nothing shows', <>Is the widget added and switched on? Is the script’s <C>data-key</C> the project key from API → Keys? The browser console says which.</>],
 					['A change doesn’t show', 'Sites pick up saved changes within a minute. Reload the page.'],
 					['The colours clash with my page', <>Set <em>Light or dark</em> to Always light or Always dark, or pick a colour under <em>Look</em>.</>],
 					['Signed in, but my API calls get 401', <>Use <C>Mint.api</C>: plain <C>fetch</C> doesn’t send the customer’s token.</>],

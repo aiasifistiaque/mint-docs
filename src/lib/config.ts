@@ -17,8 +17,10 @@ export const API_ORIGIN = trim(process.env.NEXT_PUBLIC_API_URL || 'https://api.m
 /** The marketing website. */
 export const WEBSITE_URL = trim(process.env.NEXT_PUBLIC_WEBSITE_URL || 'https://mintapp.shop');
 
-/** A project's public API, with `<project>` standing in for its public slug. */
-export const PUBLIC_API = `${API_ORIGIN}/public/api/<project>`;
+/** The public API's address. The project key names the project on it — every call sends ?apiKey= (backend docs/api-builder D14). */
+export const PUBLIC_API = `${API_ORIGIN}/public/api`;
+/** A project key as the guides show it (API → Keys has the real one). */
+export const PROJECT_KEY = 'mint_pk_…';
 
 /** The app's home once signed in; the app sends anyone signed out to its login page first. */
 export const APP_HOME = `${APP_URL}/dashboard`;
