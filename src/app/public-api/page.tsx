@@ -228,7 +228,9 @@ curl '${PUBLIC_API}/products' -H 'X-Api-Key: ${PROJECT_KEY}'`}
 						<>
 							Your <A href='/customers'>customers</A>, signed in with the sign-in widget or your own form. Rules can use who
 							they are: <strong>Only their own records</strong> makes each customer reach only the records they created
-							through the API — orders, bookings, support requests.
+							through the API — orders, bookings, support requests. <strong>Which roles</strong> lets in only some kinds of
+							customers (staff, members, VIPs) — see <A href='/widgets#login-roles'>Roles</A>; anyone else gets{' '}
+							<C>403</C> with <C>code: "role_required"</C>.
 						</>,
 					],
 					[
@@ -273,7 +275,8 @@ curl '${PUBLIC_API}/products' -H 'X-Api-Key: ${PROJECT_KEY}'`}
 			<P>
 				On an endpoint for signed-in customers a rule can compare with the customer: <strong>Owner is the signed-in customer</strong>{' '}
 				(what “only their own records” is), or a text field with <strong>their email</strong>, <strong>their name</strong> or{' '}
-				<strong>their phone</strong> — orders placed with a customer’s email before they had an account, say. A value is checked
+				<strong>their phone</strong> — orders placed with a customer’s email before they had an account, say — or an options field
+				with <strong>their role</strong>. A customer without one (no role, no phone) matches nothing. A value is checked
 				against the field when you save (“Price” takes a number), so a rule can’t fail later for being mistyped. Archived records
 				and, on models with record access, private ones never reach the API whatever the rules say.
 			</P>

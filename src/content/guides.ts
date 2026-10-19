@@ -313,6 +313,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'look', title: 'The look' },
 			{ id: 'login', title: 'Login & account' },
 			{ id: 'login-customers', title: 'Your customer model' },
+			{ id: 'login-roles', title: 'Roles' },
 			{ id: 'login-reset', title: 'Forgot password' },
 			{ id: 'shop', title: 'Shop' },
 			{ id: 'cart', title: 'Cart' },

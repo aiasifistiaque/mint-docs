@@ -517,6 +517,7 @@ const Models = () => (
 			</P>
 			<List
 				items={[
+					<>A project has one sign-in model. To tell kinds of people apart (customers, staff, members), give it an Options field such as Role — see <A href='/widgets#login-roles'>Roles</A>.</>,
 					<>The model needs an Email (or Text) field, because people sign in with it.</>,
 					<>It must be a list. A single type holds one record, so it can’t hold accounts.</>,
 					<>Passwords are never stored in the records. MINT keeps them safely, apart from your data.</>,

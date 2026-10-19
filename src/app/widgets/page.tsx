@@ -20,6 +20,7 @@ const SECTIONS = [
 	{ id: 'look', title: 'The look' },
 	{ id: 'login', title: 'Login & account' },
 	{ id: 'login-customers', title: 'Your customer model' },
+	{ id: 'login-roles', title: 'Roles' },
 	{ id: 'login-reset', title: 'Forgot password' },
 	{ id: 'shop', title: 'Shop' },
 	{ id: 'cart', title: 'Cart' },
@@ -191,6 +192,7 @@ const Widgets = () => (
 					['Email', 'Required. An Email or Text field.'],
 					['Name', 'Optional. A Text field, filled from the sign-up form.'],
 					['Phone', <>Optional. A Text field. Turn on <em>Ask for a phone number on sign-up</em> to collect one.</>],
+					['Role', <>Optional. An Options field, such as Role with Customer, Staff and VIP. See <A href='#login-roles'>Roles</A>.</>],
 				]}
 			/>
 			<P>
@@ -203,6 +205,37 @@ const Widgets = () => (
 				<A href='/public-api'>public API</A> on, signed-in and owner-only, a customer can read and update the record their
 				sign-up made, and nobody else’s. A record your team made earlier is linked but not handed over, because an email
 				address alone doesn’t prove who someone is.
+			</P>
+		</Section>
+
+		<Section
+			id='login-roles'
+			title='Roles'
+			lead='One sign-in model for everyone; a Role field tells kinds of people apart.'>
+			<P>
+				A project has one sign-in model. Rather than a model each for customers, members and staff, give that model an Options
+				field such as <em>Role</em> (Customer, Member, Staff…) and choose it as the <em>Role</em> in the widget’s{' '}
+				<em>Customers</em> step. Everyone signs in the same way, with one password, and an email belongs to one account.
+			</P>
+			<List
+				items={[
+					<>New sign-ups get the field’s default. Give it one, such as Customer.</>,
+					<>Only your team changes a role, on the record in the panel. Your site and the API can’t, so nobody can make themselves staff.</>,
+					<>A change counts straight away. The customer doesn’t need to sign in again.</>,
+					<>
+						On an endpoint for signed-in customers, tick <strong>Which roles</strong> to let in only those (see{' '}
+						<A href='/public-api#api-access'>Who can call it</A>). A rule can also compare a field with <em>their role</em>.
+					</>,
+					<>Your own code sees it as <C>Mint.auth.user.role</C>.</>,
+					<>
+						A record your team made before the person signed up (linked by email) gives them no role. An email address alone
+						doesn’t prove who someone is. Set the role on their record once you know.
+					</>,
+				]}
+			/>
+			<P>
+				Details that only some people have, such as a staff member’s department, can live in a model of their own that links
+				to the sign-in model.
 			</P>
 		</Section>
 
@@ -374,7 +407,7 @@ const Widgets = () => (
 				head={['Use', 'Does']}
 				rows={[
 					[<C key='r'>await Mint.auth.ready</C>, 'Waits until the stored sign-in has been checked; gives the customer or null.'],
-					[<C key='u'>Mint.auth.user</C>, <>The signed-in customer, or null. <C>.record</C> is their record in <A href='#login-customers'>your customer model</A>, when you picked one.</>],
+					[<C key='u'>Mint.auth.user</C>, <>The signed-in customer, or null. <C>.record</C> is their record in <A href='#login-customers'>your customer model</A>, when you picked one; <C>.role</C> their <A href='#login-roles'>role</A>, or null.</>],
 					[<C key='i'>Mint.auth.signIn(email, password)</C>, 'Signs in from your own form.'],
 					[<C key='s'>Mint.auth.signUp({'{ name, email, password, phone }'})</C>, 'Creates the account and signs in. The phone is optional.'],
 					[<C key='o'>Mint.auth.signOut()</C>, 'Signs out on this browser.'],
