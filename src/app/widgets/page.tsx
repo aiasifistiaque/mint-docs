@@ -21,6 +21,7 @@ const SECTIONS = [
 	{ id: 'login', title: 'Login & account' },
 	{ id: 'login-customers', title: 'Your customer model' },
 	{ id: 'login-roles', title: 'Customer roles' },
+	{ id: 'login-role-logins', title: 'A login per customer role' },
 	{ id: 'login-reset', title: 'Forgot password' },
 	{ id: 'shop', title: 'Shop' },
 	{ id: 'cart', title: 'Cart' },
@@ -135,6 +136,7 @@ const Widgets = () => (
 					['Opens on', 'Sign in or Create an account: which form shows first.'],
 					['Let visitors create accounts', 'Off: only people who already have an account can sign in.'],
 					['Ask for a phone number on sign-up', 'Adds an optional phone field. It’s kept with the account and copied to your customer model’s phone field.'],
+					['Customer role (this login)', <>Everyone (one login for all), or one customer role — a seller login, say. See <A href='#login-role-logins'>A login per customer role</A>.</>],
 					['Show “Forgot your password?”', <>On by default. Emails a link to choose a new password — see <A href='#login-reset'>Forgot password</A>.</>],
 				]}
 			/>
@@ -238,6 +240,42 @@ const Widgets = () => (
 				Details that only some customers have, such as a seller’s shop name, can live in a model of their own that links
 				to the sign-in model.
 			</P>
+		</Section>
+
+		<Section
+			id='login-role-logins'
+			title='A login per customer role'
+			lead='A sellers’ login, a pickers’ login: each lets in its own customer role.'>
+			<P>
+				Put a login on a page for one customer role with <C>data-customer-role</C>, or set the widget’s{' '}
+				<em>Customer role (this login)</em> for every page:
+			</P>
+			<CodeBlock
+				label='a sellers’ sign-in page'
+				code={`<div data-mint="login" data-customer-role="seller"></div>`}
+			/>
+			<List
+				items={[
+					<>Only accounts with that customer role sign in there. Anyone else is told it’s for another kind of account, and gets no session.</>,
+					<>
+						Its <em>Create an account</em> makes that role, but only for roles you switch on under{' '}
+						<strong>Who can sign up as each customer role</strong> in the widget’s <em>Customers</em> step. The default role is
+						always on. For the others (pickers, staff), the link doesn’t show, and your team gives the role on the record.
+					</>,
+					<>
+						Protect what each role uses with endpoints: give sellers their own paths (<C>/seller/orders</C>) and tick{' '}
+						<A href='/public-api#api-access'>Which customer roles</A> on them.
+					</>,
+					<>
+						Your own form can do the same: <C>{'Mint.auth.signIn(email, password, { customerRole: \'seller\' })'}</C> and{' '}
+						<C>{'Mint.auth.signUp({ …, customerRole: \'seller\' })'}</C>.
+					</>,
+					<>
+						Signing up with the email of a record your team already made links that record but gives no customer role. Set it on
+						the record once you know who they are.
+					</>,
+				]}
+			/>
 		</Section>
 
 		<Section
