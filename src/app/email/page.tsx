@@ -1,5 +1,5 @@
 import Guide from '@/components/docs/Guide';
-import { List, Note, P, Section, Terms } from '@/components/docs/prose';
+import { A, List, Note, P, Section, Terms } from '@/components/docs/prose';
 import { guideMeta } from '@/lib/seo';
 
 export const metadata = guideMeta('/email');
@@ -257,7 +257,9 @@ const Email = () => (
 			lead='Each Email page lists the last 50 emails: when, what kind, to whom, the subject, and whether it went.'>
 			<P>
 				A project’s page shows that project’s emails and which account each went through; the organization’s page shows
-				them all. Only the subject is kept, never the message itself. Entries go after 180 days.
+				them all. For most emails only the subject is kept. Automation emails keep their message too: the eye shows one as
+				it went out, and a failed one has Resend — see{' '}
+				<A href='/automations#automation-emails'>Automations → seeing and resending emails</A>. Entries go after 180 days.
 			</P>
 		</Section>
 

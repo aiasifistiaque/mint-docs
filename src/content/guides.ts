@@ -236,6 +236,7 @@ export const GUIDES: Guide[] = [
 		topics: [
 			{ id: 'automation-trigger', title: 'When it runs' },
 			{ id: 'automation-actions', title: 'What it does' },
+			{ id: 'automation-emails', title: 'Seeing and resending emails' },
 			{ id: 'automation-runs', title: 'Runs' },
 		],
 	},

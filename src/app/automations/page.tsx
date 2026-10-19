@@ -4,7 +4,7 @@ import { guideMeta } from '@/lib/seo';
 
 export const metadata = guideMeta('/automations');
 
-/** Automations (backend docs/automations): triggers, conditions, actions, trying one, runs. Sections are GuideLink targets. */
+/** Automations (backend docs/automations): triggers, conditions, actions, emails (AU-03c), trying one, runs. Sections are GuideLink targets. */
 
 const SECTIONS = [
 	{ id: 'automations', title: 'What an automation is' },
@@ -12,6 +12,7 @@ const SECTIONS = [
 	{ id: 'automation-conditions', title: 'Only if' },
 	{ id: 'automation-actions', title: 'What it does' },
 	{ id: 'automation-placeholders', title: 'Filling in the record' },
+	{ id: 'automation-emails', title: 'Writing, seeing and resending emails' },
 	{ id: 'automation-try', title: 'Trying one on a record' },
 	{ id: 'automation-runs', title: 'Runs' },
 	{ id: 'automation-limits', title: 'Limits and loops' },
@@ -120,6 +121,48 @@ const Automations = () => (
 		</Section>
 
 		<Section
+			id='automation-emails'
+			title='Writing, seeing and resending emails'
+			lead='The email’s message is plain text with a little formatting, and every email an automation sends is kept so you can see it.'>
+			<P>
+				<strong>Writing.</strong> Click anywhere in the message: the cursor goes where you clicked and a small menu opens
+				there — <strong>Insert a field</strong> puts one in at the cursor (or over the words you selected), and{' '}
+				<strong>B</strong>, <strong>I</strong> and the list button make the selected words bold, italic or a bulleted list.
+				Right-click opens the same menu; ⌘B / Ctrl+B and ⌘I / Ctrl+I work without it, and typing closes it. The subject’s
+				Insert a field also puts the field where the cursor is.
+			</P>
+			<Terms
+				head={['You write', 'The email shows']}
+				rows={[
+					[<C key='b'>{'**thank you**'}</C>, <strong key='b2'>thank you</strong>],
+					[<C key='i'>{'*really*'}</C>, <em key='i2'>really</em>],
+					[<C key='l'>{'- One cake'}</C>, 'A bulleted line — lines starting with “- ” in a row make one list'],
+					['A blank line', 'A new paragraph'],
+				]}
+			/>
+			<P>
+				<strong>Preview</strong>, under the message, shows how it reads, with each field as a grey chip. A value from the
+				record is never treated as formatting — a name with a * in it stays as it is.
+			</P>
+			<P>
+				<strong>Seeing them.</strong> Open a run in <A href='#automation-runs'>Runs</A>: the emails it sent are listed under
+				it, each with whether it went. The eye opens the email as it went out — to whom, the subject, the files it carried,
+				the message in your email design (or as plain text), and why it failed if it did. Project → Email’s{' '}
+				<A href='/email#email-log'>What was sent</A> has the same eye.
+			</P>
+			<P>
+				<strong>Resending.</strong> A failed email has <strong>Resend</strong>, there and in the eye’s window. It sends the
+				same subject, message and files again through the project’s email account as it is now — fix the address’s mailbox
+				or connect an account first, then resend. The new attempt is listed as “A resend”; the failed one shows Resent (or
+				Resend failed, and you can try again). An email that went can’t be resent, and resends count toward the 300 a day.
+			</P>
+			<Note>
+				When one of several addresses fails, the others still get theirs; the run is marked failed and the next actions don’t
+				run. An email with no account to go through is listed as failed too, so it can be resent once one is connected.
+			</Note>
+		</Section>
+
+		<Section
 			id='automation-try'
 			title='Trying one on a record'
 			lead='The flask button on the list.'>
@@ -135,7 +178,8 @@ const Automations = () => (
 			lead='The Runs tab: every run in the last 30 days.'>
 			<P>
 				Each run says which automation ran on which record, who saved it, and each action’s result. A failed run shows why —
-				“Set up your email first”, “your server answered 500”. Filter by automation or result.
+				“Set up your email first”, “your server answered 500”. Filter by automation or result. A run that sent emails lists
+				them, with the eye and Resend (see <A href='#automation-emails'>emails</A>).
 			</P>
 		</Section>
 
