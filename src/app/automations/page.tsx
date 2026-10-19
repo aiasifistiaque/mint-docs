@@ -106,6 +106,12 @@ const Automations = () => (
 				Write a field’s key in double braces, or pick it from <strong>Insert a field</strong>: <C>{'{{title}} was won'}</C>{' '}
 				becomes “Big order was won”. A linked record shows by its name, a date by its day.
 			</P>
+			<P>
+				A linked record’s other details work too: <C>{'{{member.email}}'}</C> or <C>{'{{member.phone}}'}</C> on a Task that
+				picks a Member gives that member’s email or phone. Insert a field lists them under “Member’s details” (the click
+				menu in an email has a search box). If a field picks several records, their details are joined with commas. One
+				level only — a member’s company’s address can’t be reached this way.
+			</P>
 			<Terms
 				head={['Also', 'Becomes']}
 				rows={[
