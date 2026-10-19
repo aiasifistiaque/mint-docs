@@ -78,7 +78,9 @@ const Models = () => (
 					</>,
 					<>
 						<strong>Finish</strong> — where it goes in the sidebar, a summary in plain words, and{' '}
-						<strong>Create</strong>. Then add the first record straight away, or open the table.
+						<strong>Create</strong>. Pick a sidebar section, or <strong>+ New section…</strong> at the end of the list
+						to name a new one — it’s added to the sidebar and picked. Then add the first record straight away, or open
+						the table.
 					</>,
 				]}
 			/>

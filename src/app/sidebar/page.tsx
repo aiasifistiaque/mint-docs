@@ -34,7 +34,8 @@ const Sidebar = () => (
 			<P>
 				The top of the sidebar is yours: <strong>sections</strong> (headings with an icon, like “Sales”) and{' '}
 				<strong>pages</strong> (links under them, like “Orders”). New models add their page to the section you chose when
-				creating them; here you rename, reorder, hide and restrict them. Each project has its own sidebar.
+				creating them (or one you made there with <em>+ New section…</em>, which goes last); here you rename, reorder,
+				hide and restrict them. Each project has its own sidebar.
 			</P>
 			<P>
 				The <em>API</em>, <em>Build</em> and <em>Organization</em> sections below yours are fixed — they follow each

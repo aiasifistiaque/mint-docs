@@ -152,7 +152,8 @@ const GettingStarted = () => (
 						sensible, so <strong>Next</strong> is fine for a first model.
 					</>,
 					<>
-						On the last step, choose the sidebar section for it and press <strong>Create model</strong>.
+						On the last step, choose the sidebar section for it (or <strong>+ New section…</strong> to make one) and
+						press <strong>Create model</strong>.
 					</>,
 				]}
 			/>
