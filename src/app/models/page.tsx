@@ -26,6 +26,7 @@ const SECTIONS = [
 	{ id: 'date-formulas', title: 'Formula (date)' },
 	{ id: 'models-links', title: 'Linking models' },
 	{ id: 'models-access', title: 'Who sees the records' },
+	{ id: 'models-signin', title: 'Sign-in' },
 	{ id: 'models-drafts', title: 'Drafts and publishing' },
 	{ id: 'models-schedule', title: 'Scheduling' },
 	{ id: 'changing', title: 'Changing a model' },
@@ -503,6 +504,25 @@ const Models = () => (
 				For the people using your site or app it’s different: a public model can be set to{' '}
 				<A href='/public-api#who'>customers’ own records only</A>, so each customer sees just what they created.
 			</P>
+		</Section>
+
+		<Section
+			id='models-signin'
+			title='Sign-in'
+			lead='Let people sign up and sign in to your site or app as one of a model’s records.'>
+			<P>
+				On a model’s <strong>Advanced</strong> tab, switch on <strong>People can sign up and sign in</strong>. The model can then
+				hold the customers of your <A href='/widgets#login-customers'>Login widget</A>: pick it in the widget’s setup. Models
+				with the switch off aren’t offered there.
+			</P>
+			<List
+				items={[
+					<>The model needs an Email (or Text) field, because people sign in with it.</>,
+					<>It must be a list. A single type holds one record, so it can’t hold accounts.</>,
+					<>Passwords are never stored in the records. MINT keeps them safely, apart from your data.</>,
+					<>While the Login widget uses the model, the switch can’t be turned off. Choose another model, or MINT’s Customers, in the widget first.</>,
+				]}
+			/>
 		</Section>
 
 		<Section

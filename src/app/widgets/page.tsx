@@ -8,7 +8,7 @@ export const metadata = guideMeta('/widgets');
 /**
  * Site widgets (backend docs/widgets): adding a widget with the setup wizard
  * (W-24), the mint.js script, the shared look,
- * the login widget and its customer model, the shop, cart, checkout, thank-you page and My orders
+ * the login widget, its customer model and forgot password (W-25), the shop, cart, checkout, thank-you page and My orders
  * (W-05/W-07), window.Mint and what's coming. The panel's Widgets page
  * (src/app/widgets) links each panel here — the section ids are GuideLink
  * targets (GuideLink.tsx GUIDE_OF).
@@ -20,6 +20,7 @@ const SECTIONS = [
 	{ id: 'look', title: 'The look' },
 	{ id: 'login', title: 'Login & account' },
 	{ id: 'login-customers', title: 'Your customer model' },
+	{ id: 'login-reset', title: 'Forgot password' },
 	{ id: 'shop', title: 'Shop' },
 	{ id: 'cart', title: 'Cart' },
 	{ id: 'shop-orders', title: 'The Shop’s orders' },
@@ -133,6 +134,7 @@ const Widgets = () => (
 					['Opens on', 'Sign in or Create an account: which form shows first.'],
 					['Let visitors create accounts', 'Off: only people who already have an account can sign in.'],
 					['Ask for a phone number on sign-up', 'Adds an optional phone field. It’s kept with the account and copied to your customer model’s phone field.'],
+					['Show “Forgot your password?”', <>On by default. Emails a link to choose a new password — see <A href='#login-reset'>Forgot password</A>.</>],
 				]}
 			/>
 			<P>
@@ -157,7 +159,9 @@ const Widgets = () => (
 			lead='Accounts are kept in MINT’s Customers by default. You can keep them with a model of your own instead.'>
 			<P>
 				Out of the box, everyone who signs up is on your <A href='/customers'>Customers</A> page. If you have a model of your
-				own for customers, for example <em>Members</em> or <em>Customers</em>, pick it in the setup’s <em>Customers</em> step,
+				own for customers, for example <em>Members</em> or <em>Customers</em>, first open it to sign-in: switch on{' '}
+				<strong>People can sign up and sign in</strong> on the model’s <A href='/models#models-signin'>Advanced tab</A>. Only
+				models switched on there are offered. Then pick it in the widget setup’s <em>Customers</em> step,
 				choose which fields hold the email, name and phone, then choose how:
 			</P>
 			<Terms
@@ -199,6 +203,29 @@ const Widgets = () => (
 				<A href='/public-api'>public API</A> on, signed-in and owner-only, a customer can read and update the record their
 				sign-up made, and nobody else’s. A record your team made earlier is linked but not handed over, because an email
 				address alone doesn’t prove who someone is.
+			</P>
+		</Section>
+
+		<Section
+			id='login-reset'
+			title='Forgot password'
+			lead='Customers who forget their password get an email with a link to choose a new one.'>
+			<P>
+				Under the sign-in form there’s a <em>Forgot your password?</em> link. The customer types their email and is told a link
+				is on its way. They see the same message whether or not that email has an account, so nobody can use it to find out who
+				your customers are. It works the same for accounts in MINT’s Customers and accounts your own model holds.
+			</P>
+			<List
+				items={[
+					<>The email comes from your project’s own email account (<em>Project → Email</em>, or your organization’s). Until one is set up, visitors are told the email can’t be sent.</>,
+					<>The link leads back to the page they asked from, as long as it’s on one of your project’s domains. Anywhere else, it opens a <em>Choose a new password</em> page hosted by MINT, so a link never goes to a site that isn’t yours.</>,
+					<>The link works once, for an hour. Setting the new password signs them in there and signs them out on every other device.</>,
+				]}
+			/>
+			<P>
+				The email shows in your email log as <em>Password reset</em>, using your email design. To hide the link, switch off{' '}
+				<em>Show “Forgot your password?”</em> in the widget’s options. Building your own form? Use{' '}
+				<A href='#mint-js'>Mint.auth.forgotPassword and resetPassword</A>.
 			</P>
 		</Section>
 
@@ -351,6 +378,8 @@ const Widgets = () => (
 					[<C key='i'>Mint.auth.signIn(email, password)</C>, 'Signs in from your own form.'],
 					[<C key='s'>Mint.auth.signUp({'{ name, email, password, phone }'})</C>, 'Creates the account and signs in. The phone is optional.'],
 					[<C key='o'>Mint.auth.signOut()</C>, 'Signs out on this browser.'],
+					[<C key='f'>Mint.auth.forgotPassword(email)</C>, 'Emails a link back to this page to choose a new password.'],
+					[<C key='r'>Mint.auth.resetPassword(token, password)</C>, <>Sets the new password and signs in. When the page is opened from the link, the token is <C>Mint.auth.resetToken</C> (taken out of the address bar).</>],
 					[<C key='c'>Mint.auth.onChange(cb)</C>, 'Calls cb with the customer (or null) on every sign-in and sign-out.'],
 					[<C key='a'>Mint.api(path, init)</C>, <>Calls your public API, as the customer when one is signed in. Gives a <C>fetch</C> Response.</>],
 					[<C key='e'>Mint.on(event, cb)</C>, <>Listens for widget events, e.g. <C>auth</C> or <C>cart</C>. They also fire on <C>document</C> as <C>mint:auth</C>, <C>mint:cart</C>.</>],

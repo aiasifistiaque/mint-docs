@@ -157,6 +157,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'models-fields', title: 'Fields' },
 			{ id: 'models-links', title: 'Linking models' },
 			{ id: 'models-access', title: 'Private records' },
+			{ id: 'models-signin', title: 'Sign-in' },
 		],
 	},
 	{
@@ -312,6 +313,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'look', title: 'The look' },
 			{ id: 'login', title: 'Login & account' },
 			{ id: 'login-customers', title: 'Your customer model' },
+			{ id: 'login-reset', title: 'Forgot password' },
 			{ id: 'shop', title: 'Shop' },
 			{ id: 'cart', title: 'Cart' },
 			{ id: 'checkout', title: 'Checkout' },
