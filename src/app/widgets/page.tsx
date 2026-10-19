@@ -6,17 +6,20 @@ import { guideMeta } from '@/lib/seo';
 export const metadata = guideMeta('/widgets');
 
 /**
- * Site widgets (backend docs/widgets): the mint.js script, the shared look,
- * the login widget, the shop, cart, checkout, thank-you page and My orders
+ * Site widgets (backend docs/widgets): adding a widget with the setup wizard
+ * (W-24), the mint.js script, the shared look,
+ * the login widget and its customer model, the shop, cart, checkout, thank-you page and My orders
  * (W-05/W-07), window.Mint and what's coming. The panel's Widgets page
  * (src/app/widgets) links each panel here — the section ids are GuideLink
  * targets (GuideLink.tsx GUIDE_OF).
  */
 
 const SECTIONS = [
+	{ id: 'add-widget', title: 'Add a widget' },
 	{ id: 'add-mint', title: 'Add MINT to your site' },
 	{ id: 'look', title: 'The look' },
 	{ id: 'login', title: 'Login & account' },
+	{ id: 'login-customers', title: 'Your customer model' },
 	{ id: 'shop', title: 'Shop' },
 	{ id: 'cart', title: 'Cart' },
 	{ id: 'shop-orders', title: 'The Shop’s orders' },
@@ -35,6 +38,35 @@ const Widgets = () => (
 		href='/widgets'
 		sections={SECTIONS}
 		open={{ href: '/widgets', label: 'Open Widgets' }}>
+		<Section
+			id='add-widget'
+			title='Add a widget'
+			lead='The Widgets page starts empty. Add the widgets you want one at a time; a short setup walks you through each.'>
+			<P>
+				Open <em>Widgets</em> and press <em>Add a widget</em>. The setup takes a few steps:
+			</P>
+			<Terms
+				head={['Step', 'What you do']}
+				rows={[
+					['Widget', 'Pick one: Login & account, Cart, Checkout, Thank-you page or My orders. Widgets that are coming soon show greyed out.'],
+					['Customers', <>Login & account only: which of your models holds your customers, if any. See <A href='#login-customers'>Your customer model</A>.</>],
+					['Shop', <>Cart, Checkout, Thank-you page and My orders: which model holds your products (and, for all but the cart, where orders go). The <A href='#shop'>Shop</A> settings are right there to fill in and save.</>],
+					['Set up', 'The widget’s options, such as a card or a button, and what it asks for.'],
+					['Texts', 'Every word it shows, in your words or your visitors’ language. Leave one as it is to keep the default.'],
+					['Review', <>A preview, the code to put on your page, and <em>Switch it on now</em>. Press <em>Add widget</em>.</>],
+				]}
+			/>
+			<P>
+				Added widgets are listed on the Widgets page. Each one has a switch to turn it on or off straight away,{' '}
+				<em>Edit</em> (the same steps again, without picking the widget) and <em>Remove</em>. Removing takes it off your site
+				at once and puts its settings back to the defaults; you can add it again any time.
+			</P>
+			<Note>
+				A selling widget can be added before the Shop is set up. It’s added switched off, with a note saying what’s missing;
+				switch it on once the Shop is saved.
+			</Note>
+		</Section>
+
 		<Section
 			id='add-mint'
 			title='Add MINT to your site'
@@ -56,7 +88,7 @@ const Widgets = () => (
 			</P>
 			<List
 				items={[
-					'A widget shows only once you switch it on and save. Switch it off and it disappears from your site within a minute.',
+					'A widget shows only once it’s added and switched on. Switch it off (or remove it) and it disappears from your site within a minute.',
 					'Each widget’s code loads only on pages that use it.',
 					'Widgets draw in their own sealed area: your CSS can’t break them and theirs can’t touch your page.',
 					'Widgets added to the page later (single-page apps, pop-ups) are picked up too.',
@@ -81,8 +113,8 @@ const Widgets = () => (
 				]}
 			/>
 			<P>
-				Each widget has a live preview beside its settings, on a light or dark page. It shows your unsaved changes; nothing
-				goes live until you press <em>Save</em>.
+				The Look panel appears once you’ve added a widget, and has its own <em>Save</em>. Each widget’s setup ends with a
+				live preview on a light or dark page, showing your settings before anything goes live.
 			</P>
 		</Section>
 
@@ -100,6 +132,7 @@ const Widgets = () => (
 					['Layout', 'A card on the page (suits an account page), or a button that opens the card (suits a header).'],
 					['Opens on', 'Sign in or Create an account: which form shows first.'],
 					['Let visitors create accounts', 'Off: only people who already have an account can sign in.'],
+					['Ask for a phone number on sign-up', 'Adds an optional phone field. It’s kept with the account and copied to your customer model’s phone field.'],
 				]}
 			/>
 			<P>
@@ -119,11 +152,49 @@ const Widgets = () => (
 		</Section>
 
 		<Section
+			id='login-customers'
+			title='Your customer model'
+			lead='Keep the people who sign up in one of your own models, alongside the rest of your data.'>
+			<P>
+				Every account lives in MINT’s <A href='/customers'>Customers</A>, with its password kept safely (scrambled, never
+				shown to anyone). If you also have a model of your own for customers, for example a <em>Members</em> or{' '}
+				<em>Customers</em> model your team already works in, pick it in the setup’s <em>Customers</em> step. Then:
+			</P>
+			<List
+				items={[
+					'Each new account also gets a record in your model, with the email, name and phone filled into the fields you chose.',
+					'If your model already has a record with the same email (in any capitals), the account is linked to it instead. No duplicates.',
+					'Accounts made before you picked the model get their record the next time they sign in.',
+					'When a customer changes their name or phone on your site, their record changes too.',
+					'Passwords never go into your model. Signing in, staying signed in and signing out everywhere work as before.',
+				]}
+			/>
+			<Terms
+				head={['Field', 'Needs']}
+				rows={[
+					['Email', 'Required. An Email or Text field. It’s how an account finds its record.'],
+					['Name', 'Optional. A Text field, filled from the sign-up form.'],
+					['Phone', <>Optional. A Text field. Turn on <em>Ask for a phone number on sign-up</em> to collect one.</>],
+				]}
+			/>
+			<P>
+				The model must be a list (not a single record), and any other required field needs a default value, because the
+				record is made from the sign-up form alone. The panel says so if it doesn’t fit. If you later remove a field you
+				picked, sign-up keeps working; the setup then tells you to pick the fields again.
+			</P>
+			<P>
+				Your own code sees the record’s ID as <C>Mint.auth.user.record</C>. With your model’s{' '}
+				<A href='/public-api'>public API</A> on, signed-in and owner-only, a customer can read and update their own record and
+				nobody else’s.
+			</P>
+		</Section>
+
+		<Section
 			id='shop'
 			title='Shop'
 			lead='Tell the widgets which model is your catalogue. The cart, and later checkout, read prices and stock from it.'>
 			<P>
-				Widgets don’t assume what your models are called. On the Widgets page, under <em>Shop</em>, pick the model that
+				Widgets don’t assume what your models are called. In a selling widget’s setup (its <em>Shop</em> step), or under <em>Shop</em> on the Widgets page once one is added, pick the model that
 				holds your products and say what its fields mean. If your project came from the E-commerce or Products & orders
 				template, this is filled in for you: check it and save.
 			</P>
@@ -263,9 +334,9 @@ const Widgets = () => (
 				head={['Use', 'Does']}
 				rows={[
 					[<C key='r'>await Mint.auth.ready</C>, 'Waits until the stored sign-in has been checked; gives the customer or null.'],
-					[<C key='u'>Mint.auth.user</C>, 'The signed-in customer, or null.'],
+					[<C key='u'>Mint.auth.user</C>, <>The signed-in customer, or null. <C>.record</C> is their record in <A href='#login-customers'>your customer model</A>, when you picked one.</>],
 					[<C key='i'>Mint.auth.signIn(email, password)</C>, 'Signs in from your own form.'],
-					[<C key='s'>Mint.auth.signUp({'{ name, email, password }'})</C>, 'Creates the account and signs in.'],
+					[<C key='s'>Mint.auth.signUp({'{ name, email, password, phone }'})</C>, 'Creates the account and signs in. The phone is optional.'],
 					[<C key='o'>Mint.auth.signOut()</C>, 'Signs out on this browser.'],
 					[<C key='c'>Mint.auth.onChange(cb)</C>, 'Calls cb with the customer (or null) on every sign-in and sign-out.'],
 					[<C key='a'>Mint.api(path, init)</C>, <>Calls your public API, as the customer when one is signed in. Gives a <C>fetch</C> Response.</>],
@@ -327,11 +398,12 @@ const Widgets = () => (
 			<Terms
 				head={['Symptom', 'Why, and what to do']}
 				rows={[
-					['Nothing shows', <>Is the widget switched on and saved? Is the script’s <C>data-project</C> right? The browser console says which.</>],
+					['Nothing shows', <>Is the widget added and switched on? Is the script’s <C>data-project</C> right? The browser console says which.</>],
 					['A change doesn’t show', 'Sites pick up saved changes within a minute. Reload the page.'],
 					['The colours clash with my page', <>Set <em>Light or dark</em> to Always light or Always dark, or pick a colour under <em>Look</em>.</>],
 					['Signed in, but my API calls get 401', <>Use <C>Mint.api</C>: plain <C>fetch</C> doesn’t send the customer’s token.</>],
 					['The cart won’t switch on', <>Set up the <A href='#shop'>Shop</A> first and save it.</>],
+					['Sign-ups don’t show in my model', <>Check the <A href='#login-customers'>customer model</A> in the widget’s setup (Edit → Customers). If a field you picked was removed or renamed, pick it again.</>],
 					['An add-to-cart button does nothing', <>Check the product ID (a wrong one, or a product that isn’t for sale, shows “Not found”) and that it isn’t sold out.</>],
 				]}
 			/>

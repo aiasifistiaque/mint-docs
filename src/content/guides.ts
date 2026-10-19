@@ -307,9 +307,11 @@ export const GUIDES: Guide[] = [
 		icon: Puzzle,
 		group: 'Go live',
 		topics: [
+			{ id: 'add-widget', title: 'Add a widget' },
 			{ id: 'add-mint', title: 'Add MINT to your site' },
 			{ id: 'look', title: 'The look' },
 			{ id: 'login', title: 'Login & account' },
+			{ id: 'login-customers', title: 'Your customer model' },
 			{ id: 'shop', title: 'Shop' },
 			{ id: 'cart', title: 'Cart' },
 			{ id: 'checkout', title: 'Checkout' },
