@@ -909,6 +909,14 @@ async function loadMore() {
 				example response. Endpoints marked <strong>Customer</strong> need a signed-in customer’s token. The customer sign-in
 				endpoints are listed too, and for a website, the site and page endpoints.
 			</P>
+			<P>
+				Each endpoint’s own page has a <strong>Reference</strong> tab with the same for that endpoint alone, as JSON you can
+				copy: the <strong>Request</strong> — its address, headers, and for a create or update the body with every field it
+				writes (required ones named) — the <strong>Response</strong> it answers with (a list’s page, one record, or{' '}
+				<C>{'{ "message": "Deleted" }'}</C>), and the <strong>Errors</strong> it can answer instead, each with its{' '}
+				<C>message</C> and <C>code</C>. It follows the endpoint as you edit it: untick a field under Fields and it leaves
+				the sample response straight away, before you save.
+			</P>
 		</Section>
 
 		<Section
