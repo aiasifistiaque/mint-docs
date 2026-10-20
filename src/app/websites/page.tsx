@@ -29,6 +29,8 @@ const SECTIONS = [
 	{ id: 'kit', title: 'The website kit' },
 	{ id: 'build-a-page', title: 'Building a page' },
 	{ id: 'site-contents', title: 'Contents, page by page' },
+	{ id: 'site-contents-more', title: 'More in one piece' },
+	{ id: 'site-contents-slug', title: 'Slugs: how a site finds a piece' },
 	{ id: 'site-contents-list', title: 'Lists of your records' },
 	{ id: 'contents', title: 'Older content blocks' },
 	{ id: 'seo', title: 'SEO' },
@@ -165,6 +167,7 @@ const Websites = () => (
 				head={['Type', 'What it holds']}
 				rows={[
 					['Hero', 'A small line above, a heading, text, a picture, two buttons and a few numbers under it'],
+					['Hero carousel', 'Slides that move on, each with its own small line, heading, text, picture and button — and how many seconds each shows'],
 					['Text / Rich text', 'A heading and a few paragraphs — or a longer piece with headings, lists and pictures'],
 					['Cards', 'A heading and a row of cards, each with a title, small text, description, picture and link — features, services, team, plans'],
 					['Questions', 'Questions and their answers'],
@@ -184,12 +187,68 @@ const Websites = () => (
 				pieces from before types (one word each, as the site builder made them) are listed under the page and open there.
 			</P>
 			<P>
+				Text is plain words in every type — a box where each new line is a new line on the site. Only <strong>Rich text</strong>{' '}
+				has the editor with headings, lists and links. Words written in the editor before are shown as plain text the next time
+				the piece is opened.
+			</P>
+			<P>
 				<strong>Drafts until you publish.</strong> A change — made here, in the table or in the site builder — is a draft: each
 				piece says <em>Draft</em>, <em>Published</em> or <em>Changes not published</em>. <strong>Publish</strong> on a piece, or{' '}
 				<strong>Publish the page</strong>, puts it on your site and API; the site builder’s Publish puts the words it shows live
 				with the layout. Publishing needs the <A href='/organization#roles'>Publish permission</A>. The site builder writes each
 				section’s words into one piece of the section’s type, so what you add there shows here, in the page’s order.
 			</P>
+		</Section>
+
+		<Section
+			id='site-contents-more'
+			title='More in one piece'
+			lead='A Text with a Gallery under it, a Hero with a Section after it: blocks that belong together stay in one piece.'>
+			<P>
+				Under a piece’s own fields, <strong>More in this block</strong> adds more blocks to it. <strong>Add</strong> picks a type —
+				any but List, which is a piece of its own — and shows that type’s fields. Each block moves up and down, folds away, is
+				copied or removed; one piece holds up to 20. The list says <em>+2 blocks</em> beside a piece that has them.
+			</P>
+			<P>
+				They go live with the piece when it’s published, in the order you put them. The site builder only changes the piece’s
+				own words; the blocks you added here stay.
+			</P>
+		</Section>
+
+		<Section
+			id='site-contents-slug'
+			title='Slugs: how a site finds a piece'
+			lead='Every piece has a slug — a short name like home-intro. That’s what connects it to your site.'>
+			<P>
+				A slug is made for each new piece from its page and type (<C>home-hero-3f9a2c</C>), or you type your own when you add
+				or edit it: lowercase letters, numbers and dashes, one piece per slug. The list shows each piece’s slug with a copy
+				button, and the piece’s form shows the addresses to read it.
+			</P>
+			<Terms
+				head={['Your site', 'How it reads the piece']}
+				rows={[
+					['Made with the site builder', 'Each text on the page is tied to a piece’s slug and field — you don’t need the address. Change a slug, and places that use the old one stop showing it until they’re tied again.'],
+					[
+						'Your own site or app — one piece',
+						<>
+							<C>GET /public/api/web-contents/by-slug/home-intro?apiKey=mint_pk_…</C> — its type, its words, and the blocks
+							added under it (<C>block</C>: the piece’s own first, then the others in order, each with its type in{' '}
+							<C>__component</C>).
+						</>,
+					],
+					[
+						'Your own site or app — a whole page',
+						<>
+							<C>GET /public/api/pages/by-path?path=/about&apiKey=mint_pk_…</C> — the page, its SEO, and its pieces in the
+							order they show. Draw each by its <C>type</C>, or pick one out by its <C>slug</C>.
+						</>,
+					],
+				]}
+			/>
+			<Note>
+				Both answer with what’s published only — a draft, a hidden piece or a removed one isn’t there. The key is your
+				project key, from <A href='/public-api#api-project-key'>API → Keys</A>; more in <A href='#site-api'>The site API</A>.
+			</Note>
 		</Section>
 
 		<Section
@@ -280,7 +339,7 @@ const Websites = () => (
 		<Section
 			id='site-api'
 			title='The site API'
-			lead='Two read-only calls, with the project key (API → Keys).'>
+			lead='Three read-only calls, with the project key (API → Keys).'>
 			<Terms
 				head={['Call', 'Answers']}
 				rows={[
@@ -297,12 +356,20 @@ const Websites = () => (
 							published blocks in order. 404 if there’s no published page there.
 						</>,
 					],
+					[
+						<C key='c'>GET /web-contents/by-slug/home-intro</C>,
+						<>
+							One published piece by its <A href='#site-contents-slug'>slug</A>: its <C>type</C> and <C>block</C> — its
+							own words first, then any <A href='#site-contents-more'>blocks added under it</A>. 404 if there’s none.
+						</>,
+					],
 				]}
 			/>
 			<CodeBlock
 				label='Site API'
 				code={`const site = await fetch('${PUBLIC_API}/site?apiKey=${PROJECT_KEY}').then(r => r.json());
-const about = await fetch('${PUBLIC_API}/pages/by-path?apiKey=${PROJECT_KEY}&path=/about').then(r => r.json());`}
+const about = await fetch('${PUBLIC_API}/pages/by-path?apiKey=${PROJECT_KEY}&path=/about').then(r => r.json());
+const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=${PROJECT_KEY}').then(r => r.json());`}
 			/>
 			<P>
 				Need something else — every block with section “faq”, say? The models’ own public API is there too:{' '}
