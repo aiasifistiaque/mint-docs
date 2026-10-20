@@ -20,7 +20,7 @@ const SECTIONS = [
 	{ id: 'site-seo', title: 'Default SEO' },
 	{ id: 'tracking', title: 'Tracking tags and pixels' },
 	{ id: 'server-side', title: 'Server-side tracking' },
-	{ id: 'site-code', title: 'Code on every page' },
+	{ id: 'site-code', title: 'Add script' },
 	{ id: 'indexing', title: 'Indexing, robots.txt and sitemap' },
 	{ id: 'redirects', title: 'Redirects and headers' },
 	{ id: 'site-domains', title: 'Domains' },
@@ -398,9 +398,14 @@ const about = await fetch('${PUBLIC_API}/pages/by-path?apiKey=${PROJECT_KEY}&pat
 			id='site-seo'
 			title='Default SEO'>
 			<P>
-				On the <strong>SEO</strong> tab: the default title, description, share image and keywords, used by any page without
-				its own SEO, and a <strong>title template</strong> — <C>%s · Acme</C> makes a page called “About us” show as “About
-				us · Acme”.
+				On the <strong>SEO</strong> tab: the home page’s title and description, the default share image and keywords, used by
+				any page without its own SEO, and a <strong>title template</strong> — <C>%s · Acme</C> makes a page called “About us”
+				show as “About us · Acme”. A <strong>Google preview</strong> shows the result as you type, and each box counts its
+				characters: 30–60 for the title and 70–160 for the description is what Google shows whole.
+			</P>
+			<P>
+				Each page’s own SEO — social cards, indexing, structured data, sitemap — is in the site builder:{' '}
+				<A href='/site-builder#page-seo'>A page’s SEO</A>.
 			</P>
 		</Section>
 
@@ -466,11 +471,31 @@ const about = await fetch('${PUBLIC_API}/pages/by-path?apiKey=${PROJECT_KEY}&pat
 
 		<Section
 			id='site-code'
-			title='Code on every page'>
+			title='Add script'
+			lead='Paste any script a provider gives you and it’s on every page of your website.'>
+			<List
+				items={[
+					<>
+						Open <strong>Site setup → Add script</strong> and press <strong>Add script</strong>.
+					</>,
+					<>
+						Give it a <strong>name</strong> (so you know it later), choose <strong>where</strong> it goes — in{' '}
+						<C>&lt;head&gt;</C> (tags that must load first, verification metas), at the start of <C>&lt;body&gt;</C> (a{' '}
+						<C>&lt;noscript&gt;</C> fallback) or at its end (chat widgets) — and paste the script exactly as given, with its
+						own <C>&lt;script&gt;</C> or <C>&lt;meta&gt;</C> tags.
+					</>,
+					<>
+						<strong>Add</strong>. It’s saved at once and live within a minute. Switch it off to pause it without losing it;{' '}
+						<strong>Edit</strong> or <strong>Remove</strong> it any time.
+					</>,
+				]}
+			/>
 			<P>
-				Named pieces of HTML — a chat widget, another provider’s tag, a verification snippet — each placed in the{' '}
-				<C>&lt;head&gt;</C>, at the start of <C>&lt;body&gt;</C> or at its end. Add, edit, switch off or remove each one;
-				it’s saved straight away. Scripts in it run. Only add code you trust: it can do anything on your site.
+				Good for Google Tag Manager, Microsoft Clarity, Hotjar, a chat widget (Tawk.to, Crisp, Intercom), a Facebook
+				domain-verification tag — anything a provider gives you as HTML. On a site made in the{' '}
+				<A href='/site-builder'>site builder</A> the scripts are written into each page’s HTML, so they run on the first
+				load and verification checkers find them; a site with its own code gets them from the analytics script. Only add
+				scripts you trust: they run with full access to your pages and visitors.
 			</P>
 		</Section>
 

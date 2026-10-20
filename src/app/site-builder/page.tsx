@@ -17,6 +17,7 @@ const SECTIONS = [
 	{ id: 'start', title: 'What the site builder is' },
 	{ id: 'live-site', title: 'Your live site' },
 	{ id: 'pages', title: 'Pages' },
+	{ id: 'page-seo', title: 'A page’s SEO' },
 	{ id: 'canvas', title: 'The canvas' },
 	{ id: 'outline', title: 'The outline' },
 	{ id: 'props', title: 'A block’s settings' },
@@ -281,11 +282,12 @@ const SiteBuilder = () => (
 			<Terms
 				head={['', 'Where it comes from']}
 				rows={[
-					['Page title and description', 'Each page’s SEO settings. A page without its own description uses the site’s default from Site setup → SEO, and every page but the home page follows the title template there (for example “%s · Acme”).'],
-					['Share picture', 'The page’s share image, or the site’s default — shown when someone posts a link to the page.'],
-					['Hide from search engines', 'Per page, or for the whole site in Site setup → SEO.'],
-					['Sitemap and robots.txt', <>Made for you at <em>/sitemap.xml</em> and <em>/robots.txt</em>, listing the published pages that aren’t hidden from search.</>],
-					['Favicon, tracking, pixels, your code tags', 'From Site setup — the same settings a code-built site uses. Search-console verification is in the page itself, so Google and Bing can check it.'],
+					['Page title and description', <>Each page’s <A href='#page-seo'>SEO</A>. A page without its own description uses the site’s default from Site setup → SEO, and every page but the home page follows the title template there (for example “%s · Acme”).</>],
+					['Share picture and social cards', 'The page’s share image, or the site’s default — shown when someone posts a link to the page. Facebook, LinkedIn and X can each get their own title and words.'],
+					['Hide from search engines', 'Per page (SEO → Indexing), or for the whole site in Site setup → SEO.'],
+					['Structured data', 'Written into every page for Google’s rich results: the page itself (a web page, or the type you pick), its breadcrumbs, and on the home page your business’s name, logo and social links.'],
+					['Sitemap and robots.txt', <>Made for you at <em>/sitemap.xml</em> and <em>/robots.txt</em>, listing the published pages that aren’t hidden from search, with each page’s priority and how often it changes.</>],
+					['Favicon, tracking, pixels, your scripts', <>From Site setup — the same settings a code-built site uses. Search-console verification and the scripts you add under <A href='/websites#site-code'>Add script</A> are in the page itself, so Google, Bing and checkers can see them.</>],
 					['Widgets', <>The <A href='/widgets'>widgets</A> you switch on load on every page.</>],
 				]}
 			/>
@@ -340,6 +342,41 @@ const SiteBuilder = () => (
 					<><strong>Delete</strong> — a published page stays live until you publish, then it’s gone. The home page can’t be deleted.</>,
 				]}
 			/>
+		</Section>
+
+		<Section
+			id='page-seo'
+			title='A page’s SEO'
+			lead='How the page shows in Google and when someone shares its link — with a preview and checks as you type.'>
+			<P>
+				In a page’s <em>⋯</em> menu, <strong>Name, address & SEO</strong>. Under <em>Search engines and sharing</em> a{' '}
+				<strong>Google preview</strong> shows the page as a search result while you type. Anything you leave empty uses the
+				fallback, shown greyed in the box: the page’s name for the title, the site’s defaults from Site setup → SEO for the rest.
+			</P>
+			<Terms
+				head={['Tab', 'What’s in it']}
+				rows={[
+					[
+						'Basics',
+						<>
+							<strong>Meta title</strong> (aim for 30–60 characters) and <strong>meta description</strong> (70–160) — the counter
+							turns green inside the window, amber when short or close to being cut, red past it. <strong>Focus keyword</strong>{' '}
+							(the phrase the page should rank for; never published), <strong>canonical URL</strong> (only when the page copies
+							another) and <strong>keywords</strong>. Below them, eight <strong>SEO checks</strong>: title and description set
+							and the right length, focus keyword set and found in both, share image set.
+						</>,
+					],
+					['Social', 'Open Graph title, description and type, the share image (1200 × 630) and its alt text, and the X (Twitter) card, title, description and image. Empty: the meta title, description and share image.'],
+					['Indexing', 'Allow indexing, follow links, prevent archiving, prevent image indexing, max snippet length (-1 lets Google choose) and max image preview. The defaults suit a page you want found.'],
+					['Structured data', <>The <strong>schema type</strong> (auto is a web page; or Local Business, Service, FAQ Page, Article…), <strong>custom JSON-LD</strong> merged over what the site writes (one JSON object — the box says whether it’s valid; invalid is left out, never breaks the page) and the <strong>breadcrumb label</strong> used in breadcrumbs on the page and in Google.</>],
+					['Sitemap', 'Include in sitemap.xml, priority (0 to 1) and change frequency.'],
+				]}
+			/>
+			<P>
+				Save the dialog; the SEO goes live with your next publish. The page’s title, description, share image, keywords,
+				canonical and “hide” switch are also in the panel under <em>Website → SEO</em> (one record per page) — a change there
+				comes back to the builder and keeps the rest of the page’s SEO as it is.
+			</P>
 		</Section>
 
 		<Section
