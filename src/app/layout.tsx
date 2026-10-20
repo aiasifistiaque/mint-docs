@@ -1,14 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { JetBrains_Mono, Outfit } from 'next/font/google';
 import Header from '@/components/site/Header';
 import Footer from '@/components/site/Footer';
 import { THEME_SCRIPT } from '@/components/site/ThemeToggle';
 import { SITE_URL } from '@/lib/config';
+import { mono, sans } from '@/fonts';
 import './globals.css';
-
-// Headings and text: Outfit — slim and geometric (light weights). Labels and code: JetBrains Mono.
-const sans = Outfit({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
-const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains', display: 'swap' });
 
 const TITLE = 'MINT Guides';
 const DESCRIPTION =
