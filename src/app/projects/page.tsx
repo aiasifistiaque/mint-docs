@@ -192,6 +192,13 @@ const Projects = () => (
 				keeps its own project, so two projects can be open side by side. <strong>Dashboard</strong> on the home page takes you
 				back to the project you worked in last.
 			</P>
+			<P>
+				<strong>Finding one.</strong> On <A href={`${APP_URL}/projects`}>Projects</A>, the search box beside the kinds narrows
+				the cards by name, address, description or domain (Enter opens the only match). The navbar search (the magnifier, or{' '}
+				<C>⌘K</C>) finds projects too: on the organization’s pages it lists them first — every one before you type — and
+				inside a project it lists the others once you type. Projects in your other organizations show with their
+				organization’s name; opening one switches you there.
+			</P>
 		</Section>
 
 		<Section

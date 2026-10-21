@@ -245,7 +245,7 @@ const Pages = () => (
 				its name (its <em>Record name</em> field, or its record number when it has none), with its record number and the
 				page it comes from underneath — <em>INV-0001 · Invoices</em>. When the match was in another field, a line under
 				that says which: <em>Email: jane@acme.com</em>. Click one, or pick it with the arrow keys and Enter, to open its
-				page.
+				page. It finds your other <A href='/projects#switching'>projects</A> by name as well.
 			</P>
 			<P>
 				<strong>Search by</strong> lists the page’s <em>Searchable</em> fields — the ones its table’s search box uses,
