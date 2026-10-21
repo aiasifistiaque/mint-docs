@@ -161,13 +161,15 @@ const Websites = () => (
 				piece up or down; the pencil opens it.
 			</P>
 			<P>
-				<strong>New content</strong> asks first what it is, then shows only that type’s fields:
+				<strong>New content</strong> asks first what it is, then shows only that type’s fields. Type in the search box to
+				find a type by name or by what it’s for; above the rest, <em>Suggested</em> offers what usually comes next — an
+				opening for an empty page, the header and footer for the whole site, and after a hero: text, cards, numbers…
 			</P>
 			<Terms
 				head={['Type', 'What it holds']}
 				rows={[
 					['Hero', 'A small line above, a heading, text, a picture, two buttons and a few numbers under it'],
-					['Hero carousel', 'Slides that move on, each with its own small line, heading, text, picture and button — and how many seconds each shows'],
+					['Hero carousel', 'Slides that move on, each with its own heading, subheading, two buttons and background picture — and how many seconds each shows'],
 					['Text / Rich text', 'A heading and a few paragraphs — or a longer piece with headings, lists and pictures'],
 					['Cards', 'A heading and a row of cards, each with a title, small text, description, picture and link — features, services, team, plans'],
 					['Questions', 'Questions and their answers'],
@@ -187,9 +189,9 @@ const Websites = () => (
 				pieces from before types (one word each, as the site builder made them) are listed under the page and open there.
 			</P>
 			<P>
-				Text is plain words in every type — a box where each new line is a new line on the site. Only <strong>Rich text</strong>{' '}
-				has the editor with headings, lists and links. Words written in the editor before are shown as plain text the next time
-				the piece is opened.
+				Every text field is plain words — a box where each new line is a new line on the site — in every type, your own
+				types included. Only <strong>Rich text</strong> has the editor with headings, lists and links. Words written in the
+				editor before are shown as plain text the next time the piece is opened.
 			</P>
 			<P>
 				<strong>Drafts until you publish.</strong> A change — made here, in the table or in the site builder — is a draft: each
@@ -205,8 +207,10 @@ const Websites = () => (
 			title='More in one piece'
 			lead='A Text with a Gallery under it, a Hero with a Section after it: blocks that belong together stay in one piece.'>
 			<P>
-				Under a piece’s own fields, <strong>More in this block</strong> adds more blocks to it. <strong>Add</strong> picks a type —
-				any but List, which is a piece of its own — and shows that type’s fields. Each block moves up and down, folds away, is
+				Under a piece’s own fields, <strong>More in this block</strong> adds more blocks to it. While it’s empty it suggests
+				what goes well with the piece — under a Text: a Picture, a Gallery, a Video; under a Section: Cards, a Gallery, a
+				Picture — one click adds one. <strong>Add</strong> opens every type with a search box, the suggested ones first
+				(Enter adds the first match) — any type but List, which is a piece of its own — and shows that type’s fields. Each block moves up and down, folds away, is
 				copied or removed; one piece holds up to 20. The list says <em>+2 blocks</em> beside a piece that has them.
 			</P>
 			<P>
