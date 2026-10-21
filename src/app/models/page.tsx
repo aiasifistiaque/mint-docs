@@ -189,6 +189,7 @@ const Models = () => (
 					['Link to a record / records', 'One or more records of another model — a booking’s guest, a post’s tags'],
 					['Section / Section list', 'A group of fields, or rows of them (see below)'],
 					['Password', 'A login or key you keep for someone — shown as dots until you click the eye (see below)'],
+					['SEO', <>A record’s search and share details in one editor — Google and share previews, meta title and description, Open Graph and X cards, indexing, structured data, sitemap. For pages, posts, products · see <A href='/site-builder#page-seo'>A page’s SEO</A></>],
 				]}
 			/>
 			<List

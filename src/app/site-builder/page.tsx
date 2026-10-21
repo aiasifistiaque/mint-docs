@@ -373,10 +373,20 @@ const SiteBuilder = () => (
 				]}
 			/>
 			<P>
-				Save the dialog; the SEO goes live with your next publish. The page’s title, description, share image, keywords,
-				canonical and “hide” switch are also in the panel under <em>Website → SEO</em> (one record per page) — a change there
-				comes back to the builder and keeps the rest of the page’s SEO as it is.
+				Save the dialog; the SEO goes live with your next publish.
 			</P>
+			<P>
+				The same editor is in the panel under <em>Website → SEO</em>: one record per page, with the Google preview (on your
+				site’s own domain), the five tabs above and, on <em>Social</em>, a <strong>share preview</strong> — the card a link
+				to the page shows on Facebook, LinkedIn, WhatsApp or X. A change there comes back to the page in the builder, all of
+				it, and goes live with the next publish.
+			</P>
+			<Note>
+				The editor is also a field type of its own: add an <strong>SEO</strong> field to any model in the model builder
+				(a blog post, a product) and its records get the same editor. The public API returns it as one object —{' '}
+				<code>metaTitle</code>, <code>metaDescription</code>, <code>ogTitle</code>, <code>ogImage</code>, <code>robots</code>,{' '}
+				<code>sitemap</code>… — for your own site to put in its page head.
+			</Note>
 		</Section>
 
 		<Section
