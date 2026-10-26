@@ -25,6 +25,8 @@ const SECTIONS = [
 	{ id: 'redirects', title: 'Redirects and headers' },
 	{ id: 'site-domains', title: 'Domains' },
 	{ id: 'site-check', title: 'Check the site' },
+	{ id: 'website-setup', title: 'Website setup: connect your code' },
+	{ id: 'website-setup-keys', title: 'Keys, and where each setting goes' },
 	{ id: 'ai-site', title: 'Build your site with AI' },
 	{ id: 'kit', title: 'The website kit' },
 	{ id: 'build-a-page', title: 'Building a page' },
@@ -628,6 +630,90 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 				by itself: the same ID twice means every visit is counted twice; another ID means the page has its own. Google Tag
 				Manager confirms your container exists, and Meta confirms the Conversions API token is valid and made for your
 				pixel. Each Tracking card shows its result from the last check.
+			</P>
+		</Section>
+
+		<Section
+			id='website-setup'
+			title='Website setup: connect your code'
+			lead='Site → Website setup: how a site you build yourself reads this project — step by step, for your framework.'>
+			<P>
+				Pick what your site is built with — <strong>Plain HTML</strong>, <strong>React (Vite)</strong> or{' '}
+				<strong>Next.js</strong> — and the page shows the code for each step, already filled in with your project’s API address,
+				project key and domain. Copy it into your site:
+			</P>
+			<List
+				ordered
+				items={[
+					<>
+						<strong>Keys</strong> — where they go: a small <C>site.js</C> for plain HTML (there’s no build step), <C>.env</C> for
+						Vite, <C>.env.local</C> for Next.js — and the same names on your host.
+					</>,
+					<>
+						<strong>Connect</strong> — a few lines that call the <A href='#site-api'>site API</A>: the site and its menu, a page by
+						its path, a piece by its <A href='#site-contents-slug'>slug</A>, a list of records.
+					</>,
+					<>
+						<strong>Show a page</strong> — one route that draws whatever page is asked for.
+					</>,
+					<>
+						<strong>Analytics</strong> — the <A href='/analytics'>analytics script</A> in every page’s head (Next.js: the root
+						layout). It counts route changes in React apps by itself, and brings in every tag from{' '}
+						<A href='#tracking'>Tracking</A> and <A href='#site-code'>Add script</A>.
+					</>,
+					<>
+						<strong>SEO</strong> — each page’s title, description and share image from Website → SEO, and{' '}
+						<C>robots.txt</C> and <C>sitemap.xml</C> passed on from this project (a rewrite on Netlify or Vercel, two route
+						handlers in Next.js).
+					</>,
+				]}
+			/>
+			<Note>
+				Plain HTML and Vite apps are drawn in the browser. Google reads them, but link previews (WhatsApp, Facebook, LinkedIn)
+				only see the HTML file — write the title, description and share image there too. Pages that must rank or share well
+				are best on Next.js, which renders them on the server.
+			</Note>
+		</Section>
+
+		<Section
+			id='website-setup-keys'
+			title='Keys, and where each setting goes'
+			lead='Two values go in your code; everything else is set here and reaches the site without a deploy.'>
+			<Terms
+				head={['Setting', 'Where it goes']}
+				rows={[
+					[
+						'Site API address',
+						<>
+							Your settings: <C>MINT_API</C> (server), <C>VITE_MINT_API</C> (Vite), <C>NEXT_PUBLIC_MINT_API</C> (Next.js client
+							code).
+						</>,
+					],
+					[
+						<>Project key (<C>mint_pk_…</C>)</>,
+						<>
+							<C>MINT_API_KEY</C>, <C>VITE_MINT_API_KEY</C> or <C>NEXT_PUBLIC_MINT_API_KEY</C>. It’s publishable: it reads only
+							what’s published and what your endpoints allow, so it can be in a page.
+						</>,
+					],
+					[
+						<>Server key (<C>mint_sk_…</C>)</>,
+						<>
+							Only your server’s settings, as <C>MINT_SERVER_KEY</C> — never with <C>VITE_</C> or <C>NEXT_PUBLIC_</C>, never in a
+							page. Make one on <A href='/public-api'>API → Keys</A>, only if your server calls endpoints that need it.
+						</>,
+					],
+					['Google Analytics, Tag Manager, pixels', <A key='t' href='#tracking'>Site setup → Tracking</A>],
+					['Chat, verification and other scripts', <A key='c' href='#site-code'>Site setup → Add script</A>],
+					['Default title, description, share image', <A key='s' href='#site-seo'>Site setup → SEO</A>],
+					['Each page’s SEO', <A key='p' href='#seo'>Website → SEO</A>],
+					['Your domain', <A key='d' href='#site-domains'>Site setup → Domains</A>],
+				]}
+			/>
+			<P>
+				After the first deploy, add the site’s domain (analytics counts visits only from your domains) and run{' '}
+				<A href='#site-check'>Check the site</A>. On Vercel or Netlify, environment variables go in the project’s settings; Vite
+				writes them into the build, so redeploy after changing one.
 			</P>
 		</Section>
 
