@@ -471,14 +471,21 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 			id='site-seo'
 			title='Default SEO'>
 			<P>
-				On the <strong>SEO</strong> tab: the home page’s title and description, the default share image and keywords, used by
-				any page without its own SEO, and a <strong>title template</strong> — <C>%s · Acme</C> makes a page called “About us”
-				show as “About us · Acme”. A <strong>Google preview</strong> shows the result as you type, and each box counts its
-				characters: 30–60 for the title and 70–160 for the description is what Google shows whole.
+				On the <strong>SEO</strong> tab, Default SEO is the same SEO editor as each page’s: a <strong>Google preview</strong>{' '}
+				on your site’s domain, then <em>Basics</em>, <em>Social</em> (with a share preview), <em>Indexing</em>,{' '}
+				<em>Structured data</em> and <em>Sitemap</em>, with counters and SEO checks. Above it, the <strong>title template</strong>{' '}
+				— <C>%s · Acme</C> makes a page called “About us” show as “About us · Acme”.
 			</P>
 			<P>
-				Each page’s own SEO — social cards, indexing, structured data, sitemap — is in the site builder:{' '}
-				<A href='/site-builder#page-seo'>A page’s SEO</A>.
+				What it covers depends on the kind of field. The meta title, description, share image and keywords are the home
+				page’s, and the fallback for any page without its own. Settings — the Open Graph type, the X card and image,
+				indexing switches, max snippet and image preview, sitemap priority and change frequency — apply to every page that
+				doesn’t set its own. Share titles and descriptions, the schema type, custom JSON-LD and the canonical URL are the
+				home page’s only, so pages don’t all share one.
+			</P>
+			<P>
+				Each page’s own SEO is under <em>Website → SEO</em>, or a page’s <em>⋯ → Name, address & SEO</em> in the site
+				builder: <A href='/site-builder#page-seo'>A page’s SEO</A>.
 			</P>
 		</Section>
 
