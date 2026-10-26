@@ -263,7 +263,8 @@ const mine = await fetch('${PUBLIC_API}/bookings?apiKey=${PROJECT_KEY}', {
 						<strong>Model</strong> — whose records it works on.
 					</>,
 					<>
-						<strong>What it does</strong> — List, Read one, Create, Update or Delete.
+						<strong>What it does</strong> — List, Read one, Create, Update, Delete, or{' '}
+						<A href='#api-upload'>Upload files</A>.
 					</>,
 					<>
 						<strong>Address</strong> — lowercase words and dashes, up to four parts: <C>/products/featured</C>. Read one,
@@ -280,6 +281,35 @@ const mine = await fetch('${PUBLIC_API}/bookings?apiKey=${PROJECT_KEY}', {
 				When a custom address and a model’s <C>/:id</C> could both match — <C>/products/featured</C> and{' '}
 				<C>/products/:id</C> — the one with more fixed words wins, so <C>featured</C> is never taken for an id.
 			</P>
+		</Section>
+
+		<Section
+			id='api-upload'
+			title='Upload files'
+			lead='For a form that takes attachments: a model with a file or image field, like a contact form’s “Attachments”.'>
+			<P>
+				An <strong>Upload files</strong> endpoint takes the files and answers their links; your site then sends those links in
+				the record’s file field through its Create (or Update) endpoint. Make one with <strong>Generate</strong> (tick Upload
+				files — it answers at <C>/&lt;model&gt;/files</C>) or <strong>New endpoint</strong>. Only models with a file or image field
+				can have one.
+			</P>
+			<Terms
+				head={['', '']}
+				rows={[
+					['Send', <>A <C>POST</C> with multipart form data, the files in the field <C>files</C>: up to 5, 10 MB each.</>],
+					['Kinds', 'Photos (png, jpg, webp, gif, heic), PDF, Word, Excel, PowerPoint, text, CSV and zip — never svg or html.'],
+					['Answer', <><C>201</C> with <C>{'{ files: [{ url, name, type, size }] }'}</C>.</>],
+					['Where they go', <>Your <A href='/media'>media library</A>, folder <strong>website-uploads</strong>.</>],
+				]}
+			/>
+			<P>
+				Who can call it is its Access tab, as for any endpoint — and a valid <A href='#api-keys'>server key</A> may always
+				upload, whoever the endpoint is for. With <strong>Anyone</strong>, one address can upload 20 times in 15 minutes.
+			</P>
+			<Note>
+				A site that sends its form from its own server (the safest way) keeps the server key there: the browser posts the form to
+				your server, and your server calls Upload files and Create with the key — set both endpoints to <strong>A server key</strong>.
+			</Note>
 		</Section>
 
 		<Section
