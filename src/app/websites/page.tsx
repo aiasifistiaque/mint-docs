@@ -626,6 +626,13 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 				(and from localhost while you build), so others can’t send visits in your name. With none, visits from anywhere
 				count.
 			</P>
+			<P>
+				The quickest way is on <strong>Analytics</strong>, under the project’s name: once the snippet is on your site, the
+				site your visits come from shows there with <strong>Add</strong> beside it, one click. <strong>Add domain</strong>{' '}
+				(or <strong>Domains</strong>) opens the list: every site visits came from in the last 30 days, a box to type one in
+				(a whole address like <C>https://www.example.com/about</C> is fine), and the domains you have, each with a × to remove.
+				Adding a domain needs the Manage projects permission.
+			</P>
 		</Section>
 
 		<Section
