@@ -38,6 +38,7 @@ const SECTIONS = [
 	{ id: 'contents', title: 'Older content blocks' },
 	{ id: 'seo', title: 'SEO' },
 	{ id: 'seo-score', title: 'The SEO score' },
+	{ id: 'seo-health', title: 'Site SEO health' },
 	{ id: 'menu', title: 'The menu' },
 	{ id: 'site-api', title: 'The site API' },
 	{ id: 'render', title: 'Rendering your site' },
@@ -366,6 +367,35 @@ const Websites = () => (
 				The page’s words come from the site builder for pages built there (the saved draft), and from the live page for a site
 				built elsewhere. When they can’t be read, the checks that need them are left out rather than failed, and the score
 				says why. The focus keyword is never published.
+			</P>
+		</Section>
+
+		<Section
+			id='seo-health'
+			title='Site SEO health'
+			lead='At the top of Website → SEO: problems that only show when your published pages are looked at together, and the gaps on each.'>
+			<P>
+				Each problem lists its pages; click one to open its SEO. Errors come first, then warnings, then notices.{' '}
+				<strong>Check again</strong> (the arrows) runs it once more after you’ve fixed something.
+			</P>
+			<Terms
+				head={['Problem', 'What to do']}
+				rows={[
+					['The whole site is hidden from search engines (error)', 'Site setup → SEO → Indexing is off. Turn it on when the site is ready.'],
+					['Canonical URL points to a page that isn’t on the site (error)', 'Search engines follow it and drop the page. Point it at a published page, or clear it.'],
+					['Hidden from search engines, but in the menu', 'Allow indexing, or take the page out of the menu.'],
+					['Pages with the same title / description', 'Give each page its own, so search engines can tell them apart.'],
+					['Pages with the same focus keyword', 'Two pages after one phrase both rank lower. Give each its own phrase.'],
+					['No title of their own / No description', 'Write them in the page’s SEO. Without a title, results show the page’s name.'],
+					['Titles over 60 / descriptions over 160 characters (notice)', 'The end gets cut off in search results. Put what matters first.'],
+					['No share image', 'Add one to each page, or a default in Site setup → SEO (then it’s only a notice).'],
+					['Hidden from search engines (notice)', 'Check these are meant to be hidden.'],
+					['Published pages with no SEO here (notice)', 'For a site built elsewhere, these keep their own SEO. Add them on Website → SEO to set it here.'],
+				]}
+			/>
+			<P>
+				Only published pages count. Pages made one per record (like <C>/blog/[slug]</C>) aren’t compared with other pages,
+				since their titles are filled in per record.
 			</P>
 		</Section>
 
