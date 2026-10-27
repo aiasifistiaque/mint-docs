@@ -662,11 +662,31 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 						browser (<C>/about</C>), set to <em>Published</em>; then its SEO on <A href='#seo'>Website → SEO</A>.
 					</>,
 					<>
-						<strong>Check</strong> what a page gets: Website setup has the address to open. <C>&quot;found&quot;: false</C> means the
-						page isn’t added.
+						<strong>Test the connection</strong>: open your site once in a browser, then type a page’s address in Website setup and
+						press <em>Test connection</em>.
 					</>,
 				]}
 			/>
+			<H3>What Test connection checks</H3>
+			<Terms
+				head={['Check', 'What it tells you']}
+				rows={[
+					['Domain', 'The address is one of your domains (Site setup → Domains). Visits from other addresses aren’t counted.'],
+					[
+						'Snippet',
+						'The page’s HTML has the snippet with this project’s key and data-seo. Added by a tag manager or a plugin that loads it later? It may not be in the HTML; Visits then shows whether it runs.',
+					],
+					['Visits', 'Page views are arriving, with the last page and when. This shows the snippet runs in visitors’ browsers.'],
+					[
+						'SEO',
+						'Whether the page takes its SEO from here or keeps its own, and whether the HTML your server sends already has it (then link previews see it too).',
+					],
+				]}
+			/>
+			<P>
+				<em>Connected</em> means nothing is missing and the snippet is on the page or visits are arriving. For the raw answer a page
+				gets, open <C>/site/head</C> with its path (below): <C>&quot;found&quot;: false</C> means the page isn’t added.
+			</P>
 			<H3>Which SEO a page gets</H3>
 			<List
 				items={[
