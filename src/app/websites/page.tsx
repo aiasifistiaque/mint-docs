@@ -37,6 +37,7 @@ const SECTIONS = [
 	{ id: 'site-contents-list', title: 'Lists of your records' },
 	{ id: 'contents', title: 'Older content blocks' },
 	{ id: 'seo', title: 'SEO' },
+	{ id: 'seo-score', title: 'The SEO score' },
 	{ id: 'menu', title: 'The menu' },
 	{ id: 'site-api', title: 'The site API' },
 	{ id: 'render', title: 'Rendering your site' },
@@ -331,6 +332,40 @@ const Websites = () => (
 				search results, a <strong>Share image</strong> for link previews, keywords and tags, a <strong>Canonical URL</strong>{' '}
 				if the page lives at another address too, and <strong>Hide from search engines</strong>. Your site puts them in the
 				page’s head (see the example below); pages without one fall back to the site settings’ defaults.
+			</P>
+		</Section>
+
+		<Section
+			id='seo-score'
+			title='The SEO score'
+			lead='Under Basics in each page’s SEO: a score from 0 to 100 and what to fix, worked out as you type.'>
+			<P>
+				Type the page’s <strong>Focus keyword</strong>, the one phrase people would search to find it, and the checks look for
+				it. The score is <strong>Good</strong> from 80, <strong>Needs work</strong> from 50 and <strong>Poor</strong> below
+				that, and it shows under the Google preview too. Problems come first, each with what to do.
+			</P>
+			<Terms
+				head={['Check', 'Good when']}
+				rows={[
+					['Visible to search engines', 'Hide from search engines is off. A hidden page can’t rank at all.'],
+					['Title and description', 'Title 30–60 characters, description 70–160. Longer ones get cut off in results.'],
+					['Keyword in the title', 'It’s there, near the start.'],
+					['Keyword in the description', 'It’s there. Google shows the searched words in bold.'],
+					['Keyword in the address', <>It’s in the page’s path, like <C>/wireless-headphones</C>. Not checked on the home page.</>],
+					['Keyword in the main heading', 'The page’s first heading has it.'],
+					['Keyword in the opening words', 'It’s in the first 100 words.'],
+					['How often', 'About 0.5–3% of the words. More reads as stuffing.'],
+					['One page per keyword', 'No other page has the same focus keyword. Two pages after one phrase both rank lower.'],
+					['Page length', '300 words or more.'],
+					['One main heading', 'A page built elsewhere has exactly one h1.'],
+					['Short sentences', 'Under 20 words on average (English pages).'],
+					['Share image', 'The page has its own. Using the site’s image counts half.'],
+				]}
+			/>
+			<P>
+				The page’s words come from the site builder for pages built there (the saved draft), and from the live page for a site
+				built elsewhere. When they can’t be read, the checks that need them are left out rather than failed, and the score
+				says why. The focus keyword is never published.
 			</P>
 		</Section>
 
