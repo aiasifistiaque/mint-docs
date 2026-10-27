@@ -33,6 +33,7 @@ import {
 	Sidebar as PhSidebar,
 	SquaresFour as PhSquaresFour,
 	Stack as PhStack,
+	Storefront as PhStorefront,
 	Sun as PhSun,
 	Table as PhTable,
 	UserCircle as PhUserCircle,
@@ -72,6 +73,7 @@ export const Building = make(PhBuildings, 'light');
 export const Chart = make(PhChartLine, 'light');
 export const CreditCard = make(PhCreditCard, 'light');
 export const Cube = make(PhCube, 'light');
+export const Storefront = make(PhStorefront, 'light');
 export const Envelope = make(PhEnvelope, 'light');
 export const Folder = make(PhFolderSimple, 'light');
 export const Globe = make(PhGlobe, 'light');
