@@ -22,6 +22,7 @@ const SECTIONS = [
 	{ id: 'server-side', title: 'Server-side tracking' },
 	{ id: 'site-code', title: 'Add script' },
 	{ id: 'indexing', title: 'Indexing, robots.txt and sitemap' },
+	{ id: 'robots', title: 'Your robots.txt and AI crawlers' },
 	{ id: 'redirects', title: 'Redirects and headers' },
 	{ id: 'site-domains', title: 'Domains' },
 	{ id: 'site-check', title: 'Check the site' },
@@ -702,6 +703,40 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 				Past 5,000 addresses the sitemap becomes an index of numbered parts, <C>/sitemap.xml?part=1</C>,{' '}
 				<C>?part=2</C> and so on, as search engines expect. Sites made in the site builder and sites behind the MINT Worker
 				pass the part on for you; a site you serve yourself should pass <C>?part=</C> on to the site API too.
+			</P>
+		</Section>
+
+		<Section
+			id='robots'
+			title='Your robots.txt and AI crawlers'
+			lead='Site setup → SEO → robots.txt: what search engines and AI crawlers may read. Built for you, or written by you in full.'>
+			<P>
+				<strong>Built for you</strong> starts from the Indexing settings: everything allowed (or everything blocked while
+				indexing is off), your <strong>Extra rules</strong>, and the Sitemap line. Each crawler has a switch; turn one off
+				and the file tells it to stay away.
+			</P>
+			<Terms
+				head={['Crawler', 'What it’s for']}
+				rows={[
+					['Googlebot, Bingbot', 'Search results. Blocking one takes your site out of that search engine.'],
+					['Google-Extended', 'Training Gemini. Doesn’t affect Google Search.'],
+					['GPTBot', 'Training OpenAI’s models.'],
+					['ChatGPT-User', 'ChatGPT opening a page when someone asks it to.'],
+					['ClaudeBot', 'Training Anthropic’s models.'],
+					['PerplexityBot', 'Perplexity’s answer engine.'],
+					['CCBot', 'Common Crawl, an open web archive many AI models are trained on.'],
+					['Bytespider', 'Training ByteDance’s models (TikTok’s owner).'],
+					['Applebot-Extended', 'Training Apple’s models. Doesn’t affect Siri or Spotlight.'],
+				]}
+			/>
+			<P>
+				<strong>Write the whole file</strong> starts from the file built for you, and the site then serves exactly what you
+				write: the switches, Extra rules and Indexing don’t change it. With indexing off, every page still says noindex.
+			</P>
+			<P>
+				Under the editor you see the file and a check for the usual mistakes: the whole site blocked, Googlebot or Bingbot
+				blocked, no Sitemap line, a Sitemap line without a full address, Noindex lines (search engines ignore them), and
+				lines crawlers don’t understand. Crawlers are asked, not forced: the well-known ones listen, others may not.
 			</P>
 		</Section>
 
