@@ -164,6 +164,7 @@ const ConnectAi = () => (
 					['get_api_logs', 'Read the calls made to your API (last 7 days) — find why one fails.'],
 					['list_automations · save_automation · test_automation', 'See, make and change automations — when they run, their conditions, and what they do (notify, email, webhook, update or add a record) — and try one on a record without sending anything.'],
 					['get_automation_runs · delete_automation', 'Read what automations did and why one failed; delete one when you ask.'],
+					['list_email_designs · save_email_design · send_test_email_design', 'See and change how the project’s emails look — header, logo, colours, footer — make one the default, and send you a sample. Changing them needs Manage projects.'],
 					['upload_media', 'Put an image into your Media library and get its address — with its alt text and caption.'],
 					[
 						'list_content_types · get_entry · save_entry_draft',
