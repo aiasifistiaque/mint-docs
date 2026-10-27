@@ -23,6 +23,8 @@ const SECTIONS = [
 	{ id: 'store-pos', title: 'The POS' },
 	{ id: 'store-review', title: 'Review and set up' },
 	{ id: 'store-built', title: 'What you get' },
+	{ id: 'store-variants', title: 'Variants, SKUs and barcodes' },
+	{ id: 'store-stock', title: 'Stock: counts, adjustments, transfers' },
 	{ id: 'store-kept', title: 'What the store keeps to itself' },
 	{ id: 'store-settings', title: 'Store settings' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -174,6 +176,36 @@ const Store = () => (
 				]}
 			/>
 			<P>Pages for things you switched off stay hidden until you switch them on in Store settings.</P>
+		</Section>
+
+		<Section
+			id='store-variants'
+			title='Variants, SKUs and barcodes'
+			lead='Every sale is of a variant — one size and colour of a product, or the product itself.'>
+			<List
+				items={[
+					'Give a product its options (Size: S, M, L · Colour: White, Navy) and save: its variants are made from every combination. Add a value later and the new combinations appear; take one away and those variants stop selling — they’re never deleted, since orders and stock name them.',
+					'A product without options has one variant of its own, hidden, that follows the product’s SKU, barcode and status.',
+					'A variant can have its own SKU, barcode and price; an empty price is the product’s.',
+					'SKUs and barcodes are one item’s each — saving one that another item has is refused, naming who has it.',
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='store-stock'
+			title='Stock: counts, adjustments, transfers'
+			lead='Stock is kept per variant per outlet, and every change is a stock movement saying why.'>
+			<Terms
+				head={['To…', 'Do this']}
+				rows={[
+					['Put in opening stock or a count', 'Open the product → In stock, click the figure for the outlet, and type what’s there (or how many to add or take away).'],
+					['Write off damaged or lost items, or count many at once', 'Stock adjustments → New: pick the outlet and reason, find the items, type what was counted (or the change, − to take away), then Apply. It applies once.'],
+					['Move stock between outlets', 'Stock transfers → New: from, to, the items and quantities, then Send — it leaves the first outlet. Receive when it arrives and it’s added to the second. A sent transfer can be cancelled, which puts it back.'],
+					['See what happened', 'Stock movements: every change with the item, outlet, how much, the figure after it, why and its reference (the order, adjustment or transfer).'],
+				]}
+			/>
+			<Note>A transfer can’t send more than the outlet has — unless you allowed selling below zero in Store settings.</Note>
 		</Section>
 
 		<Section
