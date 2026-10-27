@@ -199,6 +199,13 @@ const Projects = () => (
 				inside a project it lists the others once you type. Projects in your other organizations show with their
 				organization’s name; opening one switches you there.
 			</P>
+			<P>
+				<span id='pinning' />
+				<strong>Pinning one.</strong> <strong>Pin to top</strong> in a card’s menu (⋯) moves the project into{' '}
+				<strong>Pinned</strong>, above all the others — the one you pinned last comes first. <strong>Unpin</strong> puts it
+				back. Pins are yours alone: everyone in the organization keeps their own, and anyone who can open a project can pin
+				it.
+			</P>
 		</Section>
 
 		<Section
