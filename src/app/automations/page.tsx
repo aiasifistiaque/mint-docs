@@ -135,7 +135,8 @@ const Automations = () => (
 				there — <strong>Insert a field</strong> puts one in at the cursor (or over the words you selected), and{' '}
 				<strong>B</strong>, <strong>I</strong> and the list button make the selected words bold, italic or a bulleted list.
 				Right-click opens the same menu; ⌘B / Ctrl+B and ⌘I / Ctrl+I work without it, and typing closes it. The subject’s
-				Insert a field also puts the field where the cursor is.
+				Insert a field also puts the field where the cursor is. The AI connected to your project can write and change automations for you too — see{' '}
+				<A href='/connect-ai#tools'>Connect AI</A>.
 			</P>
 			<Terms
 				head={['You write', 'The email shows']}
@@ -143,6 +144,7 @@ const Automations = () => (
 					[<C key='b'>{'**thank you**'}</C>, <strong key='b2'>thank you</strong>],
 					[<C key='i'>{'*really*'}</C>, <em key='i2'>really</em>],
 					[<C key='l'>{'- One cake'}</C>, 'A bulleted line — lines starting with “- ” in a row make one list'],
+					[<C key='a'>{'[Unsubscribe](https://example.com/unsubscribe?code={{code}})'}</C>, 'A link: the words in square brackets, going to the address in round ones — the address may hold fields'],
 					['A blank line', 'A new paragraph'],
 				]}
 			/>

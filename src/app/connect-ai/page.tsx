@@ -162,6 +162,8 @@ const ConnectAi = () => (
 					['set_public_api', 'Turn a model’s public API on or off.'],
 					['list_endpoints · generate_endpoints · save_endpoint', 'See, generate and change your API’s endpoints — who can call each, its rules and fields.'],
 					['get_api_logs', 'Read the calls made to your API (last 7 days) — find why one fails.'],
+					['list_automations · save_automation · test_automation', 'See, make and change automations — when they run, their conditions, and what they do (notify, email, webhook, update or add a record) — and try one on a record without sending anything.'],
+					['get_automation_runs · delete_automation', 'Read what automations did and why one failed; delete one when you ask.'],
 					['upload_media', 'Put an image into your Media library and get its address — with its alt text and caption.'],
 					[
 						'list_content_types · get_entry · save_entry_draft',
