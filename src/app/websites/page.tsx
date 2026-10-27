@@ -26,6 +26,7 @@ const SECTIONS = [
 	{ id: 'redirects', title: 'Redirects and headers' },
 	{ id: 'site-domains', title: 'Domains' },
 	{ id: 'site-check', title: 'Check the site' },
+	{ id: 'link-preview', title: 'Link previews' },
 	{ id: 'connect-a-website', title: 'Connect a website you already have' },
 	{ id: 'website-setup', title: 'Website setup: connect your code' },
 	{ id: 'website-setup-keys', title: 'Keys, and where each setting goes' },
@@ -813,6 +814,47 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 				Manager confirms your container exists, and Meta confirms the Conversions API token is valid and made for your
 				pixel. Each Tracking card shows its result from the last check.
 			</P>
+		</Section>
+
+		<Section
+			id='link-preview'
+			title='Link previews'
+			lead='Site setup → Link previews: what Facebook, LinkedIn, WhatsApp, X and Slack show when someone shares a page.'>
+			<P>
+				Those apps never run a page’s JavaScript. They read the HTML your server sends and build the card from its title,
+				description and share image tags. So a page can look right in the browser and still share badly. Type any address —
+				yours or anyone’s — and press <strong>Check</strong>: you see each app’s card the way it lays it out (big picture,
+				small thumbnail or text only), the share image’s size, and what to fix. On a page’s SEO, the{' '}
+				<strong>Link previews</strong> button checks that page.
+			</P>
+			<List
+				items={[
+					<>
+						<strong>Tags only added in the browser</strong> come first. On a connected site, the snippet’s <C>data-seo</C> puts
+						the SEO set here on the page in the browser — Google sees it, the share apps don’t. Print it on your server, or put
+						the Mint edge in front of the site (<A href='#connect-a-website'>Connect a website</A>). A page that’s a
+						JavaScript app with an empty <C>{'<div id="root">'}</C> is flagged the same way.
+					</>,
+					<>
+						<strong>The share image:</strong> 1200×630 (1.91:1), a JPEG, PNG or WebP, under 300 KB for WhatsApp. Under 600×315
+						it shows as a small thumbnail; under 200×200 not at all; over 5 MB X and LinkedIn refuse it, over 8 MB Facebook.
+						Its address must be a whole one (<C>https://…</C>).
+					</>,
+					<>
+						<strong>Title and description:</strong> about 60 characters for the title, under 160 for the description. Add{' '}
+						<C>twitter:card</C> <C>summary_large_image</C> for X’s big card, and <C>og:site_name</C> so Slack and Facebook
+						show your site’s name.
+					</>,
+					<>
+						<strong>Edit SEO</strong> opens the page’s SEO when the address is one of this project’s pages; <em>Add SEO</em>{' '}
+						when the page has none yet.
+					</>,
+				]}
+			/>
+			<Note>
+				Facebook, LinkedIn and WhatsApp keep their copy of a card for days. After a fix, use the Facebook Sharing Debugger and
+				LinkedIn Post Inspector links under the cards to make them read the page again — WhatsApp follows Facebook’s copy.
+			</Note>
 		</Section>
 
 		<Section
