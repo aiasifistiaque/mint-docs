@@ -408,7 +408,8 @@ const Widgets = () => (
 				]}
 			/>
 			<P>
-				Pay writes the order as waiting for payment and sends the buyer to the provider’s page. If something in the cart
+				With more than one provider switched on, the buyer picks how to pay (card through Stripe, SSLCommerz, bKash). Pay
+				writes the order as waiting for payment and sends the buyer to that provider’s page. If something in the cart
 				changed meanwhile (a price, sold out), the widget says so and shows the cart as it is now.
 			</P>
 		</Section>
@@ -488,10 +489,9 @@ const Widgets = () => (
 			<List
 				items={[
 					<>
-						<strong>More ways to pay</strong>: SSLCommerz and bKash for organizations in Bangladesh, cash on delivery and bank
-						transfer everywhere, and refunds. Which providers you can use depends on your organization’s country, set in{' '}
-						<A href='/organization'>organization settings</A>. Card payments with Stripe work now — see{' '}
-						<A href='/payments'>Payments</A>.
+						<strong>More ways to pay</strong>: cash on delivery and bank transfer everywhere, and refunds. Stripe works now, and
+						in Bangladesh SSLCommerz and bKash too — which ones you can use depends on your organization’s country, set in{' '}
+						<A href='/organization'>organization settings</A>; see <A href='/payments'>Payments</A>.
 					</>,
 					<>
 						<strong>Forms</strong>: contact and newsletter forms built from your models, with spam protection.
