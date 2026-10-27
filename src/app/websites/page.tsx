@@ -37,6 +37,7 @@ const SECTIONS = [
 	{ id: 'site-contents-list', title: 'Lists of your records' },
 	{ id: 'contents', title: 'Older content blocks' },
 	{ id: 'seo', title: 'SEO' },
+	{ id: 'seo-page', title: 'A page’s SEO page' },
 	{ id: 'seo-score', title: 'The SEO score' },
 	{ id: 'seo-health', title: 'Site SEO health' },
 	{ id: 'menu', title: 'The menu' },
@@ -337,9 +338,30 @@ const Websites = () => (
 		</Section>
 
 		<Section
+			id='seo-page'
+			title='A page’s SEO page'
+			lead='Open a row on Website → SEO to edit all of that page’s SEO on one page, with its score and previews beside it.'>
+			<P>
+				The fields are in five parts: <strong>Search result</strong>, <strong>Sharing</strong>, <strong>Search engines</strong>,{' '}
+				<strong>Structured data</strong> and <strong>Sitemap</strong>. The buttons at the top jump to each part. Beside them, the
+				score and the Google and shared-link previews change as you type.
+			</P>
+			<P>
+				Changes are kept on the page until you press <strong>Save</strong> (or ⌘S / Ctrl+S). While there are any, a bar at the
+				bottom offers <strong>Discard</strong> and <strong>Save</strong>, and leaving the page asks first.
+			</P>
+			<P>
+				<strong>Across the site</strong> lists the site SEO health problems this page is part of, like another page with the
+				same title, with links to those pages. It reflects the last save. <strong>Page</strong> opens the page’s own record, and{' '}
+				<strong>View on site</strong> opens it on your domain. Overview, Comments and History are in the tabs, as on any record.
+				To link the SEO to a different page, use Edit in the row’s ⋯ menu on the table.
+			</P>
+		</Section>
+
+		<Section
 			id='seo-score'
 			title='The SEO score'
-			lead='Under Basics in each page’s SEO: a score from 0 to 100 and what to fix, worked out as you type.'>
+			lead='Beside each page’s SEO, and under Basics in the edit form: a score from 0 to 100 and what to fix, worked out as you type.'>
 			<P>
 				Type the page’s <strong>Focus keyword</strong>, the one phrase people would search to find it, and the checks look for
 				it. The score is <strong>Good</strong> from 80, <strong>Needs work</strong> from 50 and <strong>Poor</strong> below
@@ -375,7 +397,7 @@ const Websites = () => (
 			title='Site SEO health'
 			lead='At the top of Website → SEO: problems that only show when your published pages are looked at together, and the gaps on each.'>
 			<P>
-				Each problem lists its pages; click one to open its SEO. Errors come first, then warnings, then notices.{' '}
+				Each problem lists its pages; click one to open its SEO page. Errors come first, then warnings, then notices.{' '}
 				<strong>Check again</strong> (the arrows) runs it once more after you’ve fixed something.
 			</P>
 			<Terms
