@@ -677,8 +677,14 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 						away.
 					</>,
 					<>
-						<strong>Sitemap</strong> — a sitemap.xml of your published pages, without those marked <em>Hide from search
-						engines</em>, named in robots.txt.
+						<strong>Sitemap</strong> — a sitemap.xml named in robots.txt: your published pages, and every record a template
+						page shows (each blog post at <C>/blog/my-post</C>, each product) with the date it last changed and its image.
+						Anything marked <em>Hide from search engines</em> is left out: a page, a whole template page, or one record with
+						its own switch.
+					</>,
+					<>
+						<strong>Extra sitemap addresses</strong> — pages Mint doesn’t know about, one per line: <C>/old-page</C>, or a
+						full address on your site. Addresses on other domains are ignored.
 					</>,
 					<>
 						<strong>Main domain</strong> — the address used in the sitemap and robots.txt.
@@ -691,6 +697,11 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 			<P>
 				Your site serves them from the site API: <C>/site/robots.txt</C> and <C>/site/sitemap.xml</C> — the tab shows the
 				full addresses. A site built with <A href='#ai-site'>AI</A> wires them up for you.
+			</P>
+			<P>
+				Past 5,000 addresses the sitemap becomes an index of numbered parts, <C>/sitemap.xml?part=1</C>,{' '}
+				<C>?part=2</C> and so on, as search engines expect. Sites made in the site builder and sites behind the MINT Worker
+				pass the part on for you; a site you serve yourself should pass <C>?part=</C> on to the site API too.
 			</P>
 		</Section>
 

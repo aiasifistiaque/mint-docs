@@ -286,7 +286,7 @@ const SiteBuilder = () => (
 					['Share picture and social cards', 'The page’s share image, or the site’s default — shown when someone posts a link to the page. Facebook, LinkedIn and X can each get their own title and words.'],
 					['Hide from search engines', 'Per page (SEO → Indexing), or for the whole site in Site setup → SEO.'],
 					['Structured data', 'Written into every page for Google’s rich results: the page itself (a web page, or the type you pick), its breadcrumbs, and on the home page your business’s name, logo and social links.'],
-					['Sitemap and robots.txt', <>Made for you at <em>/sitemap.xml</em> and <em>/robots.txt</em>, listing the published pages that aren’t hidden from search, with each page’s priority and how often it changes.</>],
+					['Sitemap and robots.txt', <>Made for you at <em>/sitemap.xml</em> and <em>/robots.txt</em>, listing the published pages that aren’t hidden from search, with each page’s priority and how often it changes, and every record a template page shows (each blog post or product) with its date and image.</>],
 					['Favicon, tracking, pixels, your scripts', <>From Site setup — the same settings a code-built site uses. Search-console verification and the scripts you add under <A href='/websites#site-code'>Add script</A> are in the page itself, so Google, Bing and checkers can see them.</>],
 					['Widgets', <>The <A href='/widgets'>widgets</A> you switch on load on every page.</>],
 				]}
