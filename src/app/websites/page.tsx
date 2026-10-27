@@ -25,6 +25,7 @@ const SECTIONS = [
 	{ id: 'redirects', title: 'Redirects and headers' },
 	{ id: 'site-domains', title: 'Domains' },
 	{ id: 'site-check', title: 'Check the site' },
+	{ id: 'connect-a-website', title: 'Connect a website you already have' },
 	{ id: 'website-setup', title: 'Website setup: connect your code' },
 	{ id: 'website-setup-keys', title: 'Keys, and where each setting goes' },
 	{ id: 'ai-site', title: 'Build your site with AI' },
@@ -638,6 +639,67 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 				Manager confirms your container exists, and Meta confirms the Conversions API token is valid and made for your
 				pixel. Each Tracking card shows its result from the last check.
 			</P>
+		</Section>
+
+		<Section
+			id='connect-a-website'
+			title='Connect a website you already have'
+			lead='Site → Website setup → Existing website: one line on your site, then pick which pages take their SEO from here.'>
+			<P>
+				A site that’s already built — WordPress, Webflow, Wix, Squarespace, Shopify, or one made by an agency — connects
+				without rebuilding it. You get this project’s <A href='/analytics'>Analytics</A> on it, and you edit the SEO of the pages
+				you choose here instead of in the site.
+			</P>
+			<List
+				ordered
+				items={[
+					<>
+						<strong>Paste the snippet</strong> into the <C>{'<head>'}</C> of every page, as high as you can. Website setup shows
+						it with your project key filled in, and where it goes on each platform (a header-code box or your theme’s header).
+					</>,
+					<>
+						<strong>Add the pages</strong> Mint should handle: on Website → Pages, a page with its address as it shows in the
+						browser (<C>/about</C>), set to <em>Published</em>; then its SEO on <A href='#seo'>Website → SEO</A>.
+					</>,
+					<>
+						<strong>Check</strong> what a page gets: Website setup has the address to open. <C>&quot;found&quot;: false</C> means the
+						page isn’t added.
+					</>,
+				]}
+			/>
+			<H3>Which SEO a page gets</H3>
+			<List
+				items={[
+					<>
+						<strong>A page you added to SEO:</strong> what you fill in here replaces the page’s own title, description, share
+						image and the rest. A field you leave empty keeps the page’s own, and <A href='#site-seo'>Default SEO</A> only fills
+						in tags the page doesn’t have.
+					</>,
+					<>
+						<strong>Any other page:</strong> keeps its own SEO. The snippet leaves it alone, even with Default SEO set.
+					</>,
+					<>
+						<C>/about</C>, <C>/about/</C> and <C>/about.html</C> are the same page. Changes reach the site within a minute, without
+						a deploy.
+					</>,
+				]}
+			/>
+			<H3>Link previews and other crawlers</H3>
+			<P>
+				Google runs the snippet, so it reads the SEO. WhatsApp, Facebook, LinkedIn and X previews, and most other crawlers,
+				only read the HTML your server sends. If you can edit your site’s server, Website setup has short code for PHP,
+				Node / Express and Next.js that prints the same tags into the page there. It prints nothing for pages you haven’t
+				added, so your own tags stay. Keep the snippet in the page too: it counts the visits.
+			</P>
+			<CodeBlock
+				label='One page’s SEO, by its address'
+				code={`GET ${PUBLIC_API}/site/head?apiKey=${PROJECT_KEY}&path=/about
+GET ${PUBLIC_API}/site/head?apiKey=${PROJECT_KEY}&path=/about&format=html`}
+			/>
+			<Note>
+				No access to the site’s code at all? Connecting through your own Cloudflare account is coming next, so the SEO is in the
+				HTML for every crawler without touching the code.
+			</Note>
 		</Section>
 
 		<Section
