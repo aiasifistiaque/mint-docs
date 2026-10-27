@@ -356,7 +356,10 @@ const Websites = () => (
 			<P>
 				<strong>Across the site</strong> lists the site SEO health problems this page is part of, like another page with the
 				same title, with links to those pages. It reflects the last save. <strong>Page</strong> opens the page’s own record, and{' '}
-				<strong>View on site</strong> opens it on your domain. Overview, Comments and History are in the tabs, as on any record.
+				<strong>View on site</strong> opens it on your domain. The <strong>Link preview</strong> tab checks the live page
+				the way Facebook, LinkedIn, WhatsApp, X and Slack read it (<A href='#link-preview'>Link previews</A>) — save and
+				publish a change before checking it; on a page drawn per record, type one record’s address. Overview, Comments and
+				History are in the tabs, as on any record.
 				To link the SEO to a different page, use Edit in the row’s ⋯ menu on the table.
 			</P>
 		</Section>
@@ -824,8 +827,8 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 				Those apps never run a page’s JavaScript. They read the HTML your server sends and build the card from its title,
 				description and share image tags. So a page can look right in the browser and still share badly. Type any address —
 				yours or anyone’s — and press <strong>Check</strong>: you see each app’s card the way it lays it out (big picture,
-				small thumbnail or text only), the share image’s size, and what to fix. On a page’s SEO, the{' '}
-				<strong>Link previews</strong> button checks that page.
+				small thumbnail or text only), the share image’s size, and what to fix. Each page’s SEO has the same checker in
+				its <A href='#seo-page'>Link preview tab</A>, already filled with that page’s address.
 			</P>
 			<List
 				items={[
