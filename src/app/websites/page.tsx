@@ -40,6 +40,7 @@ const SECTIONS = [
 	{ id: 'seo', title: 'SEO' },
 	{ id: 'seo-page', title: 'A page’s SEO page' },
 	{ id: 'seo-score', title: 'The SEO score' },
+	{ id: 'seo-structured', title: 'Structured data' },
 	{ id: 'seo-health', title: 'Site SEO health' },
 	{ id: 'menu', title: 'The menu' },
 	{ id: 'site-api', title: 'The site API' },
@@ -390,6 +391,39 @@ const Websites = () => (
 				The page’s words come from the site builder for pages built there (the saved draft), and from the live page for a site
 				built elsewhere. When they can’t be read, the checks that need them are left out rather than failed, and the score
 				says why. The focus keyword is never published.
+			</P>
+		</Section>
+
+		<Section
+			id='seo-structured'
+			title='Structured data'
+			lead='Under Structured data on a page’s SEO: say what the page is and fill in a short form, for star ratings, prices, opening hours and FAQs in search results.'>
+			<P>
+				Pick the <strong>Schema type</strong> and its form appears. The page’s title, description, address and share image are
+				added for you, so the form only asks for the rest. Under it, <strong>Google needs</strong> lists what the type can’t
+				do without, and <strong>Would help</strong> what makes the result richer.
+			</P>
+			<Terms
+				head={['Type', 'The form asks for']}
+				rows={[
+					['Organization', 'Name and logo (the site’s when left empty), phone, email, address, social profiles.'],
+					['Local Business', 'The same, plus the kind of business, price range, a map link and opening hours. Google needs the address.'],
+					['Product', 'Brand, SKU, image, price and currency, availability, rating and number of reviews. Google needs a price with its currency, or a rating with its count.'],
+					['Article, Blog Posting', 'Author and their page, published and updated dates, image. The site is the publisher.'],
+					['FAQ Page', 'Questions and their answers. Only pairs with both are used; they should be on the page too.'],
+					['Event', 'Start and end, in person or online or both, status, venue and address or the online link, ticket price and link, performer, organiser.'],
+					['Service', 'The service, the area served, who provides it, and a starting price.'],
+				]}
+			/>
+			<P>
+				On a page made one per record, like <C>/shoes/[slug]</C>, each text field has a <strong>{'{ }'}</strong> button: pick
+				one of the record’s fields and every shoe’s page fills it in, for example the price from <C>{'{{record.price}}'}</C>.
+			</P>
+			<P>
+				<strong>Advanced: your own JSON-LD</strong> still takes any JSON object; it goes over the form, so what you write there
+				wins. After publishing, the link under the form opens <strong>Google’s Rich Results Test</strong> for the page (for a
+				page per record, test one record’s address). On the home page, Site setup → SEO’s structured data is used when the
+				page’s type is Auto.
 			</P>
 		</Section>
 
