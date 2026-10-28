@@ -60,6 +60,7 @@ const Store = () => (
 					['Currency', 'The money the store sells in — your organization’s country’s by default.'],
 					['Order number prefix', 'Orders are numbered with it: ORD00001, ORD00002… Changing it later numbers new orders only.'],
 					['Sell items the outlet has none of', 'Off (the default): the POS refuses a sale bigger than the outlet’s stock. On: stock may go below zero, to be counted later.'],
+					['Guest checkout on your website', 'On (the default): buyers can order on your website without an account. Off: they sign in or sign up first. Your website reads this setting from your project’s public API (GET /store).'],
 				]}
 			/>
 		</Section>
