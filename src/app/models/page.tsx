@@ -223,7 +223,8 @@ const Models = () => (
 			<Terms
 				head={['', '']}
 				rows={[
-					['Always unique', 'Two records can’t share an address. One made from a title that’s taken gets -2, -3…; one you type that’s taken is refused.'],
+					['Always unique', 'Two records can’t share an address. One that’s taken — made from the title or typed by you — gets -2, -3… (local-chicken, local-chicken-2).'],
+					['Left empty', 'It’s made from the field you picked when you save — Local Chicken → local-chicken.'],
 					['Tidied', 'Lower case, words joined by dashes, accents dropped (Café → cafe). Bangla and other scripts are kept.'],
 					['On the API', <>Filter by it to find a record by its address: <C>?slug=my-first-post</C>.</>],
 				]}

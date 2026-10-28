@@ -10,7 +10,7 @@ export const metadata = guideMeta('/store');
  * itself. Section ids are targets of the tenant panel's GuideLink (store-setup,
  * store-basics, store-outlets, store-products, store-payments, store-returns,
  * store-delivery, store-pos, store-review, store-settings, store-selling, store-orders,
- * store-order, store-returns-page) — keep them.
+ * store-order, store-returns-page, store-categories) — keep them.
  */
 
 const SECTIONS = [
@@ -24,6 +24,7 @@ const SECTIONS = [
 	{ id: 'store-pos', title: 'The POS' },
 	{ id: 'store-review', title: 'Review and set up' },
 	{ id: 'store-built', title: 'What you get' },
+	{ id: 'store-categories', title: 'Categories' },
 	{ id: 'store-variants', title: 'Variants, SKUs and barcodes' },
 	{ id: 'store-stock', title: 'Stock: counts, adjustments, transfers' },
 	{ id: 'store-selling', title: 'Selling at the POS' },
@@ -182,6 +183,27 @@ const Store = () => (
 				]}
 			/>
 			<P>Pages for things you switched off stay hidden until you switch them on in Store settings.</P>
+		</Section>
+
+		<Section
+			id='store-categories'
+			title='Categories'
+			lead='How products are grouped — each category shown on the POS and your website as you choose, in its own order on each.'>
+			<Terms
+				head={['Field', 'What it does']}
+				rows={[
+					['Web address', 'Its address on your website. Left empty, it’s made from the name: Local Chicken → local-chicken. One that’s taken gets -2, -3…, even when you type it.'],
+					['Status on POS', 'Inactive: the category isn’t on the POS’s category bar. Its products still sell and can be searched.'],
+					['Status on website', 'Inactive: your website’s category list leaves it out.'],
+					['Order on POS · Order on website', 'The higher the number, the earlier it shows. Equal numbers go by name.'],
+					['Image · More images', 'Its main picture, and more if your website uses several — a banner, a gallery.'],
+				]}
+			/>
+			<P>
+				The website rule lives on the Categories list endpoint (API → Endpoints): a filter that leaves out what’s inactive on the
+				website, sorted by Order on website. Change either there if your site needs something else. Like the rest of the store’s
+				fields, these can be relabelled or hidden but not removed; add your own beside them.
+			</P>
 		</Section>
 
 		<Section
