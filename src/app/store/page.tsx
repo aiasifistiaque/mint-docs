@@ -9,7 +9,7 @@ export const metadata = guideMeta('/store');
  * wizard's steps, Store settings, what's built and what the store keeps to
  * itself. Section ids are targets of the tenant panel's GuideLink (store-setup,
  * store-basics, store-outlets, store-products, store-payments, store-returns,
- * store-delivery, store-pos, store-review, store-settings) — keep them.
+ * store-delivery, store-pos, store-review, store-settings, store-selling) — keep them.
  */
 
 const SECTIONS = [
@@ -25,6 +25,7 @@ const SECTIONS = [
 	{ id: 'store-built', title: 'What you get' },
 	{ id: 'store-variants', title: 'Variants, SKUs and barcodes' },
 	{ id: 'store-stock', title: 'Stock: counts, adjustments, transfers' },
+	{ id: 'store-selling', title: 'Selling at the POS' },
 	{ id: 'store-kept', title: 'What the store keeps to itself' },
 	{ id: 'store-settings', title: 'Store settings' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -139,7 +140,7 @@ const Store = () => (
 			<Terms
 				head={['Answer', 'What it does']}
 				rows={[
-					['Receipts', '80 mm receipt printer or A4, with your own lines at the top and bottom. Each receipt carries the order’s barcode, scanned for a return.'],
+					['Receipts', '80 mm receipt printer or A4, with your own lines at the top and bottom. Each receipt carries the order number, used to find the sale for a return.'],
 					['Registers and shifts', 'A cashier opens a shift with the cash in the drawer, and closes it with a count; the POS shows what should be there and the difference.'],
 					['Hold a sale', 'Park a basket and serve the next customer; pick it up later.'],
 					['Discounts', 'Money or a percentage off an item or the whole sale.'],
@@ -209,6 +210,27 @@ const Store = () => (
 		</Section>
 
 		<Section
+			id='store-selling'
+			title='Selling at the POS'
+			lead='Store → POS: the till, full screen. Prices, discounts, tax and totals are worked out by the store; the POS shows them.'>
+			<Terms
+				head={['To…', 'Do this']}
+				rows={[
+					['Start', 'Pick the register you’re at (it’s remembered on this device). With shifts on, open a shift with the cash in the drawer first.'],
+					['Add items', 'Scan a barcode or type a SKU and press Enter, or tap a product. A product with variants asks which one — with how many the outlet has. Tap a category to narrow the grid.'],
+					['Change a line', 'Use − and + or type the quantity; the % button gives that item a discount; the bin removes it.'],
+					['Add the customer', 'Add a customer: find them by name, phone or email, or add them as new. Their store credit shows under their name.'],
+					['Coupon or discount', 'Type the coupon code and Apply, or Discount for money or a percentage off the whole sale. A coupon that can’t be used says why.'],
+					['Take the money', 'Pay: the first way to pay is filled with the total. Add another way (+ Card, + bKash…) to split it — it takes what’s left. Cash can be more than what’s due; the change is shown before you finish.'],
+					['Print the receipt', 'After the sale: Print (80 mm or A4, as Store settings say), then New sale.'],
+					['Hold a sale', 'Hold parks the basket — nothing is taken from stock or paid. Held sales lists them at this register: Resume to carry on, Discard to drop it.'],
+					['Cash in, cash out, close', 'Shift since … in the top bar: what the shift has taken by way of paying and the cash that should be in the drawer. Cash in / out records money put in or taken out; Close shift asks for the count and shows if it’s over or short.'],
+				]}
+			/>
+			<Note>A sale that can’t go through — not enough stock, not fully paid, a coupon just used up — changes nothing: no stock moves and no payment is kept.</Note>
+		</Section>
+
+		<Section
 			id='store-kept'
 			title='What the store keeps to itself'
 			lead='Money and stock only move through the store — the POS, order pages, returns, adjustments and transfers — so they always add up.'>
@@ -241,6 +263,9 @@ const Store = () => (
 					['“The last setup didn’t finish”', 'The reason is shown above the wizard; nothing from it was kept. Check the step it names and set up again.'],
 					['“… is kept by the store and can’t be changed here”', 'That field moves with sales, returns or counts. Use the POS, the order’s page or a stock adjustment instead.'],
 					['“… is part of your store — some of its fields can’t change”', 'The field is one the store relies on. Rename its label or hide it from the page instead.'],
+					['“Open a shift on this register first”', 'Shifts are on for your store: open one from the POS with the cash in the drawer, or switch shifts off in Store settings.'],
+					['“Only 2 of … left here”', 'The outlet hasn’t got enough. Sell fewer, move stock in with a transfer, or count it in if the figure is wrong.'],
+					['“Only cash can be more than what’s due”', 'A card, wallet or store credit can only cover what’s left to pay. Lower it, or take the extra in cash.'],
 				]}
 			/>
 		</Section>
