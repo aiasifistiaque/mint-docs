@@ -9,7 +9,8 @@ export const metadata = guideMeta('/store');
  * wizard's steps, Store settings, what's built and what the store keeps to
  * itself. Section ids are targets of the tenant panel's GuideLink (store-setup,
  * store-basics, store-outlets, store-products, store-payments, store-returns,
- * store-delivery, store-pos, store-review, store-settings, store-selling) — keep them.
+ * store-delivery, store-pos, store-review, store-settings, store-selling, store-orders,
+ * store-order, store-returns-page) — keep them.
  */
 
 const SECTIONS = [
@@ -26,6 +27,9 @@ const SECTIONS = [
 	{ id: 'store-variants', title: 'Variants, SKUs and barcodes' },
 	{ id: 'store-stock', title: 'Stock: counts, adjustments, transfers' },
 	{ id: 'store-selling', title: 'Selling at the POS' },
+	{ id: 'store-orders', title: 'Orders' },
+	{ id: 'store-order', title: 'An order’s page' },
+	{ id: 'store-returns-page', title: 'Returns' },
 	{ id: 'store-kept', title: 'What the store keeps to itself' },
 	{ id: 'store-settings', title: 'Store settings' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -229,6 +233,66 @@ const Store = () => (
 				]}
 			/>
 			<Note>A sale that can’t go through — not enough stock, not fully paid, a coupon just used up — changes nothing: no stock moves and no payment is kept.</Note>
+		</Section>
+
+		<Section
+			id='store-orders'
+			title='Orders'
+			lead='Store → Orders: every sale at the POS and every order taken by phone or by hand, newest first. Held sales stay in the POS.'>
+			<Terms
+				head={['To…', 'Do this']}
+				rows={[
+					['See one kind', 'The tabs along the top: All, Today, Unpaid (nothing or only part paid), To fulfil (open orders not yet delivered), With returns and Cancelled. Each shows how many orders it has.'],
+					['Find an order', 'Type its number, the customer’s name, phone or email, or the delivery phone. The tabs’ counts follow what you typed.'],
+					['Narrow it down', 'All channels → POS or Phone / by hand; All outlets → one outlet (when you have more than one).'],
+					['Open it', 'Click the row.'],
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='store-order'
+			title='An order’s page'
+			lead='Everything about one order in one place, with what you can do next across the top.'>
+			<Terms
+				head={['Part', 'What it shows']}
+				rows={[
+					['Items', 'Each line with its SKU, price, quantity, discount and total — and how many came back. Under it: subtotal, discounts and coupon, tax, shipping, total, paid, refunded and the balance due.'],
+					['Payments and refunds', 'Every payment and refund with how it was paid, its reference, when and by whom; cash shows the change given.'],
+					['Returns', 'Returns made from this order and where each is; click one to open it.'],
+					['Stock movements', 'What the order took out of the outlet’s stock (and put back if it was cancelled).'],
+					['Timeline', 'Taken, paid, returned, completed or cancelled, in order.'],
+					['Customer, Delivery, Details', 'Who it’s for, where it goes and the shipping rate, the channel, outlet, who sold it and the note.'],
+					['More details', 'Any fields you added to Orders in Models, with this order’s values.'],
+				]}
+			/>
+			<Terms
+				head={['Action', 'What it does']}
+				rows={[
+					['Take payment', 'Shown while something is owed: pay all or part of the balance, split over several ways to pay.'],
+					['Fulfil', 'Mark packed, shipped or delivered. Delivered completes the order.'],
+					['Cancel', 'Before it ships: the stock goes back to the outlet and what was paid is refunded the way it came (store credit back to the customer). Add why — it’s kept in the note.'],
+					['Print receipt', 'The receipt in the size Store settings say (80 mm or A4).'],
+					['Return items', 'Taking items back and refunding them comes with the returns update; the button is there but not working yet.'],
+				]}
+			/>
+			<Note>An order that has gone out (shipped or delivered) or has items back can’t be cancelled — take it back as a return instead.</Note>
+		</Section>
+
+		<Section
+			id='store-returns-page'
+			title='Returns'
+			lead='Store → Returns: items brought back, with the tabs All, Open (requested, approved or received), Refunded and Rejected. Search by return, order or customer.'>
+			<List
+				ordered
+				items={[
+					'Requested — a return was asked for. Approve it, or Reject it.',
+					'Approved — you agreed to take it back. Mark received when the items arrive (or Reject).',
+					'Received — the items are back. The refund is paid from here, which marks it Refunded.',
+					'Refunded or Rejected — Close it when it’s all done.',
+				]}
+			/>
+			<Note>Each step can carry a note, kept on the return with who did it. A return’s page shows its items with why and in what condition, the refund due and paid, the refunds, and the stock it put back. Returns only show when they’re switched on in Store settings → Returns.</Note>
 		</Section>
 
 		<Section
