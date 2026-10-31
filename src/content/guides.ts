@@ -330,7 +330,7 @@ export const GUIDES: Guide[] = [
 		href: '/store',
 		title: 'Your store',
 		name: 'E-commerce: your store',
-		description: 'A store project set up by a short wizard: products and variants, stock per outlet, orders, a POS, returns and refunds — and what you can change after.',
+		description: 'A store project set up by a short wizard: products and variants, stock per outlet, orders, a POS, returns and refunds, your own couriers — and what you can change after.',
 		icon: Storefront,
 		group: 'Go live',
 		topics: [
@@ -343,6 +343,9 @@ export const GUIDES: Guide[] = [
 			{ id: 'store-pos', title: 'The POS' },
 			{ id: 'store-orders', title: 'Orders' },
 			{ id: 'store-returns-page', title: 'Returns' },
+			{ id: 'store-couriers', title: 'Your courier accounts' },
+			{ id: 'store-send-to-courier', title: 'Sending an order to a courier' },
+			{ id: 'store-deliveries', title: 'Deliveries' },
 			{ id: 'store-settings', title: 'Store settings' },
 		],
 	},

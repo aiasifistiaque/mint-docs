@@ -10,7 +10,9 @@ export const metadata = guideMeta('/store');
  * itself. Section ids are targets of the tenant panel's GuideLink (store-setup,
  * store-basics, store-outlets, store-products, store-payments, store-returns,
  * store-delivery, store-pos, store-review, store-settings, store-selling, store-orders,
- * store-order, store-returns-page, store-categories) — keep them.
+ * store-order, store-returns-page, store-categories, and the couriers' store-couriers, store-courier-steadfast,
+ * store-courier-pathao, store-courier-redx, store-courier-manual, store-send-to-courier, store-delivery-card,
+ * store-deliveries, store-delivery-risk) — keep them.
  */
 
 const SECTIONS = [
@@ -31,6 +33,15 @@ const SECTIONS = [
 	{ id: 'store-orders', title: 'Orders' },
 	{ id: 'store-order', title: 'An order’s page' },
 	{ id: 'store-returns-page', title: 'Returns' },
+	{ id: 'store-couriers', title: 'Your courier accounts' },
+	{ id: 'store-courier-steadfast', title: 'Connecting Steadfast' },
+	{ id: 'store-courier-pathao', title: 'Connecting Pathao' },
+	{ id: 'store-courier-redx', title: 'Connecting RedX' },
+	{ id: 'store-courier-manual', title: 'Couriers without an API' },
+	{ id: 'store-send-to-courier', title: 'Sending an order to a courier' },
+	{ id: 'store-delivery-card', title: 'An order’s parcel' },
+	{ id: 'store-deliveries', title: 'Deliveries' },
+	{ id: 'store-delivery-risk', title: 'Checking a buyer' },
 	{ id: 'store-kept', title: 'What the store keeps to itself' },
 	{ id: 'store-settings', title: 'Store settings' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -135,8 +146,9 @@ const Store = () => (
 			<P>
 				Switch on <strong>Deliver orders</strong> for orders taken by phone or by hand that go to the customer: they get a
 				delivery address and a shipping charge from the list you set. Pick the couriers you use (in Bangladesh: Steadfast,
-				Pathao, RedX) — an order’s page then has <strong>Send to courier</strong>, which books the parcel with your courier
-				account and follows its tracking. You connect the courier account after setup.
+				Pathao, RedX — or a courier without an API, typed by hand) — an order’s page then has <strong>Send to courier</strong>,
+				which books the parcel with your own courier account and follows it. You connect each account after setup, on Delivery
+				settings: see <A href='#store-couriers'>Your courier accounts</A>.
 			</P>
 		</Section>
 
@@ -318,6 +330,155 @@ const Store = () => (
 		</Section>
 
 		<Section
+			id='store-couriers'
+			title='Your courier accounts'
+			lead='Store settings → Delivery settings, under Delivery: a card for each courier you turned on.'>
+			<P>
+				Each courier is <strong>your own merchant account</strong> with them: you open it, you paste its keys into Mint, the
+				courier bills its delivery charges to you and pays the cash it collects straight to you. Mint never holds that money.
+				Keys are kept locked away — Mint only shows whether each one is saved — and never go to your website or to an AI.
+			</P>
+			<List
+				ordered
+				items={[
+					'Open a merchant account with the courier, if you haven’t one (each card links to its sign-up).',
+					'Paste the keys from the courier’s own panel into the card, then Save & test. Mint asks the courier with them and says what came back — “Connected — balance ৳1,240”, or what’s wrong.',
+					'Pick the courier’s settings: the pickup store (from your account), delivery type, the weight to use when an order doesn’t say.',
+					'Copy the webhook address (and secret) from the card into the courier’s webhook page, so it tells Mint where each parcel is. Mint also asks about quiet parcels every 15 minutes, so nothing is missed if a call gets lost.',
+				]}
+			/>
+			<Note>
+				One courier account sends its updates to one address. If the same account is connected in two Mint stores, both cards say
+				so — the second store gets its updates from the regular check instead. Disconnect forgets the keys; it’s refused while
+				parcels are still on their way.
+			</Note>
+		</Section>
+
+		<Section
+			id='store-courier-steadfast'
+			title='Connecting Steadfast'>
+			<List
+				ordered
+				items={[
+					'In Steadfast’s dashboard, open API and add a key named “Mint”. Paste its API key and secret key into the Steadfast card and press Save & test.',
+					'Open Steadfast’s Webhook page. Paste the Callback URL and Auth token from the card and press Save webhook. Steadfast keeps one address per account, so this replaces any address that’s there now. If you’d rather use Steadfast’s Generate button, paste the token it makes into the card’s “Or paste the token Steadfast generated” box.',
+				]}
+			/>
+			<Note>
+				Steadfast has no test mode — every parcel sent is real. If Steadfast refuses the keys, Mint stops using them until you test
+				again: ten wrong tries lock a Steadfast key for an hour. Cancel on a Steadfast parcel asks Steadfast to bring it back (a
+				return request).
+			</Note>
+		</Section>
+
+		<Section
+			id='store-courier-pathao'
+			title='Connecting Pathao'>
+			<List
+				ordered
+				items={[
+					'In Pathao’s merchant panel, open Developer API → Merchant API Credentials (press Generate Credentials if it’s empty). Paste the client id and client secret, and the email and password you sign in to Pathao with — Mint uses them only to sign in to Pathao, and keeps them locked away.',
+					'Pick the pickup store, delivery type (normal or on demand) and what you send (parcel or document).',
+					'In Developer API → Webhook Integration, paste the Callback URL and secret from the card, choose All events, press Add Webhook and use Pathao’s test button.',
+				]}
+			/>
+			<Note>
+				<strong>Try Pathao’s sandbox</strong> fills in Pathao’s public test account, so you can try sending before connecting your
+				own. Switch Mode to Live with your own keys when you’re ready. Pathao parcels can’t be cancelled from Mint — cancel in
+				Pathao’s panel and press Refresh.
+			</Note>
+		</Section>
+
+		<Section
+			id='store-courier-redx'
+			title='Connecting RedX'>
+			<List
+				ordered
+				items={[
+					'In RedX’s merchant panel, open Developer APIs → Configuration and request a token (the sandbox token is on the same page — use it with Mode: Test). Paste it and press Save & test, then pick your pickup store.',
+					'In Developer APIs → Webhook, paste the address from the card and press Enable. RedX signs nothing, so the secret is inside the address — keep it private; New secret makes another one.',
+				]}
+			/>
+			<Note>RedX needs a delivery area for each parcel: pick it in Send to courier (search by district or post code). Mint remembers it for the next order from the same place.</Note>
+		</Section>
+
+		<Section
+			id='store-courier-manual'
+			title='Couriers without an API'
+			lead='For Sundarban, a local rider or your own van — any country.'>
+			<P>
+				Turn on <strong>Manual courier</strong> and list the couriers you use, one per line: a name, then <code>|</code> and its
+				tracking link with <code>{'{tracking}'}</code> where the code goes, if it has one —{' '}
+				<code>Sundarban | https://…/track/{'{tracking}'}</code>. When you send an order, pick the courier and type the tracking code
+				from their slip. Move the parcel on with <strong>Update status</strong> on the order; marking it delivered records the cash
+				collected, just as with the other couriers.
+			</P>
+		</Section>
+
+		<Section
+			id='store-send-to-courier'
+			title='Sending an order to a courier'
+			lead='An order’s page → Send to courier. Or several at once: tick them on Orders or Website orders → Send to courier.'>
+			<Terms
+				head={['In the dialog', 'What it does']}
+				rows={[
+					['Courier', 'Only couriers that are connected and tested.'],
+					['Recipient, phone, address', 'From the order — change them for this parcel only. Bangladeshi couriers need a mobile number (01…).'],
+					['Areas', 'Pathao: city, zone and area (optional — Pathao reads the address when they’re empty). RedX: a delivery area (needed). They’re matched from the address, or filled in as you picked them before for the same place.'],
+					['Cash to collect', 'What the order still owes, in whole taka — lower it, or 0 when it’s paid. Never more than it owes.'],
+					['Weight, items, note', 'The courier’s default weight when the order doesn’t say; the note goes to the rider.'],
+				]}
+			/>
+			<Note>
+				One parcel per order at a time. If the courier doesn’t answer, Mint looks the parcel up before saying it failed, so it’s
+				never booked twice; where a courier can’t be asked (Pathao, RedX) the order says “may have been booked” until the courier
+				confirms or you check its panel. Sending several at once uses each address’s earlier area picks — orders from a new
+				place for Pathao or RedX are sent from their own page once.
+			</Note>
+		</Section>
+
+		<Section
+			id='store-delivery-card'
+			title='An order’s parcel'
+			lead='The Courier card on an order’s page.'>
+			<Terms
+				head={['Shows / button', 'What it means']}
+				rows={[
+					['Status', 'Booked → Waiting for pickup → Picked up → On the way → Out for delivery → Delivered; or On hold, Delivery attempt failed, Coming back, Returned, Cancelled, Lost. The order follows: picked up marks it shipped, delivered completes it.'],
+					['Tracking', 'The courier’s code (copy it) and its tracking page, when the courier has one. Your website’s order page shows the same.'],
+					['Cash', 'What the courier collects. When it’s delivered, a “Cash on delivery” payment is added to the order for what the courier says it collected.'],
+					['Refresh', 'Asks the courier now. The page also asks when you open it, and Mint asks about quiet parcels every 15 minutes.'],
+					['Label', 'A label for the parcel: courier, tracking barcode, recipient, cash to collect, order number.'],
+					['Cancel', 'Before it’s delivered. Steadfast and RedX are asked to stop it and the status changes when they confirm.'],
+					['Receive returned parcel', 'When it comes back: tick what arrived and whether it’s damaged. Sellable items go back into stock. A cash-on-delivery order is not refunded (it was never paid) — and if all of it came back, the order closes and owes nothing.'],
+					['Mark paid out', 'For RedX and manual couriers, once they’ve paid you the cash. Pathao and Steadfast tell Mint themselves.'],
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='store-deliveries'
+			title='Deliveries'
+			lead='Store → Deliveries: every parcel, by where it is — Not sent, Waiting for pickup, On the way, Delivered, Coming back, Returned, Cancelled.'>
+			<P>
+				<strong>Cash with couriers</strong> is what couriers have collected for you and not paid out yet, in all and by courier.
+				Search by delivery, invoice, tracking code or phone; tick delivered parcels to mark them paid out. Two emails come with
+				the store, switched off — “Tell the customer it’s on the way” and “…it’s delivered” — turn them on in Automations.
+			</P>
+		</Section>
+
+		<Section
+			id='store-delivery-risk'
+			title='Checking a buyer'>
+			<P>
+				With Steadfast connected, <strong>Check the buyer</strong> in Send to courier shows how parcels to that phone number have
+				gone across Steadfast: usually takes them, takes some and refuses some, or often refuses — then consider asking for
+				payment first. “Not known” means too few parcels to tell. The answer is kept for a day; Steadfast limits checks by how many
+				parcels you book.
+			</P>
+		</Section>
+
+		<Section
 			id='store-kept'
 			title='What the store keeps to itself'
 			lead='Money and stock only move through the store — the POS, order pages, returns, adjustments and transfers — so they always add up.'>
@@ -353,6 +514,10 @@ const Store = () => (
 					['“Open a shift on this register first”', 'Shifts are on for your store: open one from the POS with the cash in the drawer, or switch shifts off in Store settings.'],
 					['“Only 2 of … left here”', 'The outlet hasn’t got enough. Sell fewer, move stock in with a transfer, or count it in if the figure is wrong.'],
 					['“Only cash can be more than what’s due”', 'A card, wallet or store credit can only cover what’s left to pay. Lower it, or take the extra in cash.'],
+					['“Steadfast refused these keys”', 'Copy both keys again from Steadfast’s API page and Save & test. Wait an hour if Steadfast says the key is blocked.'],
+					['“Already with Steadfast — DLV-…”', 'The order has a parcel on its way. Cancel that delivery first to send it again.'],
+					['“… may have been booked”', 'The courier didn’t answer in time. Look for the order number in the courier’s panel; if it isn’t there, tick “I checked” and send again.'],
+					['A parcel’s status doesn’t move', 'Press Refresh. If the courier card says it hasn’t sent an update for 2 days, check the webhook address in the courier’s panel.'],
 				]}
 			/>
 		</Section>
