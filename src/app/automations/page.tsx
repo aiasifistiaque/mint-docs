@@ -89,6 +89,10 @@ const Automations = () => (
 						'POSTs the record as JSON to your server, signed with the automation’s secret in x-mint-signature — checked the same way as project webhooks.',
 					],
 					['Update a record', 'Sets fields on this record, or on the record it links to (a Deal’s Client) — to a value, a copy of one of its fields, or empty.'],
+					[
+						'Update the records that pick this one',
+						'Sets fields on every record of another page that picks this one — all the Products in a Category, a Client’s Projects. Choose the page, the field that picks this record, and (optionally) conditions on those records: only the ones where Status is Open. Each one is saved like an edit, so its calculated fields follow, and a run writes up to 5,000 of them in batches.',
+					],
 					['Create a record', 'Adds a record to another page — a Task for every won Deal. “This Deal itself” links the new record back.'],
 				]}
 			/>
@@ -96,6 +100,36 @@ const Automations = () => (
 				Changes made by an automation show in History as “Automation “Won deal” updated …”, and can start other automations
 				in turn.
 			</Note>
+		</Section>
+
+		<Section
+			id='update-linked'
+			title='Updating the records that pick this one'
+			lead='Hand a change down: when a Category’s tax changes, its Products follow.'>
+			<List
+				items={[
+					'Records on — the page whose records point at this one (it lists only the pages that have such a field).',
+					'That pick this record in — the field that points here, when the page has more than one.',
+					'Only where — optional conditions on those records, checked before each is changed.',
+					'Set — the fields to change, to a value or a copy of a field of this record. Calculated fields can’t be set, but they are worked out again.',
+				]}
+			/>
+			<P>
+				A record that already holds the new values isn’t touched, so it leaves nothing in History. The run says “Updated 23
+				Products that pick this one”. <A href='#automation-try'>Try it on a record</A> first: it counts what would change.
+			</P>
+		</Section>
+
+		<Section
+			id='store-automations'
+			title='System automations'
+			lead='Installed by your store; on or off is yours, the rest isn’t.'>
+			<P>
+				An online store comes with automations that keep its taxes and prices in step — a Category’s tax going to its
+				Products, a Product taking its Category’s tax, a tax rate’s change repricing what uses it. They are listed under
+				System automations with a System tag. You can switch each on or off and see what it did in Runs; you can’t edit or
+				delete one. If you need something different, switch it off and make an automation of your own.
+			</P>
 		</Section>
 
 		<Section
