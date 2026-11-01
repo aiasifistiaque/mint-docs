@@ -542,6 +542,14 @@ const Pages = () => (
 				author’s posts. Choose the columns, rows per page, and table or cards. Each tab has its own search, and an{' '}
 				<em>Add</em> button that opens the other model’s form with this record already filled in.
 			</P>
+			<H3 id='view-tab-link'>Adding records that are already there</H3>
+			<P>
+				When the other model picks <em>several</em> of these records (a product in many collections, a member in many
+				groups), the tab also has <em>Add existing</em>: pick records already there and this one is added to their link —
+				the others they’re in are kept. Each row gets <em>Remove</em>, which takes this one out of that row’s link; the
+				record itself stays. Both are saved like an edit — they show in History and start automations — and need edit
+				permission on the other model.
+			</P>
 			<P>
 				A tab can also reach one step further, through a model in between: a client’s documents, when each document
 				belongs to a project and each project to a client. Under <em>Linked by</em>, pick the option under{' '}

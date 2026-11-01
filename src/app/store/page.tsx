@@ -1,5 +1,5 @@
 import Guide from '@/components/docs/Guide';
-import { A, List, Note, P, Section, Terms } from '@/components/docs/prose';
+import { A, C, List, Note, P, Section, Terms } from '@/components/docs/prose';
 import { guideMeta } from '@/lib/seo';
 
 export const metadata = guideMeta('/store');
@@ -10,7 +10,7 @@ export const metadata = guideMeta('/store');
  * itself. Section ids are targets of the tenant panel's GuideLink (store-setup,
  * store-basics, store-outlets, store-products, store-payments, store-returns,
  * store-delivery, store-pos, store-review, store-settings, store-selling, store-orders,
- * store-order, store-returns-page, store-categories, and the couriers' store-couriers, store-courier-steadfast,
+ * store-order, store-returns-page, store-categories, store-collections, and the couriers' store-couriers, store-courier-steadfast,
  * store-courier-pathao, store-courier-redx, store-courier-manual, store-send-to-courier, store-delivery-card,
  * store-deliveries, store-delivery-risk) — keep them.
  */
@@ -27,6 +27,7 @@ const SECTIONS = [
 	{ id: 'store-review', title: 'Review and set up' },
 	{ id: 'store-built', title: 'What you get' },
 	{ id: 'store-categories', title: 'Categories' },
+	{ id: 'store-collections', title: 'Collections' },
 	{ id: 'store-variants', title: 'Variants, SKUs and barcodes' },
 	{ id: 'store-stock', title: 'Stock: counts, adjustments, transfers' },
 	{ id: 'store-selling', title: 'Selling at the POS' },
@@ -216,6 +217,33 @@ const Store = () => (
 				The website rule lives on the Categories list endpoint (API → Endpoints): a filter that leaves out what’s inactive on the
 				website, sorted by Order on website. Change either there if your site needs something else. Like the rest of the store’s
 				fields, these can be relabelled or hidden but not removed; add your own beside them.
+			</P>
+		</Section>
+
+		<Section
+			id='store-collections'
+			title='Collections'
+			lead='Groups of products for your website — Sale, Featured, New in. Unlike its one category, a product can be in as many collections as you like.'>
+			<Terms
+				head={['Field', 'What it does']}
+				rows={[
+					['Web address', 'Its address on your website, made from the name when left empty (Summer Sale → summer-sale); a taken one gets -2.'],
+					['Status on website', 'Inactive: your website’s collection list leaves it out.'],
+					['Order on website', 'The higher the number, the earlier it shows. Equal numbers go by name.'],
+					['Description · Image · SEO', 'What your website shows on the collection’s page, and how that page looks in search results and shared links.'],
+				]}
+			/>
+			<List
+				items={[
+					'Put a product in collections from its form: Collections, under Category and Brand.',
+					'Or from the collection’s page: its Products tab lists what’s in it. Add existing picks products already there (they keep their other collections); Remove on a row takes that product out — the product itself stays. Add product makes a new one already in it.',
+					'Collections are for your website only — the POS keeps to its categories.',
+				]}
+			/>
+			<P>
+				On your website, the Collections list endpoint leaves out the inactive ones, sorted by Order on website, and a
+				collection’s products are the Products list with <C>?collections=&lt;its id&gt;</C> (API → Endpoints). See also{' '}
+				<A href='/pages#view-tab-link'>tabs that add existing records</A>.
 			</P>
 		</Section>
 
