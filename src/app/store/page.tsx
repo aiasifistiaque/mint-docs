@@ -164,7 +164,7 @@ const Store = () => (
 					['Discounts', 'Money or a percentage off an item or the whole sale.'],
 					['Coupon codes', 'Codes from the Coupons page, checked at the till.'],
 					['Every sale needs a customer', 'Off: walk-in sales are fine.'],
-					['Tax', 'No tax, tax in the price (receipts show how much was tax), or tax added at the till — with one or more rates; a product can carry its own.'],
+					['Tax', 'No tax, tax in the price (receipts show how much was tax), or tax added at the till — with one or more rates; a product can carry its own, and one without is charged the default rate.'],
 				]}
 			/>
 		</Section>
@@ -209,12 +209,33 @@ const Store = () => (
 					['Status on website', 'Inactive: your website’s category list leaves it out.'],
 					['Order on POS · Order on website', 'The higher the number, the earlier it shows. Equal numbers go by name.'],
 					['Image · More images', 'Its main picture, and more if your website uses several — a banner, a gallery.'],
+					['Tax / VAT', 'The tax its products carry. Set or change it and every product in the category takes it, and their Price after tax follows (see Tax and prices).'],
 				]}
 			/>
 			<P>
 				The website rule lives on the Categories list endpoint (API → Endpoints): a filter that leaves out what’s inactive on the
 				website, sorted by Order on website. Change either there if your site needs something else. Like the rest of the store’s
 				fields, these can be relabelled or hidden but not removed; add your own beside them.
+			</P>
+		</Section>
+
+		<Section
+			id='store-tax'
+			title='Tax and prices'
+			lead='One tax rule, from the category to the till — the price on the page is the price charged.'>
+			<List
+				items={[
+					'Tax rates holds your taxes (VAT 15%…) with a Status and one Default. A product with no tax of its own is charged the default rate.',
+					'A category’s Tax / VAT goes to every product in it, and a product moved to a category with a tax takes it. A new product with no tax takes its category’s.',
+					'A variant always has its product’s tax — it can’t be set on its own.',
+					'Price after tax is worked out for you from the price and the tax the till would charge, by your store’s tax mode: tax added on top, tax already in the price (it equals the price), or no tax. Edit a rate, the default or the tax mode and every price follows.',
+					'Switch a tax to Inactive and it comes off every category, product and variant that had it (their price goes back to the bare price). Switch it back to Active and exactly those get it back.',
+					'A tax in use can’t be deleted: you’re told how many products, categories and variants have it, and Replace with… moves them all to another active tax first.',
+				]}
+			/>
+			<P>
+				These rules run as System automations (<A href='/automations#store-automations'>Automations</A>): you can switch each on or off
+				and read what it did in Runs, but not edit or delete it.
 			</P>
 		</Section>
 
@@ -226,7 +247,7 @@ const Store = () => (
 				items={[
 					'Give a product its options (Size: S, M, L · Colour: White, Navy) and save: its variants are made from every combination. Add a value later and the new combinations appear; take one away and those variants stop selling — they’re never deleted, since orders and stock name them.',
 					'A product without options has one variant of its own, hidden, that follows the product’s SKU, barcode and status.',
-					'A variant can have its own SKU, barcode and price; an empty price is the product’s.',
+					'A variant can have its own SKU, barcode and price; an empty price is the product’s. Its tax is always the product’s.',
 					'SKUs and barcodes are one item’s each — saving one that another item has is refused, naming who has it.',
 				]}
 			/>
