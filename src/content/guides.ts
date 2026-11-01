@@ -232,11 +232,12 @@ export const GUIDES: Guide[] = [
 		href: '/automations',
 		title: 'Automations',
 		name: 'Automations',
-		description: 'When a record is created, changed or deleted: notify people, send an email, call a webhook, update or create a record.',
+		description: 'When a record is created, changed, deleted or reaches a date: notify people, send an email, call a webhook, update or create a record.',
 		icon: Lightning,
 		group: 'Build',
 		topics: [
 			{ id: 'automation-trigger', title: 'When it runs' },
+			{ id: 'automation-date', title: 'When a date is reached' },
 			{ id: 'automation-actions', title: 'What it does' },
 			{ id: 'automation-emails', title: 'Seeing and resending emails' },
 			{ id: 'automation-runs', title: 'Runs' },

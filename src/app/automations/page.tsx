@@ -9,6 +9,7 @@ export const metadata = guideMeta('/automations');
 const SECTIONS = [
 	{ id: 'automations', title: 'What an automation is' },
 	{ id: 'automation-trigger', title: 'When it runs' },
+	{ id: 'automation-date', title: 'When a date is reached' },
 	{ id: 'automation-conditions', title: 'Only if' },
 	{ id: 'automation-actions', title: 'What it does' },
 	{ id: 'automation-placeholders', title: 'Filling in the record' },
@@ -44,7 +45,7 @@ const Automations = () => (
 		<Section
 			id='automation-trigger'
 			title='When it runs'
-			lead='A page, and whether its records are created, changed or deleted.'>
+			lead='A page, and whether its records are created, changed or deleted — or reach a date (below).'>
 			<List
 				items={[
 					<>
@@ -58,6 +59,27 @@ const Automations = () => (
 						<strong>Deleted</strong> — the record is gone, but its last values can still be used (an email saying which order
 						was cancelled).
 					</>,
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='automation-date'
+			title='When a date is reached'
+			lead='Run on a date of each record — or so long before or after it: a membership’s renewal, a discount’s end, a task’s due date.'>
+			<P>
+				Tick <em>reaches a date</em> under When, pick the date field, and how long before or after it (0 is on the date
+				itself): <em>1 day before a Membership’s Renews on</em>. It runs on its own — not together with created, changed or
+				deleted; make a second automation for those.
+			</P>
+			<List
+				items={[
+					'Each record runs once for its date. MINT checks every minute, so it runs within a minute of the time.',
+					'Saving a record moves its run to its new date. Clearing the date, or deleting the record, drops it.',
+					'A date that has already passed when the record is saved doesn’t run — nothing runs for the past.',
+					'The conditions under Only if are checked when it runs, on the record as it is then: an automation that expires active memberships leaves one that was paused meanwhile alone.',
+					'Switched off, its waiting runs are dropped; switched on again, every record whose date is still ahead gets one. A new automation does the same for the records already there.',
+					'A date without a time counts from the start of that day. Its runs show in Runs like any other, with the event “reaches a date”.',
 				]}
 			/>
 		</Section>
