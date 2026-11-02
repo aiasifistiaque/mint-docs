@@ -476,13 +476,12 @@ const Models = () => (
 				kind of value as the field it copies — text, a number, a date or Yes/No — and shows, sorts and filters like it.
 			</P>
 			<Terms
-				head={['', 'Autofill', 'Autofill (read-only)']}
+				head={['', 'What happens']}
 				rows={[
-					['On the form', 'Filled in the moment you pick the record. You can type over it for this record.', 'Filled in the moment you pick the record, then locked — “Copied from Customer”.'],
-					['Pick another record', 'Fills again, replacing what was typed.', 'Fills again from the new record.'],
-					['Clear the pick', 'Keeps what is there.', 'Empties.'],
-					['The source record changes', 'Nothing — it is your copy now.', 'It follows: change the customer’s email and every order that copies it shows the new one.'],
-					['Saved through the API', 'Filled from the record when you leave it out.', 'Always set from the record; a value sent for it is ignored.'],
+					['Autofill, on the form', 'Filled in the moment you pick the record. You can type over it for this record; picking another record fills it again, replacing what was typed. Clearing the pick keeps what is there.'],
+					['Autofill (read-only), on the form', 'Filled in the moment you pick the record, then locked — “Copied from Customer”. Picking another record fills it again; clearing the pick empties it.'],
+					['When the source record changes', 'Autofill: nothing — it is your copy now. Autofill (read-only): it follows — change the customer’s email and every order that copies it shows the new one.'],
+					['Saved through the API', 'Autofill is filled from the record when you leave it out. Autofill (read-only) is always set from the record; a value sent for it is ignored.'],
 				]}
 			/>
 			<P>
