@@ -159,19 +159,15 @@ const Pages = () => (
 				tick several values in one condition. The same switch is on tab conditions and on fields from linked records.
 			</P>
 			<P>
-				<strong>Filled in from a linked record</strong>, in a field’s settings, fills it in when a record is
-				picked on the same form — a payment’s amount from the bill it pays. Turn on <em>Fill this from a linked record</em>,
-				choose the picker (<em>Bill</em>), then{' '}
-				<em>Its Total</em>, or <em>A formula over its fields…</em> such as <C>total - paid</C> (the bill’s number fields,
-				with + − × ÷, round, min and max). The value stays editable; opening a saved payment never changes it, picking
-				another bill fills it again, and a payment added without the form (through the API) gets it too when it was left
-				empty.
-			</P>
-			<P>
-				For a field that always copies, ask for it as an input: <em>Asked as</em> → <strong>Autofill</strong> (the same as
-				the switch, shown as its own type) or <strong>Autofill (read-only)</strong> — nobody types it, the server sets it
-				from the picked record on every save and it changes when that record does. Customer › Email on an order is
-				the example; <A href='/models#models-autofill'>Autofill</A> has the details.
+				<strong>Autofill</strong>, under a field’s <em>Advanced</em> settings, fills it in when a record is
+				picked on the same form — a payment’s amount from the bill it pays, an order’s phone from its customer. Turn on{' '}
+				<em>Fill this from a linked record</em>, choose the picker (<em>Bill</em>), then <em>Its Total</em>, or{' '}
+				<em>A formula over its fields…</em> such as <C>total - paid</C> (the bill’s number fields, with + − × ÷, round, min
+				and max). The field keeps its own kind. <em>Only when</em> limits it to a case (Delivery is Home, or the
+				customer’s Type is Wholesale), and <em>Read-only</em> makes it the server’s: nobody types it, it follows the
+				picked record, and while the conditions don’t hold it is cleared and stays locked. Left editable, the value
+				can be typed over; opening a saved record never changes it, and picking another record fills it again.{' '}
+				<A href='/models#models-autofill'>Autofill</A> has the details.
 			</P>
 			<P>
 				<strong>Colours</strong>, under <em>How it looks</em> for a field with choices — a status, active / inactive, a

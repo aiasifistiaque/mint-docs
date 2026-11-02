@@ -179,7 +179,6 @@ const Models = () => (
 					['Number', 'A number, with optional min/max'],
 					['Formula (number)', 'A number worked out from other fields (see below)'],
 					['Formula (date)', 'A date worked out from other fields — a due date 30 days on, a renewal’s new expiry (see below)'],
-					['Autofill / Autofill (read-only)', 'A copy of a field of the record picked in a link — an order’s customer phone. Typed over, or locked and kept in step (see below)'],
 					['Yes / No', 'A switch · a Yes/No filter. Left unticked it saves as No — a real answer, so Required never stops the save'],
 					['Date', 'A date; the default can be “when created”'],
 					['Color', 'A colour, with a picker'],
@@ -468,30 +467,39 @@ const Models = () => (
 		<Section
 			id='models-autofill'
 			title='Autofill'
-			lead='An Autofill field copies a field of a record picked in another field of the same form — an order’s customer phone and email.'>
+			lead='Autofill is a setting on a field: it copies a field of a record picked in another field of the same form — an order’s customer phone and email.'>
 			<P>
-				Add a <em>Link to a record</em> field first (the customer), then an <strong>Autofill</strong> or an{' '}
-				<strong>Autofill (read-only)</strong> field. Choose the link it copies from and what to take: one of the linked
-				record’s fields (<em>Phone</em>), or a formula over its numbers (<C>total - paid</C>). The Autofill holds the same
-				kind of value as the field it copies — text, a number, a date or Yes/No — and shows, sorts and filters like it.
+				Add a <em>Link to a record</em> field first (the customer). Then open any text, number, date, Yes/No, options or link
+				field, and under <em>Autofill</em> turn on <em>Fill this from a linked record</em>. Choose the link it copies from
+				and what to take: one of the linked record’s fields (<em>Phone</em>), or a formula over its numbers (<C>total - paid</C>).
+				The field stays what it is — a Phone stays a Phone — and shows, sorts and filters like it.
 			</P>
+			<Terms
+				head={['Setting', 'What it does']}
+				rows={[
+					['Fill it with', 'The field of the picked record to copy, or a formula over its numbers.'],
+					['Only when', 'Fill only while conditions hold — a field of this record (Delivery is Home) or of the picked record (Customer › Type is Wholesale). With none, it always fills.'],
+					['Read-only', 'Off (default): filled when you pick the record, and you can type over it for this record. On: nobody types it — the server sets it and keeps it in step with the record.'],
+				]}
+			/>
 			<Terms
 				head={['', 'What happens']}
 				rows={[
-					['Autofill, on the form', 'Filled in the moment you pick the record. You can type over it for this record; picking another record fills it again, replacing what was typed. Clearing the pick keeps what is there.'],
-					['Autofill (read-only), on the form', 'Filled in the moment you pick the record, then locked — “Copied from Customer”. Picking another record fills it again; clearing the pick empties it.'],
-					['When the source record changes', 'Autofill: nothing — it is your copy now. Autofill (read-only): it follows — change the customer’s email and every order that copies it shows the new one.'],
-					['Saved through the API', 'Autofill is filled from the record when you leave it out. Autofill (read-only) is always set from the record; a value sent for it is ignored.'],
+					['On the form', 'Filled in the moment you pick the record. You can type over it for this record (unless it is read-only); picking another record fills it again, replacing what was typed. Clearing the pick keeps what was typed, and empties a read-only one.'],
+					['When the source record changes', 'An editable autofill: nothing — it is your copy now. A read-only one follows — change the customer’s email and every order that copies it shows the new one.'],
+					['When “Only when” stops holding', 'An editable autofill is simply left alone. A read-only one is cleared and stays locked, and fills again when the conditions hold.'],
+					['Saved through the API', 'An editable autofill is filled from the record when you leave it out. A read-only one is always set from the record; a value sent for it is ignored.'],
 				]}
 			/>
 			<P>
-				In a list’s rows an Autofill works per row: a <em>Product</em> picked in an invoice item fills its <em>Rate</em> and{' '}
-				<em>Unit</em> (rows of a Section list can hold links to records and Autofill fields). A read-only Autofill can be used
+				In a list’s rows an autofill works per row: a <em>Product</em> picked in an invoice item fills its <em>Rate</em> and{' '}
+				<em>Unit</em> (rows of a Section list can hold links to records and autofill fields). A read-only number can be used
 				in formulas like any number — <C>quantity * rate</C>.
 			</P>
 			<Note>
-				A hidden field (a password, a token) can’t be copied. An Autofill takes one hop: the picked record’s own fields, not a
-				field of a record it links to.
+				A hidden field (a password, a token) can’t be copied. An autofill takes one hop: the picked record’s own fields, not a
+				field of a record it links to. A number fills a number field, a date a date, and text fills a text field — pick a
+				field that fits.
 			</Note>
 		</Section>
 
