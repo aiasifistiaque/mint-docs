@@ -168,6 +168,12 @@ const Pages = () => (
 				empty.
 			</P>
 			<P>
+				For a field that always copies, ask for it as an input: <em>Asked as</em> → <strong>Autofill</strong> (the same as
+				the switch, shown as its own type) or <strong>Autofill (read-only)</strong> — nobody types it, the server sets it
+				from the picked record on every save and it changes when that record does. Customer › Email on an order is
+				the example; <A href='/models#models-autofill'>Autofill</A> has the details.
+			</P>
+			<P>
 				<strong>Colours</strong>, under <em>How it looks</em> for a field with choices — a status, active / inactive, a
 				yes / no — turns on <em>Show as coloured tags</em>: the table and the record page show the value as a coloured
 				tag. Each option starts with a colour from what it means (paid and active green, void and cancelled red, due and

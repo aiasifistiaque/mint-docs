@@ -24,6 +24,7 @@ const SECTIONS = [
 	{ id: 'models-blocks', title: 'Content blocks' },
 	{ id: 'formulas', title: 'Calculated fields' },
 	{ id: 'date-formulas', title: 'Formula (date)' },
+	{ id: 'models-autofill', title: 'Autofill' },
 	{ id: 'models-links', title: 'Linking models' },
 	{ id: 'models-access', title: 'Who sees the records' },
 	{ id: 'models-signin', title: 'Sign-in' },
@@ -178,6 +179,7 @@ const Models = () => (
 					['Number', 'A number, with optional min/max'],
 					['Formula (number)', 'A number worked out from other fields (see below)'],
 					['Formula (date)', 'A date worked out from other fields — a due date 30 days on, a renewal’s new expiry (see below)'],
+					['Autofill / Autofill (read-only)', 'A copy of a field of the record picked in a link — an order’s customer phone. Typed over, or locked and kept in step (see below)'],
 					['Yes / No', 'A switch · a Yes/No filter. Left unticked it saves as No — a real answer, so Required never stops the save'],
 					['Date', 'A date; the default can be “when created”'],
 					['Color', 'A colour, with a picker'],
@@ -461,6 +463,37 @@ const Models = () => (
 				A member who expires on 30 November and renews on 19 October for a month runs to 30 December; one who expired in
 				September runs to a month from today. Deleting the renewal puts the old expiry back.
 			</P>
+		</Section>
+
+		<Section
+			id='models-autofill'
+			title='Autofill'
+			lead='An Autofill field copies a field of a record picked in another field of the same form — an order’s customer phone and email.'>
+			<P>
+				Add a <em>Link to a record</em> field first (the customer), then an <strong>Autofill</strong> or an{' '}
+				<strong>Autofill (read-only)</strong> field. Choose the link it copies from and what to take: one of the linked
+				record’s fields (<em>Phone</em>), or a formula over its numbers (<C>total - paid</C>). The Autofill holds the same
+				kind of value as the field it copies — text, a number, a date or Yes/No — and shows, sorts and filters like it.
+			</P>
+			<Terms
+				head={['', 'Autofill', 'Autofill (read-only)']}
+				rows={[
+					['On the form', 'Filled in the moment you pick the record. You can type over it for this record.', 'Filled in the moment you pick the record, then locked — “Copied from Customer”.'],
+					['Pick another record', 'Fills again, replacing what was typed.', 'Fills again from the new record.'],
+					['Clear the pick', 'Keeps what is there.', 'Empties.'],
+					['The source record changes', 'Nothing — it is your copy now.', 'It follows: change the customer’s email and every order that copies it shows the new one.'],
+					['Saved through the API', 'Filled from the record when you leave it out.', 'Always set from the record; a value sent for it is ignored.'],
+				]}
+			/>
+			<P>
+				In a list’s rows an Autofill works per row: a <em>Product</em> picked in an invoice item fills its <em>Rate</em> and{' '}
+				<em>Unit</em> (rows of a Section list can hold links to records and Autofill fields). A read-only Autofill can be used
+				in formulas like any number — <C>quantity * rate</C>.
+			</P>
+			<Note>
+				A hidden field (a password, a token) can’t be copied. An Autofill takes one hop: the picked record’s own fields, not a
+				field of a record it links to.
+			</Note>
 		</Section>
 
 		<Section
