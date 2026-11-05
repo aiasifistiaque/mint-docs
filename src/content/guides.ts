@@ -340,6 +340,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'store-products', title: 'Products and variations' },
 			{ id: 'store-categories', title: 'Categories' },
 			{ id: 'store-collections', title: 'Collections' },
+			{ id: 'store-discounts', title: 'Discounts' },
 			{ id: 'store-payments', title: 'How customers pay' },
 			{ id: 'store-returns', title: 'Returns and refunds' },
 			{ id: 'store-pos', title: 'The POS' },

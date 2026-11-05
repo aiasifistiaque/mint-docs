@@ -148,7 +148,9 @@ const Automations = () => (
 			lead='Installed by your store; on or off is yours, the rest isn’t.'>
 			<P>
 				An online store comes with automations that keep its taxes and prices in step — a Category’s tax going to its
-				Products, a Product taking its Category’s tax, a tax rate’s change repricing what uses it. They are listed under
+				Products, a Product taking its Category’s tax, a tax rate’s change repricing what uses it — and its discounts: a
+				discount saved, deleted, started or ended, a product or category moved, each working out the products it touches
+				(“Work out the store’s discounts”), the end at midnight after its Ends day in the store’s time zone. They are listed under
 				System automations with a System tag. You can switch each on or off and see what it did in Runs; you can’t edit or
 				delete one. If you need something different, switch it off and make an automation of your own.
 			</P>

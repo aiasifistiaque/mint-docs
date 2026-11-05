@@ -10,7 +10,7 @@ export const metadata = guideMeta('/store');
  * itself. Section ids are targets of the tenant panel's GuideLink (store-setup,
  * store-basics, store-outlets, store-products, store-payments, store-returns,
  * store-delivery, store-pos, store-review, store-settings, store-selling, store-orders,
- * store-order, store-returns-page, store-categories, store-collections, and the couriers' store-couriers, store-courier-steadfast,
+ * store-order, store-returns-page, store-categories, store-collections, store-discounts, and the couriers' store-couriers, store-courier-steadfast,
  * store-courier-pathao, store-courier-redx, store-courier-manual, store-send-to-courier, store-delivery-card,
  * store-deliveries, store-delivery-risk) — keep them.
  */
@@ -28,6 +28,7 @@ const SECTIONS = [
 	{ id: 'store-built', title: 'What you get' },
 	{ id: 'store-categories', title: 'Categories' },
 	{ id: 'store-collections', title: 'Collections' },
+	{ id: 'store-discounts', title: 'Discounts' },
 	{ id: 'store-variants', title: 'Variants, SKUs and barcodes' },
 	{ id: 'store-stock', title: 'Stock: counts, adjustments, transfers' },
 	{ id: 'store-selling', title: 'Selling at the POS' },
@@ -78,6 +79,7 @@ const Store = () => (
 					['Order number prefix', 'Orders are numbered with it: ORD00001, ORD00002… Changing it later numbers new orders only.'],
 					['Sell items the outlet has none of', 'Off (the default): the POS refuses a sale bigger than the outlet’s stock. On: stock may go below zero, to be counted later.'],
 					['Guest checkout on your website', 'On (the default): buyers can order on your website without an account. Off: they sign in or sign up first. Your website reads this setting from your project’s public API (GET /store).'],
+					['Time zone', 'Where your store’s days start and end — your organization’s country’s by default (Bangladesh: Asia/Dhaka). A discount that ends on 5 Nov runs until midnight there.'],
 				]}
 			/>
 		</Section>
@@ -107,6 +109,8 @@ const Store = () => (
 					['Scan barcodes', 'The POS adds an item when its barcode or SKU is scanned or typed.'],
 					['Track stock', 'The default for new products; off for services or made-to-order items.'],
 					['Brands', 'Shows a Brands page and a brand on each product.'],
+					['Collections', 'On (the default): shows the Collections page — groups of products for your website.'],
+					['Discounts', 'On (the default): shows the Discounts page — a percentage off products, categories or collections.'],
 				]}
 			/>
 		</Section>
@@ -164,6 +168,7 @@ const Store = () => (
 					['Hold a sale', 'Park a basket and serve the next customer; pick it up later.'],
 					['Discounts', 'Money or a percentage off an item or the whole sale.'],
 					['Coupon codes', 'Codes from the Coupons page, checked at the till.'],
+					['Coupons apply to', 'On an item with a discount: the discounted price (the default) or the original price. 10% off a 100 item that’s 20% off takes 8 (10% of 80) or 10 (10% of 100) — either way off the 80.'],
 					['Every sale needs a customer', 'Off: walk-in sales are fine.'],
 					['Tax', 'No tax, tax in the price (receipts show how much was tax), or tax added at the till — with one or more rates; a product can carry its own, and one without is charged the default rate.'],
 				]}
@@ -244,6 +249,38 @@ const Store = () => (
 				On your website, the Collections list endpoint leaves out the inactive ones, sorted by Order on website, and a
 				collection’s products are the Products list with <C>?collections=&lt;its id&gt;</C> (API → Endpoints). See also{' '}
 				<A href='/pages#view-tab-link'>tabs that add existing records</A>.
+			</P>
+		</Section>
+
+		<Section
+			id='store-discounts'
+			title='Discounts'
+			lead='A percentage off — on products you name, every product in a category, or every product in a collection. A product reached by several gets the biggest one; two are never added up.'>
+			<Terms
+				head={['Field', 'What it does']}
+				rows={[
+					['Percentage off', 'More than 0, up to 100. 20 takes 20% off the price.'],
+					['Status', 'Inactive: its products go back to their price — or to a smaller discount that also reaches them. Active again: they get it back.'],
+					['Starts · Ends', 'Both optional days, in your store’s time zone. It reaches its products from the start of its Starts day, and switches itself off at the end of its Ends day.'],
+					['Products · Categories · Collections', 'Any mix — pick at least one. A category includes the categories under it while Include sub-categories is on.'],
+					['Products reached · Ended', 'Kept by the store: how many products sell at this discount now, and the day its end date switched it off.'],
+				]}
+			/>
+			<List
+				items={[
+					'A product’s Price never changes. It shows its Discount, Discount % and Sale price — the price less the discount — and Price after tax is worked out from the Sale price. Its variants follow it.',
+					'Change a price during a sale and the Sale price follows; switch the sale off and the product is back at exactly its (new) price.',
+					'While you fill in the form, a note says what saving does: “Saving gives 20% off to 48 products — 3 of them keep a bigger discount.” The discount’s page has a Products tab with every product selling at it.',
+					'A discount whose end date has passed can’t be switched on — move the end date first.',
+					'The POS, website orders and quotes charge the Sale price. The order line keeps the discount it sold at (Eid sale −20%) and the price before it; receipts and the order page show both. An order placed during a sale keeps its price after the sale ends.',
+					'Coupons are taken off after the discount — from the discounted price, or from the original price if you choose so in Store settings → POS.',
+					'Your website reads price, salePrice, discountPercent and the discount (its name and end date) from the Products API, to strike the price out and show when the sale ends.',
+				]}
+			/>
+			<P>
+				The store does this with six automations you can see on the Automations page — a discount saved, deleted, started or
+				ended, a product moved, a category moved — each switchable on or off, with its Runs. Switch “Discount ends” off and
+				discounts stay on past their end date until you switch them off yourself. See <A href='/automations#automation-date'>when a date is reached</A>.
 			</P>
 		</Section>
 
