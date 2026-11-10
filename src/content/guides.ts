@@ -349,6 +349,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'store-couriers', title: 'Your courier accounts' },
 			{ id: 'store-send-to-courier', title: 'Sending an order to a courier' },
 			{ id: 'store-deliveries', title: 'Deliveries' },
+			{ id: 'store-search', title: 'Search on your website' },
 			{ id: 'store-settings', title: 'Store settings' },
 		],
 	},

@@ -578,6 +578,60 @@ const Store = () => (
 		</Section>
 
 		<Section
+			id='store-search'
+			title='Search on your website'
+			lead='Your store answers searches itself: best matches first, typos forgiven, Bangla and Banglish understood, with filters and their counts. Your website asks; it never has to rank anything.'>
+			<List
+				items={[
+					'Typos: “jaket” finds jackets, “emrald” the emerald ring. Short words (under 4 letters) are matched as typed.',
+					'Word forms: “shirts” finds “Oxford shirt”, “t shirt” and “T-Shirt” are the same, “500 ml” is “500ml”.',
+					'Bangla and Banglish: “শাড়ি”, “saree”, “sari” and “shari” find each other.',
+					'What counts most: a match in the name, then the brand, the category (and the ones above it), Search words and sizes or colours; the description least. Products with every word come first, the words side by side in the name before that.',
+					'SKUs and barcodes go straight to their product.',
+					'Out of stock: listed after the products in stock, or left out — your choice. Best sellers, new products and products on sale get a small lift, never enough to beat a better match.',
+					'Search words: a product field for the other words people type for it (“eid”, “party wear”, “kurta”). Only search reads them.',
+				]}
+			/>
+			<P>
+				Your website calls two addresses with its project key (see <A href='/websites#website-setup'>Website setup</A>, which has the
+				code filled in for your store):
+			</P>
+			<Terms
+				head={['Address', 'What it gives']}
+				rows={[
+					[
+						<C key='s'>GET /public/api/store/search</C>,
+						'Ranked products as cards (name, picture, price, sale price, category, in stock), the total and pages, what was read and which spellings were tried — and with facets=1 every filter with its counts, named.',
+					],
+					[<C key='g'>GET /public/api/store/search/suggest?q=</C>, 'As the shopper types: finished searches, up to 4 products, the categories and brands among them.'],
+				]}
+			/>
+			<Terms
+				head={['Ask with', 'What it does']}
+				rows={[
+					['q', 'The words, up to 100 characters. Leave it out for a category page: the products listed, sorted and filtered the same way.'],
+					['page · limit', 'Up to 60 a page.'],
+					['sort', 'relevance (the default), popular, price, -price (dearest first), newest, name.'],
+					['category · collection', 'A web address or id, several with commas. A category includes the ones under it.'],
+					['brand', 'A name (any case) or id.'],
+					['price[gte] · price[lte]', 'The price shoppers pay now, discount off.'],
+					['option.Size=M', 'A size, colour or any option, as you wrote it (any case). Several values with commas.'],
+					['inStock=1 · onSale=1', 'Only those.'],
+					['facets=1', 'Every filter’s counts. Each group’s counts ignore its own choice, so a shopper who picked M still sees how many come in S and L.'],
+				]}
+			/>
+			<List
+				items={[
+					'Answers can be cached for 30 seconds; a change to a product reaches search within seconds.',
+					'A Products list asked with only search= (no sort or other filters) is ranked the same way once your store has search on — so a site built on it gets better results without a change.',
+					'A store set up from now on has search on. A store set up before is switched on once we’ve checked its results.',
+					'explain=1 with a server key adds each result’s score, broken down — for checking why something ranks where it does.',
+				]}
+			/>
+			<Note>Search settings — on or off, typos, out of stock, the lifts — come to Store settings → Search next. Until then they sit at the defaults above.</Note>
+		</Section>
+
+		<Section
 			id='store-settings'
 			title='Store settings'
 			lead='Store → Store settings: the wizard’s answers, a card each, saved on its own.'>
