@@ -589,6 +589,8 @@ const Store = () => (
 					'Bangla and Banglish: “শাড়ি”, “saree”, “sari” and “shari” find each other.',
 					'What counts most: a match in the name, then the brand, the category (and the ones above it), Search words and sizes or colours; the description least. Products with every word come first, the words side by side in the name before that.',
 					'SKUs and barcodes go straight to their product.',
+					'It reads what a search asks for besides its words: a price (“under 2000”, “1k–2k”, “৫০০ টাকার নিচে”), an order (“cheapest”, “newest”, “best selling”, “সস্তা”), “in stock” and “on sale”, a brand you sell (“aarong saree”), and a size or colour you sell — named (“size M”, “colour red”) it filters, said as a plain word (“red”) it only lifts the products that have it. Filler words (“for”, “the”, “চাই”) are dropped.',
+					'If a brand or size in the words leaves nothing, it is set aside and the words still count.',
 					'Out of stock: listed after the products in stock, or left out — your choice. Best sellers, new products and products on sale get a small lift, never enough to beat a better match.',
 					'Search words: a product field for the other words people type for it (“eid”, “party wear”, “kurta”). Only search reads them.',
 				]}
@@ -602,7 +604,7 @@ const Store = () => (
 				rows={[
 					[
 						<C key='s'>GET /public/api/store/search</C>,
-						'Ranked products as cards (name, picture, price, sale price, category, in stock), the total and pages, what was read and which spellings were tried — and with facets=1 every filter with its counts, named.',
+						'Ranked products as cards (name, picture, price, sale price, category, in stock), the total and pages, what was read and which spellings were tried, understood (the price, order, brand, sizes it took from the words — show them as chips to remove; product when the words are one product’s SKU or barcode) — and with facets=1 every filter with its counts, named.',
 					],
 					[<C key='g'>GET /public/api/store/search/suggest?q=</C>, 'As the shopper types: finished searches, up to 4 products, the categories and brands among them.'],
 				]}
