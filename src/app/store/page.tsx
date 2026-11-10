@@ -1,5 +1,6 @@
 import Guide from '@/components/docs/Guide';
-import { A, C, List, Note, P, Section, Terms } from '@/components/docs/prose';
+import { A, C, CodeBlock, List, Note, P, Section, Terms } from '@/components/docs/prose';
+import { PROJECT_KEY, PUBLIC_API } from '@/lib/config';
 import { guideMeta } from '@/lib/seo';
 
 export const metadata = guideMeta('/store');
@@ -628,6 +629,46 @@ const Store = () => (
 					'explain=1 with a server key adds each result’s score, broken down — for checking why something ranks where it does.',
 				]}
 			/>
+			<P>
+				In Next.js — a search page that asks the store, and keeps working (with your own simple search) if the store ever
+				can’t answer:
+			</P>
+			<CodeBlock
+				label='app/search/page.js'
+				code={`// app/search/page.js — a server component
+const API = '${PUBLIC_API}';
+const KEY = '${PROJECT_KEY}';
+
+async function storeSearch(params) {
+  const qs = new URLSearchParams({ apiKey: KEY, limit: '24', facets: '1', ...params });
+  const res = await fetch(\`\${API}/store/search?\${qs}\`, { next: { revalidate: 30 } });
+  return res.ok ? res.json() : null; // null: search off — fall back below
+}
+
+export default async function SearchPage({ searchParams }) {
+  const { q = '', category = '', sort = 'relevance' } = await searchParams;
+  const found = await storeSearch({ q, ...(category && { category }), sort });
+  if (!found) {
+    const res = await fetch(\`\${API}/products?apiKey=\${KEY}&search=\${encodeURIComponent(q)}\`);
+    return <Results products={(await res.json()).doc} />;
+  }
+  // "jaket" → the store tried "jacket": show it the way shops do.
+  const fixed = found.query.typos.length && found.total
+    ? found.query.words.map(w => found.query.typos.find(t => t.word === w)?.tried[0] ?? w).join(' ')
+    : null;
+  return (
+    <>
+      {fixed && <p>Showing results for “{fixed}”</p>}
+      <Filters facets={found.facets} />      {/* categories, brands, price.buckets, options, with counts */}
+      <Results products={found.doc} total={found.total} pages={found.totalPages} />
+    </>
+  );
+}`}
+			/>
+			<P>
+				For suggestions, call <C>/store/search/suggest?q=</C> from the browser about 120 ms after the last key, and show its{' '}
+				<C>queries</C>, <C>products</C> and <C>categories</C> under the box.
+			</P>
 		</Section>
 
 		<Section
