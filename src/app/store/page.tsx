@@ -628,7 +628,37 @@ const Store = () => (
 					'explain=1 with a server key adds each result’s score, broken down — for checking why something ranks where it does.',
 				]}
 			/>
-			<Note>Search settings — on or off, typos, out of stock, the lifts — come to Store settings → Search next. Until then they sit at the defaults above.</Note>
+		</Section>
+
+		<Section
+			id='store-search-settings'
+			title='Search settings'
+			lead='Store → Search settings: how your website’s search matches and orders products. Saved together; Back to the defaults undoes your choices.'>
+			<Terms
+				head={['Setting', 'What it does']}
+				rows={[
+					['Search on', 'On: your website’s search address answers, and a Products list searched by words is ranked the same way. Off: the search address answers “search is switched off” and the Products list searches the old way, matching the letters exactly. A store set up before search came shows “Not switched on yet” until you switch it on.'],
+					['Typos', 'Normal (the default): one slip in a word of 4–7 letters, two in longer words. Forgiving: one more, even in short words. Off: words as typed.'],
+					['Bangla and Banglish', 'Bangla script, Banglish and English spellings of the same word find each other.'],
+					['Out of stock', 'Show them last (the default), marked out of stock — or hide them from search, suggestions and category pages until they’re back.'],
+					['Popular products · New products · On sale · What shoppers pick', 'How much each lifts a product: off, low, normal or high. Popular = sold, viewed and wished-for; new = added in the last 14 days. A lift never puts a product ahead of one that matches the search better.'],
+					['Learn from shoppers', 'Clicks and orders after a search teach it what people mean, once search learning is built. Nothing is applied until enough different shoppers agree.'],
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='store-search-index'
+			title='The search index'
+			lead='What search reads: an entry per product shoppers can find (active, not archived), kept up to date by itself.'>
+			<List
+				items={[
+					'Searchable shows the entries against your active products; Waiting, the changes still to go in (seconds).',
+					'A change to a product, its variants, category (and the ones under it), brand, collection, stock or discount reaches search in seconds. Changes made through the API or an import are caught within 2 minutes.',
+					'Once a day the numbers are compared; if they differ, the index is rebuilt by itself.',
+					'Rebuild builds every entry again — only needed if something looks wrong. You can keep working while it runs.',
+				]}
+			/>
 		</Section>
 
 		<Section

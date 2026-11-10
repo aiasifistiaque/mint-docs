@@ -350,6 +350,8 @@ export const GUIDES: Guide[] = [
 			{ id: 'store-send-to-courier', title: 'Sending an order to a courier' },
 			{ id: 'store-deliveries', title: 'Deliveries' },
 			{ id: 'store-search', title: 'Search on your website' },
+			{ id: 'store-search-settings', title: 'Search settings' },
+			{ id: 'store-search-index', title: 'The search index' },
 			{ id: 'store-settings', title: 'Store settings' },
 		],
 	},
