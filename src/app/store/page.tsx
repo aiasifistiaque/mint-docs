@@ -606,7 +606,9 @@ const Store = () => (
 						<C key='s'>GET /public/api/store/search</C>,
 						'Ranked products as cards (name, picture, price, sale price, category, in stock), the total and pages, what was read and which spellings were tried, understood (the price, order, brand, sizes it took from the words — show them as chips to remove; product when the words are one product’s SKU or barcode) — and with facets=1 every filter with its counts, named.',
 					],
-					[<C key='g'>GET /public/api/store/search/suggest?q=</C>, 'As the shopper types: finished searches, up to 4 products, the categories and brands among them.'],
+					[<C key='g'>GET /public/api/store/search/suggest?q=</C>, 'As the shopper types: finished searches (your store’s popular searches first), up to 4 products, the categories and brands among them.'],
+					[<C key='p'>GET /public/api/store/search/popular</C>, 'Your store’s top searches this week that found something, for an empty search page (see What shoppers did).'],
+					[<C key='e'>POST /public/api/store/search/events</C>, 'Clicks and adds to the bag from a search, for your sales from search (see What shoppers did).'],
 				]}
 			/>
 			<Terms
@@ -625,7 +627,7 @@ const Store = () => (
 			/>
 			<List
 				items={[
-					'Answers can be cached for 30 seconds; a change to a product reaches search within seconds.',
+					'Answers can be cached for 30 seconds, by the shopper’s own browser (a search has its own searchId; category pages by anyone). A change to a product reaches search within seconds.',
 					'A Products list asked with only search= (no sort or other filters) is ranked the same way once your store has search on — so a site built on it gets better results without a change.',
 					'A store set up from now on has search on. A store set up before is switched on once we’ve checked its results.',
 					'explain=1 with a server key adds each result’s score, broken down — for checking why something ranks where it does.',
@@ -736,6 +738,48 @@ export default async function SearchPage({ searchParams }) {
 				Try a search on Search settings shows each of these. Your website decides how to show them; the example above has the
 				words shops use.
 			</P>
+		</Section>
+
+		<Section
+			id='store-search-events'
+			title='What shoppers did'
+			lead='Each search your website makes is kept for 90 days: what was searched, what it found, what shoppers opened, and the orders that came from it.'>
+			<Terms
+				head={['What', 'How']}
+				rows={[
+					['A search', 'Logged when it has words (category pages aren’t), with the results it showed. The answer has a searchId. Send visitor and session (MintAnalytics.visitorId and sessionId from track.js) with the search, so the rest ties back to it.'],
+					['Opened, added to the bag', 'Send { type: click or cart, searchId, product } to /store/search/events — with navigator.sendBeacon, as text/plain, up to 20 at a time. The product must be one that search showed; its place on the page is worked out for you.'],
+					['A suggestion picked', '{ type: suggest, q } (and product, when it was a product).'],
+					['The order', 'Send the searches with it: search: { ids: […] } on POST /store/orders. A line counts as from search when its product was opened or added from a search in the 24 hours before — this browser’s searches, or the same visitor’s. The last search wins, and only that line’s total counts, never the whole order.'],
+					['Popular searches', '/store/search/popular: the top searches this week that found something, shown as people typed them most. Suggestions show the ones that start with what’s typed first.'],
+				]}
+			/>
+			<List
+				items={[
+					'Nothing personal is kept: emails, phone numbers and card numbers typed into search are stored as [email], [phone] and [number]. No IP address.',
+					'A search shows up in popular searches and suggestions only once 3 different visitors have made it, so one shopper’s typing is never shown to others.',
+					'Every order adds its units to the products’ sales, so best sellers rise in search that day.',
+					'Crawlers’ searches aren’t logged.',
+				]}
+			/>
+			<CodeBlock
+				label='search events in the browser'
+				code={`// After each search: keep its id for this visit.
+const who = { visitor: window.MintAnalytics?.visitorId, session: window.MintAnalytics?.sessionId };
+const found = await (await fetch(\`\${API}/store/search?\${new URLSearchParams({ apiKey: KEY, q, ...who })}\`)).json();
+const ids = JSON.parse(sessionStorage.getItem('searches') || '[]');
+sessionStorage.setItem('searches', JSON.stringify([found.searchId, ...ids].slice(0, 30)));
+
+// A result opened (or added to the bag: type 'cart').
+navigator.sendBeacon(\`\${API}/store/search/events?apiKey=\${KEY}\`,
+  new Blob([JSON.stringify({ ...who, events: [{ type: 'click', searchId: found.searchId, product: card._id }] })], { type: 'text/plain' }));
+
+// The order: the searches that led to it.
+await fetch(\`\${API}/store/orders?apiKey=\${KEY}\`, {
+  method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ lines, customerName, phone, address, search: { ids: JSON.parse(sessionStorage.getItem('searches') || '[]'), ...who } }),
+});`}
+			/>
 		</Section>
 
 		<Section
