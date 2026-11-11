@@ -352,6 +352,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'store-search', title: 'Search on your website' },
 			{ id: 'store-search-settings', title: 'Search settings' },
 			{ id: 'store-search-words', title: 'Words and redirects' },
+			{ id: 'store-search-recover', title: 'When nothing matches' },
 			{ id: 'store-search-index', title: 'The search index' },
 			{ id: 'store-settings', title: 'Store settings' },
 		],

@@ -590,7 +590,7 @@ const Store = () => (
 					'What counts most: a match in the name, then the brand, the category (and the ones above it), Search words and sizes or colours; the description least. Products with every word come first, the words side by side in the name before that.',
 					'SKUs and barcodes go straight to their product.',
 					'It reads what a search asks for besides its words: a price (“under 2000”, “1k–2k”, “৫০০ টাকার নিচে”), an order (“cheapest”, “newest”, “best selling”, “সস্তা”), “in stock” and “on sale”, a brand you sell (“aarong saree”), and a size or colour you sell — named (“size M”, “colour red”) it filters, said as a plain word (“red”) it only lifts the products that have it. Filler words (“for”, “the”, “চাই”) are dropped.',
-					'If a brand or size in the words leaves nothing, it is set aside and the words still count.',
+					'No dead ends: when no product has every word, search tries again, looser, and says what it showed (see When nothing matches).',
 					'Out of stock: listed after the products in stock, or left out — your choice. Best sellers, new products and products on sale get a small lift, never enough to beat a better match.',
 					'Search words: a product field for the other words people type for it (“eid”, “party wear”, “kurta”). Only search reads them.',
 				]}
@@ -658,9 +658,15 @@ export default async function SearchPage({ searchParams }) {
   const fixed = found.query.typos.length && found.total
     ? found.query.words.map(w => found.query.typos.find(t => t.word === w)?.tried[0] ?? w).join(' ')
     : null;
+  // No product had every word: say what was shown instead (see “When nothing matches”).
+  const instead = found.showing?.reason === 'some words'
+    ? \`No product has all of “\${q}” — showing the ones with some of the words.\`
+    : found.showing && \`No exact results for “\${q}”. Showing results for “\${found.showing.q}”.\`;
   return (
     <>
-      {fixed && <p>Showing results for “{fixed}”</p>}
+      {instead ? <p>{instead}</p> : fixed && <p>Showing results for “{fixed}”</p>}
+      {found.didYouMean && <p>Did you mean <a href={\`?q=\${found.didYouMean}\`}>{found.didYouMean}</a>?</p>}
+      {found.fallback && <Results products={found.fallback.doc} title='Popular right now' />}
       <Filters facets={found.facets} />      {/* categories, brands, price.buckets, options, with counts */}
       <Results products={found.doc} total={found.total} pages={found.totalPages} />
     </>
@@ -710,6 +716,26 @@ export default async function SearchPage({ searchParams }) {
 					'A store set up before synonyms gets both tables with the next store upgrade.',
 				]}
 			/>
+		</Section>
+
+		<Section
+			id='store-search-recover'
+			title='When nothing matches'
+			lead='A search never ends on an empty page: when no product has every word, it tries again, looser, and tells the shopper what it did.'>
+			<Terms
+				head={['In this order', 'What happens']}
+				rows={[
+					['A price, brand or size', '“candle under 10” with nothing under 10: every price, and it says so. Filters the shopper picked are never set aside. In the answer: understood.relaxed.'],
+					['Further spellings', 'Two typos in a word of six letters or more (“walrett” → wallet). Short words never get two (“kicks” is not “kit”). Not when typos are off. In the answer: showing, reason typos.'],
+					['Fewer words', '“blue linen shirt” with no blue shirt: “linen shirt”, with “blue” left out. The most words some products have together; the rarer, more telling words stay; at least half the words. In the answer: showing, reason fewer words, dropped.'],
+					['Some of the words', 'No smaller set works (“jacket candle watch”): the products with any of the words, those with more of them first. In the answer: showing, reason some words.'],
+					['Nothing at all', '“Did you mean” with the nearest word your store has (“ackets” → jacket), and popular products — from the category the search named, or your best sellers. In the answer: didYouMean, fallback.'],
+				]}
+			/>
+			<P>
+				Try a search on Search settings shows each of these. Your website decides how to show them; the example above has the
+				words shops use.
+			</P>
 		</Section>
 
 		<Section
