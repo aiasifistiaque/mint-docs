@@ -799,6 +799,57 @@ await fetch(\`\${API}/store/orders?apiKey=\${KEY}\`, {
 		</Section>
 
 		<Section
+			id='store-search-insights'
+			title='Search insights'
+			lead='Store → Search insights: what shoppers search for on your website, what they find, and what it earns — with a fix one tap away.'>
+			<Terms
+				head={['Number', 'What it means']}
+				rows={[
+					['Searches', 'Searches with words in them (the next page of the same search doesn’t count again).'],
+					['Visitors who searched', 'Different shoppers who searched at least once.'],
+					['Visits with a search', 'The share of visits to your website with a search in them. Needs your website’s analytics (track.js); — without it.'],
+					['Revenue from search', 'The lines of orders that came from a search, as worked out in What shoppers did above.'],
+					['No results', 'The share of searches that found nothing.'],
+					['Click rate', 'Of the searches that found something, the share where a result was opened.'],
+					['Conversion from search', 'Orders from search for every 100 searches.'],
+				]}
+			/>
+			<P>
+				Pick 7, 30 or 90 days; each number shows how it moved against the same length of time before. The numbers are your
+				store’s own days, updated every hour.
+			</P>
+			<Terms
+				head={['Table', 'What to do with it']}
+				rows={[
+					['Top searches', 'What shoppers want most, with clicks, orders and revenue.'],
+					['No results', 'The worst first. Add a synonym when you sell it under another word, a redirect when a page answers it (returns, delivery), or create the product when you should sell it — each opens a new one with the search filled in.'],
+					['Low click rate', 'Searched 3 times or more, results shown, but fewer than 15 in 100 opened. Try search shows you what they saw.'],
+					['Trending', 'The last 7 days against the 7 before, up the most first; New when it wasn’t searched before.'],
+				]}
+			/>
+			<List
+				items={[
+					'Open a search to see it by day, its results now (the same for every shopper), which result shoppers opened (most on the first few is a good sign), and what they searched next in the same visit — often what they meant.',
+					'The dashboard has a “Website search this week” card: revenue and searches against last week, and the top search with no results. Add it in the dashboard builder if yours doesn’t have it.',
+					'Coming next: pinning and boosting products for a search, and suggested fixes.',
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='store-product-search'
+			title='A product’s Search tab'
+			lead='On each product page: how shoppers found it by searching your website in the last 30 days.'>
+			<List
+				items={[
+					'Shown in searches: how many searches had it on their first page. Opened, Added to the bag and Sold from search follow it down to the order.',
+					'Searches that led here: what shoppers typed before opening it. Click one to try it.',
+					'Its search words: the extra words search knows it by, from its Search words field. Add the ones shoppers use that aren’t in its name or description.',
+				]}
+			/>
+		</Section>
+
+		<Section
 			id='store-search-index'
 			title='The search index'
 			lead='What search reads: an entry per product shoppers can find (active, not archived), kept up to date by itself.'>
