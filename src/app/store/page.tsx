@@ -762,6 +762,22 @@ export default async function SearchPage({ searchParams }) {
 					'Crawlers’ searches aren’t logged.',
 				]}
 			/>
+			<P>
+				Every hour the searches are added up by day — your store’s own day, in its time zone — and kept for 13 months: each
+				search, how many shoppers made it, how many found nothing, what was opened, added and ordered from it. “Shirts” and
+				“shirt” are one search. Today’s numbers fill in through the day.
+			</P>
+			<Terms
+				head={['On each product', 'What it counts']}
+				rows={[
+					['Sold, 30 days', 'Units sold in the last 30 days, from every order (website and POS), returns taken off; cancelled orders don’t count. Recounted each night.'],
+					['Opened from search, 30 days', 'How many times shoppers opened it from your website’s search results in the last 30 days.'],
+				]}
+			/>
+			<P>
+				Both are filled in by the store and can’t be typed. Search ranks best sellers, and products viewed and wished for in
+				the last 30 days, a little higher (the Popularity dial in Search settings).
+			</P>
 			<CodeBlock
 				label='search events in the browser'
 				code={`// After each search: keep its id for this visit.
