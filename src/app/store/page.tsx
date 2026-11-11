@@ -691,6 +691,28 @@ export default async function SearchPage({ searchParams }) {
 		</Section>
 
 		<Section
+			id='store-search-words'
+			title='Words and redirects'
+			lead='Teach search your shoppers’ words: synonyms for things called differently, and searches that should open a page.'>
+			<Terms
+				head={['Where', 'What it does']}
+				rows={[
+					['Search synonyms', 'Same thing: each word finds the others (sneakers, trainers, keds). One way: the words also find others, not back (jutta → shoes). One word per entry. Switch one off with On. Saved, it works on the next search.'],
+					['Starter packs', 'On Search settings: Clothes and fashion, Electronics, Grocery, Bangla and English. Switching one on adds its groups as your own synonyms (From: starter pack) — edit or switch off any of them; switching the pack off removes what it added.'],
+					['Search redirects', 'Searches that open a page instead (return, refund → /returns; eid → your Eid collection). Exactly one of these, or contains one of these. Optional start and end days. Used counts how often it answered.'],
+					['Try a search', 'On Search settings: the results shoppers get, each with why it’s there (“name synonym “sneakers” 8”), and what the search understood — a price, a brand, a size, the synonyms and spellings it used, a redirect.'],
+				]}
+			/>
+			<List
+				items={[
+					'A synonym match counts a little less than the word itself, so a product named with the shopper’s own word comes first.',
+					'Your website gets a redirect with the results (redirect.url); it decides whether to open the page.',
+					'A store set up before synonyms gets both tables with the next store upgrade.',
+				]}
+			/>
+		</Section>
+
+		<Section
 			id='store-search-index'
 			title='The search index'
 			lead='What search reads: an entry per product shoppers can find (active, not archived), kept up to date by itself.'>
