@@ -29,6 +29,7 @@ const SECTIONS = [
 	{ id: 'checkout', title: 'Checkout' },
 	{ id: 'thanks', title: 'Thank-you page' },
 	{ id: 'orders', title: 'My orders' },
+	{ id: 'search', title: 'Search (stores)' },
 	{ id: 'mint-js', title: 'Mint in your own code' },
 	{ id: 'coming-next', title: 'Coming next' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -51,7 +52,7 @@ const Widgets = () => (
 			<Terms
 				head={['Step', 'What you do']}
 				rows={[
-					['Widget', 'Pick one: Login & account, Cart, Checkout, Thank-you page or My orders. Widgets that are coming soon show greyed out.'],
+					['Widget', 'Pick one: Login & account, Cart, Checkout, Thank-you page, My orders or — for a store — Search. Widgets that are coming soon show greyed out.'],
 					['Customers', <>Login & account only: MINT’s Customers (the default) or a model of your own. See <A href='#login-customers'>Your customer model</A>.</>],
 					['Shop', <>Cart, Checkout, Thank-you page and My orders: which model holds your products (and, for all but the cart, where orders go). The <A href='#shop'>Shop</A> settings are right there to fill in and save.</>],
 					['Set up', 'The widget’s options, such as a card or a button, and what it asks for.'],
@@ -440,6 +441,44 @@ const Widgets = () => (
 		</Section>
 
 		<Section
+			id='search'
+			title='Search (stores)'
+			lead='A search box, suggestions as the shopper types, and a results page with filters — answered by your store’s own search. Stores only.'>
+			<CodeBlock
+				label='header and search page'
+				code={'<!-- in the header: an icon that opens search -->\n<div data-mint="search"></div>\n\n<!-- or a box always shown -->\n<div data-mint="search" data-layout="box"></div>\n\n<!-- on your /search page -->\n<div data-mint="search" data-layout="results"></div>'}
+			/>
+			<Terms
+				head={['Option', 'What it does']}
+				rows={[
+					['Layout', <>Icon (a button that opens a search window), Box (a search field in the page) or Results (the results page). A tag’s own <C>data-layout</C> wins over the setting, so one widget serves the header and the search page.</>],
+					['Results page', <>Where a search goes, <C>/search</C> by default. When the results widget is on the same page, it updates in place.</>],
+					['Product link', <>How a product’s address is written, <C>/products/{'{slug}'}</C> by default (also <C>{'{id}'}</C>).</>],
+					['Per page', 'Products on a results page, 4–60 (24 by default).'],
+					['Filters', 'Show the filters beside the results: categories, brands, sizes and colours, price, in stock and on sale, with their counts.'],
+				]}
+			/>
+			<List
+				items={[
+					'As the shopper types: finished searches, up to 4 products with their price, and the categories and brands among them. With nothing typed, your popular searches.',
+					'What the search understood shows as chips — “under 2000”, “In stock”, a brand or colour. Removing one searches again without it. Filters picked show as chips too, with Clear all.',
+					<>The results page says when it showed something else: “Showing results for …” for a corrected spelling, “Did you mean …”, close matches, and, when nothing matches, a category or your best sellers (see <A href='/store#store-search'>Search on your website</A>).</>,
+					'Keyboard and screen readers: arrows move through suggestions, Enter picks, Esc closes; the window keeps focus inside it; the count of results is read out.',
+					<>It follows <A href='#look'>the look</A>, and every word is in its Texts.</>,
+				]}
+			/>
+			<P>
+				Your page’s pixels hear about it: Google gets <C>search</C> and <C>view_search_results</C>, Meta and TikTok
+				a <C>Search</C>, each once per search. Each search has an id that goes with a click on a product, an add to the bag
+				and the order, so Search → What shoppers did shows the sales that came from search.
+			</P>
+			<Note>
+				Only a store has the Search widget. In the site builder it’s the Search box and Search results blocks, and a button
+				can open search (its action Open a widget → Search).
+			</Note>
+		</Section>
+
+		<Section
 			id='mint-js'
 			title='Mint in your own code'
 			lead='mint.js gives your page’s scripts window.Mint.'>
@@ -461,6 +500,7 @@ const Widgets = () => (
 					[<C key='cs'>Mint.cart.set(id, quantity, variant)</C>, <>Sets a line’s quantity; 0 removes it. Also <C>remove(id, variant)</C> and <C>clear()</C>.</>],
 					[<C key='cp'>Mint.cart.product(id)</C>, 'A product as the cart sees it: name, price, variants with their price and stock.'],
 					[<C key='cf'>Mint.cart.format(amount)</C>, 'An amount in your currency, written the visitor’s way.'],
+					[<C key='so'>Mint.search.open(q)</C>, <>Opens the <A href='#search'>Search</A> window, with q typed in. <C>Mint.on('search:results', cb)</C> gives each search’s answer.</>],
 				]}
 			/>
 			<CodeBlock

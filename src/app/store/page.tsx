@@ -633,6 +633,10 @@ const Store = () => (
 					'explain=1 with a server key adds each result’s score, broken down — for checking why something ranks where it does.',
 				]}
 			/>
+			<Note>
+				No code needed: the <A href='/widgets#search'>Search widget</A> adds a search box, suggestions and a results page with
+				filters to any site, and sends clicks and orders back for What shoppers did.
+			</Note>
 			<P>
 				In Next.js — a search page that asks the store, and keeps working (with your own simple search) if the store ever
 				can’t answer:
