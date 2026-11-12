@@ -917,6 +917,29 @@ await fetch(\`\${API}/store/orders?apiKey=\${KEY}\`, {
 		</Section>
 
 		<Section
+			id='store-search-fix-with-ai'
+			title='Fix search with your AI'
+			lead='Search insights → Fix with your AI: a prompt for your own AI (Claude, ChatGPT or another) with this project connected.'>
+			<List
+				items={[
+					'Copy the prompt and paste it into your AI. It reads your search insights, tries the searches that go wrong, and works out why.',
+					'It suggests synonyms, redirects and search rules — they wait in Suggested fixes, marked From your AI, and nothing changes until you accept them.',
+					'It can add search words to products: it shows you the change first, and saves only when you say so. Search finds the products by them straight away.',
+					'Your AI needs a project key with Data and Build (Connect your AI). Nothing is sent to an AI by Mint itself.',
+				]}
+			/>
+			<Terms
+				head={['Tool', 'What it does']}
+				rows={[
+					['search_insights', 'Top searches, ones with no results or few clicks, trending, and the fixes waiting.'],
+					['try_search', 'A search as shoppers get it, every result explained.'],
+					['save_search_suggestion', 'A synonym, redirect or rule for you to accept.'],
+					['enrich_products', 'Search words on products — a dry run, then saved.'],
+				]}
+			/>
+		</Section>
+
+		<Section
 			id='store-search-try'
 			title='Try search'
 			lead='Store → Try search: your website’s search exactly as shoppers get it, with the reasons.'>
