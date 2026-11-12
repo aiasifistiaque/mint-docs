@@ -890,6 +890,48 @@ await fetch(\`\${API}/store/orders?apiKey=\${KEY}\`, {
 		</Section>
 
 		<Section
+			id='store-search-suggestions'
+			title='Learning and suggested fixes'
+			lead='Search gets better from what your shoppers do, and tells you what it noticed. Search settings → Learning turns it off.'>
+			<List
+				items={[
+					'Once a day it counts, for each search and product, how often the product was shown, clicked, added to a cart and bought — recent weeks count more (half as much after 30 days).',
+					'A product shoppers choose more than its place on the page would say gets a small lift for that search (up to ×1.25), and one they skip a small drop (down to ×0.85). It waits for 20 showings to 5 different shoppers, so one person can’t move it. The Learned dial sets how much it counts.',
+					'Try search shows it as “Learned” in a result’s Why.',
+				]}
+			/>
+			<Terms
+				head={['Suggested fix', 'Comes from']}
+				rows={[
+					['Synonym', 'Shoppers searching one thing, finding nothing they want, and searching again with one word changed (“frock” → “dress”).'],
+					['Pin rule', 'A product shoppers keep choosing from low on the page — pinning puts it where they look first.'],
+				]}
+			/>
+			<List
+				items={[
+					'Suggested fixes sit on Search insights. Accept makes the synonym or the rule (you can change it after); Dismiss means that one won’t be suggested again.',
+					'Look for fixes now runs the daily count at once.',
+					'Fixes from your own AI (over MCP) show here too, marked From your AI.',
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='store-search-try'
+			title='Try search'
+			lead='Store → Try search: your website’s search exactly as shoppers get it, with the reasons.'>
+			<List
+				items={[
+					'Type a search (or leave it empty for a page of everything), pick a sort, page through. It’s the same for every shopper — no one’s history changes it.',
+					'Why on a result shows the words it matched, where (name, brand, category, search words…) and how (exact, word form, synonym, typo, sounds like), then every lift: all words found, in stock, popular, new, on sale, learned, a search rule — and the score.',
+					'The right column shows what the search understood (price, brand, colour, sort), the synonyms and spellings it used, the rules that fired and how long it took.',
+					'A redirect, “Showing results for”, “Did you mean” and the no-results fallback show as shoppers would see them.',
+					'Insights’ Try search opens it with that search; from there, pin or boost products for it in one click.',
+				]}
+			/>
+		</Section>
+
+		<Section
 			id='store-search-index'
 			title='The search index'
 			lead='What search reads: an entry per product shoppers can find (active, not archived), kept up to date by itself.'>
