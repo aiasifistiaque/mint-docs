@@ -831,7 +831,8 @@ await fetch(\`\${API}/store/orders?apiKey=\${KEY}\`, {
 				items={[
 					'Open a search to see it by day, its results now (the same for every shopper), which result shoppers opened (most on the first few is a good sign), and what they searched next in the same visit — often what they meant.',
 					'The dashboard has a “Website search this week” card: revenue and searches against last week, and the top search with no results. Add it in the dashboard builder if yours doesn’t have it.',
-					'Coming next: pinning and boosting products for a search, and suggested fixes.',
+					'Low click rate searches, and the search you opened, have Pin products and Boost: each starts a search rule for that search (below). The drawer lists the rules a search already sets off.',
+					'Coming next: suggested fixes.',
 				]}
 			/>
 		</Section>
@@ -845,6 +846,41 @@ await fetch(\`\${API}/store/orders?apiKey=\${KEY}\`, {
 					'Shown in searches: how many searches had it on their first page. Opened, Added to the bag and Sold from search follow it down to the order.',
 					'Searches that led here: what shoppers typed before opening it. Click one to try it.',
 					'Its search words: the extra words search knows it by, from its Search words field. Add the ones shoppers use that aren’t in its name or description.',
+					'Search rules: the rules that name it, its brand, category or collections — Add a rule starts one for it.',
+				]}
+			/>
+		</Section>
+
+		<Section
+			id='store-search-rules'
+			title='Search rules'
+			lead='Store → Search rules: decide what a search, or a category page, shows first, lower down or not at all.'>
+			<Terms
+				head={['When', 'It fires on']}
+				rows={[
+					['A search is exactly', 'One of the searches you list, separated by commas. Word forms count: “dress” is “dresses” too.'],
+					['A search contains', 'Any search with these words, in this order (“eid” fires on “eid dress”).'],
+					['A category page is', 'That category’s page on your website, when the shopper hasn’t typed any words.'],
+					['Anyone searches or opens a category', 'Every search and every category page.'],
+				]}
+			/>
+			<Terms
+				head={['Do', 'What shoppers see']}
+				rows={[
+					['Pin', 'The products you pick, at the top, in the order you picked them — even one the search wouldn’t have found, as long as it fits the shopper’s filters.'],
+					['Boost', 'Products, brands, categories, collections or products on sale shown higher: a little (×1.5), clearly (×2) or a lot (×3).'],
+					['Bury', 'The same, shown lower: clearly (×0.5) or a lot (×0.2).'],
+					['Hide', 'Those products left out of the results.'],
+					['Show only', 'Only those products. If none of the results are, the rule steps aside — shoppers never get an empty page.'],
+				]}
+			/>
+			<List
+				items={[
+					'Rules apply in this order: hide, show only, pin, then boost and bury. A sort the shopper picks (price, newest) comes before pins and boosts; hide and show only still apply.',
+					'As you write a rule, the editor shows your real results without it and with it: ▲ moved up, ▼ down, new, pinned. Type in Try it to see another search.',
+					'Dates are optional: a rule with an end date stops at the end of that day. The switch turns a rule off without deleting it; Used counts the searches it changed.',
+					'Leave the name empty and the rule is named by what it does, e.g. “Searches for “dress”: pin 2 products”.',
+					'Stores built before search rules get them with the next store upgrade.',
 				]}
 			/>
 		</Section>
