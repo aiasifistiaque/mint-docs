@@ -697,7 +697,8 @@ export default async function SearchPage({ searchParams }) {
 					['Bangla and Banglish', 'Bangla script, Banglish and English spellings of the same word find each other.'],
 					['Out of stock', 'Show them last (the default), marked out of stock — or hide them from search, suggestions and category pages until they’re back.'],
 					['Popular products · New products · On sale · What shoppers pick', 'How much each lifts a product: off, low, normal or high. Popular = sold, viewed and wished-for; new = added in the last 14 days. A lift never puts a product ahead of one that matches the search better.'],
-					['Learn from shoppers', 'Clicks and orders after a search teach it what people mean, once search learning is built. Nothing is applied until enough different shoppers agree.'],
+					['Search by meaning', 'On (the default): words your products don’t use still find them — “party wear” finds an evening gown, “শাড়ি” a saree. Products that match the words always come first. Off: words only. See Search by meaning below.'],
+					['Learn from shoppers', 'Clicks and orders after a search teach it what people mean. Nothing is applied until enough different shoppers agree.'],
 				]}
 			/>
 		</Section>
@@ -735,6 +736,7 @@ export default async function SearchPage({ searchParams }) {
 					['Further spellings', 'Two typos in a word of six letters or more (“walrett” → wallet). Short words never get two (“kicks” is not “kit”). Not when typos are off. In the answer: showing, reason typos.'],
 					['Fewer words', '“blue linen shirt” with no blue shirt: “linen shirt”, with “blue” left out. The most words some products have together; the rarer, more telling words stay; at least half the words. In the answer: showing, reason fewer words, dropped.'],
 					['Some of the words', 'No smaller set works (“jacket candle watch”): the products with any of the words, those with more of them first. In the answer: showing, reason some words.'],
+					['Close in meaning', 'No product has the words: the products closest in meaning (“something to wear to a reception” → the evening gown), with “Did you mean” if a word is close to one of yours. Only products clearly alike are shown. In the answer: showing, reason meaning.'],
 					['Nothing at all', '“Did you mean” with the nearest word your store has (“ackets” → jacket), and popular products — from the category the search named, or your best sellers. In the answer: didYouMean, fallback.'],
 				]}
 			/>
@@ -742,6 +744,22 @@ export default async function SearchPage({ searchParams }) {
 				Try a search on Search settings shows each of these. Your website decides how to show them; the example above has the
 				words shops use.
 			</P>
+		</Section>
+
+		<Section
+			id='store-search-meaning'
+			title='Search by meaning'
+			lead='Search understands what shoppers mean, in Bangla and English — not only the words on your products.'>
+			<List
+				items={[
+					'Each product is read for what it is: its name, category, brand, options and search words. A search is read the same way, and the two are compared.',
+					'Products that match the words always come first. Meaning only orders the top results (a quarter of the weight), and fills in when nothing matches the words.',
+					'It runs on Mint’s own servers with a small open-source model: no AI service, nothing sent anywhere, no cost per search. Suggestions as shoppers type use words only, to stay instant.',
+					'A product you add or rename is understood within seconds. The search index card shows how many products have it (By meaning).',
+					'A search found only by meaning still counts under No results in Search insights — a synonym or search words makes it exact.',
+					'Try search shows what meaning did for a search: ordered the top results, found them by meaning, or not used and why. Switch it off in Search settings.',
+				]}
+			/>
 		</Section>
 
 		<Section
@@ -964,6 +982,7 @@ await fetch(\`\${API}/store/orders?apiKey=\${KEY}\`, {
 					'A change to a product, its variants, category (and the ones under it), brand, collection, stock or discount reaches search in seconds. Changes made through the API or an import are caught within 2 minutes.',
 					'Once a day the numbers are compared; if they differ, the index is rebuilt by itself.',
 					'Rebuild builds every entry again — only needed if something looks wrong. You can keep working while it runs.',
+					'By meaning: how many products search understands by meaning, and any still on the way.',
 				]}
 			/>
 		</Section>
