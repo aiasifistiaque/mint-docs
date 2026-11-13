@@ -13,7 +13,8 @@ export const metadata = guideMeta('/store');
  * store-delivery, store-pos, store-review, store-settings, store-selling, store-orders,
  * store-order, store-returns-page, store-categories, store-collections, store-discounts, and the couriers' store-couriers, store-courier-steadfast,
  * store-courier-pathao, store-courier-redx, store-courier-manual, store-send-to-courier, store-delivery-card,
- * store-deliveries, store-delivery-risk) — keep them.
+ * store-deliveries, store-delivery-risk, and the buyer check's store-buyer-check, store-buyer-lookup,
+ * store-buyer-check-settings, store-courier-buyer-checks) — keep them.
  */
 
 const SECTIONS = [
@@ -44,7 +45,11 @@ const SECTIONS = [
 	{ id: 'store-send-to-courier', title: 'Sending an order to a courier' },
 	{ id: 'store-delivery-card', title: 'An order’s parcel' },
 	{ id: 'store-deliveries', title: 'Deliveries' },
-	{ id: 'store-delivery-risk', title: 'Checking a buyer' },
+	{ id: 'store-buyer-check', title: 'Checking a buyer' },
+	{ id: 'store-delivery-risk', title: 'Checking a buyer in Send to courier' },
+	{ id: 'store-buyer-lookup', title: 'Check a buyer' },
+	{ id: 'store-buyer-check-settings', title: 'Buyer check settings' },
+	{ id: 'store-courier-buyer-checks', title: 'Buyer checks with RedX and Pathao' },
 	{ id: 'store-kept', title: 'What the store keeps to itself' },
 	{ id: 'store-settings', title: 'Store settings' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -555,14 +560,108 @@ const Store = () => (
 		</Section>
 
 		<Section
-			id='store-delivery-risk'
-			title='Checking a buyer'>
+			id='store-buyer-check'
+			title='Checking a buyer'
+			lead='The Buyer check card on an order’s page, and the Buyer column on Orders and Website orders.'>
 			<P>
-				With Steadfast connected, <strong>Check the buyer</strong> in Send to courier shows how parcels to that phone number have
-				gone across Steadfast: usually takes them, takes some and refuses some, or often refuses — then consider asking for
-				payment first. “Not known” means too few parcels to tell. The answer is kept for a day; Steadfast limits checks by how many
-				parcels you book.
+				Before you send a cash-on-delivery parcel, Mint shows how often the buyer’s phone number takes its parcels. It asks
+				every courier that can say — Steadfast with its API keys, RedX and Pathao with your merchant login — and adds your
+				own orders to that number. The answer is one rate (delivered ÷ delivered and refused, over every source) and a badge.
 			</P>
+			<Terms
+				head={['Badge', 'What it means']}
+				rows={[
+					['Safe · 92%', 'Takes most of its parcels (80% or more, by default). Send it as usual.'],
+					['Check first · 64%', 'Takes some, refuses some (50–79%). Call the buyer to confirm before sending.'],
+					['Risky · 31%', 'Often refuses (under 50%). Call first, or ask for the delivery charge — or the whole amount — in advance.'],
+					['New buyer', 'Fewer than 3 known parcels, too few to tell. Treat it like any new buyer.'],
+				]}
+			/>
+			<List
+				items={[
+					'Website and phone orders are checked by themselves as they come in; checkout never waits for a courier. Walk-in POS sales aren’t checked.',
+					'The card shows a row per courier (parcels, % delivered, the courier’s own rating) and This store (orders, delivered, refused). Details opens the full answer; Check again asks the couriers now.',
+					'A fraud report on Steadfast shows in red, whatever the rate.',
+					'Orders and Website orders have a Buyer column and a Buyer filter (Safe, Check first, Risky, New buyer), so you can find the risky ones before sending.',
+					'Send to courier shows the same answer — press Check the buyer there.',
+				]}
+			/>
+			<Note>
+				The answer is kept for a day per number, so the order, Send to courier and Check a buyer share it and checking again
+				today costs nothing. A courier that’s slow or down drops off the answer — the others and your own orders still show.
+				Only people who can view orders see it. Numbers outside Bangladesh get only your own orders.
+			</Note>
+		</Section>
+
+		<Section
+			id='store-delivery-risk'
+			title='Checking a buyer in Send to courier'>
+			<P>
+				<strong>Check the buyer</strong> in Send to courier shows the same answer as the order’s{' '}
+				<A href='#store-buyer-check'>Buyer check</A> card: the badge, a row per courier and your own orders, and what to do.
+				A risky buyer’s box is outlined red, one to check first orange. Here, This store leaves out the order you’re sending.
+			</P>
+		</Section>
+
+		<Section
+			id='store-buyer-lookup'
+			title='Check a buyer'
+			lead='Store → Check a buyer (or the Check a buyer button on Deliveries): look up any phone number, with or without an order.'>
+			<List
+				ordered
+				items={[
+					'Type the number (01…, +880… and spaces are fine) and press Check. You get the same answer as on an order. The page address keeps the number, so you can send someone the link.',
+					'Below it: that number’s latest orders in your store (up to 10) — click one to open it.',
+					'Recent lookups lists every number checked, with its badge, who checked it and from where: Check a buyer, New order, Send to courier or AI (MCP). Click a row to check it again.',
+				]}
+			/>
+			<P>
+				Your own AI can ask too: the <code>check_buyer</code> tool over <A href='/connect-ai'>MCP</A> takes a phone number (and{' '}
+				<code>fresh: true</code> to ask the couriers again) and answers with the level, rate, warnings and a line per source.
+				Its lookups are listed as “your name (AI)”.
+			</P>
+			<Note>Every lookup is logged with who did it, so numbers can’t be looked up quietly.</Note>
+		</Section>
+
+		<Section
+			id='store-buyer-check-settings'
+			title='Buyer check settings'
+			lead='Store settings → Delivery settings → Buyer check.'>
+			<Terms
+				head={['Setting', 'What it does']}
+				rows={[
+					['Check website and phone orders as they come in', 'On by default. Off: orders aren’t checked by themselves — you can still press Check now on an order, in Send to courier or on Check a buyer.'],
+					['Safe from (%)', 'The rate from which a buyer is Safe. 80 by default.'],
+					['Check first from (%)', 'The rate from which a buyer is Check first; below it is Risky. 50 by default.'],
+				]}
+			/>
+			<Note>Under 3 known parcels is always New buyer. New levels apply to the next check of each number.</Note>
+		</Section>
+
+		<Section
+			id='store-courier-buyer-checks'
+			title='Buyer checks with RedX and Pathao'
+			lead='Store settings → Delivery settings → the RedX or Pathao card → Buyer checks.'>
+			<P>
+				RedX and Pathao don’t offer buyer records in their developer API, so Mint signs in to their merchant website with{' '}
+				<strong>your own merchant login</strong> and reads the same Fraud Check page you’d open yourself. It’s separate from the
+				API keys, and works even if you don’t send parcels with that courier. Steadfast needs nothing extra — its API keys
+				are enough.
+			</P>
+			<List
+				ordered
+				items={[
+					'RedX: type the phone number and password you sign in to RedX’s merchant panel with. Pathao: your merchant panel email and password — leave them empty to use the ones from your Pathao connection.',
+					'Press Save & sign in. Mint signs in once and says what came back: “Buyer checks on”, or what’s wrong.',
+					'From then on the courier’s row shows on every buyer check, as “RedX (your login)”.',
+				]}
+			/>
+			<Note>
+				This isn’t the courier’s official API, so it may stop working if the courier changes its site — the card then says
+				“Buyer checks stopped” and the other sources carry on. If the courier asks for a code at sign-in, Mint can’t use that
+				login. The password is kept locked away and never shown back; Remove login forgets it (your connection for sending
+				parcels stays). Mint checks a number at most once a day, and no more than a few hundred numbers a day per courier.
+			</Note>
 		</Section>
 
 		<Section
