@@ -49,7 +49,7 @@ const SECTIONS = [
 	{ id: 'store-delivery-risk', title: 'Checking a buyer in Send to courier' },
 	{ id: 'store-buyer-lookup', title: 'Check a buyer' },
 	{ id: 'store-buyer-check-settings', title: 'Buyer check settings' },
-	{ id: 'store-courier-buyer-checks', title: 'Buyer checks with RedX and Pathao' },
+	{ id: 'store-courier-buyer-checks', title: 'Buyer checks with RedX, Pathao, Paperfly and CarryBee' },
 	{ id: 'store-kept', title: 'What the store keeps to itself' },
 	{ id: 'store-settings', title: 'Store settings' },
 	{ id: 'faq', title: 'Troubleshooting' },
@@ -565,7 +565,7 @@ const Store = () => (
 			lead='The Buyer check card on an order’s page, and the Buyer column on Orders and Website orders.'>
 			<P>
 				Before you send a cash-on-delivery parcel, Mint shows how often the buyer’s phone number takes its parcels. It asks
-				every courier that can say — Steadfast with its API keys, RedX and Pathao with your merchant login — and adds your
+				every courier that can say — Steadfast with its API keys, RedX, Pathao, Paperfly and CarryBee with your merchant login — and adds your
 				own orders to that number. The answer is one rate (delivered ÷ delivered and refused, over every source) and a badge.
 			</P>
 			<Terms
@@ -640,22 +640,26 @@ const Store = () => (
 
 		<Section
 			id='store-courier-buyer-checks'
-			title='Buyer checks with RedX and Pathao'
-			lead='Store settings → Delivery settings → the RedX or Pathao card → Buyer checks.'>
+			title='Buyer checks with RedX, Pathao, Paperfly and CarryBee'
+			lead='Store settings → Delivery settings → the courier’s card → Buyer checks.'>
 			<P>
-				RedX and Pathao don’t offer buyer records in their developer API, so Mint signs in to their merchant website with{' '}
-				<strong>your own merchant login</strong> and reads the same Fraud Check page you’d open yourself. It’s separate from the
-				API keys, and works even if you don’t send parcels with that courier. Steadfast needs nothing extra — its API keys
-				are enough.
+				RedX, Pathao, Paperfly and CarryBee don’t offer buyer records in an API, so Mint signs in to their merchant website
+				with <strong>your own merchant login</strong> and reads the same Fraud Check page you’d open yourself. It’s separate
+				from the API keys, and works even if you don’t send parcels with that courier. Steadfast needs nothing extra — its API
+				keys are enough.
 			</P>
 			<List
 				ordered
 				items={[
-					'RedX: type the phone number and password you sign in to RedX’s merchant panel with. Pathao: your merchant panel email and password — leave them empty to use the ones from your Pathao connection.',
+					'RedX: type the phone number and password you sign in to RedX’s merchant panel with. Pathao: your merchant panel email and password — leave them empty to use the ones from your Pathao connection. Paperfly: the phone number or email and password for go.paperfly.com.bd. CarryBee: the phone number and password for merchant.carrybee.com.',
 					'Press Save & sign in. Mint signs in once and says what came back: “Buyer checks on”, or what’s wrong.',
-					'From then on the courier’s row shows on every buyer check, as “RedX (your login)”.',
+					'From then on the courier’s row shows on every buyer check, as “RedX (your login)”. A partly delivered Paperfly parcel counts as taken; CarryBee’s fraud count shows as fraud reports.',
 				]}
 			/>
+			<P>
+				<strong>Paperfly and CarryBee</strong> are marked “Buyer checks only”: Mint can’t send parcels with them yet, so their
+				cards have no keys, no test and no Use for deliveries switch — only the login. Press <strong>Set up buyer checks</strong>.
+			</P>
 			<Note>
 				This isn’t the courier’s official API, so it may stop working if the courier changes its site — the card then says
 				“Buyer checks stopped” and the other sources carry on. If the courier asks for a code at sign-in, Mint can’t use that
