@@ -282,7 +282,12 @@ const Models = () => (
 			<P>
 				Then add a <strong>Key-value pairs</strong> field to any model (it’s under <em>Sections</em> in Add a field). In the
 				form, each group shows as a section: its name as the heading, the description under it, and a box for each key.
-				Keys left empty aren’t saved. The record page shows the filled ones the same way.
+				Keys left empty aren’t saved.
+			</P>
+			<P>
+				On a record’s page the field has a tab of its own, named after it (Specifications), right after Overview. It shows
+				the filled sections, and <strong>Edit specifications</strong> opens just those sections to change — the rest of the
+				record stays as it is. You can still edit them in the full Edit form too.
 			</P>
 			<H3 id='key-values-which'>Which groups a record gets</H3>
 			<List
