@@ -20,6 +20,7 @@ const SECTIONS = [
 	{ id: 'models-uid', title: 'Address (slug) fields' },
 	{ id: 'models-password', title: 'Password fields' },
 	{ id: 'models-sections', title: 'Sections and lists' },
+	{ id: 'key-values', title: 'Key-value pairs' },
 	{ id: 'models-components', title: 'Components' },
 	{ id: 'models-blocks', title: 'Content blocks' },
 	{ id: 'formulas', title: 'Calculated fields' },
@@ -189,6 +190,7 @@ const Models = () => (
 					['Video', 'An uploaded video'],
 					['Link to a record / records', 'One or more records of another model — a booking’s guest, a post’s tags'],
 					['Section / Section list', 'A group of fields, or rows of them (see below)'],
+					['Key-value pairs', 'Sections of labelled values whose labels come from Key values — a product’s specifications by its category (see below)'],
 					['Password', 'A login or key you keep for someone — shown as dots until you click the eye (see below)'],
 					['SEO', <>A record’s search and share details in one editor — Google and share previews, meta title and description, Open Graph and X cards, indexing, structured data, sitemap. For pages, posts, products · see <A href='/site-builder#page-seo'>A page’s SEO</A></>],
 				]}
@@ -266,6 +268,47 @@ const Models = () => (
 				row’s “5 fields: …” button opens it again. Inside, fields can be text, long text, email, link, colour, number,
 				formula, yes/no, date, options, image or file.
 			</P>
+		</Section>
+
+		<Section
+			id='key-values'
+			title='Key-value pairs'
+			lead='Sections of labelled values — a laptop’s Display: Size, Resolution — whose labels you set up once and reuse.'>
+			<P>
+				Every new project has a <strong>Key values</strong> page (in the sidebar). Each key value is a group: a{' '}
+				<strong>name</strong> (Display), a <strong>description</strong> (The screen) and its <strong>keys</strong> — the
+				labels to fill in (Size, Resolution, Panel). They’re your project’s own; nobody else’s project sees them.
+			</P>
+			<P>
+				Then add a <strong>Key-value pairs</strong> field to any model (it’s under <em>Sections</em> in Add a field). In the
+				form, each group shows as a section: its name as the heading, the description under it, and a box for each key.
+				Keys left empty aren’t saved. The record page shows the filled ones the same way.
+			</P>
+			<H3 id='key-values-which'>Which groups a record gets</H3>
+			<List
+				items={[
+					<>
+						<strong>Always show</strong> — groups every record gets, like Warranty.
+					</>,
+					<>
+						<strong>And show groups by</strong> another field of the same model. If it’s a link — a product’s Category — pick
+						where its groups come from: a field on the category that lists key values (give Categories a{' '}
+						<em>Link to records</em> field pointing at Key values, e.g. Specifications), the picked record itself when the field
+						links straight to Key values, or <strong>Chosen per category</strong> to pick groups for each one here.
+					</>,
+					<>
+						If it’s options, yes/no or text, say which groups show for each value — Type “Laptop” → Display, Processor.
+					</>,
+				]}
+			/>
+			<P>
+				Change the category while adding a product and the sections change with it; anything you typed comes back if you
+				switch back before saving. Renaming a group or its keys later doesn’t change records already saved — they keep the
+				words they were saved with until they’re edited.
+			</P>
+			<Note>
+				Projects made before Key values arrived don’t have the page yet — only new projects get it.
+			</Note>
 		</Section>
 
 		<Section
