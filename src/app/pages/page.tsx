@@ -7,7 +7,7 @@ export const metadata = guideMeta('/pages');
 /**
  * The page builder (Build → Pages, /builder) for projects. Section ids mirror
  * the platform's builder guide (workflow, settings, settings-linked, guidelines, navbar-search, value-display, table,
- * table-status, table-totals, table-upload, filters, form, view, linked-relationships,
+ * table-status, table-totals, table-upload, filters, form, form-steps, view, linked-relationships,
  * linked-tab, linked-rule, linked-transfer, linked-form, linked-where) — the
  * builder's "How it works" links land here through panel.ts docsPath.
  */
@@ -513,6 +513,53 @@ const Pages = () => (
 				<em>Method</em> is <em>Bank transfer</em>. Its conditions test fields in other sections. While it’s hidden its
 				fields count as empty: their values aren’t saved and they aren’t required, and the section’s heading goes too.
 			</P>
+			<H3 id='form-steps'>Form in pages</H3>
+			<P>
+				A long form — a product with prices, stock, shipping and SEO — reads better as steps: a numbered bar across the
+				top (<em>1 Basic info → 2 Pricing → 3 Inventory → 4 Review</em>), one page of sections at a time, and{' '}
+				<em>Next</em> / <em>Back</em> at the bottom. Turn it on under <em>Form in pages</em> on the Form tab, then publish.
+			</P>
+			<List
+				items={[
+					<>
+						<strong>Pages.</strong> Each page has a title and an optional line under it. Add, rename, drag or use the
+						arrows to reorder, and delete — a deleted page’s sections move to the page before it. Up to 12 pages.
+					</>,
+					<>
+						<strong>Sections on pages.</strong> Every section has a <em>Page</em> picker; <em>Add a section here</em> starts
+						a new one on that page. A section on no page shows on the last page, with a warning, so no field is lost. A page
+						with no sections is skipped.
+					</>,
+					<>
+						<strong>Side column.</strong> Switch it on for a section to put it in a narrow column on the right of its page —
+						status, sales channels, a cover image.
+					</>,
+					<>
+						<strong>Review page.</strong> An optional last page that sums up everything filled in, page by page, with an{' '}
+						<em>Edit</em> link back to each.
+					</>,
+				]}
+			/>
+			<P>
+				Pages are used when the add form opens as its own page (<em>Opens: Its own page</em> on the Table tab) — the panel
+				offers to switch it. A pop-up form stays on one page.
+			</P>
+			<P>
+				<strong>Filling it in.</strong> <em>Next</em> checks that page’s required fields and names any that are empty;
+				what’s typed is kept when going back. Pages already passed can be clicked in the bar. Nothing is saved until{' '}
+				<em>Save</em> on the last page, which checks every page once more and saves the record in one go. On a phone the bar
+				becomes one line — <em>Step 2 of 4 · Pricing</em> — with a progress line under it.
+			</P>
+			<P>
+				<strong>Editing.</strong> With pages on, <em>Edit</em> — in the row menu, on the record page and in the quick view —
+				opens an edit page instead of a dialog. It starts on page 1, any page can be opened straight away, and only what
+				changed is saved. Store logins in the commerce panel get the same pages; your AI can set them up too (
+				<C>update_page</C> with <C>formSteps</C>).
+			</P>
+			<Note>
+				Conditions still work across pages: a field on page 2 can depend on one on page 1, and a hidden field is never
+				required.
+			</Note>
 		</Section>
 
 		<Section
