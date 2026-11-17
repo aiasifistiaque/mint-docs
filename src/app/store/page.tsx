@@ -28,6 +28,7 @@ const SECTIONS = [
 	{ id: 'store-pos', title: 'The POS' },
 	{ id: 'store-review', title: 'Review and set up' },
 	{ id: 'store-built', title: 'What you get' },
+	{ id: 'store-product-form', title: 'Adding a product' },
 	{ id: 'store-categories', title: 'Categories' },
 	{ id: 'store-collections', title: 'Collections' },
 	{ id: 'store-discounts', title: 'Discounts' },
@@ -207,6 +208,31 @@ const Store = () => (
 				]}
 			/>
 			<P>Pages for things you switched off stay hidden until you switch them on in Store settings.</P>
+		</Section>
+
+		<Section
+			id='store-product-form'
+			title='Adding a product'
+			lead='New product opens a page in five steps, with a bar across the top showing where you are — the same in the store panel.'>
+			<Terms
+				head={['Step', 'Holds']}
+				rows={[
+					['1. Basic information', 'Name, category, brand, description, Simple or With variations, and the price, tax, compare-at price and cost.'],
+					['2. Images', 'Its photos — the first one is the cover.'],
+					['3. Inventory & variations', 'SKU, barcode and Track stock, then what it varies by (Size: S, M, L) — the variations part shows only for a product With variations.'],
+					['4. SEO & others', 'How its page looks in search results and shared links, the search words shoppers type for it, and fields you added.'],
+					['5. Review & finalize', 'Everything filled in, page by page, with an Edit link to each — then its status (Active, Draft, Archived) and collections, and Save.'],
+				]}
+			/>
+			<P>
+				<em>Next</em> checks the page’s required fields (Name and Price on the first); <em>Back</em> keeps what you typed;
+				nothing is saved until <em>Save</em>. A product with specifications gets a Specifications step before SEO &amp;
+				others. <em>Edit</em> opens the same steps, starting on the first, and any step can be opened straight away.
+			</P>
+			<P>
+				Stores set up before this got it in an upgrade, with any sections you added kept on SEO &amp; others. To change the
+				steps, see <A href='/pages#form-steps'>Form in pages</A>.
+			</P>
 		</Section>
 
 		<Section

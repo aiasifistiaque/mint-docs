@@ -523,7 +523,9 @@ const Pages = () => (
 				items={[
 					<>
 						<strong>Pages.</strong> Each page has a title and an optional line under it. Add, rename, drag or use the
-						arrows to reorder, and delete — a deleted page’s sections move to the page before it. Up to 12 pages.
+						arrows to reorder, and delete — a deleted page’s sections move to the page before it. Up to 12 pages; five or
+						fewer fit the bar on most screens. A page whose sections are all hidden right now (by <em>Show only when</em>)
+						is skipped.
 					</>,
 					<>
 						<strong>Sections on pages.</strong> Every section has a <em>Page</em> picker; <em>Add a section here</em> starts
@@ -535,8 +537,9 @@ const Pages = () => (
 						status, sales channels, a cover image.
 					</>,
 					<>
-						<strong>Review page.</strong> An optional last page that sums up everything filled in, page by page, with an{' '}
-						<em>Edit</em> link back to each.
+						<strong>Review.</strong> An optional summary of everything filled in, page by page, with an <em>Edit</em> link
+						back to each — on a page of its own at the end, or at the top of a page you pick (<em>The summary goes</em>):
+						a last page <em>Review &amp; finalize</em> shows the summary, then its own sections (the status), then Save.
 					</>,
 				]}
 			/>
