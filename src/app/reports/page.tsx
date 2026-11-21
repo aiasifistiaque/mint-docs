@@ -144,7 +144,7 @@ const Reports = () => (
 					</>,
 					<>
 						<strong>Analytics</strong>: in a website or store project, tick View on the Analytics row to let the role
-						open the site’s visitor analytics.
+						open the site’s visitor analytics — they also see the last 30 days of Traffic on their dashboard.
 					</>,
 				]}
 			/>
