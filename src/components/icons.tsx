@@ -12,6 +12,7 @@ import {
 	BookOpenText as PhBookOpenText,
 	Buildings as PhBuildings,
 	ChartLine as PhChartLine,
+	ClipboardText as PhClipboardText,
 	Check as PhCheck,
 	Copy as PhCopy,
 	CreditCard as PhCreditCard,
@@ -93,3 +94,4 @@ export const User = make(PhUserCircle, 'light');
 export const Webhooks = make(PhWebhooksLogo, 'light');
 export const Lightning = make(PhLightning, 'light');
 export const FilePdf = make(PhFilePdf, 'light');
+export const Report = make(PhClipboardText, 'light');

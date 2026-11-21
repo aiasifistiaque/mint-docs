@@ -15,6 +15,7 @@ import {
 	PaintBrush,
 	Plug,
 	Puzzle,
+	Report,
 	Rocket,
 	Shield,
 	SidebarIcon,
@@ -200,6 +201,20 @@ export const GUIDES: Guide[] = [
 			{ id: 'widgets', title: 'Widgets' },
 			{ id: 'charts', title: 'Charts' },
 			{ id: 'access', title: 'Who sees what' },
+		],
+	},
+	{
+		href: '/reports',
+		title: 'Reports',
+		name: 'Reports, panel users & panel roles',
+		description: 'Reports your team runs and downloads (CSV, Excel, PDF), and the people who work in your project from their own panel — with roles that say what each may do.',
+		icon: Report,
+		group: 'Build',
+		topics: [
+			{ id: 'reports', title: 'Reports' },
+			{ id: 'build-report', title: 'Making a report' },
+			{ id: 'panel-users', title: 'Panel users' },
+			{ id: 'panel-roles', title: 'Panel roles' },
 		],
 	},
 	{
