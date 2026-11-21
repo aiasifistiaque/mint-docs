@@ -119,7 +119,7 @@ const Reports = () => (
 						as their username.
 					</>,
 					<>
-						From a row’s menu: <em>Change role</em>, <em>Change username or email</em>, change the password, turn the login off, or remove it.
+						From a row’s menu: <em>See permissions</em> (what their role lets them do, table by table), <em>Change role</em>, <em>Change username or email</em>, change the password, turn the login off, or remove it.
 					</>,
 					<>Panel users never get developer (Build) access, whatever their role.</>,
 				]}
