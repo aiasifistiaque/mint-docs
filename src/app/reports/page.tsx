@@ -133,6 +133,19 @@ const Reports = () => (
 				publish — and with reports: <strong>view reports</strong>, and <strong>download reports</strong>. Adding, editing,
 				deleting and downloading include viewing. A panel user sees only the models, pages and reports their role allows.
 			</P>
+			<List
+				items={[
+					<>
+						<strong>Select all</strong> ticks everything at once; a row’s <strong>All</strong> box ticks every action
+						on that model (say all four on Leads), and a column heading ticks that action on every model. A dash means
+						some are ticked.
+					</>,
+					<>
+						<strong>Analytics</strong>: in a website or store project, tick View on the Analytics row to let the role
+						open the site’s visitor analytics.
+					</>,
+				]}
+			/>
 		</Section>
 
 		<Section
