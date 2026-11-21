@@ -98,8 +98,8 @@ const Reports = () => (
 			lead='Panel users work in their own app: panel.tcrypt.site.'>
 			<P>
 				It shows one project — its tables, dashboard and reports — without any of the building tools. People sign in there
-				with the email and password you give them on the Panel users page. A store’s people sign in to the commerce panel
-				instead; each panel sends the other’s logins to the right place.
+				with the username and password you give them on the Panel users page (an email you gave them signs in too). A
+				store’s people sign in to the commerce panel instead; each panel sends the other’s logins to the right place.
 			</P>
 		</Section>
 
@@ -110,14 +110,16 @@ const Reports = () => (
 			<List
 				items={[
 					<>
-						<strong>Add panel user</strong>: name, email, password and phone, and what they may do — a panel role, or{' '}
-						<em>Super admin</em>.
+						<strong>Add a login</strong>: name, username, password, and optionally email and phone, and what they may do —
+						a panel role, or <em>Super admin</em>.
 					</>,
 					<>
-						<strong>One email, one project</strong>: an email is a login to one project only.
+						<strong>Username</strong>: what they sign in with — letters, numbers and . _ - @ +. The email, if you give one,
+						signs in too. A username (or email) is a login to one project only. Logins made before usernames use their email
+						as their username.
 					</>,
 					<>
-						From a row’s menu: <em>Change role</em>, change the password, turn the login off, or remove it.
+						From a row’s menu: <em>Change role</em>, <em>Change username or email</em>, change the password, turn the login off, or remove it.
 					</>,
 					<>Panel users never get developer (Build) access, whatever their role.</>,
 				]}
@@ -178,8 +180,8 @@ const Reports = () => (
 				rows={[
 					['A panel user doesn’t see Reports', 'Their role needs “view reports”, and view on the report’s model.'],
 					['No download buttons', 'The report can’t be downloaded, or their role lacks “download reports”.'],
-					['“This login is for the panel app” at sign-in', 'That login belongs to panel.tcrypt.site, not the commerce panel — and a store’s login the other way round.'],
-					['“Already a panel login”', 'One email opens one project — use another email.'],
+					['“That username is taken”', 'Usernames and emails are unique across every project — pick another.'],
+					['“Taking you there…” at sign-in', 'The login belongs to the other app — the commerce panel for a store, the panel app otherwise; it sends you on.'],
 					['A report is missing rows', 'Check its conditions and dates; archived records and records outside the reader’s access never show.'],
 				]}
 			/>
