@@ -408,6 +408,20 @@ export const GUIDES: Guide[] = [
 		],
 	},
 	{
+		href: '/seo-connect',
+		title: 'Mint SEO',
+		name: 'Connect your site to Mint SEO',
+		description: 'Add your address, choose the snippet or the Cloudflare Worker, prove it’s yours and test — then manage each page’s SEO.',
+		icon: Plug,
+		group: 'Go live',
+		topics: [
+			{ id: 'address', title: 'Your site’s address' },
+			{ id: 'choose-a-way', title: 'Choose a way to connect' },
+			{ id: 'ownership', title: 'Prove the site is yours' },
+			{ id: 'test', title: 'Test the connection' },
+		],
+	},
+	{
 		href: '/site-builder',
 		title: 'Site builder',
 		name: 'The site builder',
