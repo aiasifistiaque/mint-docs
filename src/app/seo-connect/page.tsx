@@ -6,11 +6,14 @@ export const metadata = guideMeta('/seo-connect');
 
 /**
  * Mint SEO: connecting a site you already have (backend docs/seo-panel). The ids are the #anchors the mint-seo app's
- * "How this works ↗" links use (guide('address' | 'choose-a-way' | 'ownership' | 'test')) — keep them in step.
+ * "How this works ↗" links use (guide('address' | 'choose-a-way' | 'ownership' | 'test')) and the MINT panel's GuideLinks (mint-seo, seo-logins, seo-demo) — keep them in step.
  */
 
 const SECTIONS = [
 	{ id: 'seo-connect', title: 'What Mint SEO does' },
+	{ id: 'mint-seo', title: 'Make an SEO project' },
+	{ id: 'seo-logins', title: 'Logins for Mint SEO' },
+	{ id: 'seo-demo', title: 'A demo link' },
 	{ id: 'address', title: 'Your site’s address' },
 	{ id: 'choose-a-way', title: 'Choose a way to connect' },
 	{ id: 'ownership', title: 'Prove the site is yours' },
@@ -31,6 +34,48 @@ const SeoConnect = () => (
 			<P>
 				You don’t rebuild anything. Mint adds your SEO to your pages as they are served and counts visits. Your site keeps running as it
 				is the whole time; if Mint is ever slow or down, your pages load untouched.
+			</P>
+		</Section>
+
+		<Section
+			id='mint-seo'
+			title='Make an SEO project'>
+			<P>
+				In the MINT panel, open Projects → <strong>New project</strong>, pick <strong>Website</strong>, and under{' '}
+				<strong>The site</strong> choose <strong>SEO for a site I already have</strong>. There are no templates or domains to fill in —
+				your site’s address is asked for later, when it’s connected. The project opens on its logins page.
+			</P>
+		</Section>
+
+		<Section
+			id='seo-logins'
+			title='Logins for Mint SEO'>
+			<P>
+				The people who look after the site sign in at <A href='https://seo.tcrypt.site'>seo.tcrypt.site</A> with a username and a
+				password you make under the project’s <strong>SEO logins</strong>. One login opens one site. There are no roles to set up, just
+				two kinds:
+			</P>
+			<List
+				items={[
+					<>
+						<strong>SEO admin</strong> — pages, SEO, link previews, redirects, tracking, analytics and the site’s connection.
+					</>,
+					<>
+						<strong>Super admin</strong> — all of that, and they can add, switch off and remove the other SEO logins themselves.
+					</>,
+				]}
+			/>
+			<Note>Make the first login a super admin; they can take it from there.</Note>
+		</Section>
+
+		<Section
+			id='seo-demo'
+			title='A demo link'>
+			<P>
+				Under <strong>Demo login</strong>, <strong>Make a demo login</strong> gives one link that opens Mint SEO signed in for an hour,
+				no password — for showing the work on your website. Visitors see Home, Pages &amp; SEO, Defaults, Link previews, Media,
+				Analytics and Connection, but they can’t change anything: saving, connecting, checking and disconnecting are off for them. Make
+				a new link, switch it off or remove it from the same card.
 			</P>
 		</Section>
 
