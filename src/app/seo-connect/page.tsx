@@ -100,6 +100,32 @@ const SeoConnect = () => (
 		</Section>
 
 		<Section
+			id='needs-attention'
+			title='When your site needs attention'>
+			<P>
+				Mint checks your site once a day. On the Cloudflare way it looks for its Worker in front of your pages — the Worker also checks
+				in with Mint every time it fetches your settings. With the snippet it looks for the snippet in your page, or for visits arriving
+				in the last three days.
+			</P>
+			<P>
+				If it can’t find Mint, the connection turns to <strong>Needs attention</strong>: a red banner shows on every page, and you and
+				your team get an email and a notification saying what went wrong. Nothing is locked — keep editing. Fix the cause (put the
+				snippet back, or add the Worker’s route again in Cloudflare), then press <strong>Check now</strong> on Connection. When the check
+				passes the banner goes and everyone hears it’s fixed.
+			</P>
+		</Section>
+
+		<Section
+			id='update-worker'
+			title='Updating the Worker'>
+			<P>
+				Connection shows the version of the Worker on your site. When Mint has a newer one it says <strong>update available</strong>.
+				Press <strong>Copy Worker code</strong> on Connection, paste it over the old code in Cloudflare → Workers → mint-edge →
+				Edit code, and press Deploy. Its settings (MINT_KEY) stay as they are.
+			</P>
+		</Section>
+
+		<Section
 			id='disconnect'
 			title='Pausing and disconnecting'>
 			<P>
