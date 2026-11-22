@@ -7,7 +7,7 @@ export const metadata = guideMeta('/reports');
 /**
  * Reports, panel users and panel roles (backend docs/panel-users). Section ids
  * are targets of the tenant panel's GuideLink (reports, run-report,
- * build-report, panel-app, panel-users, panel-roles, super-admin, panel-ai) —
+ * build-report, panel-app, panel-users, demo-login, panel-roles, super-admin, panel-ai) —
  * keep them in step with mint-tenant GuideLink.tsx GUIDE_OF.
  */
 
@@ -18,6 +18,7 @@ const SECTIONS = [
 	{ id: 'report-kinds', title: 'List, Summary, Over time' },
 	{ id: 'panel-app', title: 'The panel app' },
 	{ id: 'panel-users', title: 'Panel users' },
+	{ id: 'demo-login', title: 'Demo login' },
 	{ id: 'panel-roles', title: 'Panel roles' },
 	{ id: 'super-admin', title: 'Super admins' },
 	{ id: 'panel-ai', title: 'Panel users’ own AI' },
@@ -127,6 +128,40 @@ const Reports = () => (
 		</Section>
 
 		<Section
+			id='demo-login'
+			title='Demo login'
+			lead='One link that opens your panel signed in, with no password: for showing your work on your website.'>
+			<P>
+				On the Panel users page (Store logins for a store), <em>Make a demo login</em> and pick what visitors may see: a
+				panel role, <em>Everything</em> (every table and report), or for a store, the store admin set. You get a link. Put
+				it behind a button on your website. Anyone who opens it lands in the panel app (the commerce panel for a store) a
+				moment later, after a short “Signing you in” screen.
+			</P>
+			<List
+				items={[
+					<>
+						<strong>One hour</strong>: each visit lasts an hour. Then the panel shows <em>Your demo has ended</em> with a{' '}
+						<em>Start the demo again</em> button, which opens the link for another hour.
+					</>,
+					<>
+						<strong>Signs out first</strong>: whoever was signed in on that browser is signed out before the demo starts.
+					</>,
+					<>
+						<strong>What visitors can change</strong>: whatever the access you picked allows. To keep your data as it is,
+						pick a role that only views. A demo can never manage panel users, change a password, or make AI keys, even
+						with Everything.
+					</>,
+					<>
+						From the card: <em>Copy</em> or <em>Open</em> the link; from its menu, <em>Change what visitors see</em>,{' '}
+						<em>Make a new link</em> (the old link stops and open demos are signed out), <em>Switch off</em> /{' '}
+						<em>Switch on</em>, or <em>Remove</em>.
+					</>,
+					<>One demo login per project. Only you and your project’s managers see it; panel super admins don’t.</>,
+				]}
+			/>
+		</Section>
+
+		<Section
 			id='panel-roles'
 			title='Panel roles'
 			lead='Team → Panel roles: what a panel user may do.'>
@@ -182,6 +217,8 @@ const Reports = () => (
 					['No download buttons', 'The report can’t be downloaded, or their role lacks “download reports”.'],
 					['“That username is taken”', 'Usernames and emails are unique across every project — pick another.'],
 					['“Taking you there…” at sign-in', 'The login belongs to the other app — the commerce panel for a store, the panel app otherwise; it sends you on.'],
+					['“This demo didn’t open”', 'The demo link was switched off, removed or replaced by a new link — copy the current link from the Demo login card.'],
+					['A demo ends in the middle of a visit', 'Each visit lasts an hour. Start the demo again, or open the link again, for another hour.'],
 					['A report is missing rows', 'Check its conditions and dates; archived records and records outside the reader’s access never show.'],
 				]}
 			/>

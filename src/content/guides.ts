@@ -214,6 +214,7 @@ export const GUIDES: Guide[] = [
 			{ id: 'reports', title: 'Reports' },
 			{ id: 'build-report', title: 'Making a report' },
 			{ id: 'panel-users', title: 'Panel users' },
+			{ id: 'demo-login', title: 'Demo login' },
 			{ id: 'panel-roles', title: 'Panel roles' },
 		],
 	},
