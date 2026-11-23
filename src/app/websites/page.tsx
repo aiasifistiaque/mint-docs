@@ -16,6 +16,7 @@ const SECTIONS = [
 	{ id: 'site-overview', title: 'The website’s home' },
 	{ id: 'site-setup', title: 'Site setup' },
 	{ id: 'site-general', title: 'Name, logo and favicon' },
+	{ id: 'site-theme', title: 'Colour palette and fonts' },
 	{ id: 'site-contact', title: 'Contact and social links' },
 	{ id: 'site-seo', title: 'Default SEO' },
 	{ id: 'tracking', title: 'Tracking tags and pixels' },
@@ -578,9 +579,62 @@ const intro = await fetch('${PUBLIC_API}/web-contents/by-slug/home-intro?apiKey=
 			id='site-general'
 			title='Name, logo and favicon'>
 			<P>
-				<strong>General</strong> has the site’s name, tagline, logo, favicon and footer text, and its theme: primary and
-				secondary colour and font. Images come from your <A href='/media'>Media library</A>. The analytics script
+				<strong>General</strong> has the site’s name, tagline, logo, favicon and footer text, and its{' '}
+				<A href='#site-theme'>theme</A>. Images come from your <A href='/media'>Media library</A>. The analytics script
 				adds the favicon to pages that don’t have one.
+			</P>
+		</Section>
+
+		<Section
+			id='site-theme'
+			title='Colour palette and fonts'>
+			<P>
+				<strong>Theme</strong> on the General tab is the site’s whole colour palette and its two fonts. Start from a
+				ready-made palette (Mint, Midnight, Ocean, Forest, Ember, Rose, Royal, Sand, Mono or the dark Night), then change any
+				colour. The preview beside it shows a heading, text, buttons and a card in your colours and fonts as you go.
+			</P>
+			<H3>The nine colours</H3>
+			<Terms
+				head={['Colour', 'Where it goes']}
+				rows={[
+					['Primary', 'Your brand colour: main buttons, links and highlights.'],
+					['Text on primary', 'Words on a primary button. Usually white, or near-black on a light primary.'],
+					['Secondary', 'A second brand colour for secondary buttons, tags and accents.'],
+					['Accent', 'A small pop of colour for badges, sale tags and notices. Use it sparingly.'],
+					['Background', 'The page itself.'],
+					['Surface', 'Cards, panels and boxes that sit on the page.'],
+					['Border', 'Lines around cards, inputs and dividers.'],
+					['Text', 'Headings and body text.'],
+					['Muted text', 'Captions, dates and help text.'],
+				]}
+			/>
+			<H3>A palette that works</H3>
+			<List
+				items={[
+					'One strong brand colour (primary) and calm surfaces. Most of the page is background and surface.',
+					'Background and surface close to each other, with a border a little darker than both.',
+					'Text dark on a light page, or light on a dark one. Muted text is the same colour, just softer.',
+					'Accent is for small things. A whole section in the accent colour stops it standing out.',
+				]}
+			/>
+			<P>
+				<strong>Easy to read?</strong> checks four pairs as you edit: text on background, muted text on background, words on
+				a primary button and text on a surface. Each shows its contrast ratio; 4.5:1 is enough for body text (3:1 for muted
+				text). Fix anything marked <em>Low</em> before you save.
+			</P>
+			<H3>Fonts</H3>
+			<P>
+				<strong>Heading font</strong> is for titles and headings, <strong>Body font</strong> for everything else. Pick one
+				from the list (Google Fonts, Bangla included: Hind Siliguri, Noto Sans Bengali, Noto Serif Bengali) or type the name
+				of any Google Font. The pairings under the pickers set both at once. Two fonts is enough: a characterful one for
+				headings and a plain, readable one for text.
+			</P>
+			<P>
+				Your site reads the palette from the <A href='#site-api'>site API</A> as <C>identity.palette</C> (
+				<C>primary</C>, <C>onPrimary</C>, <C>secondary</C>, <C>accent</C>, <C>background</C>, <C>surface</C>,{' '}
+				<C>border</C>, <C>text</C>, <C>mutedText</C>) and the fonts as <C>identity.headingFont</C> and{' '}
+				<C>identity.bodyFont</C>. The older <C>primaryColor</C>, <C>secondaryColor</C> and <C>fontFamily</C> stay in step
+				with them, so existing sites keep working.
 			</P>
 		</Section>
 
