@@ -45,7 +45,7 @@ const Reports = () => (
 		<Section
 			id='run-report'
 			title='Running and downloading'
-			lead='Open a report, pick the dates, read the rows, download.'>
+			lead='Open a report, pick the dates and filters, read the rows, download. Nothing is generated ahead or on a schedule — the report is worked out from the current records each time you open, run or download it.'>
 			<List
 				items={[
 					<>
@@ -53,11 +53,16 @@ const Reports = () => (
 						or 90 days, This month, This year, All time — or set <strong>From</strong> and <strong>To</strong>.
 					</>,
 					<>
+						<strong>Filters</strong>: next to the dates, a box for each field the report lets you narrow it by — pick one
+						employee, one department, a status. <em>All</em> leaves it out. A pick runs the report again; a typed value waits
+						for <strong>Run</strong>.
+					</>,
+					<>
 						<strong>Rows and totals</strong>: numbers are right-aligned and the <em>Total</em> row is in bold.
 					</>,
 					<>
 						<strong>Download</strong>: the CSV, Excel and PDF buttons the report allows — the same rows and totals as on
-						screen, for the dates you picked.
+						screen, for the dates and filters you picked.
 					</>,
 				]}
 			/>
@@ -72,7 +77,15 @@ const Reports = () => (
 					['Name, description, category', 'How it’s listed; reports with the same category sit together.'],
 					['Model', 'Whose records it reads.'],
 					['Kind', 'List, Summary or Over time — below.'],
-					['Which records', <>Conditions that always apply — status <C>is</C> sold, due <C>is more than</C> 0, next due <C>has a value</C>.</>],
+					[
+						'Which records',
+						<>
+							Conditions that always apply — status <C>is</C> sold, due <C>is more than</C> 0, next due <C>is filled</C>. The value
+							fits the field: a linked field (Employee) lists that model’s records to pick, a choice field its choices, yes/no
+							fields Yes or No.
+						</>,
+					],
+					['Filters for the reader', 'Up to 6 fields whoever opens the report can narrow it by, next to the dates — e.g. Employee, so each person can see one employee’s rows.'],
 					['Dated by', 'The date the From / To range uses — when the record was made, or a date field like Date or Purchase date — and the range it opens on.'],
 					['Download', <>Turn <strong>Can be downloaded</strong> on and pick CSV, Excel and/or PDF; off, it can only be read on screen.</>],
 					['Preview', 'The report with real records as you set it up.'],
