@@ -7,7 +7,7 @@ export const metadata = guideMeta('/reports');
 /**
  * Reports, panel users and panel roles (backend docs/panel-users). Section ids
  * are targets of the tenant panel's GuideLink (reports, run-report,
- * build-report, panel-app, panel-users, demo-login, panel-roles, super-admin, panel-ai) —
+ * build-report, panel-app, panel-users, demo-login, panel-theme, panel-roles, super-admin, panel-ai) —
  * keep them in step with mint-tenant GuideLink.tsx GUIDE_OF.
  */
 
@@ -19,6 +19,7 @@ const SECTIONS = [
 	{ id: 'panel-app', title: 'The panel app' },
 	{ id: 'panel-users', title: 'Panel users' },
 	{ id: 'demo-login', title: 'Demo login' },
+	{ id: 'panel-theme', title: 'Panel theme' },
 	{ id: 'panel-roles', title: 'Panel roles' },
 	{ id: 'super-admin', title: 'Super admins' },
 	{ id: 'panel-ai', title: 'Panel users’ own AI' },
@@ -172,6 +173,39 @@ const Reports = () => (
 					<>One demo login per project. Only you and your project’s managers see it; panel super admins don’t.</>,
 				]}
 			/>
+		</Section>
+
+		<Section
+			id='panel-theme'
+			title='Panel theme'
+			lead='Give each panel its own feel: an HR panel can look like an old ledger, a store panel like a dense console.'>
+			<P>
+				On the Panel users page (Store logins for a store), under <em>Panel theme</em>, pick the look the panel opens in
+				for every login of this project. The colour themes change colours only. The full looks bring their own type,
+				text size, corners and tables:
+			</P>
+			<List
+				items={[
+					<>
+						<strong>Classic</strong>: an old-school ledger. Serif type at 14px, ruled tables with shaded alternate
+						rows, square corners, a navy sidebar on parchment.
+					</>,
+					<>
+						<strong>Console</strong>: dense and technical. IBM Plex at 13px, tight lined rows, small mono labels,
+						soft corners, teal on a dark sidebar.
+					</>,
+					<>
+						<strong>Cosy</strong>: big and friendly. Nunito at 16px, roomy open rows with shaded alternate rows,
+						sentence-case headings, round corners.
+					</>,
+				]}
+			/>
+			<P>
+				Turn on <em>Only this theme</em> to make it the only one: the panel’s own theme picker shows just this theme,
+				and users can still switch between light and dark. With it off, the theme is where everyone starts, and each
+				user can pick another for themselves from their account menu. Users see a change the next time they open the
+				panel.
+			</P>
 		</Section>
 
 		<Section
