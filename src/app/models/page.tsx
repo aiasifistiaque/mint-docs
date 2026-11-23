@@ -76,7 +76,9 @@ const Models = () => (
 						like a transfer taking money from one account and giving it to another). <strong>Next</strong> takes you
 						through each in turn (the bar shows “part 2 of 7”), and <strong>Preview</strong> shows how they’ll look.
 						They’re ready as they are; change anything on the way, with the same tools as{' '}
-						<A href='/pages'>Pages</A>. <strong>Finish</strong> opens once you’ve seen every part.
+						<A href='/pages'>Pages</A> — every rule is here too: fields that show only when, form pages, picker
+						filters, record-page sections and tabs, guidelines, comments and search. <strong>Finish</strong> opens
+						once you’ve seen every part.
 					</>,
 					<>
 						<strong>Finish</strong> — where it goes in the sidebar, a summary in plain words, and{' '}
