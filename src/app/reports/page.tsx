@@ -7,7 +7,7 @@ export const metadata = guideMeta('/reports');
 /**
  * Reports, panel users and panel roles (backend docs/panel-users). Section ids
  * are targets of the tenant panel's GuideLink (reports, run-report,
- * build-report, panel-app, panel-users, demo-login, panel-theme, panel-roles, super-admin, panel-ai) —
+ * build-report, report-kinds, report-calcs, panel-app, panel-users, demo-login, panel-theme, panel-roles, super-admin, panel-ai) —
  * keep them in step with mint-tenant GuideLink.tsx GUIDE_OF.
  */
 
@@ -16,6 +16,7 @@ const SECTIONS = [
 	{ id: 'run-report', title: 'Running and downloading' },
 	{ id: 'build-report', title: 'Making a report' },
 	{ id: 'report-kinds', title: 'List, Summary, Over time' },
+	{ id: 'report-calcs', title: 'Pairs, linked values, calculated columns' },
 	{ id: 'panel-app', title: 'The panel app' },
 	{ id: 'panel-users', title: 'Panel users' },
 	{ id: 'demo-login', title: 'Demo login' },
@@ -105,6 +106,38 @@ const Reports = () => (
 					['Over time', 'One row per day, week, month or year of the date field, with how many records and the totals you choose.'],
 				]}
 			/>
+		</Section>
+
+		<Section
+			id='report-calcs'
+			title='Pairs, linked values, calculated columns'
+			lead='A Summary can do more than count: one row per pair, values of the linked record, and columns worked out by a formula.'>
+			<List
+				items={[
+					<>
+						<strong>Then per</strong>: a second field, so there’s one row per pair — an employee × a leave type, a shed × a
+						breed.
+					</>,
+					<>
+						<strong>Values of the linked record</strong>: when a row is per a linked record (a leave type), tick its fields
+						to show them as columns — the leave type’s days per year.
+					</>,
+					<>
+						<strong>Every pair, even with no records</strong>: lists every active record of the linked field(s), so an
+						employee who took no casual leave still gets a Casual leave row with 0.
+					</>,
+					<>
+						<strong>Calculated columns</strong>: give a column a title and a formula, in the same language as formula
+						fields. It can use the totals, the linked values and earlier calculated columns — click a name to add it. Up to 10.
+					</>,
+				]}
+			/>
+			<P>
+				Example — <strong>Leave balance</strong>: model Leave applications, Summary per <C>employee</C> then per{' '}
+				<C>leaveType</C>, total of <C>approvedDays</C> (Taken), the leave type’s <C>daysPerYear</C> (Allowed), every pair
+				on, a calculated column Left = <C>leaveType.daysPerYear - approvedDays</C>, only approved applications, dates by
+				start date, This year.
+			</P>
 		</Section>
 
 		<Section
